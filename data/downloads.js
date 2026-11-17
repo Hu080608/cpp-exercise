@@ -12,7 +12,7 @@ window.CPP_DOWNLOADS = [
     group: "题库与项目",
     items: [
       { file: "downloads/question-bank.json", title: "完整题库 JSON", desc: "447 道题，含答案、解析、知识点来源与编程题测试用例", tag: "447 题" },
-      { file: "docs/REFERENCE_FEATURE_MATRIX.md", title: "参考站功能对照表", desc: "逐项列出参考站功能、本站实现情况与超越点", tag: "对照表" },
+      { file: "docs/FEATURE_GUIDE.md", title: "功能清单", desc: "题库、编程训练、沙箱、学习数据与部署能力一览", tag: "功能" },
       { file: "README.md", title: "项目 README", desc: "目录结构、本地运行、题库扩展与 GitHub Pages 部署说明", tag: "说明" }
     ]
   },

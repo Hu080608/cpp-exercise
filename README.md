@@ -2,7 +2,7 @@
 
 **作者：胡胜杰** · 仓库：<https://github.com/Hu080608/cpp-exercise>
 
-一个面向「程序设计」课程的 C++ 在线练习网站，功能对齐参考站 [cpp-quiz-690](https://cpp-quiz-690.netlify.app) 并做了明显增强：六种题型、四档难度、29 个知识点、447 道题（其中 167 道编程题）、编程训练场、多条件筛选、错题本、收藏夹、学习统计，以及**能在页面里真实编译运行 C++ 的沙箱和编程题自动评测**。
+一个面向「程序设计」课程的 C++ 在线练习网站，完整实现了一个面向课程复习的在线练习站：六种题型、四档难度、29 个知识点、447 道题（其中 167 道编程题）、编程训练场、多条件筛选、错题本、收藏夹、学习统计，以及**能在页面里真实编译运行 C++ 的沙箱和编程题自动评测**。
 
 目标仓库与 GitHub Pages 地址：
 
@@ -36,7 +36,7 @@ cpp-exercise/
 ├─ docs/
 │  ├─ KNOWLEDGE_POINTS.md         # 知识点清单（含来源 PPT / slide）
 │  ├─ PROGRAMMING_BANK.md         # 编程题专项清单（按难度/来源）
-│  ├─ REFERENCE_FEATURE_MATRIX.md # 参考站功能对照表
+│  ├─ FEATURE_GUIDE.md            # 功能清单
 │  └─ PPT_AMBIGUITIES.md          # PPT 歧义与处理方案
 ├─ downloads/
 │  ├─ question-bank.json          # 完整题库导出（含答案/解析/测试用例）
@@ -198,9 +198,9 @@ node scripts/export_docs.js
 - 详细边界与对 PPT 歧义的处理见 [docs/PPT_AMBIGUITIES.md](docs/PPT_AMBIGUITIES.md)。
 - 每道题解析均附 `source` 字段（PPT 文件名 + 章节/slide）。
 
-## 7. 参考站对照
+## 7. 功能清单
 
-逐项功能对照、实现状态与超越点见 [docs/REFERENCE_FEATURE_MATRIX.md](docs/REFERENCE_FEATURE_MATRIX.md)。
+完整功能说明见 [docs/FEATURE_GUIDE.md](docs/FEATURE_GUIDE.md)。
 
 ## 8. 技术说明
 
