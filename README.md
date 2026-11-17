@@ -2,7 +2,7 @@
 
 **作者：胡胜杰** · 仓库：<https://github.com/Hu080608/cpp-exercise>
 
-一个面向「程序设计」课程的 C++ 在线练习网站，功能对齐参考站 [cpp-quiz-690](https://cpp-quiz-690.netlify.app) 并做了明显增强：六种题型、四档难度、编程训练场、29 个知识点、347 道题、67 道编程题、多条件筛选、错题本、收藏夹、学习统计，以及**能在页面里真实编译运行 C++ 的沙箱和编程题自动评测**。
+一个面向「程序设计」课程的 C++ 在线练习网站，功能对齐参考站 [cpp-quiz-690](https://cpp-quiz-690.netlify.app) 并做了明显增强：六种题型、四档难度、29 个知识点、447 道题（其中 167 道编程题）、编程训练场、多条件筛选、错题本、收藏夹、学习统计，以及**能在页面里真实编译运行 C++ 的沙箱和编程题自动评测**。
 
 目标仓库与 GitHub Pages 地址：
 
@@ -40,7 +40,7 @@ cpp-exercise/
 │  └─ PPT_AMBIGUITIES.md          # PPT 歧义与处理方案
 ├─ downloads/
 │  ├─ question-bank.json          # 完整题库导出（含答案/解析/测试用例）
-│  ├─ programming-bank.json       # 67 道编程题专项导出
+│  ├─ programming-bank.json       # 167 道编程题专项导出
 │  ├─ knowledge-points.md         # 可打印知识点速查
 │  └─ wrongbook-template.md       # 错题复盘模板
 ├─ scripts/
@@ -48,6 +48,7 @@ cpp-exercise/
 │  ├─ questions_ch1.py … ch5.py   # 章节题库源
 │  ├─ questions_extra.py          # 矩阵补全题
 │  ├─ questions_prog_extra.py     # 50 道综合编程题（原创/经典题改编）
+│  ├─ questions_prog_100.py       # 第 3 批 100 道情境/算法编程题
 │  ├─ build_questionbank.py       # 生成 JSON + 覆盖矩阵校验
 │  ├─ test_programming.py         # 用本机 g++ 回归测试编程题标准解
 │  ├─ audit_code_questions.py     # 代码阅读题输出抽查
@@ -96,7 +97,7 @@ node scripts/export_docs.js
 - 每个 `topicId` 都能在 `data/knowledge.js` 中找到；
 - **6 种题型 × 4 档难度 = 24 个组合无空缺**；
 - 29 个知识点全部有题。
-- 编程题专项：67 道，覆盖 12 / 27 / 22 / 6（入门/简单/中等/困难）。
+- 编程题专项：167 道，覆盖 35 / 78 / 41 / 13（入门/简单/中等/困难）。
 
 ---
 

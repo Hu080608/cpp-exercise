@@ -9,7 +9,7 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 
 import qcommon
-import questions_ch1, questions_ch2, questions_ch3, questions_ch4, questions_ch5, questions_extra, questions_prog_extra
+import questions_ch1, questions_ch2, questions_ch3, questions_ch4, questions_ch5, questions_extra, questions_prog_extra, questions_prog_100
 
 KNOWLEDGE = {}
 with open(os.path.join(ROOT, "data", "knowledge.js"), encoding="utf-8") as f:

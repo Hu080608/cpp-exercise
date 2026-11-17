@@ -1821,6 +1821,655 @@
       "typeName": "编程题",
       "difficultyName": "入门",
       "knowledge": "算术、关系与逻辑运算"
+    },
+    {
+      "chapter": 2,
+      "section": "2.3",
+      "topicId": "2.3",
+      "type": "programming",
+      "difficulty": 1,
+      "stem": "【文具结账】输入单价和数量，输出总价。",
+      "origin": "原创情境 · 文具店",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // 读入单价 price 和数量 count，输出 price * count。\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int p,q;cin>>p>>q;cout<<p*q;}\n",
+      "tests": [
+        {
+          "input": "12 3\n",
+          "output": "36"
+        },
+        {
+          "input": "5 8\n",
+          "output": "40"
+        },
+        {
+          "input": "0 7\n",
+          "output": "0",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "读入单价 price 和数量 count，输出 price * count。"
+      ],
+      "explain": "总价等于单价乘数量，整数乘法不会丢失信息。",
+      "source": "第02章.pptx · 2.3 输入输出与格式控制（slide 18、37–39）",
+      "topic": "",
+      "tags": [],
+      "id": "q348",
+      "typeName": "编程题",
+      "difficultyName": "入门",
+      "knowledge": "输入输出与格式化"
+    },
+    {
+      "chapter": 2,
+      "section": "2.4",
+      "topicId": "2.4",
+      "type": "programming",
+      "difficulty": 1,
+      "stem": "【矩形菜地】输入长和宽，输出面积和周长，用空格分隔。",
+      "origin": "原创情境 · 菜地测量",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // 面积 = 长 × 宽；周长 = 2 × (长 + 宽)。\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int w,h;cin>>w>>h;cout<<w*h<<\" \"<<2*(w+h);}\n",
+      "tests": [
+        {
+          "input": "3 4\n",
+          "output": "12 14"
+        },
+        {
+          "input": "5 2\n",
+          "output": "10 14"
+        },
+        {
+          "input": "1 1\n",
+          "output": "1 4",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "面积 = 长 × 宽；周长 = 2 × (长 + 宽)。"
+      ],
+      "explain": "两个公式都使用整数运算，最后按顺序输出。",
+      "source": "第02章.pptx · 2.4 算术、关系与逻辑运算（slide 19–29）",
+      "topic": "",
+      "tags": [],
+      "id": "q349",
+      "typeName": "编程题",
+      "difficultyName": "入门",
+      "knowledge": "算术、关系与逻辑运算"
+    },
+    {
+      "chapter": 2,
+      "section": "2.5",
+      "topicId": "2.5",
+      "type": "programming",
+      "difficulty": 1,
+      "stem": "【三角形花圃】输入底和高，输出三角形面积，保留 2 位小数。",
+      "origin": "原创情境 · 花圃面积",
+      "starter": "#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    // 面积 = 底 × 高 ÷ 2。\n    return 0;\n}\n",
+      "solution": "#include <iostream>\n#include <iomanip>\nusing namespace std;\nint main(){double b,h;cin>>b>>h;cout<<fixed<<setprecision(2)<<b*h/2;}\n",
+      "tests": [
+        {
+          "input": "4 3\n",
+          "output": "6.00"
+        },
+        {
+          "input": "7 2\n",
+          "output": "7.00"
+        },
+        {
+          "input": "2.5 4\n",
+          "output": "5.00",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "面积 = 底 × 高 ÷ 2。"
+      ],
+      "explain": "使用 double 保存底和高，fixed 与 setprecision(2) 固定两位小数。",
+      "source": "第02章.pptx · 2.4–2.5 类型转换与表达式（slide 21–36）",
+      "topic": "",
+      "tags": [],
+      "id": "q350",
+      "typeName": "编程题",
+      "difficultyName": "入门",
+      "knowledge": "类型转换、表达式求值与位运算"
+    },
+    {
+      "chapter": 2,
+      "section": "2.4",
+      "topicId": "2.4",
+      "type": "programming",
+      "difficulty": 1,
+      "stem": "【梯形田地】输入上底、下底和高，输出面积，保留 1 位小数。",
+      "origin": "原创情境 · 田地面积",
+      "starter": "#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    // 面积 = (上底 + 下底) × 高 ÷ 2。\n    return 0;\n}\n",
+      "solution": "#include <iostream>\n#include <iomanip>\nusing namespace std;\nint main(){double a,b,h;cin>>a>>b>>h;cout<<fixed<<setprecision(1)<<(a+b)*h/2;}\n",
+      "tests": [
+        {
+          "input": "2 4 3\n",
+          "output": "9.0"
+        },
+        {
+          "input": "3 5 2\n",
+          "output": "8.0"
+        },
+        {
+          "input": "1 1 1\n",
+          "output": "1.0",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "面积 = (上底 + 下底) × 高 ÷ 2。"
+      ],
+      "explain": "先加括号再乘高、除以 2；输出固定一位小数。",
+      "source": "第02章.pptx · 2.4 算术、关系与逻辑运算（slide 19–29）",
+      "topic": "",
+      "tags": [],
+      "id": "q351",
+      "typeName": "编程题",
+      "difficultyName": "入门",
+      "knowledge": "算术、关系与逻辑运算"
+    },
+    {
+      "chapter": 2,
+      "section": "2.4",
+      "topicId": "2.4",
+      "type": "programming",
+      "difficulty": 1,
+      "stem": "【时间拆分】输入总秒数（非负整数），输出「分钟:秒」。",
+      "origin": "原创情境 · 秒表",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // 分钟 = 总秒数 / 60；秒 = 总秒数 % 60。\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int t;cin>>t;cout<<t/60<<\":\"<<t%60;}\n",
+      "tests": [
+        {
+          "input": "125\n",
+          "output": "2:5"
+        },
+        {
+          "input": "59\n",
+          "output": "0:59"
+        },
+        {
+          "input": "600\n",
+          "output": "10:0",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "分钟 = 总秒数 / 60；秒 = 总秒数 % 60。"
+      ],
+      "explain": "整除得到完整分钟数，取余得到剩余秒数。",
+      "source": "第02章.pptx · 2.4 算术、关系与逻辑运算（slide 19–29）",
+      "topic": "",
+      "tags": [],
+      "id": "q352",
+      "typeName": "编程题",
+      "difficultyName": "入门",
+      "knowledge": "算术、关系与逻辑运算"
+    },
+    {
+      "chapter": 2,
+      "section": "2.4",
+      "topicId": "2.4",
+      "type": "programming",
+      "difficulty": 1,
+      "stem": "【数字拼图】输入一个三位正整数，输出百位、十位、个位的乘积。",
+      "origin": "原创情境 · 数字拼图",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // 百位 n/100，十位 n/10%10，个位 n%10。\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int n;cin>>n;cout<<(n/100)*(n/10%10)*(n%10);}\n",
+      "tests": [
+        {
+          "input": "123\n",
+          "output": "6"
+        },
+        {
+          "input": "507\n",
+          "output": "0"
+        },
+        {
+          "input": "999\n",
+          "output": "729",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "百位 n/100，十位 n/10%10，个位 n%10。"
+      ],
+      "explain": "用 / 和 % 拆出三位数字，再相乘。",
+      "source": "第02章.pptx · 2.4 算术、关系与逻辑运算（slide 19–29）",
+      "topic": "",
+      "tags": [],
+      "id": "q353",
+      "typeName": "编程题",
+      "difficultyName": "入门",
+      "knowledge": "算术、关系与逻辑运算"
+    },
+    {
+      "chapter": 2,
+      "section": "2.4",
+      "topicId": "2.4",
+      "type": "programming",
+      "difficulty": 1,
+      "stem": "【找较大值】输入两个整数，输出较大的那个。",
+      "origin": "原创情境 · 比较大小",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // 使用条件运算符或 if 比较两个数。\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int a,b;cin>>a>>b;cout<<(a>b?a:b);}\n",
+      "tests": [
+        {
+          "input": "3 9\n",
+          "output": "9"
+        },
+        {
+          "input": "-1 -7\n",
+          "output": "-1"
+        },
+        {
+          "input": "5 5\n",
+          "output": "5",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "使用条件运算符或 if 比较两个数。"
+      ],
+      "explain": "a > b 时取 a，否则取 b；相等时取 b 仍是同一个值。",
+      "source": "第02章.pptx · 2.4 算术、关系与逻辑运算（slide 19–29）",
+      "topic": "",
+      "tags": [],
+      "id": "q356",
+      "typeName": "编程题",
+      "difficultyName": "入门",
+      "knowledge": "算术、关系与逻辑运算"
+    },
+    {
+      "chapter": 2,
+      "section": "2.4",
+      "topicId": "2.4",
+      "type": "programming",
+      "difficulty": 1,
+      "stem": "【找最小值】输入三个整数，输出其中的最小值。",
+      "origin": "原创情境 · 比较三个数",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // 先把 a 设为当前最小值，再依次和 b、c 比较。\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int a,b,c;cin>>a>>b>>c;int m=a;if(b<m)m=b;if(c<m)m=c;cout<<m;}\n",
+      "tests": [
+        {
+          "input": "3 9 -2\n",
+          "output": "-2"
+        },
+        {
+          "input": "5 5 5\n",
+          "output": "5"
+        },
+        {
+          "input": "-1 0 -3\n",
+          "output": "-3",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "先把 a 设为当前最小值，再依次和 b、c 比较。"
+      ],
+      "explain": "用当前最小值 m 逐个比较，适合扩展到更多数。",
+      "source": "第02章.pptx · 2.4 算术、关系与逻辑运算（slide 19–29）",
+      "topic": "",
+      "tags": [],
+      "id": "q357",
+      "typeName": "编程题",
+      "difficultyName": "入门",
+      "knowledge": "算术、关系与逻辑运算"
+    },
+    {
+      "chapter": 2,
+      "section": "2.4",
+      "topicId": "2.4",
+      "type": "programming",
+      "difficulty": 2,
+      "stem": "【象限判断】输入非零平面坐标 x、y，输出点所在象限 Q1、Q2、Q3 或 Q4。",
+      "origin": "原创情境 · 坐标象限",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // 根据 x、y 的符号判断象限。\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int x,y;cin>>x>>y;if(x>0&&y>0)cout<<\"Q1\";else if(x<0&&y>0)cout<<\"Q2\";else if(x<0&&y<0)cout<<\"Q3\";else cout<<\"Q4\";}\n",
+      "tests": [
+        {
+          "input": "2 3\n",
+          "output": "Q1"
+        },
+        {
+          "input": "-2 3\n",
+          "output": "Q2"
+        },
+        {
+          "input": "-2 -3\n",
+          "output": "Q3"
+        },
+        {
+          "input": "2 -3\n",
+          "output": "Q4",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "根据 x、y 的符号判断象限。"
+      ],
+      "explain": "题目保证 x、y 非零，因此只需判断正负；四个分支互斥。",
+      "source": "第02章.pptx · 2.4 算术、关系与逻辑运算（slide 19–29）",
+      "topic": "",
+      "tags": [],
+      "id": "q361",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "算术、关系与逻辑运算"
+    },
+    {
+      "chapter": 2,
+      "section": "2.4",
+      "topicId": "2.4",
+      "type": "programming",
+      "difficulty": 2,
+      "stem": "【加班工资】某兼职前 40 小时每小时 20 元，超过 40 小时的部分每小时 30 元。输入工作小时数，输出工资。",
+      "origin": "原创情境 · 兼职工资",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // 前 40 小时按 20 元，超出部分按 30 元。\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int h;cin>>h;if(h<=40)cout<<h*20;else cout<<40*20+(h-40)*30;}\n",
+      "tests": [
+        {
+          "input": "35\n",
+          "output": "700"
+        },
+        {
+          "input": "40\n",
+          "output": "800"
+        },
+        {
+          "input": "45\n",
+          "output": "950"
+        },
+        {
+          "input": "0\n",
+          "output": "0",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "前 40 小时按 20 元，超出部分按 30 元。"
+      ],
+      "explain": "分段计费时要先把前 40 小时的工资固定为 800 元，再加上超出部分。",
+      "source": "第02章.pptx · 2.4 算术、关系与逻辑运算（slide 19–29）",
+      "topic": "",
+      "tags": [],
+      "id": "q362",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "算术、关系与逻辑运算"
+    },
+    {
+      "chapter": 2,
+      "section": "2.5",
+      "topicId": "2.5",
+      "type": "programming",
+      "difficulty": 2,
+      "stem": "【书店折扣】输入购书金额，满 100 元打九折，否则打九五折。输出实付金额，保留 2 位小数。",
+      "origin": "原创情境 · 书店优惠",
+      "starter": "#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    // 根据金额是否达到 100 使用不同折扣。\n    return 0;\n}\n",
+      "solution": "#include <iostream>\n#include <iomanip>\nusing namespace std;\nint main(){double x;cin>>x;double pay=x>=100?x*0.9:x*0.95;cout<<fixed<<setprecision(2)<<pay;}\n",
+      "tests": [
+        {
+          "input": "120\n",
+          "output": "108.00"
+        },
+        {
+          "input": "80\n",
+          "output": "76.00"
+        },
+        {
+          "input": "100\n",
+          "output": "90.00",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "根据金额是否达到 100 使用不同折扣。"
+      ],
+      "explain": "100 元正好满足满减条件；结果用 fixed 固定两位小数。",
+      "source": "第02章.pptx · 2.4–2.5 类型转换与表达式（slide 21–36）",
+      "topic": "",
+      "tags": [],
+      "id": "q363",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "类型转换、表达式求值与位运算"
+    },
+    {
+      "chapter": 2,
+      "section": "2.5",
+      "topicId": "2.5",
+      "type": "programming",
+      "difficulty": 2,
+      "stem": "【体重指数】输入体重（千克）和身高（米），计算 BMI = 体重 / 身高²，并输出 UNDER（<18.5）、NORMAL（18.5～23.9）或 OVER（≥24）。",
+      "origin": "原创情境 · 健康记录",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // 先计算 BMI，再按区间输出分类。\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){double w,h;cin>>w>>h;double b=w/(h*h);if(b<18.5)cout<<\"UNDER\";else if(b<24)cout<<\"NORMAL\";else cout<<\"OVER\";}\n",
+      "tests": [
+        {
+          "input": "50 1.6\n",
+          "output": "NORMAL"
+        },
+        {
+          "input": "40 1.7\n",
+          "output": "UNDER"
+        },
+        {
+          "input": "90 1.7\n",
+          "output": "OVER"
+        },
+        {
+          "input": "60 1.7\n",
+          "output": "NORMAL",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "先计算 BMI，再按区间输出分类。"
+      ],
+      "explain": "区间判断要注意 18.5 与 24 两个边界；用 else-if 避免重叠。",
+      "source": "第02章.pptx · 2.4–2.5 类型转换与表达式（slide 21–36）",
+      "topic": "",
+      "tags": [],
+      "id": "q366",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "类型转换、表达式求值与位运算"
+    },
+    {
+      "chapter": 2,
+      "section": "2.4",
+      "topicId": "2.4",
+      "type": "programming",
+      "difficulty": 1,
+      "stem": "【乘积符号】输入两个整数，输出它们乘积的符号：POSITIVE、NEGATIVE 或 ZERO。",
+      "origin": "原创情境 · 符号判断",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // 用 long long 保存乘积，避免 a*b 在 int 中溢出。\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int a,b;cin>>a>>b;long long p=(long long)a*b;if(p>0)cout<<\"POSITIVE\";else if(p<0)cout<<\"NEGATIVE\";else cout<<\"ZERO\";}\n",
+      "tests": [
+        {
+          "input": "2 3\n",
+          "output": "POSITIVE"
+        },
+        {
+          "input": "-2 3\n",
+          "output": "NEGATIVE"
+        },
+        {
+          "input": "0 9\n",
+          "output": "ZERO"
+        },
+        {
+          "input": "-2 -3\n",
+          "output": "POSITIVE",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "用 long long 保存乘积，避免 a*b 在 int 中溢出。"
+      ],
+      "explain": "根据乘积的正负零输出；乘积可能很大，因此用 long long 暂存。",
+      "source": "第02章.pptx · 2.4 算术、关系与逻辑运算（slide 19–29）",
+      "topic": "",
+      "tags": [],
+      "id": "q367",
+      "typeName": "编程题",
+      "difficultyName": "入门",
+      "knowledge": "算术、关系与逻辑运算"
+    },
+    {
+      "chapter": 2,
+      "section": "2.4",
+      "topicId": "2.4",
+      "type": "programming",
+      "difficulty": 1,
+      "stem": "【数字洞】输入两个整数 a、b，输出 (a+b)² - |a-b| 的值。",
+      "origin": "原创情境 · 数学小游戏",
+      "starter": "#include <iostream>\n#include <cmath>\nusing namespace std;\n\nint main() {\n    // 先求和、求绝对差，再代入公式。\n    return 0;\n}\n",
+      "solution": "#include <iostream>\n#include <cmath>\nusing namespace std;\nint main(){int a,b;cin>>a>>b;int s=a+b;cout<<s*s-abs(a-b);}\n",
+      "tests": [
+        {
+          "input": "2 3\n",
+          "output": "24"
+        },
+        {
+          "input": "-1 4\n",
+          "output": "4"
+        },
+        {
+          "input": "5 5\n",
+          "output": "100",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "先求和、求绝对差，再代入公式。"
+      ],
+      "explain": "平方可以写成 s*s；绝对差用 abs 函数。",
+      "source": "第02章.pptx · 2.4 算术、关系与逻辑运算（slide 19–29）",
+      "topic": "",
+      "tags": [],
+      "id": "q370",
+      "typeName": "编程题",
+      "difficultyName": "入门",
+      "knowledge": "算术、关系与逻辑运算"
+    },
+    {
+      "chapter": 2,
+      "section": "2.4",
+      "topicId": "2.4",
+      "type": "programming",
+      "difficulty": 2,
+      "stem": "【循环幂】输入底数 a 和非负整数 n，输出 aⁿ。",
+      "origin": "原创情境 · 迭代幂",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // 结果初始为 1，循环 n 次乘 a。\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){long long a,n,r=1;cin>>a>>n;for(int i=0;i<n;i++)r*=a;cout<<r;}\n",
+      "tests": [
+        {
+          "input": "5 3\n",
+          "output": "125"
+        },
+        {
+          "input": "2 0\n",
+          "output": "1"
+        },
+        {
+          "input": "3 4\n",
+          "output": "81",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "结果初始为 1，循环 n 次乘 a。"
+      ],
+      "explain": "n=0 时返回 1；用 long long 保存结果，避免中等规模幂溢出。",
+      "source": "第02章.pptx · 2.4 算术、关系与逻辑运算（slide 19–29）",
+      "topic": "",
+      "tags": [],
+      "id": "q381",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "算术、关系与逻辑运算"
+    },
+    {
+      "chapter": 2,
+      "section": "2.5",
+      "topicId": "2.5",
+      "type": "programming",
+      "difficulty": 2,
+      "stem": "【十进制转二进制】输入非负整数 n，输出它的二进制表示（不输出前导 0）。",
+      "origin": "原创情境 · 进制转换",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // 除 2 取余，把余数存入数组，最后逆序输出。\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int n,a[40],k=0;cin>>n;if(n==0){cout<<0;return 0;}while(n>0){a[k++]=n%2;n/=2;}for(int i=k-1;i>=0;i--)cout<<a[i];}\n",
+      "tests": [
+        {
+          "input": "13\n",
+          "output": "1101"
+        },
+        {
+          "input": "0\n",
+          "output": "0"
+        },
+        {
+          "input": "1\n",
+          "output": "1",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "除 2 取余，把余数存入数组，最后逆序输出。"
+      ],
+      "explain": "0 要单独输出；数组保存的是低位到高位的余数。",
+      "source": "第02章.pptx · 2.4–2.5 类型转换与表达式（slide 21–36）",
+      "topic": "",
+      "tags": [],
+      "id": "q390",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "类型转换、表达式求值与位运算"
+    },
+    {
+      "chapter": 2,
+      "section": "2.5",
+      "topicId": "2.5",
+      "type": "programming",
+      "difficulty": 3,
+      "stem": "【十进制转十六进制】输入非负整数 n，输出它的大写十六进制表示（不输出前导 0）。",
+      "origin": "原创情境 · 进制转换",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // 除 16 取余，用字符表映射 0～15 到 0～9、A～F。\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int n,a[40],k=0;char h[]=\"0123456789ABCDEF\";cin>>n;if(n==0){cout<<0;return 0;}while(n>0){a[k++]=n%16;n/=16;}for(int i=k-1;i>=0;i--)cout<<h[a[i]];}\n",
+      "tests": [
+        {
+          "input": "26\n",
+          "output": "1A"
+        },
+        {
+          "input": "255\n",
+          "output": "FF"
+        },
+        {
+          "input": "0\n",
+          "output": "0"
+        },
+        {
+          "input": "4096\n",
+          "output": "1000",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "除 16 取余，用字符表映射 0～15 到 0～9、A～F。"
+      ],
+      "explain": "余数数组从低位到高位保存，输出时逆序；0 特殊处理。",
+      "source": "第02章.pptx · 2.4–2.5 类型转换与表达式（slide 21–36）",
+      "topic": "",
+      "tags": [],
+      "id": "q391",
+      "typeName": "编程题",
+      "difficultyName": "中等",
+      "knowledge": "类型转换、表达式求值与位运算"
     }
   ]
 }

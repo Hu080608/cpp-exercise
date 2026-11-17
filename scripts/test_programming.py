@@ -19,11 +19,11 @@ def main():
         for q in progs:
             cpp=os.path.join(td,q['id']+'.cpp')
             open(cpp,'w',encoding='utf-8').write(q['solution'])
-            r=subprocess.run(['g++','-std=c++17','-O2','-o',exe,cpp],capture_output=True,text=True)
+            r=subprocess.run(['g++','-std=c++17','-O2','-o',exe,cpp],capture_output=True,text=True,encoding='utf-8',errors='replace')
             if r.returncode:
                 print('COMPILE FAIL',q['id'],r.stderr[:500]);bad+=1;continue
             for i,t in enumerate(q['tests'],1):
-                run=subprocess.run([exe],input=t['input'],capture_output=True,text=True,timeout=5)
+                run=subprocess.run([exe],input=t['input'],capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=5)
                 if run.returncode!=0 or norm(run.stdout)!=norm(t['output']):
                     print('TEST FAIL',q['id'],'case',i,'rc',run.returncode,'got',repr(run.stdout),'want',repr(t['output']),'err',run.stderr[:200]);bad+=1
     print('编程题:',len(progs),' 失败:',bad)

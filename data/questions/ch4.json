@@ -1847,6 +1847,302 @@
       "typeName": "编程题",
       "difficultyName": "中等",
       "knowledge": "递归函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.5",
+      "topicId": "4.4",
+      "type": "programming",
+      "difficulty": 2,
+      "stem": "【递归求和】编写递归函数 sumTo(n)，返回 1+2+…+n，并输出结果（n≥1）。",
+      "origin": "原创情境 · 递归求和",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint sumTo(int n) {\n    // 结束条件与递归式\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << sumTo(n);\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint sumTo(int n){if(n==1)return 1;return n+sumTo(n-1);}\nint main(){int n;cin>>n;cout<<sumTo(n);}\n",
+      "tests": [
+        {
+          "input": "5\n",
+          "output": "15"
+        },
+        {
+          "input": "1\n",
+          "output": "1"
+        },
+        {
+          "input": "100\n",
+          "output": "5050",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "结束条件 n==1，递归式 n+sumTo(n-1)。"
+      ],
+      "explain": "递归把大问题化小；sumTo(100) 仍在 int 范围内。",
+      "source": "第04章-02.pptx · 4.5 递归函数（slide 3–31）",
+      "topic": "",
+      "tags": [],
+      "id": "q421",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "递归函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.5",
+      "topicId": "4.4",
+      "type": "programming",
+      "difficulty": 2,
+      "stem": "【递归 Fibonacci】编写递归函数 fib(n)，输出第 n 个 Fibonacci 数（F1=F2=1）。",
+      "origin": "原创情境 · 递归数列",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // 结束条件 n≤2 返回 1。\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint fib(int n){if(n<=2)return 1;return fib(n-1)+fib(n-2);}\nint main(){int n;cin>>n;cout<<fib(n);}\n",
+      "tests": [
+        {
+          "input": "1\n",
+          "output": "1"
+        },
+        {
+          "input": "6\n",
+          "output": "8"
+        },
+        {
+          "input": "10\n",
+          "output": "55",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "结束条件 n≤2 返回 1。"
+      ],
+      "explain": "递归实现直观但会重复计算；题目数据范围较小。",
+      "source": "第04章-02.pptx · 4.5 递归函数（slide 3–31）",
+      "topic": "",
+      "tags": [],
+      "id": "q422",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "递归函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.5",
+      "topicId": "4.4",
+      "type": "programming",
+      "difficulty": 2,
+      "stem": "【递归最大公约数】编写递归函数 gcd(a,b)，用欧几里得算法求最大公约数。",
+      "origin": "原创情境 · 递归 gcd",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // 结束条件 b==0，此时 a 就是 gcd。\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint gcd(int a,int b){return b==0?a:gcd(b,a%b);}\nint main(){int a,b;cin>>a>>b;cout<<gcd(a,b);}\n",
+      "tests": [
+        {
+          "input": "12 18\n",
+          "output": "6"
+        },
+        {
+          "input": "7 13\n",
+          "output": "1"
+        },
+        {
+          "input": "100 25\n",
+          "output": "25",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "结束条件 b==0，此时 a 就是 gcd。"
+      ],
+      "explain": "递归式 gcd(a,b)=gcd(b,a%b)，每次规模缩小。",
+      "source": "第04章-02.pptx · 4.5 递归函数（slide 3–31）",
+      "topic": "",
+      "tags": [],
+      "id": "q423",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "递归函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.5",
+      "topicId": "4.4",
+      "type": "programming",
+      "difficulty": 2,
+      "stem": "【递归数位和】编写递归函数 digitSum(n)，求非负整数 n 的各位数字之和。",
+      "origin": "原创情境 · 递归数位和",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // 结束条件 n<10，递归式 n%10 + digitSum(n/10)。\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint digitSum(int n){if(n<10)return n;return n%10+digitSum(n/10);}\nint main(){int n;cin>>n;cout<<digitSum(n);}\n",
+      "tests": [
+        {
+          "input": "1234\n",
+          "output": "10"
+        },
+        {
+          "input": "0\n",
+          "output": "0"
+        },
+        {
+          "input": "999\n",
+          "output": "27",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "结束条件 n<10，递归式 n%10 + digitSum(n/10)。"
+      ],
+      "explain": "每次取个位并把 n 除以 10，直到只剩一位。",
+      "source": "第04章-02.pptx · 4.5 递归函数（slide 3–31）",
+      "topic": "",
+      "tags": [],
+      "id": "q424",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "递归函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.5",
+      "topicId": "4.4",
+      "type": "programming",
+      "difficulty": 2,
+      "stem": "【递归数组最大值】编写递归函数 maxInArray(a, left, right)，返回数组区间最大值。输入 n 和数组，输出最大值。",
+      "origin": "原创情境 · 递归最大值",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // 区间只剩一个元素时返回它，否则比较首元素和剩余区间的最大值。\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint maxInArray(int a[],int l,int r){if(l==r)return a[l];int m=maxInArray(a,l+1,r);return a[l]>m?a[l]:m;}\nint main(){int n,a[1000];cin>>n;for(int i=0;i<n;i++)cin>>a[i];cout<<maxInArray(a,0,n-1);}\n",
+      "tests": [
+        {
+          "input": "5\n1 9 2 7 3\n",
+          "output": "9"
+        },
+        {
+          "input": "1\n-5\n",
+          "output": "-5"
+        },
+        {
+          "input": "4\n-2 -9 -1 -7\n",
+          "output": "-1",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "区间只剩一个元素时返回它，否则比较首元素和剩余区间的最大值。"
+      ],
+      "explain": "递归处理的数组区间不断缩短，结束条件是 l==r。",
+      "source": "第04章-02.pptx · 4.5 递归函数（slide 3–31）",
+      "topic": "",
+      "tags": [],
+      "id": "q425",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "递归函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.5",
+      "topicId": "4.4",
+      "type": "programming",
+      "difficulty": 3,
+      "stem": "【汉诺塔步数】输入圆盘数 n，输出按经典递归策略完成汉诺塔所需的最少移动次数。",
+      "origin": "原创情境 · 汉诺塔计数",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // 递归式 moves(n)=2*moves(n-1)+1。\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nlong long moves(int n){if(n==0)return 0;return 2*moves(n-1)+1;}\nint main(){int n;cin>>n;cout<<moves(n);}\n",
+      "tests": [
+        {
+          "input": "1\n",
+          "output": "1"
+        },
+        {
+          "input": "3\n",
+          "output": "7"
+        },
+        {
+          "input": "10\n",
+          "output": "1023",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "递归式 moves(n)=2*moves(n-1)+1。"
+      ],
+      "explain": "汉诺塔最少移动次数为 2ⁿ−1，n 大时使用 long long。",
+      "source": "第04章-02.pptx · 4.5 递归函数（slide 3–31）",
+      "topic": "",
+      "tags": [],
+      "id": "q427",
+      "typeName": "编程题",
+      "difficultyName": "中等",
+      "knowledge": "递归函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.5",
+      "topicId": "4.4",
+      "type": "programming",
+      "difficulty": 4,
+      "stem": "【全排列】输入 n（1≤n≤6），按字典序输出 1～n 的所有全排列，每行一个排列。",
+      "origin": "原创情境 · 回溯入门",
+      "starter": "#include <iostream>\nusing namespace std;\nint n, a[10], used[10];\nvoid dfs(int k) {\n    // 回溯搜索\n}\nint main() { cin >> n; dfs(0); return 0; }\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint n,a[10],used[10];\nvoid dfs(int k){if(k==n){for(int i=0;i<n;i++)cout<<a[i];cout<<\"\\n\";return;}for(int i=1;i<=n;i++)if(!used[i]){used[i]=1;a[k]=i;dfs(k+1);used[i]=0;}}\nint main(){cin>>n;dfs(0);}\n",
+      "tests": [
+        {
+          "input": "2\n",
+          "output": "12\n21"
+        },
+        {
+          "input": "1\n",
+          "output": "1"
+        },
+        {
+          "input": "3\n",
+          "output": "123\n132\n213\n231\n312\n321",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "用 used 数组标记数字是否已经使用。"
+      ],
+      "explain": "每个位置按 1～n 尝试，递归填满 n 位后输出；回溯时撤销标记。",
+      "source": "第04章-02.pptx · 4.5 递归函数（slide 3–31）",
+      "topic": "",
+      "tags": [],
+      "id": "q428",
+      "typeName": "编程题",
+      "difficultyName": "困难",
+      "knowledge": "递归函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.6",
+      "topicId": "4.5",
+      "type": "programming",
+      "difficulty": 2,
+      "stem": "【默认参数平方】编写函数 long long power(int base, int exp = 2)。只输入一个整数 base，调用 power(base) 输出它的平方。",
+      "origin": "原创情境 · 默认参数",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // 函数第二个参数默认值为 2，调用 power(a) 表示 a²。\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nlong long power(int base,int exp=2){long long r=1;for(int i=0;i<exp;i++)r*=base;return r;}\nint main(){int a;cin>>a;cout<<power(a);}\n",
+      "tests": [
+        {
+          "input": "5\n",
+          "output": "25"
+        },
+        {
+          "input": "-3\n",
+          "output": "9"
+        },
+        {
+          "input": "0\n",
+          "output": "0",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "函数第二个参数默认值为 2，调用 power(a) 表示 a²。"
+      ],
+      "explain": "默认参数写在函数声明或定义中；调用时省略的实参从右端开始使用默认值。",
+      "source": "第04章-3.pptx · 4.6 宏、内联、默认参数（slide 14–36）",
+      "topic": "",
+      "tags": [],
+      "id": "q446",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "宏、内联函数、默认参数与命名空间"
     }
   ]
 }
