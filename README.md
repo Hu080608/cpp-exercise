@@ -51,7 +51,6 @@ cpp-exercise/
 │  ├─ questions_prog_100.py       # 第 3 批 100 道情境/算法编程题
 │  ├─ build_questionbank.py       # 生成 JSON + 覆盖矩阵校验
 │  ├─ test_programming.py         # 用本机 g++ 回归测试编程题标准解
-│  ├─ audit_code_questions.py     # 代码阅读题输出抽查
 │  └─ export_docs.js              # 生成知识点清单/题库下载包
 └─ .github/workflows/pages.yml    # GitHub Pages 自动发布
 ```
