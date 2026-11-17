@@ -414,8 +414,10 @@
       return '<div class="console-head"><span class="status-dot bad"></span>COMPILER ERROR · '+r.durationMs+'ms</div><div class="console-body"><pre class="err">'+U.esc(r.error||'编译失败')+'</pre>'+(r.friendly?'<pre class="warn" style="margin-top:10px">'+U.esc(r.friendly)+'</pre>':'')+'</div>';
     }
     const out = r.stdout ? U.esc(r.stdout) : '(无标准输出)';
+    const runErr = !r.ok && r.error ? '<pre class="err" style="margin-top:10px">'+U.esc(r.error)+'</pre>' : '';
     const err = r.stderr ? '<pre class="err" style="margin-top:10px">'+U.esc(r.stderr)+'</pre>' : '';
-    return '<div class="console-head"><span class="status-dot '+(r.stderr?'bad':'ok')+'"></span>RUN COMPLETE · '+r.durationMs+'ms</div><div class="console-body"><div class="meta-line">$ g++ -std=c++17 main.cpp && ./a.out</div><pre class="'+(r.stderr?'':'ok')+'">'+out+'</pre>'+err+(r.friendly?'<pre class="warn" style="margin-top:10px">'+U.esc(r.friendly)+'</pre>':'')+'</div>';
+    const warnings = (r.compilerError || r.compilerOutput) ? '<pre class="warn" style="margin-top:10px">'+U.esc(r.compilerError || r.compilerOutput)+'</pre>' : '';
+    return '<div class="console-head"><span class="status-dot '+(r.ok?'ok':'bad')+'"></span>'+(r.ok?'RUN COMPLETE':'RUN FAILED')+' · '+r.durationMs+'ms</div><div class="console-body"><div class="meta-line">$ g++ -std=c++17 main.cpp && ./a.out</div><pre class="'+(r.ok?'ok':'')+'">'+out+'</pre>'+runErr+err+warnings+(r.friendly?'<pre class="warn" style="margin-top:10px">'+U.esc(r.friendly)+'</pre>':'')+'</div>';
   }
   function updateConsole(qid, html) {
     const el=document.getElementById('prog-console-'+qid); if(el) el.innerHTML=html;

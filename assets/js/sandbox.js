@@ -55,9 +55,12 @@
       const compilerError = data.compiler_error || '';
       const compilerOutput = data.compiler_output || '';
       const status = String(data.status == null ? '' : data.status);
-      const compiled = !compilerError && status !== '1';
+      // Wandbox: status=0 正常；status=1 编译失败；>128 通常表示程序被信号终止。
+      const hasCompileError = status === '1' || /error:/.test(compilerError);
+      const compiled = !hasCompileError;
+      const runtimeFailed = compiled && (status !== '0' || !!data.program_error || !!data.signal);
       const result = {
-        ok: compiled && !data.program_error && status !== '1',
+        ok: compiled && !runtimeFailed,
         compiled,
         phase: compiled ? 'run' : 'compile',
         stdout: data.program_output || '',
@@ -70,7 +73,7 @@
         friendly: friendlyError(compilerError || data.program_error || compilerOutput)
       };
       if (!compiled) result.error = compilerError || compilerOutput || '编译失败。';
-      else if (data.program_error) result.error = data.program_error;
+      else if (runtimeFailed) result.error = data.program_error || ('程序异常终止：返回码/信号 ' + status + (data.signal ? ' (' + data.signal + ')' : '') + '。常见原因包括数组越界、空指针解引用、除以零或递归过深。');
       return result;
     } catch (err) {
       clearTimeout(timer);
