@@ -249,7 +249,15 @@
     });
   }
   function topicOptions(selected) {
-    return '<option value="all">全部知识点</option>' + KNOWLEDGE.map(k => '<option value="' + U.attr(k.id) + '" ' + (selected===k.id?'selected':'') + '>第' + k.chapter + '章 · ' + U.esc(k.title) + '</option>').join('');
+    const chapter = practiceFilter.chapter;
+    const topics = chapter === 'all' ? KNOWLEDGE : KNOWLEDGE.filter(k => String(k.chapter) === String(chapter));
+    return '<option value="all">' + (chapter === 'all' ? '全部知识点' : '本章全部知识点') + '</option>' + topics.map(k => '<option value="' + U.attr(k.id) + '" ' + (selected===k.id?'selected':'') + '>第' + k.chapter + '章 · ' + U.esc(k.title) + '</option>').join('');
+  }
+  function normalizePracticeFilter() {
+    if (practiceFilter.chapter !== 'all' && practiceFilter.topic !== 'all') {
+      const t = TOPICS[practiceFilter.topic];
+      if (!t || String(t.chapter) !== String(practiceFilter.chapter)) practiceFilter.topic = 'all';
+    }
   }
   function practiceListHtml(list) {
     if (!list.length) return emptyState('search','没有匹配的题目','试着放宽筛选条件，或清空关键词后重新查找。','<button class="btn btn-ghost btn-sm" style="margin-top:14px" data-action="clear-filters">清空筛选</button>');
@@ -259,6 +267,7 @@
     }).join('') + '</div>';
   }
   function renderPractice() {
+    normalizePracticeFilter();
     const list = filterQuestions();
     const activeFilters = ['chapter','topic','type','diff','status'].filter(k=>practiceFilter[k]!=='all').length + (practiceFilter.q?1:0);
     const counts = { total:QUESTIONS.length, single:QUESTIONS.filter(q=>q.type==='single').length, multiple:QUESTIONS.filter(q=>q.type==='multiple').length, judge:QUESTIONS.filter(q=>q.type==='judge').length, fill:QUESTIONS.filter(q=>q.type==='fill').length, code:QUESTIONS.filter(q=>q.type==='code').length, programming:QUESTIONS.filter(q=>q.type==='programming').length };
