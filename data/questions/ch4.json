@@ -1543,7 +1543,8 @@
       "id": "q206",
       "typeName": "编程题",
       "difficultyName": "入门",
-      "knowledge": "宏、内联函数、默认参数与命名空间"
+      "knowledge": "宏、内联函数、默认参数与命名空间",
+      "origin": "原创编程题 · 课程知识点综合"
     },
     {
       "chapter": 4,
@@ -1580,7 +1581,8 @@
       "id": "q207",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "递归函数"
+      "knowledge": "递归函数",
+      "origin": "原创编程题 · 课程知识点综合"
     },
     {
       "chapter": 4,
@@ -1617,7 +1619,8 @@
       "id": "q208",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "函数重载、函数指针、Lambda、范围 for 与 auto"
+      "knowledge": "函数重载、函数指针、Lambda、范围 for 与 auto",
+      "origin": "原创编程题 · 课程知识点综合"
     },
     {
       "chapter": 4,
@@ -1655,7 +1658,8 @@
       "id": "q209",
       "typeName": "编程题",
       "difficultyName": "困难",
-      "knowledge": "动态内存：new/delete 与 malloc/free"
+      "knowledge": "动态内存：new/delete 与 malloc/free",
+      "origin": "原创编程题 · 课程知识点综合"
     },
     {
       "chapter": 4,
@@ -1723,6 +1727,126 @@
       "typeName": "判断题",
       "difficultyName": "困难",
       "knowledge": "函数重载、函数指针、Lambda、范围 for 与 auto"
+    },
+    {
+      "chapter": 4,
+      "section": "4.5",
+      "topicId": "4.4",
+      "difficulty": 2,
+      "stem": "【快速幂】用递归函数计算 base 的 exp 次方（exp≥0），结果在 long long 范围内。输入 base 和 exp，输出结果。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nlong long power(long long base, int exp) {\n    // 递归：exp==0 返回 1；偶数拆半，奇数多乘一次\n}\n\nint main() {\n    long long b;\n    int e;\n    cin >> b >> e;\n    cout << power(b, e);\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nlong long power(long long b,int e){if(e==0)return 1;long long h=power(b,e/2);if(e%2==0)return h*h;return h*h*b;}\nint main(){long long b;int e;cin>>b>>e;cout<<power(b,e);}\n",
+      "tests": [
+        {
+          "input": "2 10\n",
+          "output": "1024"
+        },
+        {
+          "input": "3 0\n",
+          "output": "1"
+        },
+        {
+          "input": "5 3\n",
+          "output": "125",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "结束条件 exp==0 返回 1。",
+        "先算一半幂 h，再根据奇偶合成。"
+      ],
+      "explain": "快速幂把指数折半递归，偶数结果为 h*h，奇数再乘一次 base，显著减少乘法次数。",
+      "origin": "原创情境 · 递归快速幂",
+      "source": "第04章-02.pptx · 4.5 递归条件与结束条件（slide 15–16）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q340",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "递归函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.5",
+      "topicId": "4.4",
+      "difficulty": 3,
+      "stem": "【汉诺塔记录】输入圆盘数 n（1≤n≤8），按递归策略把 n 个圆盘从 A 柱移到 C 柱，B 为辅助柱。每次移动输出一行：from->to。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nvoid hanoi(int n, char from, char to, char via) {\n    // 先移 n-1 个到辅助柱，再移最大盘，最后移回 n-1 个\n}\n\nint main() {\n    int n;\n    cin >> n;\n    hanoi(n, 'A', 'C', 'B');\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nvoid hanoi(int n,char from,char to,char via){if(n==0)return;hanoi(n-1,from,via,to);cout<<from<<\"->\"<<to<<\"\\n\";hanoi(n-1,via,to,from);}\nint main(){int n;cin>>n;hanoi(n,'A','C','B');}\n",
+      "tests": [
+        {
+          "input": "2\n",
+          "output": "A->B\nA->C\nB->C"
+        },
+        {
+          "input": "1\n",
+          "output": "A->C"
+        },
+        {
+          "input": "3\n",
+          "output": "A->C\nA->B\nC->B\nA->C\nB->A\nB->C\nA->C",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "n==0 时直接返回，作为递归边界。",
+        "注意主问题是从 from 移到 to，借助 via。"
+      ],
+      "explain": "汉诺塔的递归分解：先把 n-1 个移到辅助柱，再移动最大盘，最后把 n-1 个移到目标柱。",
+      "origin": "原创情境 · 汉诺塔",
+      "source": "第04章-02.pptx · 4.5 汉诺塔（slide 16–19）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q341",
+      "typeName": "编程题",
+      "difficultyName": "中等",
+      "knowledge": "递归函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.3",
+      "topicId": "4.4",
+      "difficulty": 3,
+      "stem": "【有序查找】输入 n 个严格递增整数和待查找值 x，用二分查找输出 x 第一次出现的下标；不存在输出 -1。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n, x, a[1000];\n    cin >> n;\n    for (int i = 0; i < n; i++) cin >> a[i];\n    cin >> x;\n    // 二分查找\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int n,x,a[1000];cin>>n;for(int i=0;i<n;i++)cin>>a[i];cin>>x;int l=0,r=n-1,ans=-1;while(l<=r){int m=(l+r)/2;if(a[m]==x){ans=m;break;}else if(a[m]<x)l=m+1;else r=m-1;}cout<<ans;}\n",
+      "tests": [
+        {
+          "input": "5\n1 3 5 7 9\n5\n",
+          "output": "2"
+        },
+        {
+          "input": "5\n1 3 5 7 9\n4\n",
+          "output": "-1"
+        },
+        {
+          "input": "1\n10\n10\n",
+          "output": "0",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "循环条件 left <= right。",
+        "中点用 (left+right)/2，向查找值所在半边收缩。"
+      ],
+      "explain": "二分查找每次比较中点并排除一半区间，查找区间为空时仍未找到则返回 -1。",
+      "origin": "原创情境 · 二分查找",
+      "source": "第04章-01.pptx · 函数与算法；第03章 slide 56；第05章-1 slide 120–123",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q342",
+      "typeName": "编程题",
+      "difficultyName": "中等",
+      "knowledge": "递归函数"
     }
   ]
 }

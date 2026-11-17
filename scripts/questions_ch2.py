@@ -100,9 +100,9 @@ q(chapter=2, section="2.3", topicId="2.2", type="multiple", difficulty=2,
   source="第02章.pptx · 2.3 整数类型字面常量（slide 12）")
 
 q(chapter=2, section="2.3", topicId="2.2", type="judge", difficulty=1,
-  stem="字符串字面量 \"abc\" 在内存中通常需要 4 个字符位置：'a'、'b'、'c' 和 '\0'。",
+  stem="字符串字面量 \"abc\" 在内存中通常需要 4 个字符位置：'a'、'b'、'c' 和 '\\0'。",
   answer=True,
-  explain="字符串字面量末尾会自动加字符串结束标记 '\0'，所以存储 \"abc\" 至少需要 4 个 char 位置。",
+  explain="字符串字面量末尾会自动加字符串结束标记 '\\0'，所以存储 \"abc\" 至少需要 4 个 char 位置。",
   source="第02章.pptx · 2.3 字符串字面常量（slide 14）")
 
 q(chapter=2, section="2.3", topicId="2.2", type="judge", difficulty=2,

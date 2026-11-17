@@ -977,7 +977,8 @@
       "id": "q142",
       "typeName": "编程题",
       "difficultyName": "入门",
-      "knowledge": "循环结构：while、do-while、for 与嵌套"
+      "knowledge": "循环结构：while、do-while、for 与嵌套",
+      "origin": "原创编程题 · 课程知识点综合"
     },
     {
       "chapter": 3,
@@ -1023,7 +1024,8 @@
       "id": "q143",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "选择结构：if、else 与 switch"
+      "knowledge": "选择结构：if、else 与 switch",
+      "origin": "原创编程题 · 课程知识点综合"
     },
     {
       "chapter": 3,
@@ -1071,7 +1073,8 @@
       "id": "q144",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "循环结构：while、do-while、for 与嵌套"
+      "knowledge": "循环结构：while、do-while、for 与嵌套",
+      "origin": "原创编程题 · 课程知识点综合"
     },
     {
       "chapter": 3,
@@ -1118,7 +1121,8 @@
       "id": "q145",
       "typeName": "编程题",
       "difficultyName": "困难",
-      "knowledge": "循环结构：while、do-while、for 与嵌套"
+      "knowledge": "循环结构：while、do-while、for 与嵌套",
+      "origin": "原创编程题 · 课程知识点综合"
     },
     {
       "chapter": 3,
@@ -1178,6 +1182,793 @@
       "typeName": "多选题",
       "difficultyName": "困难",
       "knowledge": "转移语句与程序设计风格"
+    },
+    {
+      "chapter": 3,
+      "section": "3.3",
+      "topicId": "3.2",
+      "difficulty": 1,
+      "stem": "【灯光控制】输入一个整数，若为偶数输出 EVEN，否则输出 ODD。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    // 使用 % 判断奇偶\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int n;cin>>n;if(n%2==0)cout<<\"EVEN\";else cout<<\"ODD\";}\n",
+      "tests": [
+        {
+          "input": "4\n",
+          "output": "EVEN"
+        },
+        {
+          "input": "7\n",
+          "output": "ODD"
+        },
+        {
+          "input": "0\n",
+          "output": "EVEN",
+          "hidden": true
+        },
+        {
+          "input": "-3\n",
+          "output": "ODD",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "n % 2 == 0 表示偶数。"
+      ],
+      "explain": "整数 %2 的余数判断奇偶；0 是偶数，负数取余结果非零时也走奇数分支。",
+      "origin": "原创情境 · 奇偶判断",
+      "source": "第03章.pptx · 3.3 选择执行（slide 19）；第02章 slide 19",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q303",
+      "typeName": "编程题",
+      "difficultyName": "入门",
+      "knowledge": "选择结构：if、else 与 switch"
+    },
+    {
+      "chapter": 3,
+      "section": "3.3",
+      "topicId": "3.2",
+      "difficulty": 1,
+      "stem": "【三人赛跑】输入三个整数成绩，输出其中的最大值。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int a, b, c;\n    cin >> a >> b >> c;\n    // 输出最大值\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int a,b,c;cin>>a>>b>>c;int m=a;if(b>m)m=b;if(c>m)m=c;cout<<m;}\n",
+      "tests": [
+        {
+          "input": "3 9 5\n",
+          "output": "9"
+        },
+        {
+          "input": "-1 -7 -2\n",
+          "output": "-1"
+        },
+        {
+          "input": "5 5 5\n",
+          "output": "5",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "先把 a 赋给 m，再依次与 b、c 比较。"
+      ],
+      "explain": "用一个临时最大值 m 依次比较，可扩展到更多数据；初值取 a 能正确处理全负数。",
+      "origin": "原创情境 · 三数最大值",
+      "source": "第03章.pptx · 3.3 三个整数中的最大值（slide 20）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q304",
+      "typeName": "编程题",
+      "difficultyName": "入门",
+      "knowledge": "选择结构：if、else 与 switch"
+    },
+    {
+      "chapter": 3,
+      "section": "3.3",
+      "topicId": "3.2",
+      "difficulty": 2,
+      "stem": "【成绩报告】输入 0～100 的整数成绩，按 ≥90 输出 A、80～89 输出 B、70～79 输出 C、60～69 输出 D、其余输出 E。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int score;\n    cin >> score;\n    // 用 else-if 分级\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int s;cin>>s;if(s>=90)cout<<\"A\";else if(s>=80)cout<<\"B\";else if(s>=70)cout<<\"C\";else if(s>=60)cout<<\"D\";else cout<<\"E\";}\n",
+      "tests": [
+        {
+          "input": "95\n",
+          "output": "A"
+        },
+        {
+          "input": "60\n",
+          "output": "D"
+        },
+        {
+          "input": "59\n",
+          "output": "E"
+        },
+        {
+          "input": "80\n",
+          "output": "B",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "从高到低判断，前面的条件覆盖后，后面无需重复写上限。"
+      ],
+      "explain": "互斥区间适合用 else-if 链；每个分支只负责一个等级。",
+      "origin": "原创情境 · 成绩等级",
+      "source": "第03章.pptx · 3.3 独立 if 与 else-if（slide 23）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q305",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "选择结构：if、else 与 switch"
+    },
+    {
+      "chapter": 3,
+      "section": "3.3",
+      "topicId": "3.2",
+      "difficulty": 2,
+      "stem": "【日历判断】输入年份 year，判断是否为闰年：是输出 LEAP，否则输出 COMMON。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int year;\n    cin >> year;\n    // 判断闰年\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int y;cin>>y;if(y%400==0||(y%4==0&&y%100!=0))cout<<\"LEAP\";else cout<<\"COMMON\";}\n",
+      "tests": [
+        {
+          "input": "2000\n",
+          "output": "LEAP"
+        },
+        {
+          "input": "1900\n",
+          "output": "COMMON"
+        },
+        {
+          "input": "2024\n",
+          "output": "LEAP"
+        },
+        {
+          "input": "2023\n",
+          "output": "COMMON",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "能被 400 整除，或能被 4 整除且不能被 100 整除。"
+      ],
+      "explain": "闰年条件必须写成 year%400==0 || (year%4==0 && year%100!=0)，注意逻辑与优先级高于逻辑或。",
+      "origin": "原创情境 · 日历判断",
+      "source": "第03章.pptx · 3.3 例 3-9 判断闰年（slide 30）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q306",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "选择结构：if、else 与 switch"
+    },
+    {
+      "chapter": 3,
+      "section": "3.3",
+      "topicId": "3.2",
+      "difficulty": 2,
+      "stem": "【阶梯电费】某地电费按用电量分段：0～150 度每度 0.4463 元；151～400 度超出部分每度 0.4663 元；超过 400 度，超出部分每度 0.5663 元。输入用电量，输出电费，保留 1 位小数。",
+      "starter": "#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int x;\n    cin >> x;\n    double fee = 0;\n    // 按阶梯分段累加\n    return 0;\n}\n",
+      "solution": "#include <iostream>\n#include <iomanip>\nusing namespace std;\nint main(){int x;cin>>x;double f=0;if(x<=150)f=x*0.4463;else if(x<=400)f=150*0.4463+(x-150)*0.4663;else f=150*0.4463+250*0.4663+(x-400)*0.5663;cout<<fixed<<setprecision(1)<<f;}\n",
+      "tests": [
+        {
+          "input": "100\n",
+          "output": "44.6"
+        },
+        {
+          "input": "200\n",
+          "output": "90.3"
+        },
+        {
+          "input": "500\n",
+          "output": "240.1",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "分段计费时，前面的 150 度和 250 度要单独算。",
+        "最终结果用 fixed 保留 1 位小数。"
+      ],
+      "explain": "阶梯计费不是整段统一单价：先加满低档，再计算超出部分。用 else-if 拆成三段。",
+      "origin": "洛谷 P1422 同类 · 小玉家的电费",
+      "source": "第03章.pptx · 3.3 else-if（slide 23）；第02章 slide 39",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q307",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "选择结构：if、else 与 switch"
+    },
+    {
+      "chapter": 3,
+      "section": "3.3",
+      "topicId": "3.2",
+      "difficulty": 3,
+      "stem": "【文具采购】学校要买 n 支铅笔。商店有三种包装：每包数量与价格不同，可以买任意包，但必须买够至少 n 支。求最少花多少钱。第一行输入 n，接下来三行每行输入“每包数量 每包价格”。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    // 读入三种包装，计算每种包装买够 n 支所需费用，取最小值\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int n;cin>>n;int best=2147483647;for(int i=0;i<3;i++){int num,price;cin>>num>>price;int packs=(n+num-1)/num;int cost=packs*price;if(cost<best)best=cost;}cout<<best;}\n",
+      "tests": [
+        {
+          "input": "57\n2 2\n50 30\n30 27\n",
+          "output": "54"
+        },
+        {
+          "input": "10\n3 5\n5 8\n10 15\n",
+          "output": "15"
+        },
+        {
+          "input": "1\n10 100\n5 51\n2 20\n",
+          "output": "20",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "每种包装至少要买 ceil(n/num) 包。",
+        "整数上取整可写 (n + num - 1) / num。"
+      ],
+      "explain": "对三种包装分别计算费用，取最小值。必须买够至少 n 支，所以包数要上取整。",
+      "origin": "洛谷 P1909 同类 · 买铅笔",
+      "source": "第03章.pptx · 3.3 选择；3.4 循环（slide 19–38）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q308",
+      "typeName": "编程题",
+      "difficultyName": "中等",
+      "knowledge": "选择结构：if、else 与 switch"
+    },
+    {
+      "chapter": 3,
+      "section": "3.4",
+      "topicId": "3.3",
+      "difficulty": 2,
+      "stem": "【果园收获】陶陶家的苹果树上有 10 个苹果，高度分别为 100～200 厘米。陶陶有一个 30 厘米高的板凳，她伸手能达到的高度为 max_height + 30。输入 10 个苹果高度，再输入陶陶把手伸直能达到的高度，输出她能摘到的苹果数。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int a[10];\n    for (int i = 0; i < 10; i++) cin >> a[i];\n    int h;\n    cin >> h;\n    // 统计 a[i] <= h + 30 的个数\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int a[10],h,c=0;for(int i=0;i<10;i++)cin>>a[i];cin>>h;for(int i=0;i<10;i++)if(a[i]<=h+30)c++;cout<<c;}\n",
+      "tests": [
+        {
+          "input": "100 200 150 140 129 134 167 198 200 111\n110\n",
+          "output": "5"
+        },
+        {
+          "input": "100 100 100 100 100 100 100 100 100 100\n70\n",
+          "output": "10"
+        },
+        {
+          "input": "100 200 150 140 129 134 167 198 200 111\n50\n",
+          "output": "0",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "可摘到条件：苹果高度 <= 手高 + 30。",
+        "遍历 10 个元素计数。"
+      ],
+      "explain": "数组遍历加条件计数，是“筛选满足条件的元素”的基础模型。",
+      "origin": "洛谷 P1046 同类 · 陶陶摘苹果",
+      "source": "第05章 - 1.pptx · 5.2 一维数组遍历（slide 26）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q309",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
+    },
+    {
+      "chapter": 3,
+      "section": "3.4",
+      "topicId": "3.3",
+      "difficulty": 2,
+      "stem": "【心情记录】津津连续 7 天记录上课时间（小时）。若某天上课时间超过 8 小时，她会不高兴。输出最不高兴的是第几天（1～7）；如果都不超过 8 小时，输出 0。若并列，输出天数更早的一天。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int day = 0, maxExtra = 0;\n    // 读入 7 天的上课时间，找出超过 8 小时且超出最多的一天\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int best=0,extraMax=0;for(int i=1;i<=7;i++){int x;cin>>x;if(x>8&&x-8>extraMax){extraMax=x-8;best=i;}}cout<<best;}\n",
+      "tests": [
+        {
+          "input": "5 6 7 8 9 10 9\n",
+          "output": "6"
+        },
+        {
+          "input": "5 6 7 8 8 8 8\n",
+          "output": "0"
+        },
+        {
+          "input": "9 9 7 8 8 8 8\n",
+          "output": "1",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "只有超过 8 小时才算不高兴。",
+        "用严格大于更新，自动保留最早出现的最不高兴日。"
+      ],
+      "explain": "一次遍历记录最大超出量及对应天数；由于只在更大时更新，并列时保留较早天数。",
+      "origin": "洛谷 P1085 同类 · 不高兴的津津",
+      "source": "第03章.pptx · 3.4 循环与条件（slide 34）；第05章 slide 26",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q310",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
+    },
+    {
+      "chapter": 3,
+      "section": "3.4",
+      "topicId": "3.3",
+      "difficulty": 2,
+      "stem": "【阶梯奖励】输入 n，计算 1! + 2! + … + n! 的值（n≤12）。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    // 一边累乘阶乘，一边累加\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int n;cin>>n;long long f=1,sum=0;for(int i=1;i<=n;i++){f*=i;sum+=f;}cout<<sum;}\n",
+      "tests": [
+        {
+          "input": "1\n",
+          "output": "1"
+        },
+        {
+          "input": "3\n",
+          "output": "9"
+        },
+        {
+          "input": "5\n",
+          "output": "153"
+        },
+        {
+          "input": "12\n",
+          "output": "522956313",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "当前项阶乘可以用上一项的阶乘乘 i 得到。",
+        "n=12 时结果较大，使用 long long。"
+      ],
+      "explain": "在同一个循环里维护阶乘项 f 和累加和 sum，避免每一轮从头重算阶乘。",
+      "origin": "原创情境 · 阶乘和",
+      "source": "第03章.pptx · 3.4 累乘与循环（slide 31–39）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q311",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
+    },
+    {
+      "chapter": 3,
+      "section": "3.4",
+      "topicId": "3.3",
+      "difficulty": 2,
+      "stem": "【分糖果】输入两个正整数 a、b，求它们的最大公约数。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int a, b;\n    cin >> a >> b;\n    // 欧几里得算法：反复用余数替换\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int a,b;cin>>a>>b;while(b!=0){int r=a%b;a=b;b=r;}cout<<a;}\n",
+      "tests": [
+        {
+          "input": "12 18\n",
+          "output": "6"
+        },
+        {
+          "input": "7 13\n",
+          "output": "1"
+        },
+        {
+          "input": "100 25\n",
+          "output": "25",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "while (b != 0) { r=a%b; a=b; b=r; }",
+        "循环结束后 a 就是最大公约数。"
+      ],
+      "explain": "欧几里得算法反复用除数与余数替换，直到余数为 0；这是循环与整除的综合应用。",
+      "origin": "原创情境 · 最大公约数",
+      "source": "第03章.pptx · 3.4 while 循环（slide 34）；第02章 slide 19",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q312",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
+    },
+    {
+      "chapter": 3,
+      "section": "3.4",
+      "topicId": "3.3",
+      "difficulty": 2,
+      "stem": "【排队分组】输入两个正整数 a、b，求它们的最小公倍数。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int a, b;\n    cin >> a >> b;\n    // 最小公倍数 = a / gcd(a,b) * b\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int a,b,x,y;cin>>a>>b;x=a;y=b;while(y!=0){int r=x%y;x=y;y=r;}cout<<a/x*b;}\n",
+      "tests": [
+        {
+          "input": "12 18\n",
+          "output": "36"
+        },
+        {
+          "input": "7 13\n",
+          "output": "91"
+        },
+        {
+          "input": "25 100\n",
+          "output": "100",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "先求 gcd，再算 a/gcd*b，避免先乘溢出。",
+        "a、b 至少为正整数。"
+      ],
+      "explain": "两个正整数的最小公倍数 = a / gcd(a,b) × b。先除后乘可降低中间结果大小。",
+      "origin": "原创情境 · 最小公倍数",
+      "source": "第03章.pptx · 3.4 循环（slide 34）；第02章 slide 19",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q313",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
+    },
+    {
+      "chapter": 3,
+      "section": "3.4",
+      "topicId": "3.3",
+      "difficulty": 2,
+      "stem": "【数字倒影】输入一个整数，输出它倒过来读的整数。例如 1230 输出 321，-450 输出 -54。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    // 用 % 和 / 逐位构造反转数\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int n;cin>>n;int sign=1;if(n<0){sign=-1;n=-n;}int r=0;while(n>0){r=r*10+n%10;n/=10;}cout<<sign*r;}\n",
+      "tests": [
+        {
+          "input": "1230\n",
+          "output": "321"
+        },
+        {
+          "input": "-450\n",
+          "output": "-54"
+        },
+        {
+          "input": "7\n",
+          "output": "7"
+        },
+        {
+          "input": "1000\n",
+          "output": "1",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "先记录符号，把负数转成正数处理。",
+        "每次 r = r*10 + n%10，再 n/=10。"
+      ],
+      "explain": "用整数的取余和整除逐位构造反转数，最后补回符号；多余的前导 0 会自然消失。",
+      "origin": "原创情境 · 整数反转",
+      "source": "第03章.pptx · 3.4 while 循环（slide 34）；第02章 slide 19",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q314",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
+    },
+    {
+      "chapter": 3,
+      "section": "3.4",
+      "topicId": "3.3",
+      "difficulty": 2,
+      "stem": "【回文密码】输入一个正整数，判断它是否为回文数（正读反读相同）。是输出 YES，否则输出 NO。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    // 构造 n 的反转数，与原数比较\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int n;cin>>n;int x=n,r=0;while(x>0){r=r*10+x%10;x/=10;}cout<<(r==n?\"YES\":\"NO\");}\n",
+      "tests": [
+        {
+          "input": "121\n",
+          "output": "YES"
+        },
+        {
+          "input": "123\n",
+          "output": "NO"
+        },
+        {
+          "input": "7\n",
+          "output": "YES"
+        },
+        {
+          "input": "1001\n",
+          "output": "YES",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "用另一个变量 x 拆位，原数 n 保留用于比较。"
+      ],
+      "explain": "把整数反转后与原数比较即可判断回文；注意保留原值，不能一边拆位一边直接用 n 比较。",
+      "origin": "力扣 9 同类 · 回文数",
+      "source": "第03章.pptx · 3.4 while（slide 34）；第02章 slide 19",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q315",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
+    },
+    {
+      "chapter": 3,
+      "section": "3.4",
+      "topicId": "3.3",
+      "difficulty": 3,
+      "stem": "【数字普查】输入 n 和数字 k（0～9），统计 1 到 n 的所有整数中，数字 k 一共出现了多少次。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n, k, count = 0;\n    cin >> n >> k;\n    // 枚举 1..n，对每个数拆位统计 k\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int n,k,c=0;cin>>n>>k;for(int i=1;i<=n;i++){int x=i;while(x>0){if(x%10==k)c++;x/=10;}}cout<<c;}\n",
+      "tests": [
+        {
+          "input": "100 1\n",
+          "output": "21"
+        },
+        {
+          "input": "25 2\n",
+          "output": "9"
+        },
+        {
+          "input": "9 0\n",
+          "output": "0"
+        },
+        {
+          "input": "1000 0\n",
+          "output": "192",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "外层枚举 i，内层 while 拆掉 i 的每一位。",
+        "k 可能为 0，不能只统计首位。"
+      ],
+      "explain": "枚举 1～n，对每个数用 %10 检查当前位、/=10 继续处理下一位，累加命中次数。",
+      "origin": "洛谷 P1980 同类 · 计数问题",
+      "source": "第03章.pptx · 3.4 嵌套循环（slide 57）；第02章 slide 19",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q316",
+      "typeName": "编程题",
+      "difficultyName": "中等",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
+    },
+    {
+      "chapter": 3,
+      "section": "3.4",
+      "topicId": "3.3",
+      "difficulty": 2,
+      "stem": "【冰雹猜想】从正整数 n 出发：若为偶数就除以 2，若为奇数就乘 3 加 1，反复操作直到变成 1。输出经过的步数（不含初始数，含变成 1 的最后一步）。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    long long n;\n    cin >> n;\n    int steps = 0;\n    // 模拟冰雹序列\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){long long n;cin>>n;int c=0;while(n!=1){if(n%2==0)n/=2;else n=n*3+1;c++;}cout<<c;}\n",
+      "tests": [
+        {
+          "input": "6\n",
+          "output": "8"
+        },
+        {
+          "input": "1\n",
+          "output": "0"
+        },
+        {
+          "input": "27\n",
+          "output": "111",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "用 long long，奇数分支可能让数短暂变大。",
+        "while(n != 1) 中每操作一次 steps++。"
+      ],
+      "explain": "按规则模拟序列状态，循环终止于 n==1；注意 1 本身不需要再操作，步数为 0。",
+      "origin": "洛谷 P5727 同类 · 冰雹猜想",
+      "source": "第03章.pptx · 3.4 while 循环（slide 34）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q317",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
+    },
+    {
+      "chapter": 3,
+      "section": "3.4",
+      "topicId": "3.3",
+      "difficulty": 2,
+      "stem": "【调和级数】输入整数 k，求最小的 n，使得 1 + 1/2 + 1/3 + … + 1/n > k。输出 n。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int k;\n    cin >> k;\n    double sum = 0;\n    int n = 0;\n    // 累加直到 sum > k\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int k,n=0;cin>>k;double s=0;while(s<=k){n++;s+=1.0/n;}cout<<n;}\n",
+      "tests": [
+        {
+          "input": "1\n",
+          "output": "2"
+        },
+        {
+          "input": "2\n",
+          "output": "4"
+        },
+        {
+          "input": "3\n",
+          "output": "11"
+        },
+        {
+          "input": "10\n",
+          "output": "12367",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "sum 必须是 double，累加 1.0/n。",
+        "循环条件是 sum <= k。"
+      ],
+      "explain": "事件控制循环：不知道循环次数，用浮点累加和与目标 k 比较决定是否继续。",
+      "origin": "洛谷 P1035 同类 · 级数求和",
+      "source": "第03章.pptx · 3.4 while 与事件控制（slide 34、43）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q318",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
+    },
+    {
+      "chapter": 3,
+      "section": "3.4",
+      "topicId": "3.3",
+      "difficulty": 2,
+      "stem": "【素数统计】输入 n（2≤n≤10000），输出 1 到 n 之间素数的个数。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n, count = 0;\n    cin >> n;\n    // 对每个数判断是否为素数\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int n,c=0;cin>>n;for(int x=2;x<=n;x++){bool ok=true;for(int i=2;i*i<=x;i++)if(x%i==0){ok=false;break;}if(ok)c++;}cout<<c;}\n",
+      "tests": [
+        {
+          "input": "10\n",
+          "output": "4"
+        },
+        {
+          "input": "2\n",
+          "output": "1"
+        },
+        {
+          "input": "100\n",
+          "output": "25"
+        },
+        {
+          "input": "1000\n",
+          "output": "168",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "1 不是素数，从 2 开始。",
+        "试除到 i*i<=x 即可。"
+      ],
+      "explain": "外层枚举候选数，内层用试除判断素数；发现因子就用 break 提前结束内层循环。",
+      "origin": "原创情境 · 素数统计",
+      "source": "第03章.pptx · 3.4 素数判断（slide 53–56）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q319",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
+    },
+    {
+      "chapter": 3,
+      "section": "3.4",
+      "topicId": "3.3",
+      "difficulty": 3,
+      "stem": "【完数寻宝】如果一个正整数等于它所有真因子（不含自身）之和，则称为完数。输入 n，输出 1 到 n 之间所有完数，按从小到大用空格分隔。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    // 枚举候选数并求因子和\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int n;cin>>n;bool first=true;for(int x=2;x<=n;x++){int s=1;for(int d=2;d*d<=x;d++)if(x%d==0){s+=d;if(d!=x/d)s+=x/d;}if(x>1&&s==x){if(!first)cout<<\" \";cout<<x;first=false;}}if(first)cout<<\"none\";}\n",
+      "tests": [
+        {
+          "input": "30\n",
+          "output": "6 28"
+        },
+        {
+          "input": "6\n",
+          "output": "6"
+        },
+        {
+          "input": "5\n",
+          "output": "none"
+        },
+        {
+          "input": "500\n",
+          "output": "6 28 496",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "1 是每个大于 1 的数的真因子，可把因子和初始化为 1。",
+        "成对因子只加一次，注意 d*d==x 时不要重复加。"
+      ],
+      "explain": "利用成对因子枚举到 √x，求所有真因子之和；没有找到时按约定输出 none。",
+      "origin": "原创情境 · 完数",
+      "source": "第03章.pptx · 3.4 循环与素数/因子（slide 31–56）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q320",
+      "typeName": "编程题",
+      "difficultyName": "中等",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
+    },
+    {
+      "chapter": 3,
+      "section": "3.4",
+      "topicId": "3.3",
+      "difficulty": 3,
+      "stem": "【水仙花数】水仙花数是指一个三位数，其各位数字的立方和等于它本身。输出所有三位水仙花数，用空格分隔。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // 枚举 100～999，拆出百、十、个位判断\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){bool first=true;for(int n=100;n<=999;n++){int a=n/100,b=n/10%10,c=n%10;if(a*a*a+b*b*b+c*c*c==n){if(!first)cout<<\" \";cout<<n;first=false;}}}\n",
+      "tests": [
+        {
+          "input": "",
+          "output": "153 370 371 407"
+        }
+      ],
+      "hints": [
+        "百位 n/100，十位 n/10%10，个位 n%10。",
+        "题目无输入，直接输出结果。"
+      ],
+      "explain": "固定范围枚举，拆出三位数字并验证立方和。输入为空也要能正常运行。",
+      "origin": "原创情境 · 水仙花数",
+      "source": "第03章.pptx · 3.4 循环枚举（slide 31–38）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q321",
+      "typeName": "编程题",
+      "difficultyName": "中等",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
     }
   ]
 }

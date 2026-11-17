@@ -51,4 +51,39 @@ const all = {
   generatedAt: new Date().toISOString(), count: questions.length, knowledge: KB, questions
 };
 fs.writeFileSync(path.join(ROOT, 'downloads/question-bank.json'), JSON.stringify(all, null, 2), 'utf8');
-console.log(`Generated KNOWLEDGE_POINTS.md (${KB.length} topics), question-bank.json (${questions.length} questions)`);
+
+// 编程题专项题库
+const progQuestions = questions.filter(q => q.type === 'programming');
+fs.writeFileSync(path.join(ROOT, 'downloads/programming-bank.json'), JSON.stringify({
+  app: 'cpp-lab-programming-bank', version: 2, count: progQuestions.length,
+  source: '程序设计课程 PPT 第1–5章 + 原创/经典题情境改编',
+  generatedAt: new Date().toISOString(), questions: progQuestions
+}, null, 2), 'utf8');
+let pmd = `# 编程题专项题库
+
+> ${progQuestions.length} 道编程题，全部只使用课程 PPT 第 1–5 章讲过的语言特性。
+> 题目情境包含原创题与经典题（洛谷/力扣等）改编；每题均附初始代码、测试用例和 PPT 知识点来源。
+
+`;
+for (const d of [1,2,3,4]) {
+  pmd += `## ${['','入门','简单','中等','困难'][d]}
+
+`;
+  for (const q of progQuestions.filter(x=>x.difficulty===d)) {
+    pmd += `### ${q.id} ${q.stem}
+
+`;
+    pmd += `- 章节/知识点：第 ${q.chapter} 章 · ${q.knowledge}
+`;
+    pmd += `- 题目来源：${q.origin || '课程综合编程'}
+`;
+    pmd += `- 测试用例：${q.tests.length} 组（${q.tests.filter(t=>t.hidden).length} 组隐藏）
+`;
+    pmd += `- PPT 来源：${q.source}
+
+`;
+  }
+}
+fs.writeFileSync(path.join(ROOT, 'docs/PROGRAMMING_BANK.md'), pmd, 'utf8');
+
+console.log(`Generated KNOWLEDGE_POINTS.md (${KB.length} topics), question-bank.json (${questions.length} questions), programming-bank.json (${progQuestions.length} problems)`);

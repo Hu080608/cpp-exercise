@@ -348,9 +348,9 @@
       "topicId": "2.2",
       "type": "judge",
       "difficulty": 1,
-      "stem": "字符串字面量 \"abc\" 在内存中通常需要 4 个字符位置：'a'、'b'、'c' 和 '\u0000'。",
+      "stem": "字符串字面量 \"abc\" 在内存中通常需要 4 个字符位置：'a'、'b'、'c' 和 '\\0'。",
       "answer": true,
-      "explain": "字符串字面量末尾会自动加字符串结束标记 '\u0000'，所以存储 \"abc\" 至少需要 4 个 char 位置。",
+      "explain": "字符串字面量末尾会自动加字符串结束标记 '\\0'，所以存储 \"abc\" 至少需要 4 个 char 位置。",
       "source": "第02章.pptx · 2.3 字符串字面常量（slide 14）",
       "topic": "",
       "tags": [],
@@ -759,7 +759,8 @@
       "id": "q074",
       "typeName": "编程题",
       "difficultyName": "入门",
-      "knowledge": "输入输出与格式化"
+      "knowledge": "输入输出与格式化",
+      "origin": "原创编程题 · 课程知识点综合"
     },
     {
       "chapter": 2,
@@ -1065,7 +1066,8 @@
       "id": "q086",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "算术、关系与逻辑运算"
+      "knowledge": "算术、关系与逻辑运算",
+      "origin": "原创编程题 · 课程知识点综合"
     },
     {
       "chapter": 2,
@@ -1532,7 +1534,8 @@
       "id": "q104",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "输入输出与格式化"
+      "knowledge": "输入输出与格式化",
+      "origin": "原创编程题 · 课程知识点综合"
     },
     {
       "chapter": 2,
@@ -1659,6 +1662,165 @@
       "typeName": "填空题",
       "difficultyName": "困难",
       "knowledge": "类型转换、表达式求值与位运算"
+    },
+    {
+      "chapter": 2,
+      "section": "2.3",
+      "topicId": "2.3",
+      "difficulty": 1,
+      "stem": "【天气播报】输入摄氏温度 C（double），输出华氏温度 F = C × 9 / 5 + 32，保留 1 位小数。",
+      "starter": "#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    double c;\n    cin >> c;\n    // 计算并输出华氏温度\n    return 0;\n}\n",
+      "solution": "#include <iostream>\n#include <iomanip>\nusing namespace std;\nint main(){double c;cin>>c;cout<<fixed<<setprecision(1)<<c*9/5+32;}\n",
+      "tests": [
+        {
+          "input": "0\n",
+          "output": "32.0"
+        },
+        {
+          "input": "100\n",
+          "output": "212.0"
+        },
+        {
+          "input": "-40\n",
+          "output": "-40.0",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "注意 9/5 是整数除法，应先乘 C 或写 9.0/5。",
+        "用 fixed + setprecision(1) 固定一位小数。"
+      ],
+      "explain": "公式 F=C×9/5+32。由于 C 是 double，c*9/5 会进行浮点运算；输出用 fixed 与 setprecision(1)。",
+      "origin": "原创情境 · 温度转换",
+      "source": "第02章.pptx · 2.4 算术运算；2.5 浮点格式（slide 19、39）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q299",
+      "typeName": "编程题",
+      "difficultyName": "入门",
+      "knowledge": "输入输出与格式化"
+    },
+    {
+      "chapter": 2,
+      "section": "2.3",
+      "topicId": "2.3",
+      "difficulty": 1,
+      "stem": "【班级花坛】输入圆的半径 r，输出面积和周长（π 取 3.14），两者保留 2 位小数，空格分隔。",
+      "starter": "#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    double r;\n    cin >> r;\n    // 面积 = 3.14*r*r，周长 = 2*3.14*r\n    return 0;\n}\n",
+      "solution": "#include <iostream>\n#include <iomanip>\nusing namespace std;\nint main(){double r;cin>>r;cout<<fixed<<setprecision(2)<<3.14*r*r<<\" \"<<2*3.14*r;}\n",
+      "tests": [
+        {
+          "input": "2\n",
+          "output": "12.56 12.56"
+        },
+        {
+          "input": "1\n",
+          "output": "3.14 6.28"
+        },
+        {
+          "input": "3.5\n",
+          "output": "38.47 21.98",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "先乘后除不会产生整数除法问题。",
+        "fixed + setprecision(2) 输出两位小数。"
+      ],
+      "explain": "面积 πr²、周长 2πr；两个表达式都以 double 参与运算，最后统一按两位小数输出。",
+      "origin": "原创情境 · 圆的计算",
+      "source": "第02章.pptx · 2.4 算术运算；2.5 输出格式（slide 19、39）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q300",
+      "typeName": "编程题",
+      "difficultyName": "入门",
+      "knowledge": "输入输出与格式化"
+    },
+    {
+      "chapter": 2,
+      "section": "2.4",
+      "topicId": "2.4",
+      "difficulty": 1,
+      "stem": "【时间换算】输入一个非负整数秒数，输出“时:分:秒”格式，例如 3661 输出 1:1:1。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int total;\n    cin >> total;\n    // 用 / 和 % 拆出时、分、秒\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int t;cin>>t;cout<<t/3600<<\":\"<<t%3600/60<<\":\"<<t%60;}\n",
+      "tests": [
+        {
+          "input": "3661\n",
+          "output": "1:1:1"
+        },
+        {
+          "input": "59\n",
+          "output": "0:0:59"
+        },
+        {
+          "input": "7322\n",
+          "output": "2:2:2",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "小时 = total / 3600。",
+        "分钟 = total % 3600 / 60，秒 = total % 60。"
+      ],
+      "explain": "整数除法和取余可把总秒数逐级拆分：先取小时，再在剩余秒数中取分钟，最后取秒。",
+      "origin": "原创情境 · 时间换算",
+      "source": "第02章.pptx · 2.4 整除与取余（slide 19）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q301",
+      "typeName": "编程题",
+      "difficultyName": "入门",
+      "knowledge": "算术、关系与逻辑运算"
+    },
+    {
+      "chapter": 2,
+      "section": "2.4",
+      "topicId": "2.4",
+      "difficulty": 1,
+      "stem": "【数字谜题】输入一个三位正整数，输出它的百位、十位、个位之和。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    // 取出三位数字并求和\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int n;cin>>n;cout<<n/100+n/10%10+n%10;}\n",
+      "tests": [
+        {
+          "input": "123\n",
+          "output": "6"
+        },
+        {
+          "input": "909\n",
+          "output": "18"
+        },
+        {
+          "input": "500\n",
+          "output": "5",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "百位 n/100，十位 n/10%10，个位 n%10。"
+      ],
+      "explain": "利用整除与取余逐个拆位，是循环处理数字的基础。",
+      "origin": "原创情境 · 数位拆分",
+      "source": "第02章.pptx · 2.4 整除与取余（slide 19）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q302",
+      "typeName": "编程题",
+      "difficultyName": "入门",
+      "knowledge": "算术、关系与逻辑运算"
     }
   ]
 }

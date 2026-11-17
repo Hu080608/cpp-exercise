@@ -471,7 +471,7 @@
         "2"
       ],
       "answer": 1,
-      "explain": "字符串以 '\u0000' 结束，\"cat\" 含 'c'、'a'、't' 三个有效字符和一个结束标记，共需 4 个 char。",
+      "explain": "字符串以 '\\0' 结束，\"cat\" 含 'c'、'a'、't' 三个有效字符和一个结束标记，共需 4 个 char。",
       "source": "第05章 - 1.pptx · 5.2 字符串结束标记（slide 56–58）",
       "topic": "",
       "tags": [],
@@ -489,12 +489,12 @@
       "stem": "关于字符数组与字符串，下列说法正确的是？",
       "options": [
         "char s[3] = \"abc\"; 可以安全存储字符串 abc",
-        "字符串以 '\u0000' 作为结束标记",
-        "字符数组长度可以等于字符串长度而不需要 '\u0000'",
+        "字符串以 '\\0' 作为结束标记",
+        "字符数组长度可以等于字符串长度而不需要 '\\0'",
         "cin >> 字符数组可以读入带空格的整行字符串"
       ],
       "answer": 1,
-      "explain": "字符串以 '\u0000' 结束；\"abc\" 至少需要 4 个位置。cin >> 会在空白处停止，读整行应使用 cin.getline。",
+      "explain": "字符串以 '\\0' 结束；\"abc\" 至少需要 4 个位置。cin >> 会在空白处停止，读整行应使用 cin.getline。",
       "source": "第05章 - 1.pptx · 5.2 字符串与字符数组（slide 56–62）",
       "topic": "",
       "tags": [],
@@ -511,17 +511,17 @@
       "difficulty": 2,
       "stem": "关于 C 风格字符串处理，下列说法正确的有？",
       "options": [
-        "strlen 返回有效字符数，不包含 '\u0000'",
+        "strlen 返回有效字符数，不包含 '\\0'",
         "strcmp 按字典序比较字符串内容",
         "可以直接用 == 比较两个字符数组的内容是否相同",
-        "strcpy 把源字符串复制到目标数组，包括 '\u0000'"
+        "strcpy 把源字符串复制到目标数组，包括 '\\0'"
       ],
       "answer": [
         0,
         1,
         3
       ],
-      "explain": "strlen 不计 '\u0000'；strcmp 比较内容；strcpy 复制包括结束标记。字符数组名用 == 比较的是地址，不是内容，C 错误。",
+      "explain": "strlen 不计 '\\0'；strcmp 比较内容；strcpy 复制包括结束标记。字符数组名用 == 比较的是地址，不是内容，C 错误。",
       "source": "第05章 - 1.pptx · 5.2 字符串库函数（slide 74–78）",
       "topic": "",
       "tags": [],
@@ -536,9 +536,9 @@
       "topicId": "5.3",
       "type": "judge",
       "difficulty": 1,
-      "stem": "字符串字面量 \"Hello\" 比字符数组 { 'H','e','l','l','o' } 多一个结束标记 '\u0000'。",
+      "stem": "字符串字面量 \"Hello\" 比字符数组 { 'H','e','l','l','o' } 多一个结束标记 '\\0'。",
       "answer": true,
-      "explain": "用双引号写出的字符串字面量会自动在末尾附加 '\u0000'；逐个字符列出的初始化列表不会自动添加，需要自己写出 '\u0000'。",
+      "explain": "用双引号写出的字符串字面量会自动在末尾附加 '\\0'；逐个字符列出的初始化列表不会自动添加，需要自己写出 '\\0'。",
       "source": "第05章 - 1.pptx · 5.2 字符串结束标记（slide 56–58）",
       "topic": "",
       "tags": [],
@@ -555,15 +555,15 @@
       "difficulty": 1,
       "stem": "C 风格字符串的结束标记字符是____。",
       "answer": [
-        "\u0000"
+        "\\0"
       ],
       "alt": [
         [
-          "'\u0000'",
+          "'\\0'",
           "0"
         ]
       ],
-      "explain": "字符串以空字符 '\u0000'（编码 0）结束，字符串处理函数依靠它判断字符串到哪里结束。",
+      "explain": "字符串以空字符 '\\0'（编码 0）结束，字符串处理函数依靠它判断字符串到哪里结束。",
       "source": "第05章 - 1.pptx · 5.2 字符串结束标记（slide 56）",
       "topic": "",
       "tags": [],
@@ -582,7 +582,7 @@
       "answer": [
         "4"
       ],
-      "explain": "strlen 统计 '\u0000' 之前的有效字符数，\"abcd\" 有 4 个字符，返回 4。",
+      "explain": "strlen 统计 '\\0' 之前的有效字符数，\"abcd\" 有 4 个字符，返回 4。",
       "source": "第05章 - 1.pptx · 5.2 strlen（slide 74）",
       "topic": "",
       "tags": [],
@@ -619,7 +619,7 @@
         "编译错误"
       ],
       "answer": 1,
-      "explain": "循环统计 '\u0000' 之前的字符数。\"abc\" 有 3 个有效字符，因此 n=3，输出 3。",
+      "explain": "循环统计 '\\0' 之前的字符数。\"abc\" 有 3 个有效字符，因此 n=3，输出 3。",
       "source": "第05章 - 1.pptx · 5.2 字符串长度计算（slide 62）",
       "topic": "",
       "tags": [],
@@ -1848,7 +1848,8 @@
       "id": "q281",
       "typeName": "编程题",
       "difficultyName": "入门",
-      "knowledge": "一维数组"
+      "knowledge": "一维数组",
+      "origin": "原创编程题 · 课程知识点综合"
     },
     {
       "chapter": 5,
@@ -1856,9 +1857,9 @@
       "topicId": "5.3",
       "type": "programming",
       "difficulty": 2,
-      "stem": "编写程序：读入一个不含空格的字符串，输出它的长度（不要调用 strlen，自己统计到 '\u0000' 为止）。",
-      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    char s[100];\n    cin >> s;\n    int len = 0;\n    // 统计到 '\u0000'\n    cout << len;\n    return 0;\n}\n",
-      "solution": "#include <iostream>\nusing namespace std;\nint main(){char s[100];cin>>s;int n=0;while(s[n]!='\u0000')n++;cout<<n;}\n",
+      "stem": "编写程序：读入一个不含空格的字符串，输出它的长度（不要调用 strlen，自己统计到 '\\0' 为止）。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    char s[100];\n    cin >> s;\n    int len = 0;\n    // 统计到 '\\0'\n    cout << len;\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){char s[100];cin>>s;int n=0;while(s[n]!='\\0')n++;cout<<n;}\n",
       "tests": [
         {
           "input": "hello\n",
@@ -1877,14 +1878,15 @@
       "hints": [
         "while (s[len] != '\\0') len++;"
       ],
-      "explain": "字符数组保存字符串时末尾有 '\u0000'；从下标 0 开始计数，遇到 '\u0000' 停止，计数即为长度。",
+      "explain": "字符数组保存字符串时末尾有 '\\0'；从下标 0 开始计数，遇到 '\\0' 停止，计数即为长度。",
       "source": "第05章 - 1.pptx · 5.2 字符串长度计算（slide 62）",
       "topic": "",
       "tags": [],
       "id": "q282",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "字符串与字符数组"
+      "knowledge": "字符串与字符数组",
+      "origin": "原创编程题 · 课程知识点综合"
     },
     {
       "chapter": 5,
@@ -1921,7 +1923,8 @@
       "id": "q283",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "结构体类型"
+      "knowledge": "结构体类型",
+      "origin": "原创编程题 · 课程知识点综合"
     },
     {
       "chapter": 5,
@@ -1958,7 +1961,8 @@
       "id": "q284",
       "typeName": "编程题",
       "difficultyName": "困难",
-      "knowledge": "引用类型"
+      "knowledge": "引用类型",
+      "origin": "原创编程题 · 课程知识点综合"
     },
     {
       "chapter": 5,
@@ -2005,6 +2009,950 @@
       "typeName": "单选题",
       "difficultyName": "困难",
       "knowledge": "指针、指针运算与函数指针"
+    },
+    {
+      "chapter": 5,
+      "section": "5.2",
+      "topicId": "5.2",
+      "difficulty": 3,
+      "stem": "【连续收益】输入 n 个整数表示连续 n 天的收益（可为负）。求连续子数组的最大和。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n, a[1000];\n    cin >> n;\n    for (int i = 0; i < n; i++) cin >> a[i];\n    // 经典 Kadane 算法\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int n,a[1000];cin>>n;for(int i=0;i<n;i++)cin>>a[i];int best=a[0],cur=a[0];for(int i=1;i<n;i++){cur=(cur>0?cur+a[i]:a[i]);if(cur>best)best=cur;}cout<<best;}\n",
+      "tests": [
+        {
+          "input": "9\n-2 1 -3 4 -1 2 1 -5 4\n",
+          "output": "6"
+        },
+        {
+          "input": "1\n-5\n",
+          "output": "-5"
+        },
+        {
+          "input": "5\n1 2 3 4 5\n",
+          "output": "15"
+        },
+        {
+          "input": "6\n-2 -3 -1 -4 -5 -2\n",
+          "output": "-1",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "cur 表示以当前元素结尾的最大子数组和。",
+        "cur 变负时从当前元素重新开始。"
+      ],
+      "explain": "Kadane 算法一次遍历：若之前累计和为正就继续累加，否则从当前元素重新开始；best 记录历史最大值。",
+      "origin": "力扣 53 同类 · 最大子数组和",
+      "source": "第05章 - 1.pptx · 5.2 数组遍历（slide 26）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q322",
+      "typeName": "编程题",
+      "difficultyName": "中等",
+      "knowledge": "一维数组"
+    },
+    {
+      "chapter": 5,
+      "section": "5.2",
+      "topicId": "5.2",
+      "difficulty": 3,
+      "stem": "【寻找搭档】输入 n 个整数和目标值 target，找出两个不同下标 i<j，使 a[i]+a[j]==target，输出 i 和 j；若不存在输出 -1。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n, target, a[1000];\n    cin >> n;\n    for (int i = 0; i < n; i++) cin >> a[i];\n    cin >> target;\n    // 双重循环查找第一组解\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int n,t,a[1000];cin>>n;for(int i=0;i<n;i++)cin>>a[i];cin>>t;for(int i=0;i<n;i++)for(int j=i+1;j<n;j++)if(a[i]+a[j]==t){cout<<i<<\" \"<<j;return 0;}cout<<-1;}\n",
+      "tests": [
+        {
+          "input": "4\n2 7 11 15\n9\n",
+          "output": "0 1"
+        },
+        {
+          "input": "3\n3 2 4\n6\n",
+          "output": "1 2"
+        },
+        {
+          "input": "3\n1 2 3\n100\n",
+          "output": "-1",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "要求 i<j，内层 j 从 i+1 开始。",
+        "找到后直接 return 0。"
+      ],
+      "explain": "用双重循环枚举所有下标对，按 i<j 顺序找到第一组解。数组不大时可接受 O(n²)。",
+      "origin": "力扣 1 同类 · 两数之和",
+      "source": "第05章 - 1.pptx · 5.2 数组（slide 26）；第03章 slide 57",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q323",
+      "typeName": "编程题",
+      "difficultyName": "中等",
+      "knowledge": "一维数组"
+    },
+    {
+      "chapter": 5,
+      "section": "5.2",
+      "topicId": "5.2",
+      "difficulty": 3,
+      "stem": "【整理队列】输入 n 个整数，将所有 0 移到数组末尾，同时保持非零元素的相对顺序。输出处理后的数组，用空格分隔。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n, a[1000];\n    cin >> n;\n    for (int i = 0; i < n; i++) cin >> a[i];\n    // 双指针或先输出非零再补零\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int n,a[1000];cin>>n;for(int i=0;i<n;i++)cin>>a[i];int k=0;for(int i=0;i<n;i++)if(a[i]!=0)a[k++]=a[i];while(k<n)a[k++]=0;for(int i=0;i<n;i++){if(i)cout<<\" \";cout<<a[i];}}\n",
+      "tests": [
+        {
+          "input": "5\n0 1 0 3 12\n",
+          "output": "1 3 12 0 0"
+        },
+        {
+          "input": "3\n0 0 1\n",
+          "output": "1 0 0"
+        },
+        {
+          "input": "4\n1 2 3 4\n",
+          "output": "1 2 3 4",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "用一个写指针 k 收集非零元素。",
+        "最后把 k 之后的位置补 0。"
+      ],
+      "explain": "双指针原地整理：读指针扫描，写指针只接收非零元素；扫描完后剩余位置置 0。",
+      "origin": "力扣 283 同类 · 移动零",
+      "source": "第05章 - 1.pptx · 5.2 数组元素移动（slide 28–29）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q324",
+      "typeName": "编程题",
+      "difficultyName": "中等",
+      "knowledge": "一维数组"
+    },
+    {
+      "chapter": 5,
+      "section": "5.2",
+      "topicId": "5.2",
+      "difficulty": 3,
+      "stem": "【去重名册】输入一个已按升序排列的整数数组，原地删除重复元素，使每个元素只出现一次。先输出不重复元素的个数 k，再输出前 k 个元素（空格分隔）。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n, a[1000];\n    cin >> n;\n    for (int i = 0; i < n; i++) cin >> a[i];\n    // 双指针原地去重\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int n,a[1000];cin>>n;for(int i=0;i<n;i++)cin>>a[i];if(n==0){cout<<0;return 0;}int k=1;for(int i=1;i<n;i++)if(a[i]!=a[k-1])a[k++]=a[i];cout<<k<<\"\\n\";for(int i=0;i<k;i++){if(i)cout<<\" \";cout<<a[i];}}\n",
+      "tests": [
+        {
+          "input": "7\n1 1 2 2 3 4 4\n",
+          "output": "4\n1 2 3 4"
+        },
+        {
+          "input": "1\n5\n",
+          "output": "1\n5"
+        },
+        {
+          "input": "5\n1 2 3 4 5\n",
+          "output": "5\n1 2 3 4 5",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "数组有序，重复元素一定相邻。",
+        "k 既表示已保留元素个数，也表示下一个写入位置。"
+      ],
+      "explain": "有序条件下可用读写双指针原地去重：只把与前一个保留值不同的元素写到 k 位置。",
+      "origin": "力扣 26 同类 · 删除有序数组中的重复项",
+      "source": "第05章 - 1.pptx · 5.2 数组元素删除（slide 28）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q325",
+      "typeName": "编程题",
+      "difficultyName": "中等",
+      "knowledge": "一维数组"
+    },
+    {
+      "chapter": 5,
+      "section": "5.2",
+      "topicId": "5.2",
+      "difficulty": 3,
+      "stem": "【合并成绩单】输入两个已经升序排列的整数数组，将它们合并为一个仍升序的数组并输出。第一行 n，第二行 n 个数，第三行 m，第四行 m 个数。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n, m, a[500], b[500], c[1000];\n    cin >> n;\n    for (int i = 0; i < n; i++) cin >> a[i];\n    cin >> m;\n    for (int i = 0; i < m; i++) cin >> b[i];\n    // 双指针合并\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int n,m,a[500],b[500],c[1000];cin>>n;for(int i=0;i<n;i++)cin>>a[i];cin>>m;for(int i=0;i<m;i++)cin>>b[i];int i=0,j=0,k=0;while(i<n&&j<m)c[k++]=(a[i]<=b[j]?a[i++]:b[j++]);while(i<n)c[k++]=a[i++];while(j<m)c[k++]=b[j++];for(int x=0;x<k;x++){if(x)cout<<\" \";cout<<c[x];}}\n",
+      "tests": [
+        {
+          "input": "3\n1 3 5\n3\n2 4 6\n",
+          "output": "1 2 3 4 5 6"
+        },
+        {
+          "input": "2\n1 2\n3\n3 4 5\n",
+          "output": "1 2 3 4 5"
+        },
+        {
+          "input": "1\n10\n1\n1\n",
+          "output": "1 10",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "i、j 分别扫描两个数组，比较后写入 c。",
+        "一个数组扫描完后，把另一个剩余元素接上。"
+      ],
+      "explain": "归并双指针：每次取两个有序数组当前较小者，最后处理剩余段。",
+      "origin": "力扣 88 同类 · 合并两个有序数组",
+      "source": "第05章 - 1.pptx · 5.2 数组与归并思想（slide 26–27）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q326",
+      "typeName": "编程题",
+      "difficultyName": "中等",
+      "knowledge": "一维数组"
+    },
+    {
+      "chapter": 5,
+      "section": "5.2",
+      "topicId": "5.2",
+      "difficulty": 2,
+      "stem": "【大数加一】用一个整数数组表示一个非负整数（高位在前），在该数基础上加一，输出结果数组。例如 [1,2,9] 输出 1 3 0。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n, a[1000];\n    cin >> n;\n    for (int i = 0; i < n; i++) cin >> a[i];\n    // 从末位开始进位\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int n,a[1001];cin>>n;for(int i=0;i<n;i++)cin>>a[i];for(int i=n-1;i>=0;i--){if(a[i]<9){a[i]++;for(int j=0;j<n;j++){if(j)cout<<\" \";cout<<a[j];}return 0;}a[i]=0;}cout<<1;for(int i=0;i<n;i++)cout<<\" \"<<a[i];}\n",
+      "tests": [
+        {
+          "input": "3\n1 2 9\n",
+          "output": "1 3 0"
+        },
+        {
+          "input": "1\n9\n",
+          "output": "1 0"
+        },
+        {
+          "input": "4\n1 2 3 4\n",
+          "output": "1 2 3 5",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "从最后一位开始，遇到小于 9 的位就加一并结束。",
+        "如果全部是 9，需要额外输出一个 1，再补 n 个 0。"
+      ],
+      "explain": "模拟十进制加法：从末尾向前处理进位；若最高位也进位，则结果比原数组多一位。",
+      "origin": "力扣 66 同类 · 加一",
+      "source": "第05章 - 1.pptx · 5.2 数组（slide 26）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q327",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "一维数组"
+    },
+    {
+      "chapter": 5,
+      "section": "5.4",
+      "topicId": "5.4",
+      "difficulty": 3,
+      "stem": "【杨辉三角】输入正整数 n，输出杨辉三角的前 n 行。每行数字用空格分隔，行末不输出多余空格。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n, a[30][30] = {};\n    cin >> n;\n    // 构造并输出杨辉三角\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int n,a[30][30]={};cin>>n;for(int i=0;i<n;i++){a[i][0]=a[i][i]=1;for(int j=1;j<i;j++)a[i][j]=a[i-1][j-1]+a[i-1][j];for(int j=0;j<=i;j++){if(j)cout<<\" \";cout<<a[i][j];}cout<<\"\\n\";}}\n",
+      "tests": [
+        {
+          "input": "5\n",
+          "output": "1\n1 1\n1 2 1\n1 3 3 1\n1 4 6 4 1"
+        },
+        {
+          "input": "1\n",
+          "output": "1"
+        },
+        {
+          "input": "3\n",
+          "output": "1\n1 1\n1 2 1",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "每行首尾元素为 1。",
+        "a[i][j] = a[i-1][j-1] + a[i-1][j]。"
+      ],
+      "explain": "二维数组按行递推，每个内部元素等于上一行左上方与正上方元素之和。",
+      "origin": "原创情境 · 杨辉三角",
+      "source": "第05章 - 1.pptx · 5.2 二维数组（slide 82–87）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q328",
+      "typeName": "编程题",
+      "difficultyName": "中等",
+      "knowledge": "二维数组"
+    },
+    {
+      "chapter": 5,
+      "section": "5.4",
+      "topicId": "5.4",
+      "difficulty": 3,
+      "stem": "【矩阵转置】输入 n 行 m 列的整数矩阵，输出它的转置（m 行 n 列）。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n, m, a[50][50];\n    cin >> n >> m;\n    // 读入并输出转置\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int n,m,a[50][50];cin>>n>>m;for(int i=0;i<n;i++)for(int j=0;j<m;j++)cin>>a[i][j];for(int j=0;j<m;j++){for(int i=0;i<n;i++){if(i)cout<<\" \";cout<<a[i][j];}cout<<\"\\n\";}}\n",
+      "tests": [
+        {
+          "input": "2 3\n1 2 3\n4 5 6\n",
+          "output": "1 4\n2 5\n3 6"
+        },
+        {
+          "input": "1 1\n7\n",
+          "output": "7"
+        },
+        {
+          "input": "3 2\n1 2\n3 4\n5 6\n",
+          "output": "1 3 5\n2 4 6",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "转置输出时外层枚举行号 j（原列），内层枚举 i（原行）。",
+        "直接输出 a[i][j]，不必新建数组。"
+      ],
+      "explain": "转置矩阵的 (j,i) 元素来自原矩阵的 (i,j)。按新行优先顺序输出即可。",
+      "origin": "原创情境 · 矩阵转置",
+      "source": "第05章 - 1.pptx · 5.2 矩阵转置（slide 88–92）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q329",
+      "typeName": "编程题",
+      "difficultyName": "中等",
+      "knowledge": "二维数组"
+    },
+    {
+      "chapter": 5,
+      "section": "5.4",
+      "topicId": "5.4",
+      "difficulty": 2,
+      "stem": "【对角线检查】输入一个 n×n 矩阵，输出主对角线元素之和与副对角线元素之和，用空格分隔。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n, a[50][50];\n    cin >> n;\n    // 读入矩阵并累加两条对角线\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int n,a[50][50];cin>>n;for(int i=0;i<n;i++)for(int j=0;j<n;j++)cin>>a[i][j];int s1=0,s2=0;for(int i=0;i<n;i++){s1+=a[i][i];s2+=a[i][n-1-i];}cout<<s1<<\" \"<<s2;}\n",
+      "tests": [
+        {
+          "input": "3\n1 2 3\n4 5 6\n7 8 9\n",
+          "output": "15 15"
+        },
+        {
+          "input": "2\n1 2\n3 4\n",
+          "output": "5 5"
+        },
+        {
+          "input": "1\n8\n",
+          "output": "8 8",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "主对角线 a[i][i]，副对角线 a[i][n-1-i]。",
+        "中心元素在两条对角线中都会出现，题目要求两条和分别计算。"
+      ],
+      "explain": "一次循环同时累加两条对角线，注意副对角线列下标随 i 递减。",
+      "origin": "原创情境 · 矩阵对角线",
+      "source": "第05章 - 1.pptx · 5.2 二维数组（slide 86–87）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q330",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "二维数组"
+    },
+    {
+      "chapter": 5,
+      "section": "5.3",
+      "topicId": "5.3",
+      "difficulty": 2,
+      "stem": "【文本体检】输入一行不含换行的字符串（可能含空格），统计字母、数字、空格和其它字符的个数，输出四个整数，用空格分隔。",
+      "starter": "#include <iostream>\n#include <cctype>\nusing namespace std;\n\nint main() {\n    char s[500];\n    cin.getline(s, 500);\n    // 遍历到 '\\0'，用 cctype 函数分类统计\n    return 0;\n}\n",
+      "solution": "#include <iostream>\n#include <cctype>\nusing namespace std;\nint main(){char s[500];cin.getline(s,500);int a=0,b=0,c=0,d=0;for(int i=0;s[i]!='\\0';i++){unsigned char ch=s[i];if(isalpha(ch))a++;else if(isdigit(ch))b++;else if(ch==' ')c++;else d++;}cout<<a<<\" \"<<b<<\" \"<<c<<\" \"<<d;}\n",
+      "tests": [
+        {
+          "input": "C++ 2026!\n",
+          "output": "1 4 1 3"
+        },
+        {
+          "input": "abc 123\n",
+          "output": "3 3 1 0"
+        },
+        {
+          "input": "Hello World\n",
+          "output": "10 0 1 0",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "用 cin.getline 读取含空格的行。",
+        "cctype 函数参数可先转 unsigned char，避免负字符值问题。"
+      ],
+      "explain": "字符串以 '\\0' 结束；遍历并用 isalpha、isdigit 分类。空格和其他字符分别计数。",
+      "origin": "原创情境 · 文本分类统计",
+      "source": "第05章 - 1.pptx · 5.2 字符数组（slide 56–62）；第04章-01 slide 28",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q331",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "字符串与字符数组"
+    },
+    {
+      "chapter": 5,
+      "section": "5.3",
+      "topicId": "5.3",
+      "difficulty": 2,
+      "stem": "【大小写翻转】输入一个不含空格的字符串，把其中大写字母改成小写、小写字母改成大写，其他字符不变，输出处理后的字符串。",
+      "starter": "#include <iostream>\n#include <cctype>\nusing namespace std;\n\nint main() {\n    char s[500];\n    cin >> s;\n    // 遍历并翻转字母大小写\n    return 0;\n}\n",
+      "solution": "#include <iostream>\n#include <cctype>\nusing namespace std;\nint main(){char s[500];cin>>s;for(int i=0;s[i]!='\\0';i++){unsigned char c=s[i];if(isupper(c))s[i]=tolower(c);else if(islower(c))s[i]=toupper(c);}cout<<s;}\n",
+      "tests": [
+        {
+          "input": "Hello123\n",
+          "output": "hELLO123"
+        },
+        {
+          "input": "C++Lab\n",
+          "output": "c++lAB"
+        },
+        {
+          "input": "abc\n",
+          "output": "ABC",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "isupper 判断大写，tolower 转小写；islower/isupper 同理。",
+        "其他字符保持不变。"
+      ],
+      "explain": "字符数组可原地修改；利用 cctype 函数检查并转换大小写。",
+      "origin": "原创情境 · 大小写转换",
+      "source": "第05章 - 1.pptx · 5.2 字符数组与 cctype（slide 59–60）；第04章-01 slide 28",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q332",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "字符串与字符数组"
+    },
+    {
+      "chapter": 5,
+      "section": "5.3",
+      "topicId": "5.3",
+      "difficulty": 2,
+      "stem": "【倒着写的留言】输入一个不含空格的字符串，输出它的逆序。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    char s[500];\n    cin >> s;\n    // 双指针交换或倒序输出\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){char s[500];cin>>s;int n=0;while(s[n]!='\\0')n++;for(int i=0;i<n/2;i++){char t=s[i];s[i]=s[n-1-i];s[n-1-i]=t;}cout<<s;}\n",
+      "tests": [
+        {
+          "input": "abcde\n",
+          "output": "edcba"
+        },
+        {
+          "input": "C++\n",
+          "output": "++C"
+        },
+        {
+          "input": "a\n",
+          "output": "a",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "先求长度 len。",
+        "i 从 0 到 len/2-1 交换 s[i] 与 s[len-1-i]。"
+      ],
+      "explain": "双指针从两端向中间交换，时间复杂度 O(n)，不需要额外数组。",
+      "origin": "原创情境 · 字符串逆序",
+      "source": "第05章 - 1.pptx · 5.2 字符串逆序（slide 71–73）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q333",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "字符串与字符数组"
+    },
+    {
+      "chapter": 5,
+      "section": "5.3",
+      "topicId": "5.3",
+      "difficulty": 2,
+      "stem": "【回文留言】输入一个不含空格的字符串，判断它是否是回文串（正读反读相同）。是输出 YES，否则输出 NO。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    char s[500];\n    cin >> s;\n    // 双指针判断回文\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){char s[500];cin>>s;int n=0;while(s[n]!='\\0')n++;bool ok=true;for(int i=0,j=n-1;i<j;i++,j--)if(s[i]!=s[j]){ok=false;break;}cout<<(ok?\"YES\":\"NO\");}\n",
+      "tests": [
+        {
+          "input": "level\n",
+          "output": "YES"
+        },
+        {
+          "input": "abc\n",
+          "output": "NO"
+        },
+        {
+          "input": "a\n",
+          "output": "YES"
+        },
+        {
+          "input": "abba\n",
+          "output": "YES",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "i 从头、j 从尾，向中间比较。",
+        "只要有一对字符不同就不是回文。"
+      ],
+      "explain": "字符串回文判断与数组双指针完全一致；无需反转整个字符串。",
+      "origin": "原创情境 · 回文串",
+      "source": "第05章 - 1.pptx · 5.2 字符串与双指针（slide 56–73）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q334",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "字符串与字符数组"
+    },
+    {
+      "chapter": 5,
+      "section": "5.3",
+      "topicId": "5.3",
+      "difficulty": 3,
+      "stem": "【查找关键词】输入主串和子串（均不含空格），输出子串第一次出现的位置（从 0 开始）；找不到输出 -1。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    char s[500], sub[100];\n    cin >> s >> sub;\n    // 朴素子串匹配\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){char s[500],p[100];cin>>s>>p;int n=0,m=0;while(s[n]!='\\0')n++;while(p[m]!='\\0')m++;for(int i=0;i+m<=n;i++){int j=0;while(j<m&&s[i+j]==p[j])j++;if(j==m){cout<<i;return 0;}}cout<<-1;}\n",
+      "tests": [
+        {
+          "input": "abcabcde\nabc\n",
+          "output": "0"
+        },
+        {
+          "input": "hello\nll\n",
+          "output": "2"
+        },
+        {
+          "input": "abc\nxyz\n",
+          "output": "-1"
+        },
+        {
+          "input": "aaaaa\naa\n",
+          "output": "0",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "先求两串长度。",
+        "外层 i 只需枚举到 n-m，内层逐字符比较。"
+      ],
+      "explain": "朴素匹配：枚举主串起点，逐字符比较；一旦完整匹配就返回起点。",
+      "origin": "原创情境 · 子串查找",
+      "source": "第05章 - 1.pptx · 5.2 子串查找（slide 67–70）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q335",
+      "typeName": "编程题",
+      "difficultyName": "中等",
+      "knowledge": "字符串与字符数组"
+    },
+    {
+      "chapter": 5,
+      "section": "5.3",
+      "topicId": "5.3",
+      "difficulty": 3,
+      "stem": "【删除字符】输入一个不含空格的字符串和一个字符，删除字符串中所有该字符后输出结果。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    char s[500], ch;\n    cin >> s >> ch;\n    // 双指针原地保留不等于 ch 的字符\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){char s[500],ch;cin>>s>>ch;int k=0;for(int i=0;s[i]!='\\0';i++)if(s[i]!=ch)s[k++]=s[i];s[k]='\\0';cout<<s;}\n",
+      "tests": [
+        {
+          "input": "banana\na\n",
+          "output": "bnn"
+        },
+        {
+          "input": "hello\nl\n",
+          "output": "heo"
+        },
+        {
+          "input": "abc\nz\n",
+          "output": "abc",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "用 k 记录下一个写入位置。",
+        "复制完所有保留字符后记得补 '\\0'。"
+      ],
+      "explain": "原地删除采用读写双指针：读指针扫描原串，写指针只写保留字符，最后补结束标记。",
+      "origin": "原创情境 · 删除指定字符",
+      "source": "第05章 - 1.pptx · 5.2 字符数组（slide 56–73）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q336",
+      "typeName": "编程题",
+      "difficultyName": "中等",
+      "knowledge": "字符串与字符数组"
+    },
+    {
+      "chapter": 5,
+      "section": "5.3",
+      "topicId": "5.3",
+      "difficulty": 3,
+      "stem": "【字符串变整数】输入一个只包含数字字符的字符串，把它转换成对应的整数并输出。例如输入 1234 输出 1234。不要使用标准库转换函数。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    char s[100];\n    cin >> s;\n    int n = 0;\n    // 逐位累加：n = n*10 + (s[i]-'0')\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){char s[100];cin>>s;int n=0;for(int i=0;s[i]!='\\0';i++)n=n*10+(s[i]-'0');cout<<n;}\n",
+      "tests": [
+        {
+          "input": "1234\n",
+          "output": "1234"
+        },
+        {
+          "input": "0\n",
+          "output": "0"
+        },
+        {
+          "input": "987654321\n",
+          "output": "987654321",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "字符 '0'～'9' 的编码连续，s[i]-'0' 得到数值。",
+        "初始 n=0，从高位到低位累加。"
+      ],
+      "explain": "逐字符把数字字符转成对应数值，再用 n=n*10+d 累加，这是字符串转整数的基本算法。",
+      "origin": "原创情境 · 字符串转整数",
+      "source": "第05章 - 1.pptx · 5.2 字符串转整数（slide 63–66）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q337",
+      "typeName": "编程题",
+      "difficultyName": "中等",
+      "knowledge": "字符串与字符数组"
+    },
+    {
+      "chapter": 5,
+      "section": "5.3",
+      "topicId": "5.3",
+      "difficulty": 3,
+      "stem": "【单词计数】输入一行只含字母和空格的文本（末尾无空格），统计其中单词的个数。连续多个空格视为一个分隔。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    char s[500];\n    cin.getline(s, 500);\n    // 统计从空格到非空格的跳变次数\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){char s[500];cin.getline(s,500);int c=0;bool in=false;for(int i=0;s[i]!='\\0';i++){if(s[i]!=' '&&!in){c++;in=true;}else if(s[i]==' ')in=false;}cout<<c;}\n",
+      "tests": [
+        {
+          "input": "hello world\n",
+          "output": "2"
+        },
+        {
+          "input": "one   two  three\n",
+          "output": "3"
+        },
+        {
+          "input": "abc\n",
+          "output": "1"
+        },
+        {
+          "input": "a b c d\n",
+          "output": "4",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "用一个 in 标记当前是否在单词内部。",
+        "从空格进入非空格时单词数加一。"
+      ],
+      "explain": "不需要 split；一次扫描根据“上一字符是否为空格”判断新单词的开始。",
+      "origin": "原创情境 · 单词计数",
+      "source": "第05章 - 1.pptx · 5.2 字符数组（slide 56–62）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q338",
+      "typeName": "编程题",
+      "difficultyName": "中等",
+      "knowledge": "字符串与字符数组"
+    },
+    {
+      "chapter": 5,
+      "section": "5.3",
+      "topicId": "5.3",
+      "difficulty": 4,
+      "stem": "【括号审查】输入一个只包含 (、)、[、] 的字符串，判断括号是否合法匹配。合法输出 YES，否则输出 NO。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    char s[500], stack[500];\n    cin >> s;\n    // 用字符数组模拟栈\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){char s[500],st[500];cin>>s;int top=0;bool ok=true;for(int i=0;s[i]!='\\0';i++){if(s[i]=='('||s[i]=='[')st[top++]=s[i];else{if(top==0){ok=false;break;}char c=st[--top];if((s[i]==')'&&c!='(')||(s[i]==']'&&c!='[')){ok=false;break;}}}if(top!=0)ok=false;cout<<(ok?\"YES\":\"NO\");}\n",
+      "tests": [
+        {
+          "input": "([])\n",
+          "output": "YES"
+        },
+        {
+          "input": "([)]\n",
+          "output": "NO"
+        },
+        {
+          "input": "(([]))\n",
+          "output": "YES"
+        },
+        {
+          "input": "(\n",
+          "output": "NO",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "遇到左括号入栈，遇到右括号检查栈顶。",
+        "最后栈必须为空。"
+      ],
+      "explain": "用数组和 top 指针模拟栈：左括号入栈，右括号与栈顶配对；中途不匹配或最后栈非空都判 NO。",
+      "origin": "力扣 20 同类 · 有效的括号（数组模拟栈）",
+      "source": "第05章 - 1.pptx · 5.2 一维数组与栈思想（slide 17–26）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q339",
+      "typeName": "编程题",
+      "difficultyName": "困难",
+      "knowledge": "字符串与字符数组"
+    },
+    {
+      "chapter": 5,
+      "section": "5.3",
+      "topicId": "5.5",
+      "difficulty": 2,
+      "stem": "【成绩单】输入 n 个学生的学号和成绩，输出平均分（保留 1 位小数）以及最高分学生的学号。",
+      "starter": "#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nstruct Student { int no; int score; };\n\nint main() {\n    int n;\n    cin >> n;\n    Student a[100];\n    // 读入并统计\n    return 0;\n}\n",
+      "solution": "#include <iostream>\n#include <iomanip>\nusing namespace std;\nstruct Student{int no;int score;};\nint main(){int n;cin>>n;Student a[100];double sum=0;int best=0;for(int i=0;i<n;i++){cin>>a[i].no>>a[i].score;sum+=a[i].score;if(a[i].score>a[best].score)best=i;}cout<<fixed<<setprecision(1)<<sum/n<<\" \"<<a[best].no;}\n",
+      "tests": [
+        {
+          "input": "3\n1 80\n2 95\n3 70\n",
+          "output": "81.7 2"
+        },
+        {
+          "input": "1\n7 100\n",
+          "output": "100.0 7"
+        },
+        {
+          "input": "4\n10 60\n11 60\n12 90\n13 90\n",
+          "output": "75.0 12",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "sum 用 double，避免整数除法。",
+        "最高分并列时保留最先出现的学生。"
+      ],
+      "explain": "结构体数组把学号与成绩绑定；一次遍历求总分和最高分下标。",
+      "origin": "原创情境 · 结构体成绩单",
+      "source": "第05章 - 1.pptx · 5.3 结构体数组（slide 112–115）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q343",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "结构体类型"
+    },
+    {
+      "chapter": 5,
+      "section": "5.3",
+      "topicId": "5.5",
+      "difficulty": 4,
+      "stem": "【成绩排名】输入 n 个学生的学号和成绩，按成绩从高到低排序；成绩相同按学号从小到大。输出排序后的学号和成绩，每行一个。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nstruct Student { int no; int score; };\n\nint main() {\n    int n;\n    cin >> n;\n    Student a[100];\n    // 读入后排序\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nstruct Student{int no;int score;};\nint main(){int n;cin>>n;Student a[100];for(int i=0;i<n;i++)cin>>a[i].no>>a[i].score;for(int i=0;i<n-1;i++)for(int j=i+1;j<n;j++)if(a[j].score>a[i].score||(a[j].score==a[i].score&&a[j].no<a[i].no)){Student t=a[i];a[i]=a[j];a[j]=t;}for(int i=0;i<n;i++)cout<<a[i].no<<\" \"<<a[i].score<<\"\\n\";}\n",
+      "tests": [
+        {
+          "input": "4\n1 80\n2 90\n3 80\n4 95\n",
+          "output": "4 95\n2 90\n1 80\n3 80"
+        },
+        {
+          "input": "3\n3 70\n1 70\n2 70\n",
+          "output": "1 70\n2 70\n3 70"
+        },
+        {
+          "input": "1\n9 60\n",
+          "output": "9 60",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "比较两条记录：成绩高者优先；成绩相同则学号小者优先。",
+        "选择排序或冒泡排序都可，交换整个结构体变量。"
+      ],
+      "explain": "多关键字排序：主关键字为成绩降序，次关键字为学号升序；结构体整体赋值简化交换。",
+      "origin": "原创情境 · 结构体排序",
+      "source": "第05章 - 1.pptx · 5.3 结构数组与排序（slide 112–116）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q344",
+      "typeName": "编程题",
+      "difficultyName": "困难",
+      "knowledge": "结构体类型"
+    },
+    {
+      "chapter": 5,
+      "section": "5.5",
+      "topicId": "5.8",
+      "difficulty": 4,
+      "stem": "【链表点名】输入 n 个整数，用头插法建立单链表，然后从头到尾输出链表中的数，用空格分隔。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nstruct Node { int v; Node* next; };\n\nint main() {\n    int n;\n    cin >> n;\n    Node* head = nullptr;\n    // 头插法建表，再遍历输出\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nstruct Node{int v;Node* next;};\nint main(){int n;cin>>n;Node* head=nullptr;for(int i=0;i<n;i++){int x;cin>>x;Node* p=new Node; p->v=x; p->next=head; head=p;}for(Node* p=head;p!=nullptr;p=p->next){if(p!=head)cout<<\" \";cout<<p->v;}while(head!=nullptr){Node* p=head;head=head->next;delete p;}}\n",
+      "tests": [
+        {
+          "input": "5\n1 2 3 4 5\n",
+          "output": "5 4 3 2 1"
+        },
+        {
+          "input": "1\n7\n",
+          "output": "7"
+        },
+        {
+          "input": "3\n10 20 30\n",
+          "output": "30 20 10",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "每次创建新结点 p，让 p->next 指向当前 head，再 head=p。",
+        "输出时注意空格，最后释放链表。"
+      ],
+      "explain": "头插法把每个新结点插到表头，因此输出顺序与输入相反；动态结点最后要逐个 delete。",
+      "origin": "原创情境 · 单链表头插法",
+      "source": "第05章 - 2.pptx · 5.5 单链表头插法（slide 64–67、89–93）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q345",
+      "typeName": "编程题",
+      "difficultyName": "困难",
+      "knowledge": "动态内存与链表"
+    },
+    {
+      "chapter": 5,
+      "section": "5.5",
+      "topicId": "5.8",
+      "difficulty": 3,
+      "stem": "【动态成绩统计】输入 n，使用 new int[n] 创建动态数组，读入 n 个成绩，输出总分、最低分和最高分（空格分隔），最后释放数组。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    int* a = new int[n];\n    // 读入统计，最后 delete[]\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int n;cin>>n;int* a=new int[n];for(int i=0;i<n;i++)cin>>a[i];long long sum=0;int mn=a[0],mx=a[0];for(int i=0;i<n;i++){sum+=a[i];if(a[i]<mn)mn=a[i];if(a[i]>mx)mx=a[i];}cout<<sum<<\" \"<<mn<<\" \"<<mx;delete[] a;}\n",
+      "tests": [
+        {
+          "input": "5\n80 95 70 100 60\n",
+          "output": "405 60 100"
+        },
+        {
+          "input": "1\n88\n",
+          "output": "88 88 88"
+        },
+        {
+          "input": "4\n-1 -5 -3 -9\n",
+          "output": "-18 -9 -1",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "先读入数组再统计，最大值/最小值初值取 a[0]。",
+        "释放动态数组必须写 delete[] a;。"
+      ],
+      "explain": "new[] 按运行时的 n 分配数组，遍历统计后用 delete[] 释放；初值取首元素可正确处理全负成绩。",
+      "origin": "原创情境 · 动态数组",
+      "source": "第05章 - 2.pptx · 5.5 动态数组（slide 44–47）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q346",
+      "typeName": "编程题",
+      "difficultyName": "中等",
+      "knowledge": "动态内存与链表"
+    },
+    {
+      "chapter": 5,
+      "section": "5.1",
+      "topicId": "5.1",
+      "difficulty": 2,
+      "stem": "【日程分类】定义枚举 Weekday {MON=1,TUE,WED,THU,FRI,SAT,SUN}。输入 1～7 的整数，输出 WORKDAY（1～5）或 WEEKEND（6～7）。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nenum Weekday { MON=1, TUE, WED, THU, FRI, SAT, SUN };\n\nint main() {\n    int x;\n    cin >> x;\n    // 转成枚举值并判断\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nenum Weekday{MON=1,TUE,WED,THU,FRI,SAT,SUN};\nint main(){int x;cin>>x;Weekday d=(Weekday)x;if(d>=MON&&d<=FRI)cout<<\"WORKDAY\";else cout<<\"WEEKEND\";}\n",
+      "tests": [
+        {
+          "input": "1\n",
+          "output": "WORKDAY"
+        },
+        {
+          "input": "5\n",
+          "output": "WORKDAY"
+        },
+        {
+          "input": "6\n",
+          "output": "WEEKEND"
+        },
+        {
+          "input": "7\n",
+          "output": "WEEKEND",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "显式转换 (Weekday)x 把整数变成枚举值。",
+        "枚举值比较时按对应整数比较。"
+      ],
+      "explain": "枚举值可作为整型参与比较；输入先转成 Weekday，再判断是否在 MON～FRI 范围。",
+      "origin": "原创情境 · 枚举日程",
+      "source": "第05章 - 1.pptx · 5.1 枚举类型（slide 4–16）",
+      "type": "programming",
+      "tags": [
+        "综合编程"
+      ],
+      "topic": "",
+      "id": "q347",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "枚举类型"
     }
   ]
 }

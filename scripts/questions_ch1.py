@@ -249,7 +249,7 @@ q(chapter=1, section="1.3", topicId="1.4", type="judge", difficulty=1,
 q(chapter=1, section="1.3", topicId="1.4", type="judge", difficulty=2,
   stem="字符常量 'A' 和字符串字面量 \"A\" 的类型与存储形式相同。",
   answer=False,
-  explain="'A' 是 char 类型字符常量；\"A\" 是由 'A' 和结尾 '\0' 组成的字符串字面量，类型是一维字符常量数组。两者不能混为一谈。",
+  explain="'A' 是 char 类型字符常量；\"A\" 是由 'A' 和结尾 '\\0' 组成的字符串字面量，类型是一维字符常量数组。两者不能混为一谈。",
   source="第01章.pptx · 1.3 字面常量（slide 37）；第02章 slide 14")
 
 q(chapter=1, section="1.3", topicId="1.4", type="fill", difficulty=1,

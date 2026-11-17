@@ -1,6 +1,6 @@
 # C++ Lab · 程序设计练习场
 
-一个面向「程序设计」课程的 C++ 在线练习网站，功能对齐参考站 [cpp-quiz-690](https://cpp-quiz-690.netlify.app) 并做了明显增强：六种题型、四档难度、29 个知识点、297 道题、多条件筛选、错题本、收藏夹、学习统计，以及**能在页面里真实编译运行 C++ 的沙箱和编程题自动评测**。
+一个面向「程序设计」课程的 C++ 在线练习网站，功能对齐参考站 [cpp-quiz-690](https://cpp-quiz-690.netlify.app) 并做了明显增强：六种题型、四档难度、编程训练场、29 个知识点、347 道题、67 道编程题、多条件筛选、错题本、收藏夹、学习统计，以及**能在页面里真实编译运行 C++ 的沙箱和编程题自动评测**。
 
 目标仓库与 GitHub Pages 地址：
 
@@ -33,16 +33,19 @@ cpp-exercise/
 │     ├─ ch1.json … ch5.json      # 按章拆分的题库（与代码分离）
 ├─ docs/
 │  ├─ KNOWLEDGE_POINTS.md         # 知识点清单（含来源 PPT / slide）
+│  ├─ PROGRAMMING_BANK.md         # 编程题专项清单（按难度/来源）
 │  ├─ REFERENCE_FEATURE_MATRIX.md # 参考站功能对照表
 │  └─ PPT_AMBIGUITIES.md          # PPT 歧义与处理方案
 ├─ downloads/
 │  ├─ question-bank.json          # 完整题库导出（含答案/解析/测试用例）
+│  ├─ programming-bank.json       # 67 道编程题专项导出
 │  ├─ knowledge-points.md         # 可打印知识点速查
 │  └─ wrongbook-template.md       # 错题复盘模板
 ├─ scripts/
 │  ├─ qcommon.py                  # 题目构建公共函数
 │  ├─ questions_ch1.py … ch5.py   # 章节题库源
 │  ├─ questions_extra.py          # 矩阵补全题
+│  ├─ questions_prog_extra.py     # 50 道综合编程题（原创/经典题改编）
 │  ├─ build_questionbank.py       # 生成 JSON + 覆盖矩阵校验
 │  ├─ test_programming.py         # 用本机 g++ 回归测试编程题标准解
 │  ├─ audit_code_questions.py     # 代码阅读题输出抽查
@@ -91,6 +94,7 @@ node scripts/export_docs.js
 - 每个 `topicId` 都能在 `data/knowledge.js` 中找到；
 - **6 种题型 × 4 档难度 = 24 个组合无空缺**；
 - 29 个知识点全部有题。
+- 编程题专项：67 道，覆盖 12 / 27 / 22 / 6（入门/简单/中等/困难）。
 
 ---
 
@@ -133,7 +137,9 @@ node scripts/export_docs.js
 
 - 编辑 C++ 源码、输入自定义 stdin、编译并运行。
 - 显示编译错误、运行输出、stderr、耗时；对常见 GCC 错误给出中文排查提示。
-- 编程题可载入初始代码，运行样例，提交后逐个测试用例显示通过状态。
+- 编程题可载入初始代码，运行样例，提交后逐个测试用例显示通过状态；提交或看答案后，编辑区、运行和重新评测仍可使用。
+
+- 代码编辑区支持 `Tab` 插入 4 个空格、`Shift+Tab` 删除缩进，沙箱和编程题共用同一套编辑器行为。
 - 编程题标准解与测试用例在 `data/questions/*.json` 中，`scripts/test_programming.py` 会实际编译验证。
 
 ### 视觉与响应式

@@ -9,7 +9,7 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 
 import qcommon
-import questions_ch1, questions_ch2, questions_ch3, questions_ch4, questions_ch5, questions_extra
+import questions_ch1, questions_ch2, questions_ch3, questions_ch4, questions_ch5, questions_extra, questions_prog_extra
 
 KNOWLEDGE = {}
 with open(os.path.join(ROOT, "data", "knowledge.js"), encoding="utf-8") as f:
@@ -34,6 +34,8 @@ for i, item in enumerate(qcommon.QUESTIONS, 1):
     item["chapter"] = k["chapter"]
     item["knowledge"] = k["title"]
     item.setdefault("source", k["source"] + " · " + k["slides"])
+    if item.get("type") == "programming":
+        item.setdefault("origin", "原创编程题 · 课程知识点综合")
     if qid in seen:
         raise SystemExit("重复题号 " + qid)
     seen.add(qid)

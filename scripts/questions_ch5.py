@@ -131,40 +131,40 @@ q(chapter=5, section="5.3", topicId="5.3", type="single", difficulty=1,
   stem="存储字符串 \"cat\" 至少需要多少个 char 位置？",
   options=["3", "4", "5", "2"],
   answer=1,
-  explain="字符串以 '\0' 结束，\"cat\" 含 'c'、'a'、't' 三个有效字符和一个结束标记，共需 4 个 char。",
+  explain="字符串以 '\\0' 结束，\"cat\" 含 'c'、'a'、't' 三个有效字符和一个结束标记，共需 4 个 char。",
   source="第05章 - 1.pptx · 5.2 字符串结束标记（slide 56–58）")
 
 q(chapter=5, section="5.3", topicId="5.3", type="single", difficulty=2,
   stem="关于字符数组与字符串，下列说法正确的是？",
-  options=["char s[3] = \"abc\"; 可以安全存储字符串 abc", "字符串以 '\0' 作为结束标记", "字符数组长度可以等于字符串长度而不需要 '\0'", "cin >> 字符数组可以读入带空格的整行字符串"],
+  options=["char s[3] = \"abc\"; 可以安全存储字符串 abc", "字符串以 '\\0' 作为结束标记", "字符数组长度可以等于字符串长度而不需要 '\\0'", "cin >> 字符数组可以读入带空格的整行字符串"],
   answer=1,
-  explain="字符串以 '\0' 结束；\"abc\" 至少需要 4 个位置。cin >> 会在空白处停止，读整行应使用 cin.getline。",
+  explain="字符串以 '\\0' 结束；\"abc\" 至少需要 4 个位置。cin >> 会在空白处停止，读整行应使用 cin.getline。",
   source="第05章 - 1.pptx · 5.2 字符串与字符数组（slide 56–62）")
 
 q(chapter=5, section="5.3", topicId="5.3", type="multiple", difficulty=2,
   stem="关于 C 风格字符串处理，下列说法正确的有？",
-  options=["strlen 返回有效字符数，不包含 '\0'", "strcmp 按字典序比较字符串内容", "可以直接用 == 比较两个字符数组的内容是否相同", "strcpy 把源字符串复制到目标数组，包括 '\0'"],
+  options=["strlen 返回有效字符数，不包含 '\\0'", "strcmp 按字典序比较字符串内容", "可以直接用 == 比较两个字符数组的内容是否相同", "strcpy 把源字符串复制到目标数组，包括 '\\0'"],
   answer=[0, 1, 3],
-  explain="strlen 不计 '\0'；strcmp 比较内容；strcpy 复制包括结束标记。字符数组名用 == 比较的是地址，不是内容，C 错误。",
+  explain="strlen 不计 '\\0'；strcmp 比较内容；strcpy 复制包括结束标记。字符数组名用 == 比较的是地址，不是内容，C 错误。",
   source="第05章 - 1.pptx · 5.2 字符串库函数（slide 74–78）")
 
 q(chapter=5, section="5.3", topicId="5.3", type="judge", difficulty=1,
-  stem="字符串字面量 \"Hello\" 比字符数组 { 'H','e','l','l','o' } 多一个结束标记 '\0'。",
+  stem="字符串字面量 \"Hello\" 比字符数组 { 'H','e','l','l','o' } 多一个结束标记 '\\0'。",
   answer=True,
-  explain="用双引号写出的字符串字面量会自动在末尾附加 '\0'；逐个字符列出的初始化列表不会自动添加，需要自己写出 '\0'。",
+  explain="用双引号写出的字符串字面量会自动在末尾附加 '\\0'；逐个字符列出的初始化列表不会自动添加，需要自己写出 '\\0'。",
   source="第05章 - 1.pptx · 5.2 字符串结束标记（slide 56–58）")
 
 q(chapter=5, section="5.3", topicId="5.3", type="fill", difficulty=1,
   stem="C 风格字符串的结束标记字符是____。",
-  answer=["\0"],
-  alt=[["'\0'", "0"]],
-  explain="字符串以空字符 '\0'（编码 0）结束，字符串处理函数依靠它判断字符串到哪里结束。",
+  answer=["\\0"],
+  alt=[["'\\0'", "0"]],
+  explain="字符串以空字符 '\\0'（编码 0）结束，字符串处理函数依靠它判断字符串到哪里结束。",
   source="第05章 - 1.pptx · 5.2 字符串结束标记（slide 56）")
 
 q(chapter=5, section="5.3", topicId="5.3", type="fill", difficulty=2,
   stem="函数 strlen(\"abcd\") 的返回值是____。",
   answer=["4"],
-  explain="strlen 统计 '\0' 之前的有效字符数，\"abcd\" 有 4 个字符，返回 4。",
+  explain="strlen 统计 '\\0' 之前的有效字符数，\"abcd\" 有 4 个字符，返回 4。",
   source="第05章 - 1.pptx · 5.2 strlen（slide 74）")
 
 q(chapter=5, section="5.3", topicId="5.3", type="code", difficulty=2,
@@ -172,7 +172,7 @@ q(chapter=5, section="5.3", topicId="5.3", type="code", difficulty=2,
   code=["#include <iostream>", "using namespace std;", "int main() {", "    char s[] = \"abc\";", "    int n = 0;", "    while (s[n] != '\\0') n++;", "    cout << n;", "    return 0;", "}"],
   options=["2", "3", "4", "编译错误"],
   answer=1,
-  explain="循环统计 '\0' 之前的字符数。\"abc\" 有 3 个有效字符，因此 n=3，输出 3。",
+  explain="循环统计 '\\0' 之前的字符数。\"abc\" 有 3 个有效字符，因此 n=3，输出 3。",
   source="第05章 - 1.pptx · 5.2 字符串长度计算（slide 62）")
 
 q(chapter=5, section="5.3", topicId="5.3", type="code", difficulty=3,
@@ -506,12 +506,12 @@ q(chapter=5, section="5.2", topicId="5.2", type="programming", difficulty=1,
   source="第05章 - 1.pptx · 5.2 一维数组遍历（slide 26）")
 
 q(chapter=5, section="5.3", topicId="5.3", type="programming", difficulty=2,
-  stem="编写程序：读入一个不含空格的字符串，输出它的长度（不要调用 strlen，自己统计到 '\0' 为止）。",
-  starter="#include <iostream>\nusing namespace std;\n\nint main() {\n    char s[100];\n    cin >> s;\n    int len = 0;\n    // 统计到 '\0'\n    cout << len;\n    return 0;\n}\n",
-  solution="#include <iostream>\nusing namespace std;\nint main(){char s[100];cin>>s;int n=0;while(s[n]!='\0')n++;cout<<n;}\n",
+  stem="编写程序：读入一个不含空格的字符串，输出它的长度（不要调用 strlen，自己统计到 '\\0' 为止）。",
+  starter="#include <iostream>\nusing namespace std;\n\nint main() {\n    char s[100];\n    cin >> s;\n    int len = 0;\n    // 统计到 '\\0'\n    cout << len;\n    return 0;\n}\n",
+  solution="#include <iostream>\nusing namespace std;\nint main(){char s[100];cin>>s;int n=0;while(s[n]!='\\0')n++;cout<<n;}\n",
   tests=[{"input":"hello\n","output":"5"},{"input":"C++\n","output":"3"},{"input":"a\n","output":"1","hidden":True}],
   hints=["while (s[len] != '\\0') len++;"],
-  explain="字符数组保存字符串时末尾有 '\0'；从下标 0 开始计数，遇到 '\0' 停止，计数即为长度。",
+  explain="字符数组保存字符串时末尾有 '\\0'；从下标 0 开始计数，遇到 '\\0' 停止，计数即为长度。",
   source="第05章 - 1.pptx · 5.2 字符串长度计算（slide 62）")
 
 q(chapter=5, section="5.3", topicId="5.5", type="programming", difficulty=3,

@@ -1,9 +1,9 @@
 /* 静态资源缓存：离线时仍可打开知识点与题库；编译功能需要联网。 */
-const CACHE = 'cpplab-v1';
+const CACHE = 'cpplab-v2';
 const ASSETS = [
   './', './index.html', './manifest.webmanifest', './assets/css/style.css',
   './assets/js/utils.js', './assets/js/sandbox.js', './assets/js/app.js',
-  './assets/icon.svg', './data/knowledge.js', './data/downloads.js', './data/questions/manifest.json',
+  './assets/icon.svg', './downloads/programming-bank.json', './data/knowledge.js', './data/downloads.js', './data/questions/manifest.json',
   './data/questions/ch1.json', './data/questions/ch2.json', './data/questions/ch3.json',
   './data/questions/ch4.json', './data/questions/ch5.json'
 ];

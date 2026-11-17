@@ -21,6 +21,7 @@
   let QUESTIONS = [], QID = {}, TOPICS = {}, MANIFEST = { count: 0 };
   let route = parseHash();
   let practiceFilter = { chapter:'all', topic:'all', type:'all', diff:'all', status:'all', q:'' };
+  let progFilter = { diff:'all', status:'all', q:'' };
   let pendingProgram = {};
   let currentQuestionStarted = Date.now();
   let currentQuestionId = null;
@@ -76,6 +77,7 @@
     if (['knowledge'].includes(route.name)) return 'knowledge';
     if (['stats'].includes(route.name)) return 'stats';
     if (['wrong','favorites'].includes(route.name)) return 'wrong';
+    if (route.name === 'programming') return 'programming';
     if (['sandbox'].includes(route.name)) return 'sandbox';
     if (['settings','docs'].includes(route.name)) return 'settings';
     return 'home';
@@ -85,16 +87,17 @@
     const active = opts.active || activeNav();
     const navItems = [
       { key:'home', label:'首页', icon:'home' }, { key:'practice', label:'题库', icon:'book' },
-      { key:'knowledge', label:'知识点', icon:'brain' }, { key:'stats', label:'统计', icon:'chart' },
-      { key:'sandbox', label:'沙箱', icon:'terminal' }, { key:'wrong', label:'错题', icon:'fire' }
+      { key:'programming', label:'编程', icon:'terminal' }, { key:'knowledge', label:'知识点', icon:'brain' },
+      { key:'stats', label:'统计', icon:'chart' }, { key:'sandbox', label:'沙箱', icon:'terminal' }
     ];
+    const topNavItems = navItems.concat([{ key:'wrong', label:'错题', icon:'fire' }]);
     const top = '<div class="shell topnav-inner"><a class="brand" href="#/home" aria-label="C++ Lab 首页"><span class="brand-mark">&lt;/&gt;</span><span><span class="brand-name">C++ Lab</span><span class="brand-sub">PROGRAMMING PRACTICE</span></span></a>' +
-      '<nav class="nav-links" aria-label="主导航">' + navItems.map(n => '<a class="nav-link ' + (active===n.key?'active':'') + '" href="#/' + n.key + '">' + n.label + '</a>').join('') + '</nav>' +
+      '<nav class="nav-links" aria-label="主导航">' + topNavItems.map(n => '<a class="nav-link ' + (active===n.key?'active':'') + '" href="#/' + n.key + '">' + n.label + '</a>').join('') + '</nav>' +
       '<div class="nav-actions"><button class="icon-btn" data-action="open-search" title="搜索题目 (/)">' + U.icon('search') + '</button>' +
       '<button class="icon-btn" data-action="toggle-theme" title="切换主题">' + U.icon(state.settings.theme==='dark'?'bulb':'moon') + '</button>' +
       '<button class="icon-btn" data-nav="settings" data-action="open-settings" title="设置">' + U.icon('gear') + '</button></div></div>';
     const tab = '<nav class="mobile-tabbar" aria-label="移动端导航">' + navItems.map(n => '<button class="' + (active===n.key?'active':'') + '" data-action="tab" data-tab="' + n.key + '">' + U.icon(n.icon) + '<span>' + n.label + '</span></button>').join('') + '</nav>';
-    return '<header class="topnav" id="topnav">' + top + '</header><main class="page fade-in" id="page">' + content + '</main>' + tab;
+    return '<header class="topnav" id="topnav">' + top + '</header><main class="page fade-in" id="page"><div class="page-content ' + ((['quiz','settings','docs','wrong','favorites','programming'].includes(route.name))?'narrow':'') + '">' + content + '</div></main>' + tab;
   }
   const ICON_MOON = '<path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2z"/>';
   U.ICONS.moon = ICON_MOON;
@@ -212,10 +215,11 @@
     const todayTip = ['先后看规则，再读代码：先判断考的是类型、优先级还是控制流。','填空题先写最小正确形式，不必背冗长表达式。','错题连续答对两次才会移出错题本，别靠一次记忆。','编程题先跑通样例，再提交全部测试。'][new Date().getDate() % 4];
     const recents = (state.lastPractice && state.lastPractice.answered) ? '<div class="card" style="margin-top:14px"><div class="card-head"><div><h3>继续上次练习</h3><p>' + U.esc(state.lastPractice.title) + ' · 已做 ' + state.lastPractice.answered + '/' + state.lastPractice.qids.length + ' 题</p></div><button class="btn btn-soft btn-sm" data-action="resume-last">继续</button></div><div class="progress"><i style="width:' + U.pct(state.lastPractice.answered, state.lastPractice.qids.length) + '%"></i></div></div>' : '';
     const content = '<div class="home-grid"><div>' +
-      '<section class="hero"><div class="row between" style="align-items:flex-start"><div><div class="kicker" style="color:rgba(255,255,255,.72)">AUTUMN SEMESTER · C++</div><h1>把“看得懂”变成<br><em style="color:#fff">写得对、跑得通。</em></h1><p>297 道题覆盖 PPT 第 1–5 章，六种题型、四档难度，配合真正能编译运行的 C++ 沙箱。</p></div>' + ringSvg(donePct, '已练') + '</div><div class="hero-stats"><div class="hero-stat"><b>' + g.done + '<span style="font-size:13px;opacity:.65"> / ' + g.total + '</span></b><span>已做题数</span></div><div class="hero-stat"><b>' + g.accuracy + '%</b><span>累计正确率</span></div><div class="hero-stat"><b>' + streak + '</b><span>连续学习天数</span></div><div class="hero-stat"><b>' + g.wrongCount + '</b><span>待复习错题</span></div></div></section>' +
-      '<div class="section-head"><h2>今天从哪儿开始？</h2><span class="hint">推荐按“新题 → 错题 → 弱项”循环</span></div><div class="quick-grid">' +
-        quickCard('start-smart','spark','智能练习 20 题','优先新题与到期错题') + quickCard('start-wrong','fire', g.wrongCount ? '错题重练 · ' + g.wrongCount + ' 题' : '错题重练', g.wrongCount ? '连续答对 2 次移出' : '错题本是空的，保持住') + quickCard('open-sandbox','terminal','打开 C++ 沙箱','写代码，真实编译运行') +
+      '<section class="hero"><div class="row between" style="align-items:flex-start"><div><div class="kicker" style="color:rgba(255,255,255,.72)">AUTUMN SEMESTER · C++</div><h1>把“看得懂”变成<br><em style="color:#fff">写得对、跑得通。</em></h1><p>' + QUESTIONS.length + ' 道题覆盖 PPT 第 1–5 章，六种题型、四档难度，配合真正能编译运行的 C++ 沙箱。</p></div>' + ringSvg(donePct, '已练') + '</div><div class="hero-stats"><div class="hero-stat"><b>' + g.done + '<span style="font-size:13px;opacity:.65"> / ' + g.total + '</span></b><span>已做题数</span></div><div class="hero-stat"><b>' + g.accuracy + '%</b><span>累计正确率</span></div><div class="hero-stat"><b>' + streak + '</b><span>连续学习天数</span></div><div class="hero-stat"><b>' + g.wrongCount + '</b><span>待复习错题</span></div></div></section>' +
+      '<div class="section-head"><h2>今天从哪儿开始？</h2><span class="hint">推荐按“新题 → 错题 → 弱项”循环</span></div><div class="quick-grid four">' +
+        quickCard('open-programming','terminal','编程训练场',programmingQuestions().length + ' 道编程题 · 真实编译评测') + quickCard('start-smart','spark','智能练习 20 题','优先新题与到期错题') + quickCard('start-wrong','fire', g.wrongCount ? '错题重练 · ' + g.wrongCount + ' 题' : '错题重练', g.wrongCount ? '连续答对 2 次移出' : '错题本是空的，保持住') + quickCard('open-sandbox','code','打开 C++ 沙箱','写代码，真实编译运行') +
       '</div>' + recents +
+      '<div class="section-head"><h2>综合编程训练</h2><a href="#/programming">全部 ' + programmingQuestions().length + ' 道 →</a></div><div class="home-prog-strip">' + programmingQuestions().slice(0,3).map(q => '<button class="home-prog-card" data-action="practice-one" data-id="' + q.id + '"><span class="pill ' + DIFF_CLASS[q.difficulty] + '">' + DIFF_LABEL[q.difficulty] + '</span><h4>' + U.esc(q.stem) + '</h4><div class="tiny muted">' + U.esc(q.origin || '综合编程') + ' · ' + q.tests.length + ' 组测试</div><span class="prog-go">开始编写' + U.icon('arrow') + '</span></button>').join('') + '</div>' +
       '<div class="section-head"><h2>按章节推进</h2><a href="#/practice">查看全部题库 →</a></div><div class="chapter-grid">' + chapterCards + '</div>' +
       '<div class="section-head"><h2>最该补的知识点</h2><a href="#/knowledge">知识点地图 →</a></div><div class="card" style="padding:8px 20px"><div class="topic-list">' + topicHtml + '</div></div>' +
       '</div><aside>' +
@@ -257,7 +261,7 @@
     const list = filterQuestions();
     const activeFilters = ['chapter','topic','type','diff','status'].filter(k=>practiceFilter[k]!=='all').length + (practiceFilter.q?1:0);
     const counts = { total:QUESTIONS.length, single:QUESTIONS.filter(q=>q.type==='single').length, multiple:QUESTIONS.filter(q=>q.type==='multiple').length, judge:QUESTIONS.filter(q=>q.type==='judge').length, fill:QUESTIONS.filter(q=>q.type==='fill').length, code:QUESTIONS.filter(q=>q.type==='code').length, programming:QUESTIONS.filter(q=>q.type==='programming').length };
-    const content = '<div class="row between wrap" style="margin-bottom:18px"><div><div class="kicker">QUESTION BANK · 297 QUESTIONS</div><h1 class="display" style="font-size:clamp(28px,4vw,44px)">题库<br><em>按你的薄弱点来。</em></h1></div><div class="row wrap"><span class="pill accent">' + counts.single + ' 单选</span><span class="pill coral">' + counts.multiple + ' 多选</span><span class="pill blue">' + counts.judge + ' 判断</span><span class="pill gold">' + counts.fill + ' 填空</span><span class="pill">' + counts.code + ' 代码阅读</span><span class="pill">' + counts.programming + ' 编程</span></div></div>' +
+    const content = '<div class="row between wrap" style="margin-bottom:18px"><div><div class="kicker">QUESTION BANK · ' + QUESTIONS.length + ' QUESTIONS</div><h1 class="display" style="font-size:clamp(28px,4vw,44px)">题库<br><em>按你的薄弱点来。</em></h1></div><div class="row wrap"><span class="pill accent">' + counts.single + ' 单选</span><span class="pill coral">' + counts.multiple + ' 多选</span><span class="pill blue">' + counts.judge + ' 判断</span><span class="pill gold">' + counts.fill + ' 填空</span><span class="pill">' + counts.code + ' 代码阅读</span><span class="pill">' + counts.programming + ' 编程</span></div></div>' +
       '<div class="filter-panel"><div class="filter-grid">' +
         '<label class="field"><span>章节</span><select class="select" data-filter="chapter"><option value="all">全部章节</option>' + [1,2,3,4,5].map(c=>'<option value="'+c+'" '+(String(practiceFilter.chapter)===String(c)?'selected':'')+'>第'+c+'章 '+U.esc(CHAPTER_TITLES[c].title)+'</option>').join('') + '</select></label>' +
         '<label class="field"><span>知识点</span><select class="select" data-filter="topic">' + topicOptions(practiceFilter.topic) + '</select></label>' +
@@ -312,7 +316,7 @@
   function renderKnowledge() {
     const q = (practiceFilter.kq || '').toLowerCase();
     const list = KNOWLEDGE.filter(k => !q || (k.title + ' ' + k.summary + ' ' + (k.points||[]).join(' ') + ' ' + k.source).toLowerCase().includes(q));
-    const content = '<div class="row between wrap"><div><div class="kicker">KNOWLEDGE MAP · FROM PPT</div><h1 class="display" style="font-size:clamp(28px,4vw,44px)">知识点地图<br><em>只学 PPT 讲过的。</em></h1><p class="lede" style="margin-top:10px">29 个知识点逐项标注来源 PPT、章节与页码。题目与解析不超出这张地图。</p></div><div class="card" style="min-width:220px;padding:15px"><div class="small muted">题库覆盖</div><div style="font-size:30px;font-weight:760">29<span class="small muted" style="font-weight:500"> 个知识点</span></div><div class="small muted">297 道题 · 6 种题型 · 4 档难度</div></div></div>' +
+    const content = '<div class="row between wrap"><div><div class="kicker">KNOWLEDGE MAP · FROM PPT</div><h1 class="display" style="font-size:clamp(28px,4vw,44px)">知识点地图<br><em>只学 PPT 讲过的。</em></h1><p class="lede" style="margin-top:10px">' + KNOWLEDGE.length + ' 个知识点逐项标注来源 PPT、章节与页码。题目与解析不超出这张地图。</p></div><div class="card" style="min-width:220px;padding:15px"><div class="small muted">题库覆盖</div><div style="font-size:30px;font-weight:760">' + KNOWLEDGE.length + '<span class="small muted" style="font-weight:500"> 个知识点</span></div><div class="small muted">' + QUESTIONS.length + ' 道题 · 6 种题型 · 4 档难度</div></div></div>' +
       '<div class="filter-panel" style="margin-top:20px"><div class="row wrap"><div class="search-box" style="flex:1;min-width:240px">' + U.icon('search') + '<input class="input" id="knowledge-search" placeholder="搜索知识点、规则关键词…" value="' + U.attr(practiceFilter.kq||'') + '"></div><span class="result-count">共 <b>' + list.length + '</b> 个知识点</span><a class="btn btn-ghost btn-sm" href="#/practice">' + U.icon('book') + '去题库</a></div></div>' +
       '<div class="knowledge-grid" style="margin-top:16px" id="knowledge-grid">' + list.map(k => { const ts=topicStats(k.id); return '<article class="k-card"><div class="row between"><span class="pill accent">第 ' + k.chapter + ' 章 · ' + U.esc(k.section) + '</span><span class="tiny muted">' + ts.total + ' 题</span></div><h3 style="margin-top:10px">' + U.esc(k.title) + '</h3><div class="k-meta">来源：' + U.esc(k.source) + ' · ' + U.esc(k.slides) + '</div><p>' + U.esc(k.summary) + '</p><ul class="k-points">' + k.points.slice(0,3).map(p=>'<li>'+U.esc(p)+'</li>').join('') + '</ul><div class="k-foot"><span class="tiny muted">' + (ts.attempts ? '正确率 '+ts.accuracy+'% · 已做 '+ts.done+'/'+ts.total : '尚未练习') + '</span><div class="row"><a class="btn btn-ghost btn-sm" href="#/topic/' + encodeURIComponent(k.id) + '">详情</a><button class="btn btn-soft btn-sm" data-action="practice-topic" data-topic="' + U.attr(k.id) + '">练习</button></div></div></article>'; }).join('') + '</div>';
     return pageShell(content);
@@ -344,7 +348,7 @@
     const q=curQ(), answered=s.answers[q.id]!==undefined, rec=recOf(q.id);
     const idx=s.idx, total=s.qids.length, pct=U.pct(idx,total);
     const qMeta='<div class="q-meta"><span class="pill accent">第 '+q.chapter+' 章 · '+U.esc(q.knowledge)+'</span><span class="pill '+DIFF_CLASS[q.difficulty]+'">'+DIFF_LABEL[q.difficulty]+'</span><span class="pill">'+TYPE_LABEL[q.type]+'</span>'+(isFav(q.id)?'<span class="pill gold">'+U.icon('star')+' 已收藏</span>':'')+'</div>';
-    const source = state.settings.showSource ? '<div class="source-line">'+U.icon('doc')+'<span>来源：'+U.esc(q.source)+'</span></div>' : '';
+    const source = state.settings.showSource ? '<div class="source-line">'+U.icon('doc')+'<span>知识点来源：'+U.esc(q.source)+(q.origin?' · 题目灵感：'+U.esc(q.origin):'')+'</span></div>' : '';
     const feedback = answered ? renderFeedback(q, isAnswerCorrect(q,s.answers[q.id])) : '';
     const actions = answered ? '<div class="quiz-actions"><button class="btn btn-ghost" data-action="prev-question" '+(idx===0?'disabled':'')+'>'+U.icon('back')+'上一题</button><button class="btn btn-ghost btn-sm" data-action="toggle-favorite" data-id="'+q.id+'">'+U.icon('star')+(isFav(q.id)?'已收藏':'收藏')+'</button><span class="spacer"></span>'+(idx<total-1?'<button class="btn btn-primary" data-action="next-question">下一题'+U.icon('arrow')+'</button>':'<button class="btn btn-primary" data-action="finish-session">'+U.icon('check')+'完成练习</button>')+'</div>' : '<div class="quiz-actions"><button class="btn btn-ghost" data-action="prev-question" '+(idx===0?'disabled':'')+'>'+U.icon('back')+'上一题</button><button class="btn btn-ghost btn-sm" data-action="reveal-answer">看答案</button><button class="btn btn-ghost btn-sm" data-action="toggle-favorite" data-id="'+q.id+'">'+U.icon('star')+'收藏</button><span class="spacer"></span><button class="btn btn-primary" id="submit-answer" data-action="submit-answer" '+(draftReady(q)?'':'disabled')+'>提交答案</button></div>';
     const content='<div class="quiz-top"><button class="icon-btn" data-action="back" aria-label="返回">'+U.icon('back')+'</button><div class="quiz-progress"><div class="row between" style="margin-bottom:5px"><span class="quiz-title">'+U.esc(s.title)+'</span><span class="quiz-counter">'+(idx+1)+' / '+total+'</span></div><div class="track"><i style="width:'+pct+'%"></i></div></div><button class="icon-btn" data-action="open-map" aria-label="题目地图">'+U.icon('grid')+'</button></div>' +
@@ -403,10 +407,10 @@
       const after = r ? (r.passed ? '通过' : ('未通过 · 期望 ' + U.esc(String(t.output).split(String.fromCharCode(10)).join('↵')) + ' · 实际 ' + U.esc(String(r.actual||'').split(String.fromCharCode(10)).join('↵')))) : '未执行';
       return '<div class="test-row '+(r?(r.passed?'pass':'fail'):'')+'" title="'+U.attr((t.input||'')+' -> '+(t.output||''))+'"><span class="test-name">'+(t.hidden?'隐藏测试':'样例 '+(i+1))+'</span><span class="test-detail">'+(r?after:before)+'</span></div>';
     }).join('') + '</div>';
-    return '<div class="code-wrap"><div class="editor-card card" style="border-radius:16px"><div class="editor-head"><div class="editor-dots"><i></i><i></i><i></i></div><span class="editor-name">main.cpp</span><div class="editor-tools"><button class="btn btn-ghost btn-sm" data-action="reset-prog" data-id="'+q.id+'">'+U.icon('refresh')+'重置</button><button class="btn btn-soft btn-sm" data-action="prog-beautify" data-id="'+q.id+'">对齐</button></div></div><div class="editor-wrap"><div class="line-nums" id="prog-lines-'+q.id+'">'+d.code.split('\n').map((_,i)=>'<span>'+(i+1)+'</span>').join('')+'</div><textarea class="code-editor" id="prog-code-'+q.id+'" data-action="prog-code" data-id="'+q.id+'" spellcheck="false" '+(answered?'disabled':'')+'>'+U.esc(d.code)+'</textarea></div></div>' +
-      '<div class="grid-2" style="margin-top:12px"><div><label class="field"><span>自定义输入 stdin</span><textarea class="stdin-area" id="prog-stdin-'+q.id+'" data-action="prog-stdin" data-id="'+q.id+'" '+(answered?'disabled':'')+'>'+U.esc(d.stdin)+'</textarea></label></div><div><div class="row wrap" style="height:100%;align-content:center"><button class="btn btn-primary" data-action="run-prog" data-id="'+q.id+'" '+(answered?'disabled':'')+'>'+U.icon('play')+'运行</button><button class="btn btn-ink" data-action="judge-prog" data-id="'+q.id+'" '+(answered?'disabled':'')+'>'+U.icon('check')+'提交评测</button><button class="btn btn-ghost btn-sm" data-action="load-sample" data-id="'+q.id+'">'+U.icon('task')+'载入样例输入</button></div></div></div>' +
+    return '<div class="code-wrap"><div class="editor-card card" style="border-radius:16px"><div class="editor-head"><div class="editor-dots"><i></i><i></i><i></i></div><span class="editor-name">main.cpp</span><div class="editor-tools"><button class="btn btn-ghost btn-sm" data-action="reset-prog" data-id="'+q.id+'">'+U.icon('refresh')+'重置</button><button class="btn btn-soft btn-sm" data-action="prog-beautify" data-id="'+q.id+'">对齐</button></div></div><div class="editor-wrap"><div class="line-nums" id="prog-lines-'+q.id+'">'+d.code.split('\n').map((_,i)=>'<span>'+(i+1)+'</span>').join('')+'</div><textarea class="code-editor" id="prog-code-'+q.id+'" data-action="prog-code" data-id="'+q.id+'" spellcheck="false">'+U.esc(d.code)+'</textarea></div></div>' +
+      '<div class="grid-2" style="margin-top:12px"><div><label class="field"><span>自定义输入 stdin</span><textarea class="stdin-area" id="prog-stdin-'+q.id+'" data-action="prog-stdin" data-id="'+q.id+'">'+U.esc(d.stdin)+'</textarea></label></div><div><div class="row wrap" style="height:100%;align-content:center"><button class="btn btn-primary" data-action="run-prog" data-id="'+q.id+'">'+U.icon('play')+'运行</button><button class="btn btn-ink" data-action="judge-prog" data-id="'+q.id+'">'+U.icon('check')+(answered?'重新评测':'提交评测')+'</button><button class="btn btn-ghost btn-sm" data-action="load-sample" data-id="'+q.id+'">'+U.icon('task')+'载入样例输入</button></div></div></div>' +
       '<div class="console" id="prog-console-'+q.id+'">'+(p.html || '<div class="console-head"><span class="status-dot"></span>OUTPUT</div><div class="console-body"><pre class="muted">点击「运行」使用自定义输入；点击「提交评测」将依次运行全部测试用例。</pre></div>')+'</div>' +
-      '<div class="row between wrap" style="margin-top:10px"><span class="small muted">评测会真实编译并运行你的代码。失败后可修改再提交；成功即记录为答对。</span><span class="pill">'+q.tests.length+' 个测试 · '+q.tests.filter(t=>t.hidden).length+' 个隐藏</span></div>' + testsHtml + '</div>';
+      '<div class="row between wrap" style="margin-top:10px"><span class="small muted">评测会真实编译并运行你的代码。提交或看答案后，编辑器和运行按钮仍然可用。</span><span class="pill">'+q.tests.length+' 个测试 · '+q.tests.filter(t=>t.hidden).length+' 个隐藏</span></div>' + testsHtml + '</div>';
   }
   function consoleHtml(r) {
     if (!r) return '';
@@ -445,11 +449,14 @@
       updateConsole(q.id,consoleHtml(run)||'');
       const testsBox=document.getElementById('prog-tests-'+q.id);
       if(testsBox){testsBox.innerHTML=q.tests.map((t,i)=>{const r=res.results[i];return '<div class="test-row '+(r?(r.passed?'pass':'fail'):'')+'"><span class="test-name">'+(t.hidden?'隐藏测试':'样例 '+(i+1))+'</span><span class="test-detail">'+(r?(r.passed?'通过':('未通过 · 期望 '+U.esc(String(t.output).split(String.fromCharCode(10)).join('↵'))+' · 实际 '+U.esc(String(r.actual||'').split(String.fromCharCode(10)).join('↵')))):'未执行')+'</span></div>';}).join('');}
+      const s=state.session;
+      const wasAnswered=!!(s && s.answers[q.id]!==undefined);
       if(res.allPassed){
-        const s=state.session; if(s){s.answers[q.id]=code;} recordAttempt(q,true,code,Date.now()-currentQuestionStarted); pendingProgram[q.id]={html:p.html,testResults:res.results,passed:true};
-        save(); U.toast('全部测试通过！'); setTimeout(()=>{ if(route.name==='quiz') renderRoute(); },450);
+        if(!wasAnswered && s){ s.answers[q.id]=code; recordAttempt(q,true,code,Date.now()-currentQuestionStarted); save(); U.toast('全部测试通过！'); setTimeout(()=>{ if(route.name==='quiz') renderRoute(); },450); }
+        else { pendingProgram[q.id]={html:p.html,testResults:res.results,passed:true}; save(); U.toast('重新评测通过（本题已提交，不重复计分）'); }
       }else{
-        recordAttempt(q,false,code,Date.now()-currentQuestionStarted); pendingProgram[q.id]={html:p.html,testResults:res.results,passed:false};
+        if(!wasAnswered) recordAttempt(q,false,code,Date.now()-currentQuestionStarted);
+        pendingProgram[q.id]={html:p.html,testResults:res.results,passed:false};
         save(); U.toast(firstFail&&!firstFail.run.compiled?'编译失败，请查看错误信息':'未通过全部测试，修改后可以再提交');
       }
       return;
@@ -481,8 +488,8 @@
     const preload = qid && QID[qid];
     const content = '<div class="row between wrap"><div><div class="kicker">LIVE C++ SANDBOX · GCC</div><h1 class="display" style="font-size:clamp(28px,4vw,44px)">写一段代码，<br><em>让编译器回答。</em></h1><p class="lede" style="margin-top:10px">在页面内编辑、编译、运行 C++ 程序；输出、编译错误与运行错误都会原样呈现。需要联网。</p></div><div class="row wrap"><span class="pill accent">C++17</span><span class="pill">GCC Head</span><span class="pill blue">Wandbox API</span></div></div>' +
       (preload?'<div class="card" style="margin-top:18px;padding:14px 18px"><div class="row wrap"><span class="pill accent">已载入题目</span><b class="small">'+U.esc(preload.stem)+'</b><button class="btn btn-soft btn-sm" style="margin-left:auto" data-action="practice-one" data-id="'+preload.id+'">回到题目</button></div></div>':'') +
-      '<div class="sandbox-layout" style="margin-top:18px"><div><div class="editor-card card"><div class="editor-head"><div class="editor-dots"><i></i><i></i><i></i></div><span class="editor-name">main.cpp</span><span class="pill" style="margin-left:4px">C++17</span><div class="editor-tools"><button class="btn btn-ghost btn-sm" data-action="sandbox-reset">'+U.icon('refresh')+'重置</button><button class="btn btn-soft btn-sm" data-action="sandbox-clear">'+U.icon('trash')+'清空</button><button class="btn btn-primary btn-sm" data-action="run-sandbox">'+U.icon('play')+'运行 Ctrl+Enter</button></div></div><div class="editor-wrap"><div class="line-nums" id="sandbox-lines">'+lineNums(d.code)+'</div><textarea class="code-editor" id="sandbox-code" spellcheck="false" '+(preload?'':'')+'>'+U.esc(d.code)+'</textarea></div></div>' +
-        '<div class="grid-2" style="margin-top:14px"><div class="card" style="padding:15px"><label class="field"><span>标准输入 stdin</span><textarea class="stdin-area" id="sandbox-stdin" placeholder="程序运行时从 cin 读取的数据">'+U.esc(d.stdin)+'</textarea></label><div class="row between" style="margin-top:9px"><span class="tiny muted">可粘贴多行输入</span><button class="btn btn-ghost btn-sm" data-action="sandbox-load-stdin">载入示例输入</button></div></div><div class="card" style="padding:15px"><div class="row wrap"><span class="pill accent">真实编译</span><span class="pill">隔离执行</span></div><p class="small muted" style="margin-top:10px;line-height:1.75">首次编译可能需要 2–8 秒。编译失败会显示 GCC 原始诊断和中文排查提示。</p><div class="row" style="margin-top:12px"><button class="btn btn-ink btn-block" data-action="run-sandbox">'+U.icon('terminal')+'编译并运行</button></div></div></div>' +
+      '<div class="sandbox-layout" style="margin-top:18px"><div><div class="editor-card card"><div class="editor-head"><div class="editor-dots"><i></i><i></i><i></i></div><span class="editor-name">main.cpp</span><span class="pill" style="margin-left:4px">C++17</span><div class="editor-tools"><button class="btn btn-ghost btn-sm" data-action="sandbox-reset">'+U.icon('refresh')+'重置</button><button class="btn btn-soft btn-sm" data-action="sandbox-clear">'+U.icon('trash')+'清空</button><button class="btn btn-primary btn-sm" data-action="run-sandbox">'+U.icon('play')+'编译并运行</button></div></div><div class="editor-wrap"><div class="line-nums" id="sandbox-lines">'+lineNums(d.code)+'</div><textarea class="code-editor" id="sandbox-code" spellcheck="false" '+(preload?'':'')+'>'+U.esc(d.code)+'</textarea></div></div>' +
+        '<div class="grid-2" style="margin-top:14px"><div class="card" style="padding:15px"><label class="field"><span>标准输入 stdin</span><textarea class="stdin-area" id="sandbox-stdin" placeholder="程序运行时从 cin 读取的数据">'+U.esc(d.stdin)+'</textarea></label><div class="row between" style="margin-top:9px"><span class="tiny muted">可粘贴多行输入</span><button class="btn btn-ghost btn-sm" data-action="sandbox-load-stdin">载入示例输入</button></div></div><div class="card" style="padding:15px"><div class="row wrap"><span class="pill accent">真实编译</span><span class="pill">隔离执行</span></div><p class="small muted" style="margin-top:10px;line-height:1.75">首次编译可能需要 2–8 秒。编译失败会显示 GCC 原始诊断和中文排查提示。快捷键：<kbd>Ctrl</kbd> + <kbd>Enter</kbd>。</p></div></div>' +
         '<div class="console" id="sandbox-console">'+(p.html||'<div class="console-head"><span class="status-dot"></span>OUTPUT</div><div class="console-body"><pre class="muted">等待运行…</pre></div>')+'</div></div>' +
         '<aside class="sandbox-side"><div class="card"><div class="card-head"><div><h3>快速示例</h3><p>点击载入，不覆盖当前作答记录</p></div></div><div class="example-grid">'+EXAMPLES.map((e,i)=>'<button class="example-btn" data-action="sandbox-example" data-i="'+i+'">'+U.esc(e.name)+'</button>').join('')+'</div></div><div class="api-note">编译能力由公共 Wandbox 服务提供，源码与 stdin 会发送到远端隔离环境。它不依赖自建后端，适合 GitHub Pages。若服务不可用，请稍后重试。</div><div class="card"><div class="card-head"><div><h3>编程题</h3><p>带测试用例与自动评测</p></div><span class="pill">'+QUESTIONS.filter(q=>q.type==='programming').length+' 道</span></div><div class="stack">'+QUESTIONS.filter(q=>q.type==='programming').slice(0,4).map(q=>'<button class="q-list-item" style="grid-template-columns:minmax(0,1fr) auto;padding:9px 0;border-width:0 0 1px;border-radius:0;background:none" data-action="practice-one" data-id="'+q.id+'"><div><div class="q-list-stem" style="font-size:12px">'+U.esc(q.stem)+'</div><div class="q-list-meta"><span class="pill '+DIFF_CLASS[q.difficulty]+'">'+DIFF_LABEL[q.difficulty]+'</span><span class="tiny muted">第'+q.chapter+'章</span></div></div><span class="chapter-arrow">'+U.icon('arrow')+'</span></button>').join('')+'</div></div></aside></div>';
     return pageShell(content);
@@ -657,6 +664,7 @@
       switch(route.name){
         case 'home': html=renderHome(); break;
         case 'practice': html=renderPractice(); break;
+        case 'programming': html=renderProgrammingHub(); break;
         case 'chapter': html=renderChapter(route.params.ch); break;
         case 'topic': html=renderTopic(route.params.id); break;
         case 'quiz': html=renderQuiz(); break;
@@ -693,10 +701,14 @@
       case 'back': if(history.length>1) history.back(); else go('home'); break;
       case 'open-settings': go('settings'); break;
       case 'open-sandbox': go('sandbox'); break;
+      case 'open-programming': go('programming'); break;
       case 'open-search': go('practice'); setTimeout(()=>{const i=document.querySelector('[data-filter="q"]');if(i)i.focus();},80); break;
       case 'toggle-theme': state.settings.theme=state.settings.theme==='dark'?'light':'dark'; applyTheme(); save(); renderRoute(); break;
       case 'start-smart': { const list=smartPool(20); startSession(list.map(q=>q.id),'智能练习 · 20 题','smart'); break; }
       case 'start-wrong': startWrong(); break;
+      case 'start-programming-all': { let list=programmingQuestions(); if(el.dataset.mode==='unsolved') list=list.filter(q=>!(recOf(q.id)&&recOf(q.id).lastOk)); else list=U.shuffle(list).slice(0,10); if(!list.length){U.toast('所有编程题都已通过，试试随机复习');list=U.shuffle(programmingQuestions()).slice(0,10);} startSession(list.map(q=>q.id),'编程训练 · '+(el.dataset.mode==='unsolved'?'未通过题':'随机 10 题'),'programming'); break; }
+      case 'start-programming-track': { const track=el.dataset.track; let list=programmingQuestions(); if(track==='chapter2') list=list.filter(q=>q.chapter===2); else if(track==='chapter3') list=list.filter(q=>q.chapter===3); else if(track==='chapter4') list=list.filter(q=>q.chapter===4); else if(track==='chapter5a') list=list.filter(q=>q.chapter===5&&['5.2','5.3','5.4'].includes(q.topicId)); else if(track==='chapter5b') list=list.filter(q=>q.chapter===5&&['5.5','5.7','5.8','5.9'].includes(q.topicId)); if(!list.length){U.toast('该路线暂无题目');break;} startSession(U.shuffle(list).map(q=>q.id),'编程路线 · '+track,'programming'); break; }
+      case 'clear-prog-filters': progFilter={diff:'all',status:'all',q:''}; renderRoute(); break;
       case 'start-filtered': startFiltered(el.dataset.shuffle==='1'); break;
       case 'clear-filters': practiceFilter={chapter:'all',topic:'all',type:'all',diff:'all',status:'all',q:''}; renderRoute(); break;
       case 'practice-one': practiceOne(el.dataset.id); break;
@@ -746,13 +758,20 @@
     if(t.dataset&&t.dataset.action==='fill-input'){ const q=curQ(); if(q){const d=getDraft(q);d[Number(t.dataset.i)]=t.value;save();updateSubmitState();} }
     if(t.dataset&&t.dataset.filter==='q'){ practiceFilter.q=t.value; U.debounce(refreshPracticeResults,120)(); }
     if(t.id==='knowledge-search'){ practiceFilter.kq=t.value; refreshKnowledgeResults(); }
+    if(t.id==='prog-search'){ progFilter.q=t.value; U.debounce(refreshProgResults,100)(); }
   });
   document.addEventListener('change',function(e){
-    const t=e.target; if(!t.dataset||!t.dataset.filter)return;
+    const t=e.target;
+    if(t.dataset&&t.dataset.progFilter){ progFilter[t.dataset.progFilter]=t.value; refreshProgResults(); return; }
+    if(!t.dataset||!t.dataset.filter)return;
     const key=t.dataset.filter; practiceFilter[key]=t.value;
     if(key==='chapter'&&practiceFilter.topic!=='all'&&TOPICS[practiceFilter.topic]&&String(TOPICS[practiceFilter.topic].chapter)!==String(t.value))practiceFilter.topic='all';
     renderRoute();
   });
+  function refreshProgResults() {
+    const list=filteredProgramming(); const box=document.getElementById('programming-list'); if(box)box.innerHTML=programmingListHtml(list);
+    const c=document.getElementById('prog-count'); if(c)c.textContent=list.length;
+  }
   function refreshKnowledgeResults(){
     const q=(practiceFilter.kq||'').toLowerCase();
     const list=KNOWLEDGE.filter(k=>!q||(k.title+' '+k.summary+' '+(k.points||[]).join(' ')+' '+k.source).toLowerCase().includes(q));
@@ -762,10 +781,25 @@
   }
   function updateLineNumbers(id,code){ const el=document.getElementById(id); if(el)el.innerHTML=code.split('\n').map((_,i)=>'<span>'+(i+1)+'</span>').join(''); }
 
+  function insertIndent(textarea, unindent) {
+    const start=textarea.selectionStart, end=textarea.selectionEnd;
+    const value=textarea.value;
+    if (unindent) {
+      const lineStart=value.lastIndexOf(String.fromCharCode(10),Math.max(0,start-1))+1;
+      const before=value.slice(lineStart,start);
+      const remove=Math.min(4,(before.match(/^ +/)||[''])[0].length);
+      if(remove){ textarea.value=value.slice(0,lineStart)+value.slice(lineStart+remove); textarea.selectionStart=textarea.selectionEnd=start-remove; }
+    } else {
+      textarea.value=value.slice(0,start)+'    '+value.slice(end);
+      textarea.selectionStart=textarea.selectionEnd=start+4;
+    }
+    textarea.dispatchEvent(new Event('input',{bubbles:true}));
+  }
   /* ---------- keyboard ---------- */
   document.addEventListener('keydown',function(e){
     const tag=(e.target.tagName||'').toLowerCase();
     const editing=tag==='input'||tag==='textarea'||tag==='select'||e.target.isContentEditable;
+    if(e.key==='Tab'&&e.target&&(e.target.id==='sandbox-code'||e.target.dataset&&e.target.dataset.action==='prog-code')){ e.preventDefault(); insertIndent(e.target,e.shiftKey); return; }
     if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){
       if(document.getElementById('sandbox-code')){e.preventDefault();runFreeSandbox();return;}
       const q=curQ(); if(q&&q.type==='programming'){e.preventDefault();runProgram(q,false);return;}
@@ -796,7 +830,7 @@
   }
   async function boot(){
     applyTheme();
-    const app=document.getElementById('app'); if(app)app.innerHTML='<div class="loading-screen"><div style="text-align:center"><div class="loader" style="margin:0 auto 14px"></div><div class="small muted">正在加载 297 道题与知识点…</div></div></div>';
+    const app=document.getElementById('app'); if(app)app.innerHTML='<div class="loading-screen"><div style="text-align:center"><div class="loader" style="margin:0 auto 14px"></div><div class="small muted">正在加载题库与知识点…</div></div></div>';
     try{
       await loadData();
       if(!state.sandbox) state.sandbox={code:EXAMPLES[0].code,stdin:''};
@@ -808,4 +842,53 @@
   }
   document.addEventListener('click',function(e){ if(e.target.closest('[data-action="reload"]')) location.reload(); });
   boot();
+
+
+  /* ---------- programming training hub ---------- */
+  function programmingQuestions() { return QUESTIONS.filter(q => q.type === 'programming'); }
+  function filteredProgramming() {
+    return programmingQuestions().filter(q => {
+      if (progFilter.diff !== 'all' && q.difficulty !== Number(progFilter.diff)) return false;
+      const rec = recOf(q.id);
+      if (progFilter.status === 'new' && rec && rec.attempts) return false;
+      if (progFilter.status === 'attempted' && (!rec || !rec.attempts)) return false;
+      if (progFilter.status === 'solved' && (!rec || !rec.lastOk)) return false;
+      if (progFilter.q) {
+        const s = (q.stem + ' ' + q.knowledge + ' ' + (q.origin || '') + ' ' + q.source).toLowerCase();
+        if (!s.includes(progFilter.q.toLowerCase())) return false;
+      }
+      return true;
+    });
+  }
+  function programmingStats() {
+    const all = programmingQuestions();
+    let attempted = 0, solved = 0, tests = 0;
+    all.forEach(q => { const r = recOf(q.id); tests += q.tests.length; if (r && r.attempts) attempted++; if (r && r.lastOk) solved++; });
+    return { total: all.length, attempted, solved, tests, difficulties: [1,2,3,4].map(d => all.filter(q => q.difficulty === d).length) };
+  }
+  function programmingListHtml(list) {
+    if (!list.length) return emptyState('terminal', '没有匹配的编程题', '换个难度或状态筛选，或者清空关键词。', '<button class="btn btn-soft btn-sm" style="margin-top:14px" data-action="clear-prog-filters">清空筛选</button>');
+    return '<div class="prog-list">' + list.map(q => {
+      const rec = recOf(q.id), st = questionStatus(q.id);
+      return '<button class="prog-card" data-action="practice-one" data-id="' + q.id + '"><div class="prog-card-top"><span class="pill ' + DIFF_CLASS[q.difficulty] + '">' + DIFF_LABEL[q.difficulty] + '</span><span class="pill">第' + q.chapter + '章</span><span class="pill blue">' + q.tests.length + ' 组测试</span><span class="pill ' + (st.cls || '') + '" style="margin-left:auto">' + st.label + '</span></div><h3>' + U.esc(q.stem) + '</h3><div class="prog-origin">' + U.icon('spark') + '<span>' + U.esc(q.origin || '课程综合编程') + '</span><span class="dot">·</span><span>' + U.esc(q.knowledge) + '</span></div><div class="prog-card-foot"><span class="tiny muted">' + (rec && rec.attempts ? '已尝试 ' + rec.attempts + ' 次 · 通过 ' + rec.correct + ' 次' : '尚未开始') + '</span><span class="prog-go">开始编写' + U.icon('arrow') + '</span></div></button>';
+    }).join('') + '</div>';
+  }
+  function renderProgrammingHub() {
+    const stats = programmingStats();
+    const list = filteredProgramming();
+    const tracks = [
+      { icon:'code', title:'输入输出与表达式', desc:'读入、格式输出、算术与类型转换', filter:'chapter2' },
+      { icon:'target', title:'选择与循环', desc:'分支、枚举、计数、模拟与经典算法', filter:'chapter3' },
+      { icon:'layers', title:'数组与字符串', desc:'遍历、双指针、排序、矩阵与字符处理', filter:'chapter5a' },
+      { icon:'brain', title:'函数与递归', desc:'参数、返回值、递归、快速幂、汉诺塔', filter:'chapter4' },
+      { icon:'terminal', title:'结构体与指针', desc:'结构数组、链表、动态内存与引用', filter:'chapter5b' }
+    ];
+    const content = '<div class="prog-hero"><div><div class="kicker">PROGRAMMING LAB · ' + programmingQuestions().length + ' PROBLEMS</div><h1 class="display">不只做题，<br><em>把代码跑通。</em></h1><p class="lede">' + programmingQuestions().length + ' 道从入门到综合的编程题。每题都有初始代码、样例/隐藏测试和真实编译评测；写完可以继续修改、重跑，不会被锁住。</p><div class="row wrap" style="margin-top:18px"><button class="btn btn-primary btn-lg" data-action="start-programming-all" data-mode="random">' + U.icon('play') + '随机综合训练 10 题</button><button class="btn btn-ghost btn-lg" data-action="start-programming-all" data-mode="unsolved">' + U.icon('target') + '练未通过的题</button></div></div><div class="prog-stats-card"><div class="prog-stat-main"><b>' + stats.solved + '</b><span>/ ' + stats.total + ' 题已通过</span></div><div class="progress" style="margin-top:12px"><i style="width:' + U.pct(stats.solved, stats.total) + '%"></i></div><div class="prog-stat-grid"><div><b>' + stats.attempted + '</b><span>已尝试</span></div><div><b>' + stats.tests + '</b><span>测试用例</span></div><div><b>' + stats.difficulties[2] + '</b><span>中等</span></div><div><b>' + stats.difficulties[3] + '</b><span>困难</span></div></div></div></div>' +
+      '<div class="section-head"><h2>训练路线</h2><span class="hint">按知识点循序推进，或直接开始综合训练</span></div><div class="track-grid">' + tracks.map(t => '<button class="track-card" data-action="start-programming-track" data-track="' + t.filter + '"><div class="quick-icon">' + U.icon(t.icon) + '</div><div><b>' + t.title + '</b><span>' + t.desc + '</span></div><span class="chapter-arrow">' + U.icon('arrow') + '</span></button>').join('') + '</div>' +
+      '<div class="section-head"><h2>编程题库</h2><span class="hint">点击题目进入代码编辑器；提交后仍可继续运行和修改</span></div>' +
+      '<div class="filter-panel"><div class="row wrap"><div class="search-box" style="flex:1;min-width:240px">' + U.icon('search') + '<input class="input" id="prog-search" placeholder="搜索题目、来源、知识点…" value="' + U.attr(progFilter.q) + '"></div><select class="select" style="width:auto;min-width:110px" data-prog-filter="diff"><option value="all">全部难度</option>' + [1,2,3,4].map(d => '<option value="' + d + '" ' + (String(progFilter.diff)===String(d)?'selected':'') + '>' + DIFF_LABEL[d] + '</option>').join('') + '</select><select class="select" style="width:auto;min-width:120px" data-prog-filter="status"><option value="all">全部状态</option><option value="new" ' + (progFilter.status==='new'?'selected':'') + '>未做</option><option value="attempted" ' + (progFilter.status==='attempted'?'selected':'') + '>已尝试</option><option value="solved" ' + (progFilter.status==='solved'?'selected':'') + '>已通过</option></select><span class="result-count">共 <b id="prog-count">' + list.length + '</b> 题</span></div></div>' +
+      '<div id="programming-list" style="margin-top:14px">' + programmingListHtml(list) + '</div>';
+    return pageShell(content);
+  }
+
 })();
