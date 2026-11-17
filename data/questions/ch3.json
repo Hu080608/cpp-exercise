@@ -1,0 +1,1183 @@
+{
+  "chapter": 3,
+  "questions": [
+    {
+      "chapter": 3,
+      "section": "3.1",
+      "topicId": "3.1",
+      "type": "single",
+      "difficulty": 1,
+      "stem": "下列关于复合语句的说法，正确的是？",
+      "options": [
+        "复合语句由一对花括号包围，可包含多条语句",
+        "复合语句只能包含一条语句",
+        "复合语句必须以分号结尾",
+        "复合语句只能出现在 main 中"
+      ],
+      "answer": 0,
+      "explain": "复合语句（语句块）用 {} 把多条语句组合成一个整体，可出现在函数体、if、循环等位置，末尾不额外加分号。",
+      "source": "第03章.pptx · 3.2 空语句与复合语句（slide 16）",
+      "topic": "",
+      "tags": [],
+      "id": "q105",
+      "typeName": "单选题",
+      "difficultyName": "入门",
+      "knowledge": "语句、顺序结构与表达式语句"
+    },
+    {
+      "chapter": 3,
+      "section": "3.1",
+      "topicId": "3.1",
+      "type": "single",
+      "difficulty": 2,
+      "stem": "下列代码中，若 a>b，程序会输出什么？",
+      "code": [
+        "if (a > b)",
+        "    ;",
+        "else",
+        "    cout << \"B\";",
+        "cout << \"END\";"
+      ],
+      "options": [
+        "B",
+        "END",
+        "BEND",
+        "什么都不输出"
+      ],
+      "answer": 2,
+      "explain": "a>b 时 if 的子语句是空语句，什么也不做；随后 else 分支不执行，但最后的 cout<<\"END\" 不属于 if，所以输出 END。若 a<=b 则先输出 B 再输出 END，即 BEND。",
+      "source": "第03章.pptx · 3.2 空语句（slide 16）",
+      "topic": "",
+      "tags": [],
+      "id": "q106",
+      "typeName": "单选题",
+      "difficultyName": "简单",
+      "knowledge": "语句、顺序结构与表达式语句"
+    },
+    {
+      "chapter": 3,
+      "section": "3.1",
+      "topicId": "3.1",
+      "type": "multiple",
+      "difficulty": 2,
+      "stem": "下列属于 C++ 语句类别的有？",
+      "options": [
+        "表达式语句",
+        "复合语句",
+        "选择语句",
+        "声明语句"
+      ],
+      "answer": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explain": "PPT 将语句分为顺序执行（表达式语句、空语句、复合语句）、选择执行、循环执行、无条件转移以及声明等。",
+      "source": "第03章.pptx · 3.1 C++ 语句的分类（slide 13）",
+      "topic": "",
+      "tags": [],
+      "id": "q107",
+      "typeName": "多选题",
+      "difficultyName": "简单",
+      "knowledge": "语句、顺序结构与表达式语句"
+    },
+    {
+      "chapter": 3,
+      "section": "3.1",
+      "topicId": "3.1",
+      "type": "judge",
+      "difficulty": 1,
+      "stem": "单独一个分号构成一条空语句，它什么也不做。",
+      "answer": true,
+      "explain": "空语句就是只有一个分号的语句。它有时用于 if 条件成立时故意不执行操作，但滥用会造成逻辑错误。",
+      "source": "第03章.pptx · 3.2 空语句（slide 16）",
+      "topic": "",
+      "tags": [],
+      "id": "q108",
+      "typeName": "判断题",
+      "difficultyName": "入门",
+      "knowledge": "语句、顺序结构与表达式语句"
+    },
+    {
+      "chapter": 3,
+      "section": "3.1",
+      "topicId": "3.1",
+      "type": "fill",
+      "difficulty": 1,
+      "stem": "把多条语句组合成一个整体的复合语句使用一对____括起来。",
+      "answer": [
+        "花括号"
+      ],
+      "alt": [
+        [
+          "大括号",
+          "{}"
+        ]
+      ],
+      "explain": "复合语句用一对花括号 { } 包围多条语句，使它们作为一个整体成为 if、循环等的子语句。",
+      "source": "第03章.pptx · 3.2 复合语句（slide 16）",
+      "topic": "",
+      "tags": [],
+      "id": "q109",
+      "typeName": "填空题",
+      "difficultyName": "入门",
+      "knowledge": "语句、顺序结构与表达式语句"
+    },
+    {
+      "chapter": 3,
+      "section": "3.1",
+      "topicId": "3.1",
+      "type": "judge",
+      "difficulty": 2,
+      "stem": "if 语句后即使不写花括号，只要通过缩进把多条语句排在一起，它们也都会受 if 控制。",
+      "answer": false,
+      "explain": "if 默认只控制紧随其后的一条子语句，缩进只影响阅读，不改变语法结构。若要让多条语句受控，必须写成复合语句。",
+      "source": "第03章.pptx · 3.2 if 的子语句与花括号（slide 17）",
+      "topic": "",
+      "tags": [],
+      "id": "q110",
+      "typeName": "判断题",
+      "difficultyName": "简单",
+      "knowledge": "语句、顺序结构与表达式语句"
+    },
+    {
+      "chapter": 3,
+      "section": "3.2",
+      "topicId": "3.2",
+      "type": "single",
+      "difficulty": 1,
+      "stem": "当 score = 85 时，下列程序输出什么？",
+      "code": [
+        "if (score >= 90) cout << \"A\";",
+        "else if (score >= 80) cout << \"B\";",
+        "else if (score >= 70) cout << \"C\";",
+        "else cout << \"D\";"
+      ],
+      "options": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "answer": 1,
+      "explain": "85 不满足 >=90，但满足 >=80，因此进入第二个分支输出 B；else-if 链命中后不再检查后面的条件。",
+      "source": "第03章.pptx · 3.3 独立 if 与 else-if（slide 23）",
+      "topic": "",
+      "tags": [],
+      "id": "q111",
+      "typeName": "单选题",
+      "difficultyName": "入门",
+      "knowledge": "选择结构：if、else 与 switch"
+    },
+    {
+      "chapter": 3,
+      "section": "3.2",
+      "topicId": "3.2",
+      "type": "single",
+      "difficulty": 2,
+      "stem": "下列关于 else 配对规则的描述，正确的是？",
+      "options": [
+        "else 与最近的、尚未配对的 if 结合",
+        "else 与缩进最靠左的 if 结合",
+        "else 与第一个 if 结合",
+        "else 可以独立存在"
+      ],
+      "answer": 0,
+      "explain": "else 默认与最近的、尚未配对的 if 结合，缩进不能改变配对关系。有歧义时应加花括号明确结构。",
+      "source": "第03章.pptx · 3.3 else 与哪个 if 配对（slide 24）",
+      "topic": "",
+      "tags": [],
+      "id": "q112",
+      "typeName": "单选题",
+      "difficultyName": "简单",
+      "knowledge": "选择结构：if、else 与 switch"
+    },
+    {
+      "chapter": 3,
+      "section": "3.2",
+      "topicId": "3.2",
+      "type": "single",
+      "difficulty": 3,
+      "stem": "switch 语句中，如果某个 case 分支没有 break，会发生什么？",
+      "options": [
+        "编译错误",
+        "自动跳到 switch 末尾",
+        "继续执行后续 case 分支的代码",
+        "重新判断 switch 表达式"
+      ],
+      "answer": 2,
+      "explain": "case 只决定入口，进入后程序会顺序执行后续语句，直到遇到 break 或 switch 结束。漏写 break 会造成贯穿。",
+      "source": "第03章.pptx · 3.3 switch 的贯穿（slide 28）",
+      "topic": "",
+      "tags": [],
+      "id": "q113",
+      "typeName": "单选题",
+      "difficultyName": "中等",
+      "knowledge": "选择结构：if、else 与 switch"
+    },
+    {
+      "chapter": 3,
+      "section": "3.2",
+      "topicId": "3.2",
+      "type": "multiple",
+      "difficulty": 2,
+      "stem": "关于 switch 语句，下列说法正确的有？",
+      "options": [
+        "case 标签必须是常量表达式",
+        "default 可以省略",
+        "多个 case 可以共用一段代码",
+        "switch 表达式可以是任意浮点表达式"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "explain": "case 标签需为常量表达式；default 可省略；多个 case 可共用一个分支。PPT 中 switch 按整数或枚举类型表达式分派，浮点表达式不适用。",
+      "source": "第03章.pptx · 3.3 多路选择 switch（slide 26–28）",
+      "topic": "",
+      "tags": [],
+      "id": "q114",
+      "typeName": "多选题",
+      "difficultyName": "简单",
+      "knowledge": "选择结构：if、else 与 switch"
+    },
+    {
+      "chapter": 3,
+      "section": "3.2",
+      "topicId": "3.2",
+      "type": "judge",
+      "difficulty": 1,
+      "stem": "if 的条件表达式会被转换为 bool：0 视为 false，非 0 视为 true。",
+      "answer": true,
+      "explain": "if 对条件进行逻辑转换，算术类型的 0 转为 false，非 0 转为 true。",
+      "source": "第03章.pptx · 3.3 选择执行（slide 19）；第02章 slide 26",
+      "topic": "",
+      "tags": [],
+      "id": "q115",
+      "typeName": "判断题",
+      "difficultyName": "入门",
+      "knowledge": "选择结构：if、else 与 switch"
+    },
+    {
+      "chapter": 3,
+      "section": "3.2",
+      "topicId": "3.2",
+      "type": "judge",
+      "difficulty": 2,
+      "stem": "下列代码在 average=100 时会输出 PASS。",
+      "code": [
+        "if (average >= 60)",
+        "    if (average < 70)",
+        "        cout << \"Marginal\";",
+        "    else",
+        "        cout << \"FAIL\";"
+      ],
+      "answer": false,
+      "explain": "else 与最近的未配对 if 结合，即内层 if。average=100 时外层条件 true，内层条件 100<70 为 false，于是执行内层 else，输出 FAIL，而不是 PASS。",
+      "source": "第03章.pptx · 3.3 阅读程序：100 分为什么输出 FAIL（slide 25）",
+      "topic": "",
+      "tags": [],
+      "id": "q116",
+      "typeName": "判断题",
+      "difficultyName": "简单",
+      "knowledge": "选择结构：if、else 与 switch"
+    },
+    {
+      "chapter": 3,
+      "section": "3.2",
+      "topicId": "3.2",
+      "type": "fill",
+      "difficulty": 1,
+      "stem": "switch 中通常用____语句结束一个分支，防止继续执行后面的 case。",
+      "answer": [
+        "break"
+      ],
+      "explain": "break 立即结束整个 switch，控制转到 switch 后面的语句。若不写 break，会继续执行后续 case 的代码。",
+      "source": "第03章.pptx · 3.3 switch（slide 26–28）",
+      "topic": "",
+      "tags": [],
+      "alt": [
+        []
+      ],
+      "id": "q117",
+      "typeName": "填空题",
+      "difficultyName": "入门",
+      "knowledge": "选择结构：if、else 与 switch"
+    },
+    {
+      "chapter": 3,
+      "section": "3.2",
+      "topicId": "3.2",
+      "type": "fill",
+      "difficulty": 2,
+      "stem": "判断闰年的条件可写成 year%400==0 || (year%4==0 && year%____!=0)。",
+      "answer": [
+        "100"
+      ],
+      "explain": "闰年规则：能被 400 整除，或能被 4 整除但不能被 100 整除。因此这里是 100。",
+      "source": "第03章.pptx · 3.3 例 3-9 判断闰年（slide 30）",
+      "topic": "",
+      "tags": [],
+      "alt": [
+        []
+      ],
+      "id": "q118",
+      "typeName": "填空题",
+      "difficultyName": "简单",
+      "knowledge": "选择结构：if、else 与 switch"
+    },
+    {
+      "chapter": 3,
+      "section": "3.2",
+      "topicId": "3.2",
+      "type": "code",
+      "difficulty": 2,
+      "stem": "阅读程序，输入 2，输出是什么？",
+      "code": [
+        "#include <iostream>",
+        "using namespace std;",
+        "int main() {",
+        "    int x; cin >> x;",
+        "    switch (x) {",
+        "        case 1: cout << \"A\";",
+        "        case 2: cout << \"B\";",
+        "        case 3: cout << \"C\"; break;",
+        "        default: cout << \"D\";",
+        "    }",
+        "    return 0;",
+        "}"
+      ],
+      "options": [
+        "B",
+        "BC",
+        "BCD",
+        "A"
+      ],
+      "answer": 1,
+      "explain": "x=2 从 case 2 进入，输出 B；没有 break，继续执行 case 3 输出 C；遇到 break 后结束 switch。因此输出 BC。",
+      "source": "第03章.pptx · 3.3 switch 的贯穿（slide 28）",
+      "topic": "",
+      "tags": [],
+      "id": "q119",
+      "typeName": "代码阅读题",
+      "difficultyName": "简单",
+      "knowledge": "选择结构：if、else 与 switch"
+    },
+    {
+      "chapter": 3,
+      "section": "3.2",
+      "topicId": "3.2",
+      "type": "code",
+      "difficulty": 4,
+      "stem": "阅读程序，当输入 100 时输出是什么？",
+      "code": [
+        "#include <iostream>",
+        "using namespace std;",
+        "int main() {",
+        "    int average = 100;",
+        "    if (average >= 60)",
+        "        if (average < 70)",
+        "            cout << \"Marginal PASS\";",
+        "        else",
+        "            cout << \"FAIL\";",
+        "    return 0;",
+        "}"
+      ],
+      "options": [
+        "Marginal PASS",
+        "FAIL",
+        "没有输出",
+        "PASS"
+      ],
+      "answer": 1,
+      "explain": "外层 if 成立，进入内层；100<70 为 false，执行内层 if 的 else，输出 FAIL。这是悬空 else 的经典示例，程序结果与“及格”直觉不一致。",
+      "source": "第03章.pptx · 3.3 悬空 else（slide 25）",
+      "topic": "",
+      "tags": [],
+      "id": "q120",
+      "typeName": "代码阅读题",
+      "difficultyName": "困难",
+      "knowledge": "选择结构：if、else 与 switch"
+    },
+    {
+      "chapter": 3,
+      "section": "3.3",
+      "topicId": "3.3",
+      "type": "single",
+      "difficulty": 1,
+      "stem": "while 循环与 do-while 循环的主要区别是？",
+      "options": [
+        "while 先判断后执行，do-while 先执行一次再判断",
+        "do-while 不能使用 break",
+        "while 必须执行至少一次",
+        "两者完全相同"
+      ],
+      "answer": 0,
+      "explain": "while 先判断条件，条件为 false 时循环体一次也不执行；do-while 先执行循环体，再判断是否继续，因此至少执行一次。",
+      "source": "第03章.pptx · 3.4 while 与 do-while（slide 34–37）",
+      "topic": "",
+      "tags": [],
+      "id": "q121",
+      "typeName": "单选题",
+      "difficultyName": "入门",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
+    },
+    {
+      "chapter": 3,
+      "section": "3.3",
+      "topicId": "3.3",
+      "type": "single",
+      "difficulty": 2,
+      "stem": "执行下列 for 循环后，变量 sum 的值是？",
+      "code": [
+        "int sum = 0;",
+        "for (int i = 1; i <= 4; i++) sum += i;"
+      ],
+      "options": [
+        "4",
+        "10",
+        "9",
+        "24"
+      ],
+      "answer": 1,
+      "explain": "循环依次累加 1、2、3、4，sum=1+2+3+4=10；i=5 时条件 5<=4 为 false，循环结束。",
+      "source": "第03章.pptx · 3.4 for 循环（slide 38–39）",
+      "topic": "",
+      "tags": [],
+      "id": "q122",
+      "typeName": "单选题",
+      "difficultyName": "简单",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
+    },
+    {
+      "chapter": 3,
+      "section": "3.3",
+      "topicId": "3.3",
+      "type": "single",
+      "difficulty": 3,
+      "stem": "下列代码的循环体执行几次？",
+      "code": [
+        "int i = 10;",
+        "do {",
+        "    cout << i << \" \";",
+        "    i++;",
+        "} while (i < 3);"
+      ],
+      "options": [
+        "0 次",
+        "1 次",
+        "10 次",
+        "无限次"
+      ],
+      "answer": 1,
+      "explain": "do-while 先执行一次循环体，再判断 i<3。第一次输出 10 后 i 变成 11，条件 false 结束，所以循环体只执行 1 次。",
+      "source": "第03章.pptx · 3.4 do-while（slide 36）",
+      "topic": "",
+      "tags": [],
+      "id": "q123",
+      "typeName": "单选题",
+      "difficultyName": "中等",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
+    },
+    {
+      "chapter": 3,
+      "section": "3.3",
+      "topicId": "3.3",
+      "type": "multiple",
+      "difficulty": 2,
+      "stem": "关于 for 语句，下列说法正确的有？",
+      "options": [
+        "表达式1通常用于初始化",
+        "表达式2是循环条件",
+        "表达式3通常用于更新循环变量",
+        "三个表达式都可以省略，但分号必须保留"
+      ],
+      "answer": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explain": "for 的三部分分别负责初始化、条件判断和更新；省略表达式时两个分号仍需保留。若省略条件，按 true 处理。",
+      "source": "第03章.pptx · 3.4 for 循环（slide 38–40）",
+      "topic": "",
+      "tags": [],
+      "id": "q124",
+      "typeName": "多选题",
+      "difficultyName": "简单",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
+    },
+    {
+      "chapter": 3,
+      "section": "3.3",
+      "topicId": "3.3",
+      "type": "multiple",
+      "difficulty": 3,
+      "stem": "关于循环变量与作用域，下列说法正确的有？",
+      "options": [
+        "for (int i=0; ...) 中定义的 i 可在循环结束后继续直接使用",
+        "while 循环体定义的变量在循环外不可见",
+        "嵌套循环中内层循环每轮都从自己的初值重新开始",
+        "循环条件最终必须能变为假，或通过 break 等结束"
+      ],
+      "answer": [
+        1,
+        2,
+        3
+      ],
+      "explain": "for 表达式1中定义的变量作用域只在这条 for 语句内，循环外不能直接使用，所以 A 错误。B、C、D 均符合 PPT 中的作用域与循环控制规则。",
+      "source": "第03章.pptx · 3.4 for 变量作用域、嵌套循环（slide 41、57）",
+      "topic": "",
+      "tags": [],
+      "id": "q125",
+      "typeName": "多选题",
+      "difficultyName": "中等",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
+    },
+    {
+      "chapter": 3,
+      "section": "3.3",
+      "topicId": "3.3",
+      "type": "judge",
+      "difficulty": 1,
+      "stem": "do-while 语句末尾的 while(条件) 后面必须写分号。",
+      "answer": true,
+      "explain": "do-while 的语法是 do { ... } while (条件);，末尾分号是语法的一部分，漏写会编译错误。",
+      "source": "第03章.pptx · 3.4 do-while（slide 36）",
+      "topic": "",
+      "tags": [],
+      "id": "q126",
+      "typeName": "判断题",
+      "difficultyName": "入门",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
+    },
+    {
+      "chapter": 3,
+      "section": "3.3",
+      "topicId": "3.3",
+      "type": "judge",
+      "difficulty": 2,
+      "stem": "while 循环条件一开始就为 false 时，循环体仍然会执行一次。",
+      "answer": false,
+      "explain": "while 先判断后执行，初始条件为 false 时循环体一次也不执行；至少执行一次是 do-while 的特点。",
+      "source": "第03章.pptx · 3.4 while（slide 34）",
+      "topic": "",
+      "tags": [],
+      "id": "q127",
+      "typeName": "判断题",
+      "difficultyName": "简单",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
+    },
+    {
+      "chapter": 3,
+      "section": "3.3",
+      "topicId": "3.3",
+      "type": "fill",
+      "difficulty": 1,
+      "stem": "for (int i = 1; i <= 5; i++) 的循环体一共执行____次。",
+      "answer": [
+        "5"
+      ],
+      "explain": "i 依次为 1、2、3、4、5，共 5 次；i 变成 6 时条件不成立，循环结束。",
+      "source": "第03章.pptx · 3.4 for 循环（slide 38）",
+      "topic": "",
+      "tags": [],
+      "alt": [
+        []
+      ],
+      "id": "q128",
+      "typeName": "填空题",
+      "difficultyName": "入门",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
+    },
+    {
+      "chapter": 3,
+      "section": "3.3",
+      "topicId": "3.3",
+      "type": "fill",
+      "difficulty": 2,
+      "stem": "求 1 到 n 的累加和，若用 for 循环，循环条件应写 i <= ____。",
+      "answer": [
+        "n"
+      ],
+      "explain": "要让 i 取 1～n，条件写 i <= n；循环体中把 i 累加到 sum，并在表达式3中执行 i++。",
+      "source": "第03章.pptx · 3.4 累加指定个数（slide 44）",
+      "topic": "",
+      "tags": [],
+      "alt": [
+        []
+      ],
+      "id": "q129",
+      "typeName": "填空题",
+      "difficultyName": "简单",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
+    },
+    {
+      "chapter": 3,
+      "section": "3.3",
+      "topicId": "3.3",
+      "type": "code",
+      "difficulty": 2,
+      "stem": "阅读程序，输出是什么？",
+      "code": [
+        "#include <iostream>",
+        "using namespace std;",
+        "int main() {",
+        "    int s = 0;",
+        "    for (int i = 1; i <= 5; i += 2) s += i;",
+        "    cout << s;",
+        "    return 0;",
+        "}"
+      ],
+      "options": [
+        "6",
+        "9",
+        "15",
+        "5"
+      ],
+      "answer": 1,
+      "explain": "i 取 1、3、5，累积和为 1+3+5=9；i 变为 7 时条件不满足，循环结束，输出 9。",
+      "source": "第03章.pptx · 3.4 for 循环（slide 38–39）",
+      "topic": "",
+      "tags": [],
+      "id": "q130",
+      "typeName": "代码阅读题",
+      "difficultyName": "简单",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
+    },
+    {
+      "chapter": 3,
+      "section": "3.3",
+      "topicId": "3.3",
+      "type": "code",
+      "difficulty": 3,
+      "stem": "阅读程序，输出是什么？",
+      "code": [
+        "#include <iostream>",
+        "using namespace std;",
+        "int main() {",
+        "    int i = 2, f = 1;",
+        "    while (i <= 5) {",
+        "        f *= i;",
+        "        i++;",
+        "    }",
+        "    cout << f;",
+        "    return 0;",
+        "}"
+      ],
+      "options": [
+        "24",
+        "120",
+        "60",
+        "20"
+      ],
+      "answer": 1,
+      "explain": "循环依次计算 2×3×4×5=120，输出 120。初始 f=1、i=2，i 到 6 时退出。",
+      "source": "第03章.pptx · 3.4 while 求阶乘（slide 35）",
+      "topic": "",
+      "tags": [],
+      "id": "q131",
+      "typeName": "代码阅读题",
+      "difficultyName": "中等",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
+    },
+    {
+      "chapter": 3,
+      "section": "3.3",
+      "topicId": "3.3",
+      "type": "code",
+      "difficulty": 4,
+      "stem": "阅读程序，输出是什么？",
+      "code": [
+        "#include <iostream>",
+        "using namespace std;",
+        "int main() {",
+        "    int c = 0;",
+        "    for (int i = 1; i <= 3; i++)",
+        "        for (int j = 1; j <= 2; j++)",
+        "            c += i * j;",
+        "    cout << c;",
+        "    return 0;",
+        "}"
+      ],
+      "options": [
+        "12",
+        "18",
+        "9",
+        "6"
+      ],
+      "answer": 1,
+      "explain": "外层 i=1、2、3；每个 i 下内层 j=1、2。各项 i*j 相加：i=1 得 3，i=2 得 6，i=3 得 9，总和 18。",
+      "source": "第03章.pptx · 3.4 嵌套循环（slide 57–58）",
+      "topic": "",
+      "tags": [],
+      "id": "q132",
+      "typeName": "代码阅读题",
+      "difficultyName": "困难",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
+    },
+    {
+      "chapter": 3,
+      "section": "3.4",
+      "topicId": "3.4",
+      "type": "single",
+      "difficulty": 1,
+      "stem": "break 语句在循环中的作用是？",
+      "options": [
+        "结束最近一层循环或 switch",
+        "结束所有外层循环",
+        "跳过本轮剩余语句，进入下一轮",
+        "结束当前函数"
+      ],
+      "answer": 0,
+      "explain": "break 只结束最近一层循环或 switch，控制转到该结构之后；它不会自动退出所有外层循环。continue 才是跳过本轮。",
+      "source": "第03章.pptx · 3.5 break（slide 70–72）",
+      "topic": "",
+      "tags": [],
+      "id": "q133",
+      "typeName": "单选题",
+      "difficultyName": "入门",
+      "knowledge": "转移语句与程序设计风格"
+    },
+    {
+      "chapter": 3,
+      "section": "3.4",
+      "topicId": "3.4",
+      "type": "single",
+      "difficulty": 2,
+      "stem": "在 for 循环中执行 continue，下一步会做什么？",
+      "options": [
+        "直接结束整个循环",
+        "跳到表达式3执行更新，然后判断表达式2",
+        "重新从表达式1开始",
+        "跳出当前函数"
+      ],
+      "answer": 1,
+      "explain": "for 中的 continue 跳过本轮剩余语句，随后执行表达式3进行更新，再判断循环条件。while 中的 continue 则直接跳到条件判断。",
+      "source": "第03章.pptx · 3.5 continue（slide 74）",
+      "topic": "",
+      "tags": [],
+      "id": "q134",
+      "typeName": "单选题",
+      "difficultyName": "简单",
+      "knowledge": "转移语句与程序设计风格"
+    },
+    {
+      "chapter": 3,
+      "section": "3.4",
+      "topicId": "3.4",
+      "type": "multiple",
+      "difficulty": 2,
+      "stem": "关于 goto，下列说法正确的有？",
+      "options": [
+        "goto 可以在同一函数内跳转",
+        "goto 可以跨函数跳转",
+        "goto 不能绕过变量的初始化",
+        "滥用 goto 会增加理解和维护难度"
+      ],
+      "answer": [
+        0,
+        2,
+        3
+      ],
+      "explain": "goto 的起点和终点必须位于同一函数内，不能跨函数；不能通过跳转绕过必需变量的初始化；结构化程序设计主张避免不必要的 goto。B 错误。",
+      "source": "第03章.pptx · 3.5 goto（slide 66–69、83）",
+      "topic": "",
+      "tags": [],
+      "id": "q135",
+      "typeName": "多选题",
+      "difficultyName": "简单",
+      "knowledge": "转移语句与程序设计风格"
+    },
+    {
+      "chapter": 3,
+      "section": "3.4",
+      "topicId": "3.4",
+      "type": "judge",
+      "difficulty": 1,
+      "stem": "continue 会结束整个循环，而 break 只跳过当前一轮。",
+      "answer": false,
+      "explain": "两者说反了：break 结束最近一层循环/switch；continue 只跳过本轮剩余操作，然后继续下一轮。",
+      "source": "第03章.pptx · 3.5 break 与 continue（slide 70、74）",
+      "topic": "",
+      "tags": [],
+      "id": "q136",
+      "typeName": "判断题",
+      "difficultyName": "入门",
+      "knowledge": "转移语句与程序设计风格"
+    },
+    {
+      "chapter": 3,
+      "section": "3.4",
+      "topicId": "3.4",
+      "type": "judge",
+      "difficulty": 2,
+      "stem": "return 语句会立即结束当前函数并返回调用处。",
+      "answer": true,
+      "explain": "return 结束当前函数的执行；有返回值时把表达式结果带回调用点，void 函数可写 return;。",
+      "source": "第03章.pptx · 3.5 无条件转移（slide 65）；第04章-01 slide 7",
+      "topic": "",
+      "tags": [],
+      "id": "q137",
+      "typeName": "判断题",
+      "difficultyName": "简单",
+      "knowledge": "转移语句与程序设计风格"
+    },
+    {
+      "chapter": 3,
+      "section": "3.4",
+      "topicId": "3.4",
+      "type": "fill",
+      "difficulty": 1,
+      "stem": "在嵌套循环中，break 只能结束____层循环。",
+      "answer": [
+        "一"
+      ],
+      "alt": [
+        [
+          "1",
+          "最近"
+        ]
+      ],
+      "explain": "break 结束最近一层循环或 switch；要退出多层嵌套循环，需要额外的标志、return 或重新组织逻辑。",
+      "source": "第03章.pptx · 3.5 break 与 goto 对照（slide 71–72）",
+      "topic": "",
+      "tags": [],
+      "id": "q138",
+      "typeName": "填空题",
+      "difficultyName": "入门",
+      "knowledge": "转移语句与程序设计风格"
+    },
+    {
+      "chapter": 3,
+      "section": "3.4",
+      "topicId": "3.4",
+      "type": "fill",
+      "difficulty": 2,
+      "stem": "结构化程序的三种基本控制结构是顺序、选择和____。",
+      "answer": [
+        "循环"
+      ],
+      "explain": "顺序、选择、循环三种基本结构都有清楚的入口和出口，可以组合成结构化程序。",
+      "source": "第03章.pptx · 3.6 三种基本控制结构（slide 82）",
+      "topic": "",
+      "tags": [],
+      "alt": [
+        []
+      ],
+      "id": "q139",
+      "typeName": "填空题",
+      "difficultyName": "简单",
+      "knowledge": "转移语句与程序设计风格"
+    },
+    {
+      "chapter": 3,
+      "section": "3.4",
+      "topicId": "3.4",
+      "type": "code",
+      "difficulty": 3,
+      "stem": "阅读程序，输出是什么？",
+      "code": [
+        "#include <iostream>",
+        "using namespace std;",
+        "int main() {",
+        "    for (int i = 1; i <= 5; i++) {",
+        "        if (i % 2 == 0) continue;",
+        "        cout << i;",
+        "    }",
+        "    return 0;",
+        "}"
+      ],
+      "options": [
+        "12345",
+        "135",
+        "24",
+        "15"
+      ],
+      "answer": 1,
+      "explain": "偶数 i 执行 continue，跳过本轮输出；只有 1、3、5 被输出，结果为 135。",
+      "source": "第03章.pptx · 3.5 continue 跳过本轮（slide 74–76）",
+      "topic": "",
+      "tags": [],
+      "id": "q140",
+      "typeName": "代码阅读题",
+      "difficultyName": "中等",
+      "knowledge": "转移语句与程序设计风格"
+    },
+    {
+      "chapter": 3,
+      "section": "3.4",
+      "topicId": "3.4",
+      "type": "code",
+      "difficulty": 4,
+      "stem": "下面程序用 goto 实现循环。输出是什么？",
+      "code": [
+        "#include <iostream>",
+        "using namespace std;",
+        "int main() {",
+        "    int i = 1, f = 1;",
+        "loop:",
+        "    f *= i;",
+        "    i++;",
+        "    if (i <= 4) goto loop;",
+        "    cout << f;",
+        "    return 0;",
+        "}"
+      ],
+      "options": [
+        "6",
+        "24",
+        "120",
+        "10"
+      ],
+      "answer": 1,
+      "explain": "i 依次取 1、2、3、4 累乘，得到 1×2×3×4=24；i 变 5 后条件 i<=4 不成立，输出 24。",
+      "source": "第03章.pptx · 3.5 goto 求阶乘（slide 67）",
+      "topic": "",
+      "tags": [],
+      "id": "q141",
+      "typeName": "代码阅读题",
+      "difficultyName": "困难",
+      "knowledge": "转移语句与程序设计风格"
+    },
+    {
+      "chapter": 3,
+      "section": "3.3",
+      "topicId": "3.3",
+      "type": "programming",
+      "difficulty": 1,
+      "stem": "编写程序：读入一个整数 n，输出 1+2+…+n 的和。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    int sum = 0;\n    // 用循环累加 1 到 n\n    cout << sum;\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int n;cin>>n;int s=0;for(int i=1;i<=n;i++)s+=i;cout<<s;return 0;}\n",
+      "tests": [
+        {
+          "input": "5\n",
+          "output": "15"
+        },
+        {
+          "input": "1\n",
+          "output": "1"
+        },
+        {
+          "input": "100\n",
+          "output": "5050",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "for (int i=1; i<=n; i++) sum += i;",
+        "输出累加结果 sum。"
+      ],
+      "explain": "用 for 循环让 i 从 1 走到 n，每轮把 i 加到 sum。循环结束后输出 sum。",
+      "source": "第03章.pptx · 3.4 for 循环与累加（slide 38、44）",
+      "topic": "",
+      "tags": [],
+      "id": "q142",
+      "typeName": "编程题",
+      "difficultyName": "入门",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
+    },
+    {
+      "chapter": 3,
+      "section": "3.2",
+      "topicId": "3.2",
+      "type": "programming",
+      "difficulty": 2,
+      "stem": "编写程序：读入一个整数成绩（0～100），按 90 及以上为 A、80～89 为 B、70～79 为 C、60～69 为 D、60 以下为 E 输出等级。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int score;\n    cin >> score;\n    // 使用 if / else-if 分级\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int s;cin>>s;if(s>=90)cout<<\"A\";else if(s>=80)cout<<\"B\";else if(s>=70)cout<<\"C\";else if(s>=60)cout<<\"D\";else cout<<\"E\";return 0;}\n",
+      "tests": [
+        {
+          "input": "95\n",
+          "output": "A"
+        },
+        {
+          "input": "80\n",
+          "output": "B"
+        },
+        {
+          "input": "59\n",
+          "output": "E"
+        },
+        {
+          "input": "70\n",
+          "output": "C",
+          "hidden": true
+        },
+        {
+          "input": "0\n",
+          "output": "E",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "else-if 从高到低判断。",
+        "注意区间互斥，命中后不再判断后续分支。"
+      ],
+      "explain": "用 else-if 链按分数从高到低判断，避免区间重叠。每个分支只输出等级字母。",
+      "source": "第03章.pptx · 3.3 独立 if 与 else-if（slide 23）",
+      "topic": "",
+      "tags": [],
+      "id": "q143",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "选择结构：if、else 与 switch"
+    },
+    {
+      "chapter": 3,
+      "section": "3.3",
+      "topicId": "3.3",
+      "type": "programming",
+      "difficulty": 3,
+      "stem": "编写程序：读入整数 n（n≥2），判断 n 是否为素数，是输出 YES，否则输出 NO。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    // 只需试除到 sqrt(n) 即可（这里可用 i*i<=n）\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int n;cin>>n;bool ok=true;for(int i=2;i*i<=n;i++)if(n%i==0){ok=false;break;}cout<<(ok?\"YES\":\"NO\");return 0;}\n",
+      "tests": [
+        {
+          "input": "2\n",
+          "output": "YES"
+        },
+        {
+          "input": "9\n",
+          "output": "NO"
+        },
+        {
+          "input": "97\n",
+          "output": "YES",
+          "hidden": true
+        },
+        {
+          "input": "100\n",
+          "output": "NO",
+          "hidden": true
+        },
+        {
+          "input": "99991\n",
+          "output": "YES",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "从 2 开始试除。",
+        "若存在 i 使 n%i==0，则 n 不是素数。",
+        "i*i <= n 可避免 sqrt 的浮点误差。"
+      ],
+      "explain": "对 n≥2，从 2 试除到 √n：找到因子则输出 NO，否则 YES。PPT 的素数示例使用 while 与 sqrt；这里用等价的 for 和 i*i<=n。",
+      "source": "第03章.pptx · 3.4 素数判断（slide 53–56）",
+      "topic": "",
+      "tags": [],
+      "id": "q144",
+      "typeName": "编程题",
+      "difficultyName": "中等",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
+    },
+    {
+      "chapter": 3,
+      "section": "3.3",
+      "topicId": "3.3",
+      "type": "programming",
+      "difficulty": 4,
+      "stem": "编写程序：输出第 n 个 Fibonacci 数。规定第 1、2 项均为 1，从第 3 项起每项等于前两项之和。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    // 用迭代计算，注意 n=1 和 n=2\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int n;cin>>n;long long a=1,b=1;if(n==1||n==2){cout<<1;return 0;}for(int i=3;i<=n;i++){long long t=a+b;a=b;b=t;}cout<<b;return 0;}\n",
+      "tests": [
+        {
+          "input": "1\n",
+          "output": "1"
+        },
+        {
+          "input": "2\n",
+          "output": "1"
+        },
+        {
+          "input": "7\n",
+          "output": "13"
+        },
+        {
+          "input": "20\n",
+          "output": "6765",
+          "hidden": true
+        },
+        {
+          "input": "50\n",
+          "output": "12586269025",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "用两个变量保存相邻两项。",
+        "n 可能很大，使用 long long。",
+        "更新顺序可用临时变量保存新值。"
+      ],
+      "explain": "用 a、b 保存相邻两项，按 a+b 推出下一项并滚动更新。n=1/2 是边界；使用 long long 避免较大的 Fibonacci 数溢出 int。",
+      "source": "第03章.pptx · 3.4 Fibonacci 数列（slide 47–48）",
+      "topic": "",
+      "tags": [],
+      "id": "q145",
+      "typeName": "编程题",
+      "difficultyName": "困难",
+      "knowledge": "循环结构：while、do-while、for 与嵌套"
+    },
+    {
+      "chapter": 3,
+      "section": "3.1",
+      "topicId": "3.1",
+      "type": "code",
+      "difficulty": 1,
+      "stem": "阅读程序，输出是什么？",
+      "code": [
+        "#include <iostream>",
+        "using namespace std;",
+        "int main() {",
+        "    cout << \"C++\";",
+        "    return 0;",
+        "}"
+      ],
+      "options": [
+        "C++",
+        "C",
+        "0",
+        "没有输出"
+      ],
+      "answer": 0,
+      "explain": "cout << \"C++\" 将双引号中的字符序列输出到屏幕，结果为 C++；return 0 只表示程序正常结束。",
+      "source": "第03章.pptx · 3.2 表达式语句（slide 14–15）；第02章 slide 37",
+      "topic": "",
+      "tags": [],
+      "id": "q286",
+      "typeName": "代码阅读题",
+      "difficultyName": "入门",
+      "knowledge": "语句、顺序结构与表达式语句"
+    },
+    {
+      "chapter": 3,
+      "section": "3.4",
+      "topicId": "3.4",
+      "type": "multiple",
+      "difficulty": 4,
+      "stem": "关于 break、continue、goto 与 return，下列说法正确的有？",
+      "options": [
+        "break 只结束最近一层循环或 switch",
+        "for 中 continue 会先执行表达式3",
+        "goto 不能跨函数跳转",
+        "return 可以结束当前函数并返回调用处"
+      ],
+      "answer": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explain": "四项都正确：break 作用范围是最近一层结构；for 的 continue 跳到更新表达式；goto 限于同一函数；return 结束函数。",
+      "source": "第03章.pptx · 3.5 无条件转移（slide 65–77）",
+      "topic": "",
+      "tags": [],
+      "id": "q297",
+      "typeName": "多选题",
+      "difficultyName": "困难",
+      "knowledge": "转移语句与程序设计风格"
+    }
+  ]
+}

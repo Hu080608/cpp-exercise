@@ -1,0 +1,19 @@
+{
+  "name": "C++ Lab · 程序设计练习场",
+  "short_name": "C++ Lab",
+  "description": "覆盖程序设计课程 PPT 第 1–5 章的 C++ 在线练习与沙箱",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3f5ef",
+  "theme_color": "#247a55",
+  "lang": "zh-CN",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

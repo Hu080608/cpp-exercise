@@ -1,0 +1,1728 @@
+{
+  "chapter": 4,
+  "questions": [
+    {
+      "chapter": 4,
+      "section": "4.1",
+      "topicId": "4.1",
+      "type": "single",
+      "difficulty": 1,
+      "stem": "C++ 程序中，普通函数体中的代码什么时候执行？",
+      "options": [
+        "程序启动时自动执行",
+        "被调用时执行",
+        "编译时执行",
+        "每次输出时执行"
+      ],
+      "answer": 1,
+      "explain": "main 是程序入口，程序启动后从 main 开始；其它普通函数只有在被调用时才执行函数体。",
+      "source": "第04章-01.pptx · 4.2 函数调用（slide 9–10）",
+      "topic": "",
+      "tags": [],
+      "id": "q146",
+      "typeName": "单选题",
+      "difficultyName": "入门",
+      "knowledge": "过程抽象、函数定义与调用"
+    },
+    {
+      "chapter": 4,
+      "section": "4.1",
+      "topicId": "4.1",
+      "type": "single",
+      "difficulty": 2,
+      "stem": "下列关于函数声明的说法，正确的是？",
+      "options": [
+        "函数声明让调用点知道函数头信息，便于检查参数个数与类型",
+        "函数声明会立即执行函数体",
+        "函数体可以嵌套定义在另一个函数体内",
+        "函数声明必须写形参名"
+      ],
+      "answer": 0,
+      "explain": "函数声明提供返回值类型、函数名和形参类型等信息，用于调用检查；声明不执行函数体。函数体内不能定义另一个函数；声明中的形参名可省略。",
+      "source": "第04章-01.pptx · 4.2 函数声明（slide 12）",
+      "topic": "",
+      "tags": [],
+      "id": "q147",
+      "typeName": "单选题",
+      "difficultyName": "简单",
+      "knowledge": "过程抽象、函数定义与调用"
+    },
+    {
+      "chapter": 4,
+      "section": "4.1",
+      "topicId": "4.1",
+      "type": "single",
+      "difficulty": 3,
+      "stem": "下列函数定义中，哪一个是合法的？",
+      "options": [
+        "int f(int x) { return x*x; }",
+        "int f(int x) { int g() { return 1; } return g(); }",
+        "void f() { return 1; }",
+        "int f(int x)"
+      ],
+      "answer": 0,
+      "explain": "A 合法；B 在函数体内嵌套定义函数，不合法；void 函数不能 return 一个 int 表达式；D 只有函数头没有函数体，不是定义。",
+      "source": "第04章-01.pptx · 4.2 函数的定义（slide 7、12）",
+      "topic": "",
+      "tags": [],
+      "id": "q148",
+      "typeName": "单选题",
+      "difficultyName": "中等",
+      "knowledge": "过程抽象、函数定义与调用"
+    },
+    {
+      "chapter": 4,
+      "section": "4.1",
+      "topicId": "4.1",
+      "type": "multiple",
+      "difficulty": 2,
+      "stem": "关于函数的参数传递，下列说法正确的有？",
+      "options": [
+        "默认参数传递方式是值传递",
+        "值传递时形参改变不会影响实参",
+        "实参可以是表达式",
+        "值传递时形参与实参一定占用同一内存空间"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "explain": "默认是值传递，调用时用实参的值初始化形参，形参是新的局部变量；实参可以是表达式。形参与实参一般占用不同存储空间，所以 D 错误。",
+      "source": "第04章-01.pptx · 4.2 函数的参数传递（slide 15–16）",
+      "topic": "",
+      "tags": [],
+      "id": "q149",
+      "typeName": "多选题",
+      "difficultyName": "简单",
+      "knowledge": "过程抽象、函数定义与调用"
+    },
+    {
+      "chapter": 4,
+      "section": "4.1",
+      "topicId": "4.1",
+      "type": "judge",
+      "difficulty": 1,
+      "stem": "一个 C++ 程序可以有多个 main 函数。",
+      "answer": false,
+      "explain": "一个 C++ 程序有且只有一个 main 函数，它是程序执行的入口。",
+      "source": "第04章-01.pptx · 4.2 main 函数（slide 9）",
+      "topic": "",
+      "tags": [],
+      "id": "q150",
+      "typeName": "判断题",
+      "difficultyName": "入门",
+      "knowledge": "过程抽象、函数定义与调用"
+    },
+    {
+      "chapter": 4,
+      "section": "4.1",
+      "topicId": "4.1",
+      "type": "judge",
+      "difficulty": 2,
+      "stem": "如果 return 表达式的类型与函数返回值类型不一致，编译器会尝试把表达式结果隐式转换为函数返回类型。",
+      "answer": true,
+      "explain": "return 会把表达式结果转换成函数声明的返回值类型；例如返回 int 的函数可以 return 一个 double，发生隐式转换。",
+      "source": "第04章-01.pptx · 4.2 函数的定义（slide 7）",
+      "topic": "",
+      "tags": [],
+      "id": "q151",
+      "typeName": "判断题",
+      "difficultyName": "简单",
+      "knowledge": "过程抽象、函数定义与调用"
+    },
+    {
+      "chapter": 4,
+      "section": "4.1",
+      "topicId": "4.1",
+      "type": "fill",
+      "difficulty": 1,
+      "stem": "一个 C++ 程序从____函数开始执行。",
+      "answer": [
+        "main"
+      ],
+      "explain": "main 是程序执行的入口，由操作系统调用；主函数返回后程序结束。",
+      "source": "第04章-01.pptx · 4.2 main 函数（slide 9）",
+      "topic": "",
+      "tags": [],
+      "alt": [
+        []
+      ],
+      "id": "q152",
+      "typeName": "填空题",
+      "difficultyName": "入门",
+      "knowledge": "过程抽象、函数定义与调用"
+    },
+    {
+      "chapter": 4,
+      "section": "4.1",
+      "topicId": "4.1",
+      "type": "fill",
+      "difficulty": 2,
+      "stem": "函数定义中，用于接收调用者数据的参数称为____参数。",
+      "answer": [
+        "形式"
+      ],
+      "alt": [
+        [
+          "形参",
+          "formal"
+        ]
+      ],
+      "explain": "形式参数（形参）用于接收数据，实际参数（实参）由调用者提供；调用时实参的值传给形参。",
+      "source": "第04章-01.pptx · 4.1 子程序之间的数据传递（slide 5）",
+      "topic": "",
+      "tags": [],
+      "id": "q153",
+      "typeName": "填空题",
+      "difficultyName": "简单",
+      "knowledge": "过程抽象、函数定义与调用"
+    },
+    {
+      "chapter": 4,
+      "section": "4.1",
+      "topicId": "4.1",
+      "type": "code",
+      "difficulty": 2,
+      "stem": "阅读程序，输出是什么？",
+      "code": [
+        "#include <iostream>",
+        "using namespace std;",
+        "int square(int x) { return x * x; }",
+        "int main() {",
+        "    int a = 4;",
+        "    a = square(a);",
+        "    cout << a + square(2);",
+        "    return 0;",
+        "}"
+      ],
+      "options": [
+        "20",
+        "24",
+        "8",
+        "16"
+      ],
+      "answer": 0,
+      "explain": "square(4)=16，a 变为 16；square(2)=4，所以 a+square(2)=16+4=20。",
+      "source": "第04章-01.pptx · 4.2 函数调用（slide 6、10）",
+      "topic": "",
+      "tags": [],
+      "id": "q154",
+      "typeName": "代码阅读题",
+      "difficultyName": "简单",
+      "knowledge": "过程抽象、函数定义与调用"
+    },
+    {
+      "chapter": 4,
+      "section": "4.1",
+      "topicId": "4.1",
+      "type": "code",
+      "difficulty": 3,
+      "stem": "阅读程序，输出是什么？",
+      "code": [
+        "#include <iostream>",
+        "using namespace std;",
+        "void f(int x) { x = x + 10; }",
+        "int main() {",
+        "    int a = 5;",
+        "    f(a);",
+        "    cout << a;",
+        "    return 0;",
+        "}"
+      ],
+      "options": [
+        "5",
+        "15",
+        "10",
+        "0"
+      ],
+      "answer": 0,
+      "explain": "f 的形参 x 是值传递，接收 a 的副本；函数内修改 x 不影响 main 中的 a，因此 a 仍为 5。",
+      "source": "第04章-01.pptx · 4.2 值传递（slide 15–16）",
+      "topic": "",
+      "tags": [],
+      "id": "q155",
+      "typeName": "代码阅读题",
+      "difficultyName": "中等",
+      "knowledge": "过程抽象、函数定义与调用"
+    },
+    {
+      "chapter": 4,
+      "section": "4.2",
+      "topicId": "4.2",
+      "type": "single",
+      "difficulty": 1,
+      "stem": "在函数内部定义的变量通常称为？",
+      "options": [
+        "局部变量",
+        "全局变量",
+        "符号常量",
+        "外部变量"
+      ],
+      "answer": 0,
+      "explain": "在复合语句（包括函数体）中定义的变量是局部变量，作用域限于定义它的块；形参也可看成局部变量。",
+      "source": "第04章-01.pptx · 4.3 变量的局部性（slide 17）",
+      "topic": "",
+      "tags": [],
+      "id": "q156",
+      "typeName": "单选题",
+      "difficultyName": "入门",
+      "knowledge": "局部变量、全局变量与作用域"
+    },
+    {
+      "chapter": 4,
+      "section": "4.2",
+      "topicId": "4.2",
+      "type": "single",
+      "difficulty": 2,
+      "stem": "关于全局变量，下列说法正确的是？",
+      "options": [
+        "全局变量可以在多个函数中访问，但滥用会带来副作用",
+        "全局变量只能在 main 中访问",
+        "全局变量一定是常量",
+        "全局变量的作用域只限定义行"
+      ],
+      "answer": 0,
+      "explain": "全局变量定义在函数外，可被多个函数使用，适合共享但也破坏引用透明性，容易产生函数副作用，应尽量避免。",
+      "source": "第04章-01.pptx · 4.3 全局变量与函数副作用（slide 17–21）",
+      "topic": "",
+      "tags": [],
+      "id": "q157",
+      "typeName": "单选题",
+      "difficultyName": "简单",
+      "knowledge": "局部变量、全局变量与作用域"
+    },
+    {
+      "chapter": 4,
+      "section": "4.2",
+      "topicId": "4.2",
+      "type": "multiple",
+      "difficulty": 2,
+      "stem": "关于局部 static 变量，下列说法正确的有？",
+      "options": [
+        "具有静态存储期",
+        "名字只在所在作用域可见",
+        "每次函数调用都会重新初始化为初值",
+        "值可以在多次函数调用之间保留"
+      ],
+      "answer": [
+        0,
+        1,
+        3
+      ],
+      "explain": "局部 static 对象具有静态存储期，初始化通常只在第一次执行到定义时发生，值可跨调用保留；但名字仍局限于作用域。每次调用都重置是普通局部变量的行为，C 错误。",
+      "source": "第04章-3.pptx · 局部 static（slide 36）",
+      "topic": "",
+      "tags": [],
+      "id": "q158",
+      "typeName": "多选题",
+      "difficultyName": "简单",
+      "knowledge": "局部变量、全局变量与作用域"
+    },
+    {
+      "chapter": 4,
+      "section": "4.2",
+      "topicId": "4.2",
+      "type": "judge",
+      "difficulty": 1,
+      "stem": "函数的形式参数可以看成是局部变量。",
+      "answer": true,
+      "explain": "形参在函数调用时创建、函数返回时销毁，作用域只在函数体内，因此可以看成局部变量。",
+      "source": "第04章-01.pptx · 4.3 变量的局部性（slide 17）",
+      "topic": "",
+      "tags": [],
+      "id": "q159",
+      "typeName": "判断题",
+      "difficultyName": "入门",
+      "knowledge": "局部变量、全局变量与作用域"
+    },
+    {
+      "chapter": 4,
+      "section": "4.2",
+      "topicId": "4.2",
+      "type": "judge",
+      "difficulty": 2,
+      "stem": "在函数中修改全局变量会构成函数副作用。",
+      "answer": true,
+      "explain": "函数副作用指函数执行中改变了非局部量的值。修改全局变量正是一种副作用，会破坏函数的引用透明性。",
+      "source": "第04章-01.pptx · 4.3 函数副作用（slide 21）",
+      "topic": "",
+      "tags": [],
+      "id": "q160",
+      "typeName": "判断题",
+      "difficultyName": "简单",
+      "knowledge": "局部变量、全局变量与作用域"
+    },
+    {
+      "chapter": 4,
+      "section": "4.2",
+      "topicId": "4.2",
+      "type": "fill",
+      "difficulty": 1,
+      "stem": "在函数外部定义的变量称为____变量。",
+      "answer": [
+        "全局"
+      ],
+      "explain": "全局变量定义在函数外，可在多个函数中使用；函数内部定义的则是局部变量。",
+      "source": "第04章-01.pptx · 4.3 局部变量与全局变量（slide 17）",
+      "topic": "",
+      "tags": [],
+      "alt": [
+        []
+      ],
+      "id": "q161",
+      "typeName": "填空题",
+      "difficultyName": "入门",
+      "knowledge": "局部变量、全局变量与作用域"
+    },
+    {
+      "chapter": 4,
+      "section": "4.2",
+      "topicId": "4.2",
+      "type": "code",
+      "difficulty": 2,
+      "stem": "阅读程序，输出是什么？",
+      "code": [
+        "#include <iostream>",
+        "using namespace std;",
+        "int x = 1;",
+        "void f() { x++; }",
+        "int main() {",
+        "    int x = 10;",
+        "    f();",
+        "    cout << x;",
+        "    return 0;",
+        "}"
+      ],
+      "options": [
+        "1",
+        "2",
+        "10",
+        "11"
+      ],
+      "answer": 2,
+      "explain": "main 中局部变量 x 遮蔽了全局 x，f() 修改的是全局 x，而 cout 输出的是 main 的局部 x=10。",
+      "source": "第04章-01.pptx · 4.3 局部变量与作用域（slide 17–18）",
+      "topic": "",
+      "tags": [],
+      "id": "q162",
+      "typeName": "代码阅读题",
+      "difficultyName": "简单",
+      "knowledge": "局部变量、全局变量与作用域"
+    },
+    {
+      "chapter": 4,
+      "section": "4.2",
+      "topicId": "4.2",
+      "type": "code",
+      "difficulty": 3,
+      "stem": "阅读程序，输出是什么？",
+      "code": [
+        "#include <iostream>",
+        "using namespace std;",
+        "int nextId() {",
+        "    static int id = 0;",
+        "    return ++id;",
+        "}",
+        "int main() {",
+        "    cout << nextId() << nextId();",
+        "    return 0;",
+        "}"
+      ],
+      "options": [
+        "12",
+        "11",
+        "01",
+        "22"
+      ],
+      "answer": 0,
+      "explain": "局部 static 变量 id 只在第一次进入时初始化，之后跨调用保留。第一次返回 1、第二次返回 2，输出 12。",
+      "source": "第04章-3.pptx · 局部 static（slide 36）",
+      "topic": "",
+      "tags": [],
+      "id": "q163",
+      "typeName": "代码阅读题",
+      "difficultyName": "中等",
+      "knowledge": "局部变量、全局变量与作用域"
+    },
+    {
+      "chapter": 4,
+      "section": "4.3",
+      "topicId": "4.3",
+      "type": "single",
+      "difficulty": 1,
+      "stem": "使用标准数学函数 sqrt 需要包含的头文件是？",
+      "options": [
+        "<iostream>",
+        "<cmath>",
+        "<cstdlib>",
+        "<cctype>"
+      ],
+      "answer": 1,
+      "explain": "sqrt、fabs、pow 等数学函数声明在 <cmath>（或 C 风格 <math.h>）中。使用标准库功能前要包含对应头文件。",
+      "source": "第04章-01.pptx · 4.4 数学函数 cmath（slide 25–26）",
+      "topic": "",
+      "tags": [],
+      "id": "q164",
+      "typeName": "单选题",
+      "difficultyName": "入门",
+      "knowledge": "多模块结构与标准库函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.3",
+      "topicId": "4.3",
+      "type": "single",
+      "difficulty": 2,
+      "stem": "#include \"file.h\" 与 #include <file.h> 的主要区别是？",
+      "options": [
+        "前者优先在源文件所在目录查找，后者优先在系统目录查找",
+        "前者只能包含 .cpp 文件",
+        "后者不能包含自定义头文件",
+        "两者完全没有任何区别"
+      ],
+      "answer": 0,
+      "explain": "#include \"...\" 先在包含该指令的源文件目录中查找，再到系统目录；#include <...> 优先在系统目录查找。标准库头文件通常用尖括号。",
+      "source": "第04章-01.pptx · 4.4 模块接口与实现（slide 23）",
+      "topic": "",
+      "tags": [],
+      "id": "q165",
+      "typeName": "单选题",
+      "difficultyName": "简单",
+      "knowledge": "多模块结构与标准库函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.3",
+      "topicId": "4.3",
+      "type": "multiple",
+      "difficulty": 2,
+      "stem": "下列函数与头文件对应正确的有？",
+      "options": [
+        "sqrt —— <cmath>",
+        "toupper —— <cctype>",
+        "rand —— <cstdlib>",
+        "strcmp —— <iostream>"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "explain": "sqrt 在 <cmath>，toupper 在 <cctype>，rand 在 <cstdlib>。strcmp 在 <cstring>（或 <string.h>），不在 <iostream>。",
+      "source": "第04章-01.pptx · 4.4 标准库函数（slide 25–28）",
+      "topic": "",
+      "tags": [],
+      "id": "q166",
+      "typeName": "多选题",
+      "difficultyName": "简单",
+      "knowledge": "多模块结构与标准库函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.3",
+      "topicId": "4.3",
+      "type": "judge",
+      "difficulty": 1,
+      "stem": "多模块程序中，各 .cpp 模块可以分别独立编译，再由链接器合并成完整程序。",
+      "answer": true,
+      "explain": "模块化便于组织与多人协作；各模块分别编译产生目标代码，最终由链接程序把各模块和库合并为可执行程序。",
+      "source": "第04章-01.pptx · 4.4 程序的多模块结构（slide 22）",
+      "topic": "",
+      "tags": [],
+      "id": "q167",
+      "typeName": "判断题",
+      "difficultyName": "入门",
+      "knowledge": "多模块结构与标准库函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.3",
+      "topicId": "4.3",
+      "type": "fill",
+      "difficulty": 1,
+      "stem": "C++ 标准库中计算平方根的函数是____。",
+      "answer": [
+        "sqrt"
+      ],
+      "alt": [
+        [
+          "std::sqrt"
+        ]
+      ],
+      "explain": "sqrt(x) 返回 x 的平方根，声明在 <cmath>；例如 sqrt(9.0) 得到 3.0。",
+      "source": "第04章-01.pptx · 4.4 数学函数（slide 26）",
+      "topic": "",
+      "tags": [],
+      "id": "q168",
+      "typeName": "填空题",
+      "difficultyName": "入门",
+      "knowledge": "多模块结构与标准库函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.3",
+      "topicId": "4.3",
+      "type": "code",
+      "difficulty": 2,
+      "stem": "阅读程序，输出是什么？",
+      "code": [
+        "#include <iostream>",
+        "#include <cmath>",
+        "using namespace std;",
+        "int main() {",
+        "    cout << sqrt(16.0);",
+        "    return 0;",
+        "}"
+      ],
+      "options": [
+        "4",
+        "8",
+        "16",
+        "2"
+      ],
+      "answer": 0,
+      "explain": "sqrt(16.0) 返回 16 的平方根 4.0，输出显示为 4。",
+      "source": "第04章-01.pptx · 4.4 sqrt（slide 26）",
+      "topic": "",
+      "tags": [],
+      "id": "q169",
+      "typeName": "代码阅读题",
+      "difficultyName": "简单",
+      "knowledge": "多模块结构与标准库函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.3",
+      "topicId": "4.3",
+      "type": "code",
+      "difficulty": 3,
+      "stem": "阅读程序，输出是什么？",
+      "code": [
+        "#include <iostream>",
+        "#include <cctype>",
+        "using namespace std;",
+        "int main() {",
+        "    char c = 'a';",
+        "    cout << toupper(c) << isdigit('7');",
+        "    return 0;",
+        "}"
+      ],
+      "options": [
+        "651",
+        "A1",
+        "A0",
+        "97 1"
+      ],
+      "answer": 0,
+      "explain": "toupper 和 isdigit 的返回类型都是 int：toupper('a') 返回 65，isdigit('7') 返回非零值（通常为 1），连续输出得到 651。若想输出字符，需要显式转换成 char。",
+      "source": "第04章-01.pptx · 4.4 cctype 字符函数（slide 28）",
+      "topic": "",
+      "tags": [],
+      "id": "q170",
+      "typeName": "代码阅读题",
+      "difficultyName": "中等",
+      "knowledge": "多模块结构与标准库函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.4",
+      "topicId": "4.4",
+      "type": "single",
+      "difficulty": 1,
+      "stem": "递归函数必须具备的两个要素是？",
+      "options": [
+        "结束条件与递归条件",
+        "形参与实参",
+        "全局变量与局部变量",
+        "输入与输出"
+      ],
+      "answer": 0,
+      "explain": "递归函数必须描述结束条件（何时不再递归）和递归条件（何时调用自身），并保证实参向结束条件收敛。",
+      "source": "第04章-02.pptx · 4.5 递归条件与结束条件（slide 15–16）",
+      "topic": "",
+      "tags": [],
+      "id": "q171",
+      "typeName": "单选题",
+      "difficultyName": "入门",
+      "knowledge": "递归函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.4",
+      "topicId": "4.4",
+      "type": "single",
+      "difficulty": 2,
+      "stem": "递归函数 factorial(4) 的返回值是？",
+      "code": [
+        "int factorial(int n) {",
+        "    if (n == 1) return 1;",
+        "    return n * factorial(n - 1);",
+        "}"
+      ],
+      "options": [
+        "4",
+        "24",
+        "120",
+        "10"
+      ],
+      "answer": 1,
+      "explain": "factorial(4)=4×factorial(3)=4×3×2×1=24。n==1 是结束条件。",
+      "source": "第04章-02.pptx · 4.5 递归求阶乘（slide 16）",
+      "topic": "",
+      "tags": [],
+      "id": "q172",
+      "typeName": "单选题",
+      "difficultyName": "简单",
+      "knowledge": "递归函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.4",
+      "topicId": "4.4",
+      "type": "single",
+      "difficulty": 3,
+      "stem": "关于递归调用，下列说法正确的是？",
+      "options": [
+        "每次递归调用都会产生一组新的形参和局部变量实例",
+        "递归调用与循环相比一定更省内存",
+        "递归函数不需要结束条件，只要调用次数少即可",
+        "递归调用不会产生函数调用开销"
+      ],
+      "answer": 0,
+      "explain": "递归每次调用都会在栈上创建新的函数实例，形参和局部变量各自独立。递归有调用开销且受栈空间限制，必须有结束条件。",
+      "source": "第04章-02.pptx · 4.5 递归执行过程与缺点（slide 3、28–30）",
+      "topic": "",
+      "tags": [],
+      "id": "q173",
+      "typeName": "单选题",
+      "difficultyName": "中等",
+      "knowledge": "递归函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.4",
+      "topicId": "4.4",
+      "type": "multiple",
+      "difficulty": 2,
+      "stem": "关于递归与循环，下列说法正确的有？",
+      "options": [
+        "递归可能重复计算，效率不一定高",
+        "递归深度受栈空间限制",
+        "循环通常在同一组变量上迭代",
+        "递归和循环都能表达重复操作"
+      ],
+      "answer": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explain": "递归和循环都能实现重复；递归使用不同函数实例、调用开销较大、可能重复计算并受栈深度限制；循环通常在同一组变量上反复更新。",
+      "source": "第04章-02.pptx · 4.5 递归与循环的选择（slide 28–30）",
+      "topic": "",
+      "tags": [],
+      "id": "q174",
+      "typeName": "多选题",
+      "difficultyName": "简单",
+      "knowledge": "递归函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.4",
+      "topicId": "4.4",
+      "type": "judge",
+      "difficulty": 1,
+      "stem": "递归函数在某种条件下直接或间接调用自己，这种函数称为递归函数。",
+      "answer": true,
+      "explain": "直接调用自身是直接递归；通过另一个函数再调回自己是间接递归。二者都属于递归函数。",
+      "source": "第04章-02.pptx · 4.5 递归函数（slide 3）",
+      "topic": "",
+      "tags": [],
+      "id": "q175",
+      "typeName": "判断题",
+      "difficultyName": "入门",
+      "knowledge": "递归函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.4",
+      "topicId": "4.4",
+      "type": "judge",
+      "difficulty": 2,
+      "stem": "汉诺塔问题中，把 n 个圆盘从 A 移到 B，可以分解为移动 n-1 个圆盘、移动第 n 个圆盘、再移动 n-1 个圆盘三个子问题。",
+      "answer": true,
+      "explain": "这正是汉诺塔的递归分解：先把上面 n-1 个从 A 移到辅助柱 C，再把第 n 个移到 B，最后把 n-1 个从 C 移到 B。",
+      "source": "第04章-02.pptx · 4.5 汉诺塔（slide 16–19）",
+      "topic": "",
+      "tags": [],
+      "id": "q176",
+      "typeName": "判断题",
+      "difficultyName": "简单",
+      "knowledge": "递归函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.4",
+      "topicId": "4.4",
+      "type": "fill",
+      "difficulty": 1,
+      "stem": "递归函数中，不再继续递归调用、直接返回结果的情况称为____条件。",
+      "answer": [
+        "结束"
+      ],
+      "alt": [
+        [
+          "终止",
+          "递归结束",
+          "基底"
+        ]
+      ],
+      "explain": "结束条件（基底）定义最小规模问题的直接答案；没有结束条件会导致无限递归。",
+      "source": "第04章-02.pptx · 4.5 递归的结束条件（slide 15）",
+      "topic": "",
+      "tags": [],
+      "id": "q177",
+      "typeName": "填空题",
+      "difficultyName": "入门",
+      "knowledge": "递归函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.4",
+      "topicId": "4.4",
+      "type": "fill",
+      "difficulty": 2,
+      "stem": "递归函数 factorial(n) 的递归表达式通常写为 n * factorial(____)。",
+      "answer": [
+        "n-1"
+      ],
+      "alt": [
+        [
+          "n - 1"
+        ]
+      ],
+      "explain": "n! = n × (n-1)!，实参 n-1 向结束条件 n==1 收敛。",
+      "source": "第04章-02.pptx · 4.5 递归求阶乘（slide 16）",
+      "topic": "",
+      "tags": [],
+      "id": "q178",
+      "typeName": "填空题",
+      "difficultyName": "简单",
+      "knowledge": "递归函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.4",
+      "topicId": "4.4",
+      "type": "code",
+      "difficulty": 2,
+      "stem": "阅读程序，输出是什么？",
+      "code": [
+        "#include <iostream>",
+        "using namespace std;",
+        "int f(int n) {",
+        "    if (n <= 1) return 1;",
+        "    return n + f(n - 1);",
+        "}",
+        "int main() {",
+        "    cout << f(4);",
+        "    return 0;",
+        "}"
+      ],
+      "options": [
+        "4",
+        "10",
+        "24",
+        "5"
+      ],
+      "answer": 1,
+      "explain": "f(4)=4+f(3)=4+3+f(2)=4+3+2+f(1)=4+3+2+1=10。结束条件 n<=1 返回 1。",
+      "source": "第04章-02.pptx · 4.5 递归条件与结束条件（slide 15–16）",
+      "topic": "",
+      "tags": [],
+      "id": "q179",
+      "typeName": "代码阅读题",
+      "difficultyName": "简单",
+      "knowledge": "递归函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.4",
+      "topicId": "4.4",
+      "type": "code",
+      "difficulty": 3,
+      "stem": "阅读程序，输出是什么？",
+      "code": [
+        "#include <iostream>",
+        "using namespace std;",
+        "int fib(int n) {",
+        "    if (n == 1 || n == 2) return 1;",
+        "    return fib(n-1) + fib(n-2);",
+        "}",
+        "int main() {",
+        "    cout << fib(6);",
+        "    return 0;",
+        "}"
+      ],
+      "options": [
+        "6",
+        "8",
+        "13",
+        "5"
+      ],
+      "answer": 1,
+      "explain": "Fibonacci 数列：1,1,2,3,5,8,13…，第 6 项为 8。递归会重复计算 fib(4)、fib(3) 等，效率低于迭代。",
+      "source": "第04章-02.pptx · 4.5 递归 Fibonacci（slide 8–14）",
+      "topic": "",
+      "tags": [],
+      "id": "q180",
+      "typeName": "代码阅读题",
+      "difficultyName": "中等",
+      "knowledge": "递归函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.5",
+      "topicId": "4.5",
+      "type": "single",
+      "difficulty": 1,
+      "stem": "关于带参数的宏，下列说法正确的是？",
+      "options": [
+        "宏是预处理阶段的文本替换，没有普通函数的参数类型检查",
+        "宏调用一定会做类型检查",
+        "宏的参数每次只会求值一次",
+        "宏一定比内联函数安全"
+      ],
+      "answer": 0,
+      "explain": "宏在预处理阶段进行记号替换，不进行函数参数类型检查；参数可能被重复求值，因此需警惕副作用。",
+      "source": "第04章-3.pptx · 宏与内联函数（slide 15–19）",
+      "topic": "",
+      "tags": [],
+      "id": "q181",
+      "typeName": "单选题",
+      "difficultyName": "入门",
+      "knowledge": "宏、内联函数、默认参数与命名空间"
+    },
+    {
+      "chapter": 4,
+      "section": "4.5",
+      "topicId": "4.5",
+      "type": "single",
+      "difficulty": 2,
+      "stem": "#define MAX(a,b) ((a)>(b)?(a):(b)) 在 MAX(++x, y) 中可能出现什么问题？",
+      "options": [
+        "++x 可能被求值两次",
+        "宏没有返回值",
+        "宏不能比较大小",
+        "x 不会被修改"
+      ],
+      "answer": 0,
+      "explain": "宏直接展开为 ((++x)>(y)?(++x):(y))，比较和选中分支可能各执行一次 ++x，导致额外自增。inline 函数则只求值一次。",
+      "source": "第04章-3.pptx · 宏的重复求值（slide 18）",
+      "topic": "",
+      "tags": [],
+      "id": "q182",
+      "typeName": "单选题",
+      "difficultyName": "简单",
+      "knowledge": "宏、内联函数、默认参数与命名空间"
+    },
+    {
+      "chapter": 4,
+      "section": "4.5",
+      "topicId": "4.5",
+      "type": "single",
+      "difficulty": 3,
+      "stem": "关于默认参数，下列说法正确的是？",
+      "options": [
+        "默认参数必须从参数表右端连续给出",
+        "任意位置的形参都可以单独有默认值",
+        "同一作用域可以重复指定默认值",
+        "默认参数只能在 main 中使用"
+      ],
+      "answer": 0,
+      "explain": "某个形参有默认值后，其右侧的普通形参也必须有默认值；调用时只能从末尾连续省略。同一作用域内默认值只指定一次。",
+      "source": "第04章-3.pptx · 默认参数（slide 26–28）",
+      "topic": "",
+      "tags": [],
+      "id": "q183",
+      "typeName": "单选题",
+      "difficultyName": "中等",
+      "knowledge": "宏、内联函数、默认参数与命名空间"
+    },
+    {
+      "chapter": 4,
+      "section": "4.5",
+      "topicId": "4.5",
+      "type": "multiple",
+      "difficulty": 2,
+      "stem": "关于 inline 函数，下列说法正确的有？",
+      "options": [
+        "它仍然是函数，遵守类型检查规则",
+        "它可能减少函数调用开销",
+        "编译器一定会把 inline 函数完全展开",
+        "递归函数也可以声明为 inline"
+      ],
+      "answer": [
+        0,
+        1,
+        3
+      ],
+      "explain": "inline 是给编译器的提示，不保证一定展开；它仍按函数规则进行类型检查和参数求值。递归函数也可以声明 inline，因此 C 错误。",
+      "source": "第04章-3.pptx · inline（slide 19–24）",
+      "topic": "",
+      "tags": [],
+      "id": "q184",
+      "typeName": "多选题",
+      "difficultyName": "简单",
+      "knowledge": "宏、内联函数、默认参数与命名空间"
+    },
+    {
+      "chapter": 4,
+      "section": "4.5",
+      "topicId": "4.5",
+      "type": "judge",
+      "difficulty": 1,
+      "stem": "命名空间用于解决不同代码区域中同名实体的冲突问题。",
+      "answer": true,
+      "explain": "命名空间把名字分组，可用 A::x、B::x 区分同名变量或函数；using namespace 可引入整个命名空间。",
+      "source": "第04章-3.pptx · 命名空间（slide 31–33）",
+      "topic": "",
+      "tags": [],
+      "id": "q185",
+      "typeName": "判断题",
+      "difficultyName": "入门",
+      "knowledge": "宏、内联函数、默认参数与命名空间"
+    },
+    {
+      "chapter": 4,
+      "section": "4.5",
+      "topicId": "4.5",
+      "type": "fill",
+      "difficulty": 1,
+      "stem": "限定名 A::x 中，:: 称为____运算符。",
+      "answer": [
+        "作用域"
+      ],
+      "alt": [
+        [
+          "域",
+          "命名空间"
+        ]
+      ],
+      "explain": ":: 是作用域解析运算符，用于指定名字所属的命名空间、类或全局作用域。",
+      "source": "第04章-3.pptx · 命名空间（slide 31–34）",
+      "topic": "",
+      "tags": [],
+      "id": "q186",
+      "typeName": "填空题",
+      "difficultyName": "入门",
+      "knowledge": "宏、内联函数、默认参数与命名空间"
+    },
+    {
+      "chapter": 4,
+      "section": "4.5",
+      "topicId": "4.5",
+      "type": "code",
+      "difficulty": 2,
+      "stem": "阅读程序，输出是什么？",
+      "code": [
+        "#include <iostream>",
+        "using namespace std;",
+        "int sum(int a, int b = 2, int c = 3) {",
+        "    return a + b + c;",
+        "}",
+        "int main() {",
+        "    cout << sum(1) << sum(1, 4);",
+        "    return 0;",
+        "}"
+      ],
+      "options": [
+        "68",
+        "58",
+        "67",
+        "69"
+      ],
+      "answer": 0,
+      "explain": "sum(1)=1+2+3=6；sum(1,4)=1+4+3=8。连续输出得到 68。",
+      "source": "第04章-3.pptx · 默认参数（slide 26–27）",
+      "topic": "",
+      "tags": [],
+      "id": "q187",
+      "typeName": "代码阅读题",
+      "difficultyName": "简单",
+      "knowledge": "宏、内联函数、默认参数与命名空间"
+    },
+    {
+      "chapter": 4,
+      "section": "4.6",
+      "topicId": "4.6",
+      "type": "single",
+      "difficulty": 1,
+      "stem": "下列哪组函数可以构成合法重载？",
+      "options": [
+        "int f(int); double f(int);",
+        "int f(int); int f(int,int);",
+        "int f(int) {return 1;} int f(int) {return 2;}",
+        "void f(); int f();"
+      ],
+      "answer": 1,
+      "explain": "重载要求参数类型或个数不同。仅返回值不同不能区分重载（A、D），完全相同参数重复定义也不是重载（C）。B 的参数个数不同，合法。",
+      "source": "第04章 - 3-2.pptx · 函数重载（slide 38–39）",
+      "topic": "",
+      "tags": [],
+      "id": "q188",
+      "typeName": "单选题",
+      "difficultyName": "入门",
+      "knowledge": "函数重载、函数指针、Lambda、范围 for 与 auto"
+    },
+    {
+      "chapter": 4,
+      "section": "4.6",
+      "topicId": "4.6",
+      "type": "single",
+      "difficulty": 2,
+      "stem": "关于函数指针声明 double (*fp)(int);，下列说法正确的是？",
+      "options": [
+        "fp 是一个返回 double* 的函数",
+        "fp 是一个指向“接收 int、返回 double”的函数的指针",
+        "fp 是一个 double 变量",
+        "fp 是一个数组"
+      ],
+      "answer": 1,
+      "explain": "括号让 * 先与 fp 结合：fp 是指针，指向形参为 int、返回 double 的函数。double* fp(int) 才是返回 double* 的函数声明。",
+      "source": "第04章 - 3-2.pptx · 函数指针声明（slide 5–6）",
+      "topic": "",
+      "tags": [],
+      "id": "q189",
+      "typeName": "单选题",
+      "difficultyName": "简单",
+      "knowledge": "函数重载、函数指针、Lambda、范围 for 与 auto"
+    },
+    {
+      "chapter": 4,
+      "section": "4.6",
+      "topicId": "4.6",
+      "type": "single",
+      "difficulty": 3,
+      "stem": "关于 Lambda 表达式，下列说法正确的是？",
+      "options": [
+        "带捕获的 Lambda 可以转换为普通函数指针",
+        "无捕获 Lambda 可以转换为匹配的函数指针",
+        "Lambda 不能带参数",
+        "Lambda 捕获的变量不能按值捕获"
+      ],
+      "answer": 1,
+      "explain": "捕获列表为 [] 的 Lambda 没有需要保存的环境，可转换为函数指针；带捕获的 Lambda 不能转换为普通函数指针，因为函数指针没有存放捕获副本的位置。",
+      "source": "第04章 - 3-2.pptx · Lambda（slide 25–27）",
+      "topic": "",
+      "tags": [],
+      "id": "q190",
+      "typeName": "单选题",
+      "difficultyName": "中等",
+      "knowledge": "函数重载、函数指针、Lambda、范围 for 与 auto"
+    },
+    {
+      "chapter": 4,
+      "section": "4.6",
+      "topicId": "4.6",
+      "type": "multiple",
+      "difficulty": 2,
+      "stem": "关于范围 for 与 auto，下列说法正确的有？",
+      "options": [
+        "for (int n : a) 中 n 是元素副本",
+        "for (int& n : a) 可以修改数组元素",
+        "auto 由初始化表达式在编译期推导类型",
+        "auto 变量可以没有初始化式"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "explain": "范围 for 中 int n 是副本，int& n 是引用；auto 在编译期推导类型且必须有初始化式，因此 D 错误。",
+      "source": "第04章 - 3-2.pptx · 范围 for 与 auto（slide 31–35）",
+      "topic": "",
+      "tags": [],
+      "id": "q191",
+      "typeName": "多选题",
+      "difficultyName": "简单",
+      "knowledge": "函数重载、函数指针、Lambda、范围 for 与 auto"
+    },
+    {
+      "chapter": 4,
+      "section": "4.6",
+      "topicId": "4.6",
+      "type": "judge",
+      "difficulty": 1,
+      "stem": "仅改变函数的返回值类型，不能形成函数重载。",
+      "answer": true,
+      "explain": "函数重载靠参数个数或参数类型区分。返回值不参与重载决议，因此仅返回值不同是重复定义/非法重载。",
+      "source": "第04章 - 3-2.pptx · 函数重载（slide 39）",
+      "topic": "",
+      "tags": [],
+      "id": "q192",
+      "typeName": "判断题",
+      "difficultyName": "入门",
+      "knowledge": "函数重载、函数指针、Lambda、范围 for 与 auto"
+    },
+    {
+      "chapter": 4,
+      "section": "4.6",
+      "topicId": "4.6",
+      "type": "judge",
+      "difficulty": 2,
+      "stem": "无捕获的 Lambda 表达式可以直接赋给一个参数和返回类型都匹配的函数指针。",
+      "answer": true,
+      "explain": "无捕获 Lambda 的调用签名与函数指针匹配时，可以转换为函数指针；带捕获的 Lambda 需要保存环境，不能这样转换。",
+      "source": "第04章 - 3-2.pptx · 无捕获 Lambda（slide 26–27）",
+      "topic": "",
+      "tags": [],
+      "id": "q193",
+      "typeName": "判断题",
+      "difficultyName": "简单",
+      "knowledge": "函数重载、函数指针、Lambda、范围 for 与 auto"
+    },
+    {
+      "chapter": 4,
+      "section": "4.6",
+      "topicId": "4.6",
+      "type": "fill",
+      "difficulty": 1,
+      "stem": "函数重载要求函数的参数个数或参数____至少有一项不同。",
+      "answer": [
+        "类型"
+      ],
+      "explain": "同名函数可通过参数个数或类型不同形成重载；仅返回值不同不能构成重载。",
+      "source": "第04章 - 3-2.pptx · 函数重载（slide 39）",
+      "topic": "",
+      "tags": [],
+      "alt": [
+        []
+      ],
+      "id": "q194",
+      "typeName": "填空题",
+      "difficultyName": "入门",
+      "knowledge": "函数重载、函数指针、Lambda、范围 for 与 auto"
+    },
+    {
+      "chapter": 4,
+      "section": "4.6",
+      "topicId": "4.6",
+      "type": "fill",
+      "difficulty": 2,
+      "stem": "范围 for 中若要通过元素修改数组，循环变量应写成 int& 或 ____。",
+      "answer": [
+        "auto&"
+      ],
+      "alt": [
+        [
+          "auto &"
+        ]
+      ],
+      "explain": "使用引用 as 循环变量可绑定到数组元素本身，从而修改原数组；auto& 会根据元素类型推导引用类型。",
+      "source": "第04章 - 3-2.pptx · 范围 for 按引用（slide 32）",
+      "topic": "",
+      "tags": [],
+      "id": "q195",
+      "typeName": "填空题",
+      "difficultyName": "简单",
+      "knowledge": "函数重载、函数指针、Lambda、范围 for 与 auto"
+    },
+    {
+      "chapter": 4,
+      "section": "4.6",
+      "topicId": "4.6",
+      "type": "code",
+      "difficulty": 2,
+      "stem": "阅读程序，输出是什么？",
+      "code": [
+        "#include <iostream>",
+        "using namespace std;",
+        "int f(int x) { return x + 1; }",
+        "int f(int x, int y) { return x + y; }",
+        "int main() {",
+        "    cout << f(2) << f(2, 3);",
+        "    return 0;",
+        "}"
+      ],
+      "options": [
+        "35",
+        "33",
+        "55",
+        "23"
+      ],
+      "answer": 0,
+      "explain": "f(2) 匹配单参数版本，返回 3；f(2,3) 匹配双参数版本，返回 5。连续输出 35。",
+      "source": "第04章 - 3-2.pptx · 函数重载（slide 38–39）",
+      "topic": "",
+      "tags": [],
+      "id": "q196",
+      "typeName": "代码阅读题",
+      "difficultyName": "简单",
+      "knowledge": "函数重载、函数指针、Lambda、范围 for 与 auto"
+    },
+    {
+      "chapter": 4,
+      "section": "4.6",
+      "topicId": "4.6",
+      "type": "code",
+      "difficulty": 3,
+      "stem": "阅读程序，输出是什么？",
+      "code": [
+        "#include <iostream>",
+        "using namespace std;",
+        "int main() {",
+        "    int a[3] = {1, 2, 3};",
+        "    for (int& x : a) x *= 2;",
+        "    for (int x : a) cout << x;",
+        "    return 0;",
+        "}"
+      ],
+      "options": [
+        "123",
+        "246",
+        "222",
+        "135"
+      ],
+      "answer": 1,
+      "explain": "第一个范围 for 用 int& 引用每个元素并乘 2，数组变为 {2,4,6}；第二个按值输出，得到 246。",
+      "source": "第04章 - 3-2.pptx · 范围 for（slide 31–32）",
+      "topic": "",
+      "tags": [],
+      "id": "q197",
+      "typeName": "代码阅读题",
+      "difficultyName": "中等",
+      "knowledge": "函数重载、函数指针、Lambda、范围 for 与 auto"
+    },
+    {
+      "chapter": 4,
+      "section": "4.6",
+      "topicId": "4.6",
+      "type": "code",
+      "difficulty": 4,
+      "stem": "阅读程序，输出是什么？",
+      "code": [
+        "#include <iostream>",
+        "using namespace std;",
+        "int main() {",
+        "    int k = 1;",
+        "    auto f = [k](int x) mutable { return ++k + x; };",
+        "    cout << f(10) << f(10) << k;",
+        "    return 0;",
+        "}"
+      ],
+      "options": [
+        "12131",
+        "11112",
+        "12132",
+        "11111"
+      ],
+      "answer": 0,
+      "explain": "Lambda 按值捕获 k，mutable 允许修改闭包内的副本。第一次调用 ++k 后为 2，返回 2+10=12；第二次 ++k 后为 3，返回 13；外层 k 始终是 1。连续输出 12、13、1，即 12131。",
+      "source": "第04章 - 3-2.pptx · mutable Lambda（slide 19）",
+      "topic": "",
+      "tags": [],
+      "id": "q198",
+      "typeName": "代码阅读题",
+      "difficultyName": "困难",
+      "knowledge": "函数重载、函数指针、Lambda、范围 for 与 auto"
+    },
+    {
+      "chapter": 4,
+      "section": "4.7",
+      "topicId": "4.7",
+      "type": "single",
+      "difficulty": 1,
+      "stem": "使用 new 创建单个 int 动态对象并初始化为 7 的正确写法是？",
+      "options": [
+        "new int(7)",
+        "new int[7]",
+        "new 7",
+        "new int{7}[]"
+      ],
+      "answer": 0,
+      "explain": "new int(7) 创建单个 int 并初始化为 7；new int[7] 创建 7 个未初始化的 int 数组；new int{7} 也是初始化，但 D 的语法 new int{7}[] 不合法。",
+      "source": "第04章-3.pptx · new 初始化（slide 38–41）",
+      "topic": "",
+      "tags": [],
+      "id": "q199",
+      "typeName": "单选题",
+      "difficultyName": "入门",
+      "knowledge": "动态内存：new/delete 与 malloc/free"
+    },
+    {
+      "chapter": 4,
+      "section": "4.7",
+      "topicId": "4.7",
+      "type": "single",
+      "difficulty": 2,
+      "stem": "用 new int[n] 创建动态数组后，正确的释放语句是？",
+      "options": [
+        "delete p;",
+        "delete[] p;",
+        "free(p);",
+        "delete p[];"
+      ],
+      "answer": 1,
+      "explain": "new[] 必须与 delete[] 配套使用；new 单个对象配 delete；malloc/calloc 才配 free。",
+      "source": "第04章-3.pptx · 动态数组与释放（slide 39、45）",
+      "topic": "",
+      "tags": [],
+      "id": "q200",
+      "typeName": "单选题",
+      "difficultyName": "简单",
+      "knowledge": "动态内存：new/delete 与 malloc/free"
+    },
+    {
+      "chapter": 4,
+      "section": "4.7",
+      "topicId": "4.7",
+      "type": "multiple",
+      "difficulty": 2,
+      "stem": "关于 malloc 与 calloc，下列说法正确的有？",
+      "options": [
+        "malloc 接收总字节数",
+        "calloc 接收元素个数和每个元素字节数",
+        "calloc 会把分配的内存清零",
+        "malloc 返回类型是 int*"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "explain": "malloc 传入总字节数且不初始化内容，返回 void*；calloc 传入元素个数和元素大小并清零。D 错误。",
+      "source": "第04章-3.pptx · malloc 与 calloc（slide 42–44）",
+      "topic": "",
+      "tags": [],
+      "id": "q201",
+      "typeName": "多选题",
+      "difficultyName": "简单",
+      "knowledge": "动态内存：new/delete 与 malloc/free"
+    },
+    {
+      "chapter": 4,
+      "section": "4.7",
+      "topicId": "4.7",
+      "type": "judge",
+      "difficulty": 1,
+      "stem": "动态对象离开创建它的局部作用域时会自动释放。",
+      "answer": false,
+      "explain": "new/malloc 创建的动态对象不会因局部作用域结束自动释放，必须显式 delete/free；否则可能造成内存泄漏。",
+      "source": "第04章-3.pptx · 生存期（slide 45）",
+      "topic": "",
+      "tags": [],
+      "id": "q202",
+      "typeName": "判断题",
+      "difficultyName": "入门",
+      "knowledge": "动态内存：new/delete 与 malloc/free"
+    },
+    {
+      "chapter": 4,
+      "section": "4.7",
+      "topicId": "4.7",
+      "type": "fill",
+      "difficulty": 1,
+      "stem": "释放 new 创建的单个对象应使用____运算符。",
+      "answer": [
+        "delete"
+      ],
+      "explain": "new 配 delete，new[] 配 delete[]；不能混用。",
+      "source": "第04章-3.pptx · new/delete（slide 38–45）",
+      "topic": "",
+      "tags": [],
+      "alt": [
+        []
+      ],
+      "id": "q203",
+      "typeName": "填空题",
+      "difficultyName": "入门",
+      "knowledge": "动态内存：new/delete 与 malloc/free"
+    },
+    {
+      "chapter": 4,
+      "section": "4.7",
+      "topicId": "4.7",
+      "type": "code",
+      "difficulty": 2,
+      "stem": "阅读程序，输出是什么？",
+      "code": [
+        "#include <iostream>",
+        "using namespace std;",
+        "int main() {",
+        "    int* p = new int(3);",
+        "    *p += 4;",
+        "    cout << *p;",
+        "    delete p;",
+        "    return 0;",
+        "}"
+      ],
+      "options": [
+        "3",
+        "4",
+        "7",
+        "编译错误"
+      ],
+      "answer": 2,
+      "explain": "new int(3) 创建并初始化动态整数为 3，*p += 4 将其改为 7，输出 7，最后 delete 释放。",
+      "source": "第04章-3.pptx · new 初始化（slide 38）",
+      "topic": "",
+      "tags": [],
+      "id": "q204",
+      "typeName": "代码阅读题",
+      "difficultyName": "简单",
+      "knowledge": "动态内存：new/delete 与 malloc/free"
+    },
+    {
+      "chapter": 4,
+      "section": "4.7",
+      "topicId": "4.7",
+      "type": "code",
+      "difficulty": 3,
+      "stem": "阅读程序，输出是什么？",
+      "code": [
+        "#include <iostream>",
+        "using namespace std;",
+        "int main() {",
+        "    int* a = new int[3]{};",
+        "    a[1] = 5;",
+        "    cout << a[0] + a[1] + a[2];",
+        "    delete[] a;",
+        "    return 0;",
+        "}"
+      ],
+      "options": [
+        "0",
+        "5",
+        "10",
+        "编译错误"
+      ],
+      "answer": 1,
+      "explain": "new int[3]{} 将三个元素置零；a[1] 改为 5，其余仍为 0，总和为 5。",
+      "source": "第04章-3.pptx · new 数组初始化（slide 39–41）",
+      "topic": "",
+      "tags": [],
+      "id": "q205",
+      "typeName": "代码阅读题",
+      "difficultyName": "中等",
+      "knowledge": "动态内存：new/delete 与 malloc/free"
+    },
+    {
+      "chapter": 4,
+      "section": "4.5",
+      "topicId": "4.5",
+      "type": "programming",
+      "difficulty": 1,
+      "stem": "编写函数 int square(int x) 返回 x 的平方；在 main 中读入一个整数并输出它的平方。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint square(int x) {\n    // 返回 x 的平方\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << square(n);\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint square(int x){return x*x;}\nint main(){int n;cin>>n;cout<<square(n);}\n",
+      "tests": [
+        {
+          "input": "5\n",
+          "output": "25"
+        },
+        {
+          "input": "-4\n",
+          "output": "16"
+        },
+        {
+          "input": "0\n",
+          "output": "0",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "函数体内写 return x * x;。",
+        "main 已经调用 square，无需修改。"
+      ],
+      "explain": "函数把计算过程封装起来，main 只负责输入输出和调用。square 返回 int，直接 return x*x;。",
+      "source": "第04章-01.pptx · 4.2 函数定义与调用（slide 6–7）",
+      "topic": "",
+      "tags": [],
+      "id": "q206",
+      "typeName": "编程题",
+      "difficultyName": "入门",
+      "knowledge": "宏、内联函数、默认参数与命名空间"
+    },
+    {
+      "chapter": 4,
+      "section": "4.4",
+      "topicId": "4.4",
+      "type": "programming",
+      "difficulty": 2,
+      "stem": "编写递归函数 int factorial(int n)，计算并输出 n!（n≥1）。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint factorial(int n) {\n    // 补充结束条件与递归表达式\n}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << factorial(n);\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint factorial(int n){if(n<=1)return 1;return n*factorial(n-1);}\nint main(){int n;cin>>n;cout<<factorial(n);}\n",
+      "tests": [
+        {
+          "input": "1\n",
+          "output": "1"
+        },
+        {
+          "input": "5\n",
+          "output": "120"
+        },
+        {
+          "input": "10\n",
+          "output": "3628800",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "n<=1 时返回 1。",
+        "否则 return n * factorial(n-1);。"
+      ],
+      "explain": "结束条件 n<=1 返回 1；递归条件 n*factorial(n-1) 将规模缩小并综合结果。",
+      "source": "第04章-02.pptx · 4.5 递归求阶乘（slide 16）",
+      "topic": "",
+      "tags": [],
+      "id": "q207",
+      "typeName": "编程题",
+      "difficultyName": "简单",
+      "knowledge": "递归函数"
+    },
+    {
+      "chapter": 4,
+      "section": "4.6",
+      "topicId": "4.6",
+      "type": "programming",
+      "difficulty": 3,
+      "stem": "编写程序：使用函数重载实现 area。传入一个 double 半径时返回圆面积（π 取 3.14）；传入两个 double 长和宽时返回矩形面积。读入类型标志：1 后跟半径，2 后跟长和宽，输出面积并保留 2 位小数。",
+      "starter": "#include <iostream>\n#include <iomanip>\nusing namespace std;\n\n// 在此定义两个 area 重载\n\nint main() {\n    int kind;\n    cin >> kind;\n    if (kind == 1) { double r; cin >> r; cout << fixed << setprecision(2) << area(r); }\n    else { double w, h; cin >> w >> h; cout << fixed << setprecision(2) << area(w, h); }\n    return 0;\n}\n",
+      "solution": "#include <iostream>\n#include <iomanip>\nusing namespace std;\ndouble area(double r){return 3.14*r*r;}\ndouble area(double w,double h){return w*h;}\nint main(){int k;cin>>k;if(k==1){double r;cin>>r;cout<<fixed<<setprecision(2)<<area(r);}else{double w,h;cin>>w>>h;cout<<fixed<<setprecision(2)<<area(w,h);}}\n",
+      "tests": [
+        {
+          "input": "1 2\n",
+          "output": "12.56"
+        },
+        {
+          "input": "2 3 4\n",
+          "output": "12.00"
+        },
+        {
+          "input": "1 1\n",
+          "output": "3.14",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "两个函数同名，但参数个数不同。",
+        "圆面积 πr²，矩形面积长×宽。"
+      ],
+      "explain": "重载让同名 area 根据参数个数选择不同实现；main 根据输入标志调用对应版本。",
+      "source": "第04章 - 3-2.pptx · 函数重载（slide 38–39）",
+      "topic": "",
+      "tags": [],
+      "id": "q208",
+      "typeName": "编程题",
+      "difficultyName": "中等",
+      "knowledge": "函数重载、函数指针、Lambda、范围 for 与 auto"
+    },
+    {
+      "chapter": 4,
+      "section": "4.7",
+      "topicId": "4.7",
+      "type": "programming",
+      "difficulty": 4,
+      "stem": "编写程序：读入 n，动态创建长度为 n 的 int 数组，读入 n 个整数，输出它们的最大值；程序结束前释放动态数组。",
+      "starter": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    // 使用 new int[n] 创建数组，读入并求最大值\n    // 输出最大值，delete[] 释放\n    return 0;\n}\n",
+      "solution": "#include <iostream>\nusing namespace std;\nint main(){int n;cin>>n;int* a=new int[n];for(int i=0;i<n;i++)cin>>a[i];int m=a[0];for(int i=1;i<n;i++)if(a[i]>m)m=a[i];cout<<m;delete[] a;}\n",
+      "tests": [
+        {
+          "input": "5\n3 8 2 9 4\n",
+          "output": "9"
+        },
+        {
+          "input": "1\n-7\n",
+          "output": "-7"
+        },
+        {
+          "input": "4\n-2 -9 -1 -5\n",
+          "output": "-1",
+          "hidden": true
+        }
+      ],
+      "hints": [
+        "int* a = new int[n];",
+        "最大值初始化为 a[0] 更稳妥。",
+        "最后一定 delete[] a;。"
+      ],
+      "explain": "用 new[] 按运行时 n 分配动态数组，遍历求最大值，最后用 delete[] 释放。最大值初值取第一个元素可正确处理全负数。",
+      "source": "第04章-3.pptx · 动态数组创建与释放（slide 39）；第05章-2 slide 44–47",
+      "topic": "",
+      "tags": [],
+      "id": "q209",
+      "typeName": "编程题",
+      "difficultyName": "困难",
+      "knowledge": "动态内存：new/delete 与 malloc/free"
+    },
+    {
+      "chapter": 4,
+      "section": "4.5",
+      "topicId": "4.5",
+      "type": "multiple",
+      "difficulty": 4,
+      "stem": "关于宏、inline 与默认参数，下列说法正确的有？",
+      "options": [
+        "宏替换发生在预处理阶段，不检查参数类型",
+        "inline 函数仍然遵守函数参数求值规则",
+        "默认参数必须从参数表右端开始连续给出",
+        "经过宏展开后，带副作用的实参一定只求值一次"
+      ],
+      "answer": [
+        0,
+        1,
+        2
+      ],
+      "explain": "宏没有函数参数类型检查，且实参可能重复求值；inline 是真正的函数，遵守参数求值规则；默认参数从右端连续给出。D 错误。",
+      "source": "第04章-3.pptx · 宏、inline、默认参数（slide 15–28）",
+      "topic": "",
+      "tags": [],
+      "id": "q289",
+      "typeName": "多选题",
+      "difficultyName": "困难",
+      "knowledge": "宏、内联函数、默认参数与命名空间"
+    },
+    {
+      "chapter": 4,
+      "section": "4.6",
+      "topicId": "4.6",
+      "type": "single",
+      "difficulty": 4,
+      "stem": "关于函数重载与函数指针，下列说法正确的是？",
+      "options": [
+        "double (*fp)(int) 声明了一个返回 double* 的函数",
+        "带捕获的 Lambda 可以赋给普通函数指针",
+        "函数名可以直接赋给类型匹配的函数指针",
+        "仅返回值不同的两个同名函数构成合法重载"
+      ],
+      "answer": 2,
+      "explain": "函数名在表达式中可转换为函数地址，直接赋给匹配的函数指针。double (*fp)(int) 是函数指针；带捕获 Lambda 不能转普通函数指针；仅返回值不同不能重载。",
+      "source": "第04章 - 3-2.pptx · 函数指针、Lambda、重载（slide 5、26–27、39）",
+      "topic": "",
+      "tags": [],
+      "id": "q290",
+      "typeName": "单选题",
+      "difficultyName": "困难",
+      "knowledge": "函数重载、函数指针、Lambda、范围 for 与 auto"
+    },
+    {
+      "chapter": 4,
+      "section": "4.6",
+      "topicId": "4.6",
+      "type": "judge",
+      "difficulty": 4,
+      "stem": "无捕获 Lambda 能否转换为函数指针取决于它是否在函数体内使用了外层变量；只要函数体没用到外层变量，即使捕获列表写 [=] 也一定能转换为函数指针。",
+      "answer": false,
+      "explain": "能否转换取决于捕获列表是否为空，而不是函数体实际有没有用到外层变量。写了 [=] 就带有捕获语义，不能转换为普通函数指针。",
+      "source": "第04章 - 3-2.pptx · 无捕获 Lambda（slide 26–27）",
+      "topic": "",
+      "tags": [],
+      "id": "q294",
+      "typeName": "判断题",
+      "difficultyName": "困难",
+      "knowledge": "函数重载、函数指针、Lambda、范围 for 与 auto"
+    }
+  ]
+}

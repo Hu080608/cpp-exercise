@@ -1,0 +1,533 @@
+# -*- coding: utf-8 -*-
+from qcommon import q
+
+# ======================= 第 5 章 =======================
+q(chapter=5, section="5.1", topicId="5.1", type="single", difficulty=1,
+  stem="enum Day {SUN, MON, TUE}; 中 TUE 对应的整数值是？",
+  options=["0", "1", "2", "3"],
+  answer=2,
+  explain="枚举值默认从 0 开始依次递增：SUN=0、MON=1、TUE=2。也可以在定义时显式指定某个枚举值。",
+  source="第05章 - 1.pptx · 5.1 枚举值对应的整数（slide 7）")
+
+q(chapter=5, section="5.1", topicId="5.1", type="single", difficulty=2,
+  stem="若 enum Day {SUN=7, MON=1, TUE, WED};，则 WED 的值是？",
+  options=["2", "3", "4", "8"],
+  answer=1,
+  explain="SUN 显式指定为 7，MON 重新指定为 1；TUE 为 2，WED 为 3。显式指定值之后，后续枚举值按前一个值加 1。",
+  source="第05章 - 1.pptx · 5.1 枚举值的整数对应（slide 7）")
+
+q(chapter=5, section="5.1", topicId="5.1", type="multiple", difficulty=2,
+  stem="关于枚举类型，下列说法正确的有？",
+  options=["枚举变量只能取本枚举类型值集中的值", "枚举值可以参与算术运算", "枚举变量可以直接用 cin 输入", "不同枚举类型的枚举值一般不能互相赋值"],
+  answer=[0, 1, 3],
+  explain="枚举变量受值集限制；枚举值参与运算时转换为整数；不同枚举类型的值不兼容。枚举变量不能直接输入，通常先读整数再 switch 转换，因此 C 错误。",
+  source="第05章 - 1.pptx · 5.1 枚举类型（slide 8–15）")
+
+q(chapter=5, section="5.1", topicId="5.1", type="judge", difficulty=1,
+  stem="枚举变量可以直接用 cout 输出，输出的是其对应的整数值。",
+  answer=True,
+  explain="枚举变量不能直接输入，但可以直接输出；cout 会把枚举值转换成对应的整数输出。",
+  source="第05章 - 1.pptx · 5.1 枚举变量的输入输出（slide 8）")
+
+q(chapter=5, section="5.1", topicId="5.1", type="fill", difficulty=1,
+  stem="enum Color {RED, GREEN, BLUE}; 中 GREEN 的整数值是____。",
+  answer=["1"],
+  explain="默认第一个枚举值 RED 为 0，GREEN 为 1，BLUE 为 2。",
+  source="第05章 - 1.pptx · 5.1 枚举值的整数对应（slide 7）")
+
+q(chapter=5, section="5.1", topicId="5.1", type="code", difficulty=2,
+  stem="阅读程序，输出是什么？",
+  code=["#include <iostream>", "using namespace std;", "enum Color {RED, GREEN, BLUE};", "int main() {", "    Color c = BLUE;", "    cout << c;", "    return 0;", "}"],
+  options=["RED", "GREEN", "2", "BLUE"],
+  answer=2,
+  explain="BLUE 的默认整数值是 2。枚举变量直接输出时输出对应整数，不会自动输出枚举名。",
+  source="第05章 - 1.pptx · 5.1 枚举的输出（slide 8）")
+
+q(chapter=5, section="5.1", topicId="5.1", type="code", difficulty=3,
+  stem="阅读程序，输出是什么？",
+  code=["#include <iostream>", "using namespace std;", "enum Day {SUN=1, MON, TUE, WED};", "int main() {", "    Day d = MON;", "    int x = d + 2;", "    cout << x;", "    return 0;", "}"],
+  options=["2", "3", "4", "5"],
+  answer=2,
+  explain="SUN=1，MON=2，TUE=3，WED=4。d 的值为 2，d+2 发生整型转换后等于 4，输出 4。",
+  source="第05章 - 1.pptx · 5.1 枚举值的算术运算（slide 15）")
+
+q(chapter=5, section="5.2", topicId="5.2", type="single", difficulty=1,
+  stem="定义 int a[10]; 后，合法下标范围是？",
+  options=["1～10", "0～9", "0～10", "1～9"],
+  answer=1,
+  explain="C++ 数组下标从 0 开始，10 个元素的下标是 0 到 9。访问 a[10] 已经越界。",
+  source="第05章 - 1.pptx · 5.2 数组下标访问（slide 26）")
+
+q(chapter=5, section="5.2", topicId="5.2", type="single", difficulty=2,
+  stem="int a[5] = {1, 2}; 后，数组元素的值依次是？",
+  options=["1,2,0,0,0", "1,2,未定义,未定义,未定义", "1,2,2,2,2", "编译错误"],
+  answer=0,
+  explain="初始化值少于元素个数时，剩余元素自动初始化为 0，所以数组为 1,2,0,0,0。",
+  source="第05章 - 1.pptx · 5.2 一维数组初始化（slide 25）")
+
+q(chapter=5, section="5.2", topicId="5.2", type="single", difficulty=3,
+  stem="关于一维数组作为函数参数，下列说法正确的是？",
+  options=["数组参数会复制整个数组，函数内修改不影响实参数组", "数组参数实际传递首元素地址，函数内可通过下标修改实参数组", "数组参数不需要元素个数，函数能自动获得长度", "数组参数必须写成 int a[10] 且长度必须为 10"],
+  answer=1,
+  explain="C++ 数组参数本质上传递首元素地址，不会复制整个数组；函数通常还需要一个元素个数参数。形参长度写法 int a[] 或 int a[10] 中数字会被忽略。",
+  source="第05章 - 1.pptx · 5.2 数组参数（slide 50–51）")
+
+q(chapter=5, section="5.2", topicId="5.2", type="multiple", difficulty=2,
+  stem="关于一维数组，下列说法正确的有？",
+  options=["数组元素在内存中连续存放", "数组不能整体赋值，需逐元素复制", "C++ 运行时会自动检查所有数组下标越界", "数组元素必须是同一类型"],
+  answer=[0, 1, 3],
+  explain="数组是一段连续存储的同类型元素；不能整体赋值。C++ 注重效率，通常不检查下标越界，越界访问是未定义行为，C 错误。",
+  source="第05章 - 1.pptx · 5.2 数组（slide 17、27、45–49）")
+
+q(chapter=5, section="5.2", topicId="5.2", type="judge", difficulty=1,
+  stem="int a[] = {1, 2, 3}; 会根据初始化列表自动确定数组有 3 个元素。",
+  answer=True,
+  explain="当所有元素都在初始化列表中给出时，可以省略数组元素个数，编译器会根据初始化值数量确定长度。",
+  source="第05章 - 1.pptx · 5.2 一维数组初始化（slide 25）")
+
+q(chapter=5, section="5.2", topicId="5.2", type="judge", difficulty=2,
+  stem="C++ 中可以使用 a = b; 把数组 b 的所有元素整体复制给数组 a。",
+  answer=False,
+  explain="数组不能整体赋值，编译器会报错；需要用循环逐个元素复制，例如 for(int i=0;i<n;i++) a[i]=b[i];。",
+  source="第05章 - 1.pptx · 5.2 数组元素复制（slide 27）")
+
+q(chapter=5, section="5.2", topicId="5.2", type="fill", difficulty=1,
+  stem="int a[10]; 的最后一个合法元素是 a[____]。",
+  answer=["9"],
+  explain="数组下标从 0 开始，10 个元素的下标为 0～9，因此最后一个是 a[9]。",
+  source="第05章 - 1.pptx · 5.2 数组下标（slide 26）")
+
+q(chapter=5, section="5.2", topicId="5.2", type="fill", difficulty=2,
+  stem="若 int a[5]={3,1,4};，则 a[4] 的值是____。",
+  answer=["0"],
+  explain="初始化值不足时其余元素补 0，因此 a[3] 和 a[4] 都是 0。",
+  source="第05章 - 1.pptx · 5.2 一维数组初始化（slide 25）")
+
+q(chapter=5, section="5.2", topicId="5.2", type="code", difficulty=2,
+  stem="阅读程序，输出是什么？",
+  code=["#include <iostream>", "using namespace std;", "int main() {", "    int a[5] = {2, 4, 6};", "    int s = 0;", "    for (int i = 0; i < 5; i++) s += a[i];", "    cout << s;", "    return 0;", "}"],
+  options=["12", "6", "10", "14"],
+  answer=0,
+  explain="数组为 {2,4,6,0,0}，求和得 12。未显式初始化的元素被补 0。",
+  source="第05章 - 1.pptx · 5.2 数组初始化与遍历（slide 25–26）")
+
+q(chapter=5, section="5.2", topicId="5.2", type="code", difficulty=3,
+  stem="阅读程序，输出是什么？",
+  code=["#include <iostream>", "using namespace std;", "int main() {", "    int a[4] = {4, 3, 2, 1};", "    for (int i = 0; i < 3; i++)", "        for (int j = 0; j < 3 - i; j++)", "            if (a[j] > a[j+1]) { int t=a[j]; a[j]=a[j+1]; a[j+1]=t; }", "    for (int i = 0; i < 4; i++) cout << a[i];", "    return 0;", "}"],
+  options=["4321", "1234", "1243", "2134"],
+  answer=1,
+  explain="这是冒泡排序：相邻逆序就交换，经过若干轮后数组升序排列为 1,2,3,4，因此输出 1234。",
+  source="第05章 - 1.pptx · 5.2 冒泡排序（slide 30–33）")
+
+q(chapter=5, section="5.2", topicId="5.2", type="code", difficulty=4,
+  stem="阅读程序，输出是什么？",
+  code=["#include <iostream>", "using namespace std;", "int main() {", "    int a[5] = {1, 2, 3, 4, 5};", "    int i = 0, j = 4;", "    while (i < j) { int t=a[i]; a[i]=a[j]; a[j]=t; i++; j--; }", "    for (int k = 0; k < 5; k++) cout << a[k];", "    return 0;", "}"],
+  options=["12345", "54321", "21345", "15432"],
+  answer=1,
+  explain="双指针从两端向中间交换元素，数组被逆序为 5,4,3,2,1，输出 54321。",
+  source="第05章 - 1.pptx · 5.2 数组逆序与交换（slide 71–73）")
+
+q(chapter=5, section="5.3", topicId="5.3", type="single", difficulty=1,
+  stem="存储字符串 \"cat\" 至少需要多少个 char 位置？",
+  options=["3", "4", "5", "2"],
+  answer=1,
+  explain="字符串以 '\0' 结束，\"cat\" 含 'c'、'a'、't' 三个有效字符和一个结束标记，共需 4 个 char。",
+  source="第05章 - 1.pptx · 5.2 字符串结束标记（slide 56–58）")
+
+q(chapter=5, section="5.3", topicId="5.3", type="single", difficulty=2,
+  stem="关于字符数组与字符串，下列说法正确的是？",
+  options=["char s[3] = \"abc\"; 可以安全存储字符串 abc", "字符串以 '\0' 作为结束标记", "字符数组长度可以等于字符串长度而不需要 '\0'", "cin >> 字符数组可以读入带空格的整行字符串"],
+  answer=1,
+  explain="字符串以 '\0' 结束；\"abc\" 至少需要 4 个位置。cin >> 会在空白处停止，读整行应使用 cin.getline。",
+  source="第05章 - 1.pptx · 5.2 字符串与字符数组（slide 56–62）")
+
+q(chapter=5, section="5.3", topicId="5.3", type="multiple", difficulty=2,
+  stem="关于 C 风格字符串处理，下列说法正确的有？",
+  options=["strlen 返回有效字符数，不包含 '\0'", "strcmp 按字典序比较字符串内容", "可以直接用 == 比较两个字符数组的内容是否相同", "strcpy 把源字符串复制到目标数组，包括 '\0'"],
+  answer=[0, 1, 3],
+  explain="strlen 不计 '\0'；strcmp 比较内容；strcpy 复制包括结束标记。字符数组名用 == 比较的是地址，不是内容，C 错误。",
+  source="第05章 - 1.pptx · 5.2 字符串库函数（slide 74–78）")
+
+q(chapter=5, section="5.3", topicId="5.3", type="judge", difficulty=1,
+  stem="字符串字面量 \"Hello\" 比字符数组 { 'H','e','l','l','o' } 多一个结束标记 '\0'。",
+  answer=True,
+  explain="用双引号写出的字符串字面量会自动在末尾附加 '\0'；逐个字符列出的初始化列表不会自动添加，需要自己写出 '\0'。",
+  source="第05章 - 1.pptx · 5.2 字符串结束标记（slide 56–58）")
+
+q(chapter=5, section="5.3", topicId="5.3", type="fill", difficulty=1,
+  stem="C 风格字符串的结束标记字符是____。",
+  answer=["\0"],
+  alt=[["'\0'", "0"]],
+  explain="字符串以空字符 '\0'（编码 0）结束，字符串处理函数依靠它判断字符串到哪里结束。",
+  source="第05章 - 1.pptx · 5.2 字符串结束标记（slide 56）")
+
+q(chapter=5, section="5.3", topicId="5.3", type="fill", difficulty=2,
+  stem="函数 strlen(\"abcd\") 的返回值是____。",
+  answer=["4"],
+  explain="strlen 统计 '\0' 之前的有效字符数，\"abcd\" 有 4 个字符，返回 4。",
+  source="第05章 - 1.pptx · 5.2 strlen（slide 74）")
+
+q(chapter=5, section="5.3", topicId="5.3", type="code", difficulty=2,
+  stem="阅读程序，输出是什么？",
+  code=["#include <iostream>", "using namespace std;", "int main() {", "    char s[] = \"abc\";", "    int n = 0;", "    while (s[n] != '\\0') n++;", "    cout << n;", "    return 0;", "}"],
+  options=["2", "3", "4", "编译错误"],
+  answer=1,
+  explain="循环统计 '\0' 之前的字符数。\"abc\" 有 3 个有效字符，因此 n=3，输出 3。",
+  source="第05章 - 1.pptx · 5.2 字符串长度计算（slide 62）")
+
+q(chapter=5, section="5.3", topicId="5.3", type="code", difficulty=3,
+  stem="阅读程序，输出是什么？",
+  code=["#include <iostream>", "using namespace std;", "int main() {", "    char s[] = \"abc\";", "    for (int i = 0, j = 2; i < j; i++, j--) {", "        char t = s[i]; s[i] = s[j]; s[j] = t;", "    }", "    cout << s;", "    return 0;", "}"],
+  options=["abc", "cba", "bac", "acb"],
+  answer=1,
+  explain="首尾字符交换：a 与 c 交换，得到 cba，中间 b 不动；输出 cba。",
+  source="第05章 - 1.pptx · 5.2 字符串逆序（slide 71–73）")
+
+q(chapter=5, section="5.4", topicId="5.4", type="single", difficulty=1,
+  stem="int a[3][4]; 中 a[1][2] 表示？",
+  options=["第 1 行第 2 列元素", "第 2 行第 3 列元素", "第 2 行第 2 列元素", "第 1 行第 3 列元素"],
+  answer=1,
+  explain="二维数组下标从 0 开始：a[1][2] 是第 2 行（行下标 1）第 3 列（列下标 2）的元素。",
+  source="第05章 - 1.pptx · 5.2 二维数组元素访问（slide 86）")
+
+q(chapter=5, section="5.4", topicId="5.4", type="single", difficulty=2,
+  stem="int a[2][3] = {{1,2},{3,4}}; 后，a[1][2] 的值是？",
+  options=["2", "3", "4", "0"],
+  answer=3,
+  explain="第一行 {1,2,0}，第二行 {3,4,0}，所以 a[1][2]=0。按行初始化时不足的元素补 0。",
+  source="第05章 - 1.pptx · 5.2 二维数组初始化（slide 85）")
+
+q(chapter=5, section="5.4", topicId="5.4", type="multiple", difficulty=2,
+  stem="关于二维数组，下列说法正确的有？",
+  options=["元素按行优先顺序连续存放", "函数形参 int x[][5] 中列数 5 不能省略", "a[i] 表示第 i 行这个一维数组", "二维数组作为函数参数时行数会自动传入"],
+  answer=[0, 1, 2],
+  explain="二维数组按行优先连续存储；形参必须知道列数才能计算地址；a[i] 是一行。行数不会自动传入，通常另设参数，因此 D 错误。",
+  source="第05章 - 1.pptx · 5.2 二维数组（slide 93–98）")
+
+q(chapter=5, section="5.4", topicId="5.4", type="judge", difficulty=1,
+  stem="二维数组在内存中按行优先存储，即先存第一行，再存第二行。",
+  answer=True,
+  explain="C++ 二维数组按行优先连续存储；a[i][j] 的地址由首地址加上 (i×列数+j)×元素大小计算。",
+  source="第05章 - 1.pptx · 5.2 二维数组连续存储（slide 93）")
+
+q(chapter=5, section="5.4", topicId="5.4", type="fill", difficulty=1,
+  stem="int a[3][4]; 中，a[i][j] 的地址计算使用列数____。",
+  answer=["4"],
+  explain="a[i][j] 相对首地址的偏移是 (i×列数+j)，本数组列数为 4，所以为 i×4+j。",
+  source="第05章 - 1.pptx · 5.2 二维数组地址计算（slide 93）")
+
+q(chapter=5, section="5.4", topicId="5.4", type="code", difficulty=2,
+  stem="阅读程序，输出是什么？",
+  code=["#include <iostream>", "using namespace std;", "int main() {", "    int a[2][3] = {1,2,3,4,5,6};", "    int s = 0;", "    for (int i=0; i<2; i++)", "        for (int j=0; j<3; j++)", "            if ((i+j)%2==0) s += a[i][j];", "    cout << s;", "    return 0;", "}"],
+  options=["9", "12", "15", "21"],
+  answer=0,
+  explain="满足 i+j 为偶数的元素是 a[0][0]=1、a[0][2]=3、a[1][1]=5，和为 9。",
+  source="第05章 - 1.pptx · 5.2 二维数组遍历（slide 87）")
+
+q(chapter=5, section="5.4", topicId="5.4", type="code", difficulty=3,
+  stem="阅读程序，输出是什么？",
+  code=["#include <iostream>", "using namespace std;", "int main() {", "    int a[2][2] = {{1,2},{3,4}};", "    for (int i=0; i<2; i++)", "        for (int j=i+1; j<2; j++) {", "            int t=a[i][j]; a[i][j]=a[j][i]; a[j][i]=t;", "        }", "    for (int i=0; i<2; i++) { for (int j=0; j<2; j++) cout << a[i][j]; }", "    return 0;", "}"],
+  options=["1234", "1432", "1324", "4321"],
+  answer=2,
+  explain="转置循环只交换 i<j 的对称元素：a[0][1]=2 与 a[1][0]=3 交换，矩阵变为 {{1,3},{2,4}}，按行输出为 1324。",
+  source="第05章 - 1.pptx · 5.2 矩阵转置（slide 88–92）")
+
+q(chapter=5, section="5.3", topicId="5.5", type="single", difficulty=1,
+  stem="定义 struct Student { int no; char name[20]; }; 后，访问变量 st 的学号成员应写作？",
+  options=["st->no", "st.no", "st::no", "st[no]"],
+  answer=1,
+  explain="结构体变量用点号 . 访问成员：st.no。箭头 -> 用于结构体指针，:: 用于命名空间/类作用域。",
+  source="第05章 - 1.pptx · 5.3 访问结构成员（slide 105）")
+
+q(chapter=5, section="5.3", topicId="5.5", type="single", difficulty=2,
+  stem="关于结构体变量赋值，下列说法正确的是？",
+  options=["相同结构体类型的变量可以整体赋值", "不同结构体类型变量也可以直接整体赋值", "结构体变量不能赋值，只能逐成员赋值", "结构体变量赋值会复制成员地址而不是成员值"],
+  answer=0,
+  explain="相同结构体类型的变量可整体赋值，执行逐成员的值复制；不同类型结构体之间不能直接赋值。",
+  source="第05章 - 1.pptx · 5.3 结构变量整体赋值（slide 106）")
+
+q(chapter=5, section="5.3", topicId="5.5", type="single", difficulty=3,
+  stem="下列关于结构体大小的说法，正确的是？",
+  options=["sizeof(struct) 一定等于所有成员大小之和", "结构体成员之间可能存在地址对齐填充，使总大小变大", "结构体变量不能使用 sizeof", "结构体成员一定按字母顺序存放"],
+  answer=1,
+  explain="为了提高 CPU 访问效率，编译器会进行地址对齐，成员间可能存在空隙，因此 sizeof(struct) 可能大于成员大小之和。成员按定义次序存放。",
+  source="第05章 - 1.pptx · 5.3 结构成员的连续存储与对齐（slide 107–109）")
+
+q(chapter=5, section="5.3", topicId="5.5", type="multiple", difficulty=2,
+  stem="关于结构体，下列说法正确的有？",
+  options=["成员类型可以不同", "结构体作函数参数默认采用值传递", "结构体可以作为函数返回值", "结构体数组的每个元素类型可以不同"],
+  answer=[0, 1, 2],
+  explain="结构体成员类型可以不同；默认值传递；可作返回值。结构体数组要求所有元素属于同一结构体类型，D 错误。",
+  source="第05章 - 1.pptx · 5.3 结构体（slide 100、110）")
+
+q(chapter=5, section="5.3", topicId="5.5", type="judge", difficulty=1,
+  stem="结构体类型定义中的成员可以具有不同的数据类型。",
+  answer=True,
+  explain="结构体正是用来表示由固定多个、类型可以不同的成员组成的复合数据；数组则要求元素同类型。",
+  source="第05章 - 1.pptx · 5.3 结构类型与成员（slide 100）")
+
+q(chapter=5, section="5.3", topicId="5.5", type="fill", difficulty=1,
+  stem="访问结构体变量 st 的成员 no，应写成 st____no。",
+  answer=["."],
+  explain="结构体变量用点运算符访问成员；若 p 是指向结构体的指针，则可用 p->no。",
+  source="第05章 - 1.pptx · 5.3 访问结构成员（slide 105）")
+
+q(chapter=5, section="5.3", topicId="5.5", type="code", difficulty=2,
+  stem="阅读程序，输出是什么？",
+  code=["#include <iostream>", "using namespace std;", "struct Point { int x, y; };", "int main() {", "    Point p = {2, 3};", "    p.x += p.y;", "    cout << p.x << p.y;", "    return 0;", "}"],
+  options=["23", "53", "55", "35"],
+  answer=1,
+  explain="p.x 初值 2，p.y 初值 3；p.x += p.y 后 p.x=5，p.y 仍为 3，输出 53。",
+  source="第05章 - 1.pptx · 5.3 结构成员访问（slide 105）")
+
+q(chapter=5, section="5.3", topicId="5.5", type="code", difficulty=3,
+  stem="阅读程序，输出是什么？",
+  code=["#include <iostream>", "using namespace std;", "struct Student { int no; int score; };", "int main() {", "    Student a[3] = {{1,80},{2,90},{3,70}};", "    int m = 0;", "    for (int i=1;i<3;i++) if (a[i].score > a[m].score) m = i;", "    cout << a[m].no;", "    return 0;", "}"],
+  options=["1", "2", "3", "90"],
+  answer=1,
+  explain="比较成绩，最高分是 90，对应数组下标 1，学号为 2，输出 2。",
+  source="第05章 - 1.pptx · 5.3 结构数组（slide 112–115）")
+
+q(chapter=5, section="5.4", topicId="5.6", type="single", difficulty=1,
+  stem="联合体（union）的成员在内存中的关系是？",
+  options=["各自占用独立空间", "共用同一块存储空间", "按类型大小随机排列", "只能有一个成员存在"],
+  answer=1,
+  explain="联合体所有成员共用同一块存储空间，大小取最大成员所需空间；同一时刻只应使用一个有效成员。",
+  source="第05章 - 1.pptx · 5.4 联合类型的共用存储（slide 126）")
+
+q(chapter=5, section="5.4", topicId="5.6", type="multiple", difficulty=2,
+  stem="关于联合体，下列说法正确的有？",
+  options=["同一时刻通常只使用一个成员", "联合体大小通常取最大成员所需空间", "可以通过写入一个成员后读取另一个成员来安全地获得两种值", "常需额外标记当前有效的成员类型"],
+  answer=[0, 1, 3],
+  explain="联合体成员互斥共用存储；大小通常由最大成员决定；为了知道当前有效类型，需额外标记。写一个成员后读另一个成员通常不是安全做法，C 错误。",
+  source="第05章 - 1.pptx · 5.4 联合类型（slide 126–131）")
+
+q(chapter=5, section="5.4", topicId="5.6", type="judge", difficulty=1,
+  stem="联合体可以像结构体一样同时保存所有成员的值。",
+  answer=False,
+  explain="联合体成员共用同一块空间，同一时刻只应有一个成员有效；同时保存所有成员是结构体的特点。",
+  source="第05章 - 1.pptx · 5.4 联合类型（slide 126–128）")
+
+q(chapter=5, section="5.4", topicId="5.6", type="fill", difficulty=2,
+  stem="定义 union A { int i; double d; }; 在常见实现中 sizeof(A) 通常为____字节（double 占 8 字节）。",
+  answer=["8"],
+  explain="联合体大小至少能容纳最大成员，double 占 8 字节，所以通常为 8（还可能受对齐影响）。",
+  source="第05章 - 1.pptx · 5.4 联合体大小（slide 129）")
+
+q(chapter=5, section="5.4", topicId="5.6", type="code", difficulty=3,
+  stem="阅读程序，输出是什么？",
+  code=["#include <iostream>", "using namespace std;", "union U { int i; char c; };", "int main() {", "    U u; u.i = 65;", "    cout << u.c;", "    return 0;", "}"],
+  options=["65", "A", "B", "不确定"],
+  answer=1,
+  explain="在本机常见小端存储下，int 65 的低字节是 65，对应字符 'A'；联合体成员共用空间，读取 c 得到 'A'。注意跨成员读取依赖具体实现，只作理解共用存储的演示。",
+  source="第05章 - 1.pptx · 5.4 联合类型共用存储（slide 126–129）")
+
+q(chapter=5, section="5.5", topicId="5.7", type="single", difficulty=1,
+  stem="若 int x = 5; int *p = &x;，则 *p 的值是？",
+  options=["x 的地址", "0", "5", "未定义"],
+  answer=2,
+  explain="p 保存 x 的地址，*p 是间接访问 p 所指向的对象，即 x 的值 5。&x 才是取地址。",
+  source="第05章 - 2.pptx · 5.5 指针间接访问（slide 6–11）")
+
+q(chapter=5, section="5.5", topicId="5.7", type="single", difficulty=2,
+  stem="若 int a[5]; int *p = &a[0];，则 p+2 指向哪个元素？",
+  options=["a[1]", "a[2]", "a[3]", "a[0] 之后的第 2 个字节"],
+  answer=1,
+  explain="同类型指针加 1 会移动一个元素的大小。p 指向 a[0]，p+2 指向 a[2]，不是前进 2 个字节。",
+  source="第05章 - 2.pptx · 5.5 指针加减与元素地址（slide 15–17）")
+
+q(chapter=5, section="5.5", topicId="5.7", type="single", difficulty=3,
+  stem="若有 const int *p = &x;，下列说法正确的是？",
+  options=["可以通过 p 修改 x 的值", "p 本身不能重新指向别的变量", "不能通过 p 修改它所指向的变量的值", "p 必须用 new 初始化"],
+  answer=2,
+  explain="const int *p 表示指向常量的指针：不能通过 p 修改被指向的值，但 p 本身可以改指向别的变量。int *const p 才是指针常量。",
+  source="第05章 - 2.pptx · 5.5 指向常量的指针与指针常量（slide 36–41）")
+
+q(chapter=5, section="5.5", topicId="5.7", type="multiple", difficulty=2,
+  stem="关于指针，下列说法正确的有？",
+  options=["指针变量本身也占用内存", "void* 可以保存任意对象类型的地址", "同类型指针可以直接赋值", "指针之间可以做任意算术运算"],
+  answer=[0, 1, 2],
+  explain="指针变量存储地址，本身也占空间；void* 是通用指针，可保存对象地址；同类型指针可直接赋值。指针运算主要限于加减和比较，不能做任意算术。",
+  source="第05章 - 2.pptx · 5.5 指针类型与运算（slide 4–17）")
+
+q(chapter=5, section="5.5", topicId="5.7", type="judge", difficulty=1,
+  stem="未初始化的指针不能直接解引用，否则可能访问非法内存。",
+  answer=True,
+  explain="指针必须先指向有效对象（或初始化为 nullptr）再解引用；未初始化指针的值不确定，解引用可能导致运行时错误。",
+  source="第05章 - 2.pptx · 5.5 通用指针与未初始化指针（slide 14）")
+
+q(chapter=5, section="5.5", topicId="5.7", type="judge", difficulty=2,
+  stem="int *p, q; 中 p 和 q 都是指针变量。",
+  answer=False,
+  explain="* 只修饰紧跟其后的声明符：p 是 int*，q 是 int。若要让两者都是指针，应写 int *p, *q; 或使用 typedef。",
+  source="第05章 - 2.pptx · 5.5 同时定义多个指针变量（slide 5）")
+
+q(chapter=5, section="5.5", topicId="5.7", type="fill", difficulty=1,
+  stem="获取变量 x 的内存地址使用运算符____。",
+  answer=["&"],
+  explain="&x 取得 x 的地址，可赋给同类型指针；*p 则通过指针间接访问目标对象。",
+  source="第05章 - 2.pptx · 5.5 取地址与间接访问（slide 6–10）")
+
+q(chapter=5, section="5.5", topicId="5.7", type="fill", difficulty=2,
+  stem="若 int a[5]; int *p=&a[0];，则 *(p+3) 等价于 a[____]。",
+  answer=["3"],
+  explain="p+i 指向 a[i]，因此 *(p+3) 等价于 a[3]。",
+  source="第05章 - 2.pptx · 5.5 指针访问数组元素（slide 15）")
+
+q(chapter=5, section="5.5", topicId="5.7", type="code", difficulty=2,
+  stem="阅读程序，输出是什么？",
+  code=["#include <iostream>", "using namespace std;", "int main() {", "    int x = 7;", "    int* p = &x;", "    *p = 9;", "    cout << x;", "    return 0;", "}"],
+  options=["7", "9", "地址值", "编译错误"],
+  answer=1,
+  explain="p 指向 x，*p = 9 通过指针修改 x 的值为 9，因此输出 9。",
+  source="第05章 - 2.pptx · 5.5 间接访问（slide 10–11）")
+
+q(chapter=5, section="5.5", topicId="5.7", type="code", difficulty=3,
+  stem="阅读程序，输出是什么？",
+  code=["#include <iostream>", "using namespace std;", "void swap(int* a, int* b) {", "    int t = *a; *a = *b; *b = t;", "}", "int main() {", "    int x = 2, y = 5;", "    swap(&x, &y);", "    cout << x << y;", "    return 0;", "}"],
+  options=["25", "52", "77", "22"],
+  answer=1,
+  explain="指针参数让函数能修改调用者的变量：交换后 x=5、y=2，输出 52。",
+  source="第05章 - 2.pptx · 5.5 指针参数交换实参（slide 28–31）")
+
+q(chapter=5, section="5.5", topicId="5.7", type="code", difficulty=4,
+  stem="阅读程序，输出是什么？",
+  code=["#include <iostream>", "using namespace std;", "int main() {", "    int a[4] = {10,20,30,40};", "    int* p = a;", "    int* q = &a[3];", "    cout << (q - p) << *(p+1);", "    return 0;", "}"],
+  options=["320", "420", "340", "210"],
+  answer=0,
+  explain="q-p 计算两个指针之间相隔的元素个数，结果为 3；*(p+1) 是 a[1]=20。连续输出 320。",
+  source="第05章 - 2.pptx · 5.5 指针相减与数组（slide 15–18）")
+
+q(chapter=5, section="5.5", topicId="5.8", type="single", difficulty=1,
+  stem="使用 new int[n] 创建动态数组后，应使用什么释放？",
+  options=["delete p", "delete[] p", "free(p)", "destroy p"],
+  answer=1,
+  explain="new[] 创建的动态数组必须用 delete[] 释放；delete 只用于 new 创建的单个对象；free 配 malloc/calloc。",
+  source="第05章 - 2.pptx · 5.5 撤销动态数组（slide 47）")
+
+q(chapter=5, section="5.5", topicId="5.8", type="single", difficulty=2,
+  stem="关于内存泄漏，下列说法正确的是？",
+  options=["动态对象被 delete 后仍会泄漏", "动态对象失去所有指向它的指针且未释放，会造成内存泄漏", "栈上的局部变量会造成内存泄漏", "内存泄漏会自动被 C++ 编译器修复"],
+  answer=1,
+  explain="动态对象不会自动释放；当指向它的指针丢失或作用域结束又没有释放时，程序无法再访问该对象，形成内存泄漏。",
+  source="第05章 - 2.pptx · 5.5 内存泄漏（slide 51–54）")
+
+q(chapter=5, section="5.5", topicId="5.8", type="multiple", difficulty=2,
+  stem="关于链表，下列说法正确的有？",
+  options=["结点通常包含数据域和指向下一结点的指针域", "链表元素在内存中不必连续存放", "链表插入删除通常比数组方便", "链表按下标随机访问通常比数组快"],
+  answer=[0, 1, 2],
+  explain="链表由动态结点通过指针链接，不要求连续存储；插入删除只需改指针，较数组方便；但顺序访问效率低，按下标随机访问通常不如数组。D 错误。",
+  source="第05章 - 2.pptx · 5.5 链表（slide 61–63、101）")
+
+q(chapter=5, section="5.5", topicId="5.8", type="judge", difficulty=1,
+  stem="用 delete 释放动态数组时，若指针在释放前移动过，可能导致运行时错误。",
+  answer=True,
+  explain="delete[] 必须作用于 new[] 返回的原始指针。若 p++ 后再 delete[] p，指针不再指向数组首元素，行为错误。",
+  source="第05章 - 2.pptx · 5.5 撤销对象时的指针要求（slide 50）")
+
+q(chapter=5, section="5.5", topicId="5.8", type="fill", difficulty=1,
+  stem="与 malloc 配套使用的释放函数是____。",
+  answer=["free"],
+  explain="malloc/calloc 分配的内存用 free 释放；new 用 delete，new[] 用 delete[]，不能混配。",
+  source="第05章 - 2.pptx · 5.5 动态内存释放（slide 46–47）")
+
+q(chapter=5, section="5.5", topicId="5.8", type="code", difficulty=2,
+  stem="阅读程序，输出是什么？",
+  code=["#include <iostream>", "using namespace std;", "int main() {", "    int* p = new int[4];", "    for (int i=0;i<4;i++) p[i] = i*i;", "    cout << p[3];", "    delete[] p;", "    return 0;", "}"],
+  options=["3", "6", "9", "16"],
+  answer=2,
+  explain="p[3] = 3×3 = 9，输出 9，最后 delete[] 释放动态数组。",
+  source="第05章 - 2.pptx · 5.5 动态数组（slide 45–47）")
+
+q(chapter=5, section="5.5", topicId="5.8", type="code", difficulty=3,
+  stem="阅读程序，输出是什么？",
+  code=["#include <iostream>", "using namespace std;", "struct Node { int v; Node* next; };", "int main() {", "    Node a{1,nullptr}, b{2,nullptr}, c{3,nullptr};", "    a.next = &b; b.next = &c;", "    int s = 0;", "    for (Node* p = &a; p != nullptr; p = p->next) s += p->v;", "    cout << s;", "    return 0;", "}"],
+  options=["3", "5", "6", "1"],
+  answer=2,
+  explain="链表依次连接 a(1)→b(2)→c(3)，遍历求和 1+2+3=6。",
+  source="第05章 - 2.pptx · 5.5 链表遍历（slide 84、93）")
+
+q(chapter=5, section="5.6", topicId="5.9", type="single", difficulty=1,
+  stem="int x = 3; int& r = x; 后，执行 r = 7;，x 的值是？",
+  options=["3", "7", "10", "未定义"],
+  answer=1,
+  explain="r 是 x 的引用（别名），对 r 的修改就是对 x 的修改，因此 x 变为 7。",
+  source="第05章 - 2.pptx · 5.6 引用是变量的别名（slide 120–121）")
+
+q(chapter=5, section="5.6", topicId="5.9", type="single", difficulty=2,
+  stem="关于引用的定义，下列说法正确的是？",
+  options=["引用定义时必须初始化", "引用初始化后可以改为引用另一个变量", "引用可以没有类型", "引用和指针完全相同"],
+  answer=0,
+  explain="引用定义时必须绑定到已有对象，且之后不能重新绑定。它与指针在语法和语义上都有区别。",
+  source="第05章 - 2.pptx · 5.6 引用变量定义规则（slide 126）")
+
+q(chapter=5, section="5.6", topicId="5.9", type="multiple", difficulty=2,
+  stem="关于引用，下列说法正确的有？",
+  options=["引用是已有对象的别名", "引用参数可以让函数修改实参", "const 引用可以防止通过引用修改实参", "可以返回局部变量的引用而不出问题"],
+  answer=[0, 1, 2],
+  explain="引用是别名；引用参数可直接修改实参；const 引用只读。返回局部变量的引用会在函数返回后失效，D 错误。",
+  source="第05章 - 2.pptx · 5.6 引用（slide 120–137）")
+
+q(chapter=5, section="5.6", topicId="5.9", type="judge", difficulty=1,
+  stem="引用可以像指针一样在初始化后重新绑定到另一个变量。",
+  answer=False,
+  explain="引用一旦初始化就始终是原对象的别名，不能重新绑定。指针变量则可以改变指向。",
+  source="第05章 - 2.pptx · 5.6 引用与指针的区别（slide 125–126）")
+
+q(chapter=5, section="5.6", topicId="5.9", type="fill", difficulty=1,
+  stem="定义 int 型引用 r 绑定到变量 x 的语句是：int ____ r = x;。",
+  answer=["&"],
+  explain="int& r = x; 定义引用 r，& 在这里表示引用声明，不是取地址运算。",
+  source="第05章 - 2.pptx · 5.6 引用变量的定义（slide 120）")
+
+q(chapter=5, section="5.6", topicId="5.9", type="code", difficulty=2,
+  stem="阅读程序，输出是什么？",
+  code=["#include <iostream>", "using namespace std;", "void add(int& x) { x += 3; }", "int main() {", "    int a = 4;", "    add(a);", "    cout << a;", "    return 0;", "}"],
+  options=["4", "7", "3", "编译错误"],
+  answer=1,
+  explain="引用参数 x 绑定到实参 a，x += 3 直接修改 a，因此 a 变为 7。",
+  source="第05章 - 2.pptx · 5.6 引用参数（slide 122、127–128）")
+
+q(chapter=5, section="5.6", topicId="5.9", type="code", difficulty=3,
+  stem="阅读程序，输出是什么？",
+  code=["#include <iostream>", "using namespace std;", "void swap(int& a, int& b) { int t=a; a=b; b=t; }", "int main() {", "    int x=1, y=2;", "    swap(x,y);", "    cout << x << y;", "    return 0;", "}"],
+  options=["12", "21", "11", "22"],
+  answer=1,
+  explain="引用参数使函数直接操作 x、y，交换后 x=2、y=1，输出 21。",
+  source="第05章 - 2.pptx · 5.6 引用实现交换（slide 127–128）")
+
+q(chapter=5, section="5.2", topicId="5.2", type="programming", difficulty=1,
+  stem="编写程序：读入 n 个整数，输出它们的总和。",
+  starter="#include <iostream>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    int a[100];\n    // 读入 n 个元素并求和\n    return 0;\n}\n",
+  solution="#include <iostream>\nusing namespace std;\nint main(){int n;cin>>n;int a[100];int s=0;for(int i=0;i<n;i++){cin>>a[i];s+=a[i];}cout<<s;}\n",
+  tests=[{"input":"3\n1 2 3\n","output":"6"},{"input":"5\n-2 4 0 7 -1\n","output":"8"},{"input":"1\n42\n","output":"42","hidden":True}],
+  hints=["for 从 0 到 n-1 读入 a[i]。", "读入的同时累加到 sum。"],
+  explain="数组下标从 0 开始，循环 i=0..n-1 读入元素并累加；最后输出总和。",
+  source="第05章 - 1.pptx · 5.2 一维数组遍历（slide 26）")
+
+q(chapter=5, section="5.3", topicId="5.3", type="programming", difficulty=2,
+  stem="编写程序：读入一个不含空格的字符串，输出它的长度（不要调用 strlen，自己统计到 '\0' 为止）。",
+  starter="#include <iostream>\nusing namespace std;\n\nint main() {\n    char s[100];\n    cin >> s;\n    int len = 0;\n    // 统计到 '\0'\n    cout << len;\n    return 0;\n}\n",
+  solution="#include <iostream>\nusing namespace std;\nint main(){char s[100];cin>>s;int n=0;while(s[n]!='\0')n++;cout<<n;}\n",
+  tests=[{"input":"hello\n","output":"5"},{"input":"C++\n","output":"3"},{"input":"a\n","output":"1","hidden":True}],
+  hints=["while (s[len] != '\\0') len++;"],
+  explain="字符数组保存字符串时末尾有 '\0'；从下标 0 开始计数，遇到 '\0' 停止，计数即为长度。",
+  source="第05章 - 1.pptx · 5.2 字符串长度计算（slide 62）")
+
+q(chapter=5, section="5.3", topicId="5.5", type="programming", difficulty=3,
+  stem="定义结构体 Student{int no; int score;}; 读入 n 个学生的学号和成绩，输出成绩最高的学生的学号（成绩互不相同）。",
+  starter="#include <iostream>\nusing namespace std;\nstruct Student { int no; int score; };\n\nint main() {\n    int n;\n    cin >> n;\n    Student a[100];\n    // 读入并找出最高分学生的学号\n    return 0;\n}\n",
+  solution="#include <iostream>\nusing namespace std;\nstruct Student{int no;int score;};\nint main(){int n;cin>>n;Student a[100];for(int i=0;i<n;i++)cin>>a[i].no>>a[i].score;int m=0;for(int i=1;i<n;i++)if(a[i].score>a[m].score)m=i;cout<<a[m].no;}\n",
+  tests=[{"input":"3\n1 80\n2 95\n3 70\n","output":"2"},{"input":"2\n10 60\n20 61\n","output":"20"},{"input":"1\n7 100\n","output":"7","hidden":True}],
+  hints=["结构体数组元素用 a[i].no、a[i].score 访问。", "用 m 记录当前最高分元素下标。"],
+  explain="读入结构体数组后，从第二个元素开始与当前最高分比较并更新下标，最后输出对应学号。",
+  source="第05章 - 1.pptx · 5.3 结构数组（slide 112–115）")
+
+q(chapter=5, section="5.5", topicId="5.9", type="programming", difficulty=4,
+  stem="编写函数 void reverseArray(int a[], int n)，把数组元素逆序；在 main 中读入 n 和 n 个整数，调用函数后输出逆序数组，元素间用空格分隔。",
+  starter="#include <iostream>\nusing namespace std;\n\nvoid reverseArray(int a[], int n) {\n    // 用双指针交换\n}\n\nint main() {\n    int n, a[100];\n    cin >> n;\n    for (int i=0;i<n;i++) cin >> a[i];\n    reverseArray(a, n);\n    for (int i=0;i<n;i++) { if(i) cout << ' '; cout << a[i]; }\n    return 0;\n}\n",
+  solution="#include <iostream>\nusing namespace std;\nvoid reverseArray(int a[],int n){for(int i=0,j=n-1;i<j;i++,j--){int t=a[i];a[i]=a[j];a[j]=t;}}\nint main(){int n,a[100];cin>>n;for(int i=0;i<n;i++)cin>>a[i];reverseArray(a,n);for(int i=0;i<n;i++){if(i)cout<<' ';cout<<a[i];}}\n",
+  tests=[{"input":"5\n1 2 3 4 5\n","output":"5 4 3 2 1"},{"input":"4\n-1 0 8 2\n","output":"2 8 0 -1"},{"input":"1\n7\n","output":"7","hidden":True}],
+  hints=["数组参数传递的是首地址，函数内修改会影响原数组。", "i 从头、j 从尾向中间交换。"],
+  explain="数组参数本质传地址，reverseArray 中通过双指针交换元素即可修改 main 中的数组；注意循环条件 i<j，中间元素无需自交换。",
+  source="第05章 - 2.pptx · 5.5 数组参数与指针（slide 25–31）；第05章-1 slide 71–73")
