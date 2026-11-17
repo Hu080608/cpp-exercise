@@ -62,11 +62,12 @@
   U.dateKey = function (d) { d = d || new Date(); const p = n => String(n).padStart(2,'0'); return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate()); };
   U.shortDate = function (ts) { if (!ts) return ''; const d = new Date(ts); return (d.getMonth()+1)+'/'+d.getDate(); };
   U.relativeTime = function (ts) { if (!ts) return '—'; const diff = Date.now()-ts, min=60000, hour=3600000, day=86400000; if (diff<min) return '刚刚'; if (diff<hour) return Math.floor(diff/min)+' 分钟前'; if (diff<day) return Math.floor(diff/hour)+' 小时前'; if (diff<day*7) return Math.floor(diff/day)+' 天前'; return U.shortDate(ts); };
-  U.toast = function (msg) {
+  U.toast = function (msg, kind) {
     let el = document.getElementById('toast');
-    if (!el) { el = document.createElement('div'); el.id = 'toast'; el.className = 'toast'; el.setAttribute('role','status'); document.body.appendChild(el); }
+    if (!el) { el = document.createElement('div'); el.id = 'toast'; el.setAttribute('role','status'); document.body.appendChild(el); }
+    el.className = 'toast' + (kind ? ' ' + kind : '');
     el.textContent = msg; el.classList.add('show'); clearTimeout(U._toastTimer);
-    U._toastTimer = setTimeout(() => el.classList.remove('show'), 2200);
+    U._toastTimer = setTimeout(() => el.classList.remove('show'), 2400);
   };
   U.modal = function (html, opts) {
     opts = opts || {};

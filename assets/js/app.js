@@ -405,8 +405,9 @@
     let testsHtml = '<div class="prog-tests" id="prog-tests-'+q.id+'">' + q.tests.map((t,i) => {
       const r = p.testResults && p.testResults[i];
       const before = t.hidden ? '提交后评测' : ('输入 ' + U.esc(String(t.input||'空').split(String.fromCharCode(10)).join('↵')) + ' → 期望 ' + U.esc(String(t.output).split(String.fromCharCode(10)).join('↵')));
-      const after = r ? (r.passed ? '通过' : ('未通过 · 期望 ' + U.esc(String(t.output).split(String.fromCharCode(10)).join('↵')) + ' · 实际 ' + U.esc(String(r.actual||'').split(String.fromCharCode(10)).join('↵')))) : '未执行';
-      return '<div class="test-row '+(r?(r.passed?'pass':'fail'):'')+'" title="'+U.attr((t.input||'')+' -> '+(t.output||''))+'"><span class="test-name">'+(t.hidden?'隐藏测试':'样例 '+(i+1))+'</span><span class="test-detail">'+(r?after:before)+'</span></div>';
+      const after = r ? (r.passed ? '通过' : ('未通过' + (t.hidden?'':(' · 期望 ' + U.esc(String(t.output).split(String.fromCharCode(10)).join('↵')) + ' · 实际 ' + U.esc(String(r.actual||'').split(String.fromCharCode(10)).join('↵')))))) : '未执行';
+      const title = t.hidden ? '' : ' title="'+U.attr((t.input||'')+' -> '+(t.output||''))+'"';
+      return '<div class="test-row '+(r?(r.passed?'pass':'fail'):'')+'"'+title+'><span class="test-name">'+(t.hidden?'隐藏测试':'样例 '+(i+1))+'</span><span class="test-detail">'+(r?after:before)+'</span></div>';
     }).join('') + '</div>';
     return '<div class="code-wrap"><div class="editor-card card" style="border-radius:16px"><div class="editor-head"><div class="editor-dots"><i></i><i></i><i></i></div><span class="editor-name">main.cpp</span><div class="editor-tools"><button class="btn btn-ghost btn-sm" data-action="reset-prog" data-id="'+q.id+'">'+U.icon('refresh')+'重置</button><button class="btn btn-soft btn-sm" data-action="prog-beautify" data-id="'+q.id+'">对齐</button></div></div><div class="editor-wrap"><div class="line-nums" id="prog-lines-'+q.id+'">'+d.code.split('\n').map((_,i)=>'<span>'+(i+1)+'</span>').join('')+'</div><textarea class="code-editor" id="prog-code-'+q.id+'" data-action="prog-code" data-id="'+q.id+'" spellcheck="false">'+U.esc(d.code)+'</textarea></div></div>' +
       '<div class="grid-2" style="margin-top:12px"><div><label class="field"><span>自定义输入 stdin</span><textarea class="stdin-area" id="prog-stdin-'+q.id+'" data-action="prog-stdin" data-id="'+q.id+'">'+U.esc(d.stdin)+'</textarea></label></div><div><div class="row wrap" style="height:100%;align-content:center"><button class="btn btn-primary" data-action="run-prog" data-id="'+q.id+'">'+U.icon('play')+'运行</button><button class="btn btn-ink" data-action="judge-prog" data-id="'+q.id+'">'+U.icon('check')+(answered?'重新评测':'提交评测')+'</button><button class="btn btn-ghost btn-sm" data-action="load-sample" data-id="'+q.id+'">'+U.icon('task')+'载入样例输入</button></div></div></div>' +
@@ -453,17 +454,17 @@
       const run=firstFail?firstFail.run:res.results[res.results.length-1]?.run;
       updateConsole(q.id,consoleHtml(run)||'');
       const testsBox=document.getElementById('prog-tests-'+q.id);
-      if(testsBox){testsBox.innerHTML=q.tests.map((t,i)=>{const r=res.results[i];return '<div class="test-row '+(r?(r.passed?'pass':'fail'):'')+'"><span class="test-name">'+(t.hidden?'隐藏测试':'样例 '+(i+1))+'</span><span class="test-detail">'+(r?(r.passed?'通过':('未通过 · 期望 '+U.esc(String(t.output).split(String.fromCharCode(10)).join('↵'))+' · 实际 '+U.esc(String(r.actual||'').split(String.fromCharCode(10)).join('↵')))):'未执行')+'</span></div>';}).join('');}
+      if(testsBox){testsBox.innerHTML=q.tests.map((t,i)=>{const r=res.results[i];const detail=r?(r.passed?'通过':('未通过'+(t.hidden?'':(' · 期望 '+U.esc(String(t.output).split(String.fromCharCode(10)).join('↵'))+' · 实际 '+U.esc(String(r.actual||'').split(String.fromCharCode(10)).join('↵')))))):'未执行';return '<div class="test-row '+(r?(r.passed?'pass':'fail'):'')+'"><span class="test-name">'+(t.hidden?'隐藏测试':'样例 '+(i+1))+'</span><span class="test-detail">'+detail+'</span></div>';}).join('');}
       const s=state.session;
       const wasAnswered=!!(s && s.answers[q.id]!==undefined);
       if(res.allPassed){
-        if(!wasAnswered && s){ s.answers[q.id]=code; recordAttempt(q,true,code,Date.now()-currentQuestionStarted); save(); U.toast('全部测试通过！'); setTimeout(()=>{ if(route.name==='quiz') renderRoute(); },450); }
-        else { pendingProgram[q.id]={html:p.html,testResults:res.results,passed:true}; save(); U.toast('重新评测通过（本题已提交，不重复计分）'); }
+        if(!wasAnswered && s){ s.answers[q.id]=code; recordAttempt(q,true,code,Date.now()-currentQuestionStarted); save(); U.toast('✓ 全部测试通过！', 'ok'); setTimeout(()=>{ if(route.name==='quiz') renderRoute(); },450); }
+        else { pendingProgram[q.id]={html:p.html,testResults:res.results,passed:true}; save(); U.toast('✓ 重新评测通过（本题已提交，不重复计分）', 'ok'); }
       }else{
         const serviceBusy=res.results.length>0&&res.results[0].run&&res.results[0].run.phase==='service';
         if(!wasAnswered&&!serviceBusy) recordAttempt(q,false,code,Date.now()-currentQuestionStarted);
         pendingProgram[q.id]={html:p.html,testResults:res.results,passed:false};
-        save(); U.toast(serviceBusy?'编译服务暂时繁忙，已自动切换；未计为答错，请稍后重试':firstFail&&!firstFail.run.compiled?'编译失败，请查看错误信息':'未通过全部测试，修改后可以再提交');
+        save(); U.toast(serviceBusy?'编译服务暂时繁忙，已自动切换；未计为答错，请稍后重试':firstFail&&!firstFail.run.compiled?'编译失败，请查看错误信息':'未通过全部测试，修改后可以再提交', serviceBusy?'bad':'');
       }
       return;
     }
@@ -592,6 +593,7 @@
     const resp=JSON.parse(JSON.stringify(d)); s.answers[q.id]=resp;
     const ok=U.grade(q,resp); recordAttempt(q,ok,resp,Date.now()-currentQuestionStarted);
     updateLastPractice(); save(true); renderRoute();
+    U.toast(ok?'✓ 回答正确':'✗ 回答错误，已加入错题复习', ok?'ok':'bad');
     setTimeout(()=>{ const fb=document.querySelector('.feedback'); if(fb) fb.scrollIntoView({behavior:'smooth',block:'center'}); },40);
     if (state.settings.autoNext && ok) setTimeout(()=>{ if(route.name==='quiz') nextQuestion(); },900);
   }

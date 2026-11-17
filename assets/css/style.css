@@ -400,3 +400,11 @@ html[data-theme="dark"] { color-scheme: dark; }
   .footer-dot { display: none; }
   .site-footer-inner { gap: 6px 10px; flex-direction: column; align-items: flex-start; }
 }
+/* 判题成功/失败反馈更醒目 */
+.toast.ok { background: var(--ok); color: #fff; box-shadow: 0 10px 32px color-mix(in srgb, var(--ok) 38%, transparent); }
+.toast.bad { background: var(--bad); color: #fff; box-shadow: 0 10px 32px color-mix(in srgb, var(--bad) 30%, transparent); }
+.feedback.ok { box-shadow: 0 0 0 3px color-mix(in srgb, var(--ok) 16%, transparent), var(--shadow); animation: successPop .5s var(--ease); }
+.feedback.ok .feedback-head { font-size: 14.5px; letter-spacing: .01em; }
+.feedback.ok .feedback-head svg { width: 21px; height: 21px; stroke-width: 2.4; }
+.feedback.ok .feedback-head::after { content: "继续保持"; margin-left: auto; font-size: 10.5px; font-weight: 600; opacity: .72; }
+@keyframes successPop { 0% { transform: scale(.985); } 55% { transform: scale(1.006); } 100% { transform: scale(1); } }
