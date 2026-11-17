@@ -25,7 +25,7 @@ cpp-exercise/
 │  ├─ css/style.css               # 全站样式（响应式 + 深浅色）
 │  └─ js/
 │     ├─ utils.js                 # DOM/图标/本地存储/填空判分/弹层
-│     ├─ sandbox.js               # Wandbox C++ 编译运行封装
+│     ├─ sandbox.js               # Judge0 + Wandbox 双通道编译运行封装
 │     └─ app.js                   # 路由、题库、练习、统计、编程题评测
 ├─ data/
 │  ├─ knowledge.js                # 29 个知识点（唯一知识清单）
@@ -75,7 +75,7 @@ npx serve .
 
 打开 <http://localhost:8080>。
 
-> 沙箱与编程题评测需要联网：前端会把源码和 stdin 发送到 Wandbox 公共编译 API（CORS 可用），不需要自建后端。题目、知识点、错题本、统计与本地进度均可离线使用。
+> 沙箱与编程题评测需要联网：前端会把源码和 stdin 发送到 Judge0 CE 公共编译 API（主通道）或 Wandbox（备用通道），不需要自建后端。题目、知识点、错题本、统计与本地进度均可离线使用。
 
 ### 题库构建与校验
 
@@ -206,7 +206,8 @@ node scripts/export_docs.js
 
 - 无构建、无框架、无依赖；原生 HTML/CSS/JavaScript。
 - 题库 JSON 由 Python 构建脚本从易维护的 Python 源生成。
-- 沙箱使用 [Wandbox API](https://wandbox.org/api/compile.json)（公共 CORS 编译服务），默认 `gcc-head`、`-std=c++17`。如果公共 API 不可用，页面会显示可读的联网/服务错误提示，不影响刷题功能。
+- 沙箱使用 [Judge0 CE](https://ce.judge0.com/)（C++ GCC 14.1）作为主编译通道，[Wandbox](https://wandbox.org/api/compile.json) 作为备用通道；主通道繁忙/返回 OCI 错误时自动切换并重试。
+- 失败信息会区分“用户代码编译失败”和“公共服务繁忙”，服务繁忙不会把编程题误记为答错。
 - 所有编程题标准解均用本机 g++ 实际编译运行验证；代码阅读题抽样结果也通过脚本核对。
 
 ## 9. 许可
