@@ -1,5 +1,5 @@
 /* 静态资源缓存：离线时仍可打开知识点与题库；编译功能需要联网。 */
-const CACHE = 'cpplab-v7';
+const CACHE = 'cpplab-v8';
 const ASSETS = [
   './', './index.html', './manifest.webmanifest', './assets/css/style.css',
   './assets/js/utils.js', './assets/js/sandbox.js', './assets/js/app.js',

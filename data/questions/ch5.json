@@ -1849,7 +1849,8 @@
       "typeName": "编程题",
       "difficultyName": "入门",
       "knowledge": "一维数组",
-      "origin": "原创编程题 · 课程知识点综合"
+      "origin": "原创编程题 · 课程知识点综合",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n;\n    cin >> n;\n    int a[100];\n    int s = 0;\n    for (int i = 0; i < n; i++) {\n        cin >> a[i];\n        s += a[i];\n    }\n    cout << s;\n}\n"
     },
     {
       "chapter": 5,
@@ -1886,7 +1887,8 @@
       "typeName": "编程题",
       "difficultyName": "简单",
       "knowledge": "字符串与字符数组",
-      "origin": "原创编程题 · 课程知识点综合"
+      "origin": "原创编程题 · 课程知识点综合",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    char s[100];\n    cin >> s;\n    int n = 0;\n    while (s[n] != '\\0')\n        n++;\n    cout << n;\n}\n"
     },
     {
       "chapter": 5,
@@ -1924,7 +1926,8 @@
       "typeName": "编程题",
       "difficultyName": "中等",
       "knowledge": "结构体类型",
-      "origin": "原创编程题 · 课程知识点综合"
+      "origin": "原创编程题 · 课程知识点综合",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nstruct Student {\n    int no;\n    int score;\n};\nint main() {\n    int n;\n    cin >> n;\n    Student a[100];\n    for (int i = 0; i < n; i++)\n        cin >> a[i].no >> a[i].score;\n    int m = 0;\n    for (int i = 1; i < n; i++)\n        if (a[i].score > a[m].score)\n            m = i;\n    cout << a[m].no;\n}\n"
     },
     {
       "chapter": 5,
@@ -1962,7 +1965,8 @@
       "typeName": "编程题",
       "difficultyName": "困难",
       "knowledge": "引用类型",
-      "origin": "原创编程题 · 课程知识点综合"
+      "origin": "原创编程题 · 课程知识点综合",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nvoid reverseArray(int a[], int n) {\n    for (int i = 0, j = n - 1; i < j; i++, j--) {\n        int t = a[i];\n        a[i] = a[j];\n        a[j] = t;\n    }\n}\nint main() {\n    int n, a[100];\n    cin >> n;\n    for (int i = 0; i < n; i++)\n        cin >> a[i];\n    reverseArray(a, n);\n    for (int i = 0; i < n; i++) {\n        if (i)\n            cout << ' ';\n        cout << a[i];\n    }\n}\n"
     },
     {
       "chapter": 5,
@@ -2052,7 +2056,8 @@
       "id": "q322",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "一维数组"
+      "knowledge": "一维数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, a[1000];\n    cin >> n;\n    for (int i = 0; i < n; i++)\n        cin >> a[i];\n    int best = a[0], cur = a[0];\n    for (int i = 1; i < n; i++) {\n        cur = (cur > 0 ? cur + a[i] : a[i]);\n        if (cur > best)\n            best = cur;\n    }\n    cout << best;\n}\n"
     },
     {
       "chapter": 5,
@@ -2092,7 +2097,8 @@
       "id": "q323",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "一维数组"
+      "knowledge": "一维数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, t, a[1000];\n    cin >> n;\n    for (int i = 0; i < n; i++)\n        cin >> a[i];\n    cin >> t;\n    for (int i = 0; i < n; i++)\n        for (int j = i + 1; j < n; j++)\n            if (a[i] + a[j] == t) {\n                cout << i << \" \" << j;\n                return 0;\n            }\n    cout << -1;\n}\n"
     },
     {
       "chapter": 5,
@@ -2132,7 +2138,8 @@
       "id": "q324",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "一维数组"
+      "knowledge": "一维数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, a[1000];\n    cin >> n;\n    for (int i = 0; i < n; i++)\n        cin >> a[i];\n    int k = 0;\n    for (int i = 0; i < n; i++)\n        if (a[i] != 0)\n            a[k++] = a[i];\n    while (k < n)\n        a[k++] = 0;\n    for (int i = 0; i < n; i++) {\n        if (i)\n            cout << \" \";\n        cout << a[i];\n    }\n}\n"
     },
     {
       "chapter": 5,
@@ -2172,7 +2179,8 @@
       "id": "q325",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "一维数组"
+      "knowledge": "一维数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, a[1000];\n    cin >> n;\n    for (int i = 0; i < n; i++)\n        cin >> a[i];\n    if (n == 0) {\n        cout << 0;\n        return 0;\n    }\n    int k = 1;\n    for (int i = 1; i < n; i++)\n        if (a[i] != a[k - 1])\n            a[k++] = a[i];\n    cout << k << \"\\n\";\n    for (int i = 0; i < k; i++) {\n        if (i)\n            cout << \" \";\n        cout << a[i];\n    }\n}\n"
     },
     {
       "chapter": 5,
@@ -2212,7 +2220,8 @@
       "id": "q326",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "一维数组"
+      "knowledge": "一维数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, m, a[500], b[500], c[1000];\n    cin >> n;\n    for (int i = 0; i < n; i++)\n        cin >> a[i];\n    cin >> m;\n    for (int i = 0; i < m; i++)\n        cin >> b[i];\n    int i = 0, j = 0, k = 0;\n    while (i < n && j < m)\n        c[k++] = (a[i] <= b[j] ? a[i++] : b[j++]);\n    while (i < n)\n        c[k++] = a[i++];\n    while (j < m)\n        c[k++] = b[j++];\n    for (int x = 0; x < k; x++) {\n        if (x)\n            cout << \" \";\n        cout << c[x];\n    }\n}\n"
     },
     {
       "chapter": 5,
@@ -2252,7 +2261,8 @@
       "id": "q327",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "一维数组"
+      "knowledge": "一维数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, a[1001];\n    cin >> n;\n    for (int i = 0; i < n; i++)\n        cin >> a[i];\n    for (int i = n - 1; i >= 0; i--) {\n        if (a[i] < 9) {\n            a[i]++;\n            for (int j = 0; j < n; j++) {\n                if (j)\n                    cout << \" \";\n                cout << a[j];\n            }\n            return 0;\n        }\n        a[i] = 0;\n    }\n    cout << 1;\n    for (int i = 0; i < n; i++)\n        cout << \" \" << a[i];\n}\n"
     },
     {
       "chapter": 5,
@@ -2292,7 +2302,8 @@
       "id": "q328",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "二维数组"
+      "knowledge": "二维数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, a[30][30] = {};\n    cin >> n;\n    for (int i = 0; i < n; i++) {\n        a[i][0] = a[i][i] = 1;\n        for (int j = 1; j < i; j++)\n            a[i][j] = a[i - 1][j - 1] + a[i - 1][j];\n        for (int j = 0; j <= i; j++) {\n            if (j)\n                cout << \" \";\n            cout << a[i][j];\n        }\n        cout << \"\\n\";\n    }\n}\n"
     },
     {
       "chapter": 5,
@@ -2332,7 +2343,8 @@
       "id": "q329",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "二维数组"
+      "knowledge": "二维数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, m, a[50][50];\n    cin >> n >> m;\n    for (int i = 0; i < n; i++)\n        for (int j = 0; j < m; j++)\n            cin >> a[i][j];\n    for (int j = 0; j < m; j++) {\n        for (int i = 0; i < n; i++) {\n            if (i)\n                cout << \" \";\n            cout << a[i][j];\n        }\n        cout << \"\\n\";\n    }\n}\n"
     },
     {
       "chapter": 5,
@@ -2372,7 +2384,8 @@
       "id": "q330",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "二维数组"
+      "knowledge": "二维数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, a[50][50];\n    cin >> n;\n    for (int i = 0; i < n; i++)\n        for (int j = 0; j < n; j++)\n            cin >> a[i][j];\n    int s1 = 0, s2 = 0;\n    for (int i = 0; i < n; i++) {\n        s1 += a[i][i];\n        s2 += a[i][n - 1 - i];\n    }\n    cout << s1 << \" \" << s2;\n}\n"
     },
     {
       "chapter": 5,
@@ -2412,7 +2425,8 @@
       "id": "q331",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "字符串与字符数组"
+      "knowledge": "字符串与字符数组",
+      "solutionPretty": "#include <cctype>\n#include <iostream>\nusing namespace std;\nint main() {\n    char s[500];\n    cin.getline(s, 500);\n    int a = 0, b = 0, c = 0, d = 0;\n    for (int i = 0; s[i] != '\\0'; i++) {\n        unsigned char ch = s[i];\n        if (isalpha(ch))\n            a++;\n        else if (isdigit(ch))\n            b++;\n        else if (ch == ' ')\n            c++;\n        else\n            d++;\n    }\n    cout << a << \" \" << b << \" \" << c << \" \" << d;\n}\n"
     },
     {
       "chapter": 5,
@@ -2452,7 +2466,8 @@
       "id": "q332",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "字符串与字符数组"
+      "knowledge": "字符串与字符数组",
+      "solutionPretty": "#include <cctype>\n#include <iostream>\nusing namespace std;\nint main() {\n    char s[500];\n    cin >> s;\n    for (int i = 0; s[i] != '\\0'; i++) {\n        unsigned char c = s[i];\n        if (isupper(c))\n            s[i] = tolower(c);\n        else if (islower(c))\n            s[i] = toupper(c);\n    }\n    cout << s;\n}\n"
     },
     {
       "chapter": 5,
@@ -2492,7 +2507,8 @@
       "id": "q333",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "字符串与字符数组"
+      "knowledge": "字符串与字符数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    char s[500];\n    cin >> s;\n    int n = 0;\n    while (s[n] != '\\0')\n        n++;\n    for (int i = 0; i < n / 2; i++) {\n        char t = s[i];\n        s[i] = s[n - 1 - i];\n        s[n - 1 - i] = t;\n    }\n    cout << s;\n}\n"
     },
     {
       "chapter": 5,
@@ -2536,7 +2552,8 @@
       "id": "q334",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "字符串与字符数组"
+      "knowledge": "字符串与字符数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    char s[500];\n    cin >> s;\n    int n = 0;\n    while (s[n] != '\\0')\n        n++;\n    bool ok = true;\n    for (int i = 0, j = n - 1; i < j; i++, j--)\n        if (s[i] != s[j]) {\n            ok = false;\n            break;\n        }\n    cout << (ok ? \"YES\" : \"NO\");\n}\n"
     },
     {
       "chapter": 5,
@@ -2580,7 +2597,8 @@
       "id": "q335",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "字符串与字符数组"
+      "knowledge": "字符串与字符数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    char s[500], p[100];\n    cin >> s >> p;\n    int n = 0, m = 0;\n    while (s[n] != '\\0')\n        n++;\n    while (p[m] != '\\0')\n        m++;\n    for (int i = 0; i + m <= n; i++) {\n        int j = 0;\n        while (j < m && s[i + j] == p[j])\n            j++;\n        if (j == m) {\n            cout << i;\n            return 0;\n        }\n    }\n    cout << -1;\n}\n"
     },
     {
       "chapter": 5,
@@ -2620,7 +2638,8 @@
       "id": "q336",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "字符串与字符数组"
+      "knowledge": "字符串与字符数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    char s[500], ch;\n    cin >> s >> ch;\n    int k = 0;\n    for (int i = 0; s[i] != '\\0'; i++)\n        if (s[i] != ch)\n            s[k++] = s[i];\n    s[k] = '\\0';\n    cout << s;\n}\n"
     },
     {
       "chapter": 5,
@@ -2660,7 +2679,8 @@
       "id": "q337",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "字符串与字符数组"
+      "knowledge": "字符串与字符数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    char s[100];\n    cin >> s;\n    int n = 0;\n    for (int i = 0; s[i] != '\\0'; i++)\n        n = n * 10 + (s[i] - '0');\n    cout << n;\n}\n"
     },
     {
       "chapter": 5,
@@ -2704,7 +2724,8 @@
       "id": "q338",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "字符串与字符数组"
+      "knowledge": "字符串与字符数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    char s[500];\n    cin.getline(s, 500);\n    int c = 0;\n    bool in = false;\n    for (int i = 0; s[i] != '\\0'; i++) {\n        if (s[i] != ' ' && !in) {\n            c++;\n            in = true;\n        } else if (s[i] == ' ')\n            in = false;\n    }\n    cout << c;\n}\n"
     },
     {
       "chapter": 5,
@@ -2748,7 +2769,8 @@
       "id": "q339",
       "typeName": "编程题",
       "difficultyName": "困难",
-      "knowledge": "字符串与字符数组"
+      "knowledge": "字符串与字符数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    char s[500], st[500];\n    cin >> s;\n    int top = 0;\n    bool ok = true;\n    for (int i = 0; s[i] != '\\0'; i++) {\n        if (s[i] == '(' || s[i] == '[')\n            st[top++] = s[i];\n        else {\n            if (top == 0) {\n                ok = false;\n                break;\n            }\n            char c = st[--top];\n            if ((s[i] == ')' && c != '(') || (s[i] == ']' && c != '[')) {\n                ok = false;\n                break;\n            }\n        }\n    }\n    if (top != 0)\n        ok = false;\n    cout << (ok ? \"YES\" : \"NO\");\n}\n"
     },
     {
       "chapter": 5,
@@ -2788,7 +2810,8 @@
       "id": "q343",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "结构体类型"
+      "knowledge": "结构体类型",
+      "solutionPretty": "#include <iomanip>\n#include <iostream>\nusing namespace std;\nstruct Student {\n    int no;\n    int score;\n};\nint main() {\n    int n;\n    cin >> n;\n    Student a[100];\n    double sum = 0;\n    int best = 0;\n    for (int i = 0; i < n; i++) {\n        cin >> a[i].no >> a[i].score;\n        sum += a[i].score;\n        if (a[i].score > a[best].score)\n            best = i;\n    }\n    cout << fixed << setprecision(1) << sum / n << \" \" << a[best].no;\n}\n"
     },
     {
       "chapter": 5,
@@ -2828,7 +2851,8 @@
       "id": "q344",
       "typeName": "编程题",
       "difficultyName": "困难",
-      "knowledge": "结构体类型"
+      "knowledge": "结构体类型",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nstruct Student {\n    int no;\n    int score;\n};\nint main() {\n    int n;\n    cin >> n;\n    Student a[100];\n    for (int i = 0; i < n; i++)\n        cin >> a[i].no >> a[i].score;\n    for (int i = 0; i < n - 1; i++)\n        for (int j = i + 1; j < n; j++)\n            if (a[j].score > a[i].score || (a[j].score == a[i].score && a[j].no < a[i].no)) {\n                Student t = a[i];\n                a[i] = a[j];\n                a[j] = t;\n            }\n    for (int i = 0; i < n; i++)\n        cout << a[i].no << \" \" << a[i].score << \"\\n\";\n}\n"
     },
     {
       "chapter": 5,
@@ -2868,7 +2892,8 @@
       "id": "q345",
       "typeName": "编程题",
       "difficultyName": "困难",
-      "knowledge": "动态内存与链表"
+      "knowledge": "动态内存与链表",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nstruct Node {\n    int v;\n    Node* next;\n};\nint main() {\n    int n;\n    cin >> n;\n    Node* head = nullptr;\n    for (int i = 0; i < n; i++) {\n        int x;\n        cin >> x;\n        Node* p = new Node;\n        p->v = x;\n        p->next = head;\n        head = p;\n    }\n    for (Node* p = head; p != nullptr; p = p->next) {\n        if (p != head)\n            cout << \" \";\n        cout << p->v;\n    }\n    while (head != nullptr) {\n        Node* p = head;\n        head = head->next;\n        delete p;\n    }\n}\n"
     },
     {
       "chapter": 5,
@@ -2908,7 +2933,8 @@
       "id": "q346",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "动态内存与链表"
+      "knowledge": "动态内存与链表",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n;\n    cin >> n;\n    int* a = new int[n];\n    for (int i = 0; i < n; i++)\n        cin >> a[i];\n    long long sum = 0;\n    int mn = a[0], mx = a[0];\n    for (int i = 0; i < n; i++) {\n        sum += a[i];\n        if (a[i] < mn)\n            mn = a[i];\n        if (a[i] > mx)\n            mx = a[i];\n    }\n    cout << sum << \" \" << mn << \" \" << mx;\n    delete[] a;\n}\n"
     },
     {
       "chapter": 5,
@@ -2952,7 +2978,8 @@
       "id": "q347",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "枚举类型"
+      "knowledge": "枚举类型",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nenum Weekday { MON = 1,\n               TUE,\n               WED,\n               THU,\n               FRI,\n               SAT,\n               SUN };\nint main() {\n    int x;\n    cin >> x;\n    Weekday d = (Weekday)x;\n    if (d >= MON && d <= FRI)\n        cout << \"WORKDAY\";\n    else\n        cout << \"WEEKEND\";\n}\n"
     },
     {
       "chapter": 5,
@@ -2989,7 +3016,8 @@
       "id": "q398",
       "typeName": "编程题",
       "difficultyName": "入门",
-      "knowledge": "一维数组"
+      "knowledge": "一维数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, a[1000];\n    long long s = 0;\n    cin >> n;\n    for (int i = 0; i < n; i++) {\n        cin >> a[i];\n        s += a[i];\n    }\n    cout << s;\n}\n"
     },
     {
       "chapter": 5,
@@ -3026,7 +3054,8 @@
       "id": "q399",
       "typeName": "编程题",
       "difficultyName": "入门",
-      "knowledge": "一维数组"
+      "knowledge": "一维数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, a[1000];\n    cin >> n;\n    for (int i = 0; i < n; i++)\n        cin >> a[i];\n    int mx = a[0], mn = a[0];\n    for (int i = 1; i < n; i++) {\n        if (a[i] > mx)\n            mx = a[i];\n        if (a[i] < mn)\n            mn = a[i];\n    }\n    cout << mx << \" \" << mn;\n}\n"
     },
     {
       "chapter": 5,
@@ -3063,7 +3092,8 @@
       "id": "q400",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "一维数组"
+      "knowledge": "一维数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, a[1000];\n    cin >> n;\n    double s = 0;\n    for (int i = 0; i < n; i++) {\n        cin >> a[i];\n        s += a[i];\n    }\n    double avg = s / n;\n    int c = 0;\n    for (int i = 0; i < n; i++)\n        if (a[i] > avg)\n            c++;\n    cout << c;\n}\n"
     },
     {
       "chapter": 5,
@@ -3100,7 +3130,8 @@
       "id": "q401",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "一维数组"
+      "knowledge": "一维数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, a[1000];\n    cin >> n;\n    for (int i = 0; i < n; i++)\n        cin >> a[i];\n    for (int i = 0; i < n - 1; i++)\n        for (int j = i + 1; j < n; j++)\n            if (a[j] > a[i]) {\n                int t = a[i];\n                a[i] = a[j];\n                a[j] = t;\n            }\n    cout << a[1];\n}\n"
     },
     {
       "chapter": 5,
@@ -3137,7 +3168,8 @@
       "id": "q402",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "一维数组"
+      "knowledge": "一维数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, a[1000];\n    cin >> n;\n    for (int i = 0; i < n; i++)\n        cin >> a[i];\n    for (int i = n - 1; i >= 0; i--) {\n        if (i < n - 1)\n            cout << \" \";\n        cout << a[i];\n    }\n}\n"
     },
     {
       "chapter": 5,
@@ -3174,7 +3206,8 @@
       "id": "q403",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "一维数组"
+      "knowledge": "一维数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, k, a[1000];\n    cin >> n;\n    for (int i = 0; i < n; i++)\n        cin >> a[i];\n    cin >> k;\n    k %= n;\n    for (int i = 0; i < n; i++) {\n        if (i)\n            cout << \" \";\n        cout << a[(i + k) % n];\n    }\n}\n"
     },
     {
       "chapter": 5,
@@ -3211,7 +3244,8 @@
       "id": "q404",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "一维数组"
+      "knowledge": "一维数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, a[1000];\n    cin >> n;\n    for (int i = 0; i < n; i++)\n        cin >> a[i];\n    for (int i = 0; i < n - 1; i++)\n        for (int j = 0; j < n - 1 - i; j++)\n            if (a[j] > a[j + 1]) {\n                int t = a[j];\n                a[j] = a[j + 1];\n                a[j + 1] = t;\n            }\n    for (int i = 0; i < n; i++) {\n        if (i)\n            cout << \" \";\n        cout << a[i];\n    }\n}\n"
     },
     {
       "chapter": 5,
@@ -3248,7 +3282,8 @@
       "id": "q405",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "一维数组"
+      "knowledge": "一维数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, a[1000], x, c = 0;\n    cin >> n;\n    for (int i = 0; i < n; i++)\n        cin >> a[i];\n    cin >> x;\n    for (int i = 0; i < n; i++)\n        if (a[i] == x)\n            c++;\n    cout << c;\n}\n"
     },
     {
       "chapter": 5,
@@ -3285,7 +3320,8 @@
       "id": "q406",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "一维数组"
+      "knowledge": "一维数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, a[1000], c = 0;\n    cin >> n;\n    for (int i = 0; i < n; i++)\n        cin >> a[i];\n    for (int i = 0; i < n; i++) {\n        bool seen = false;\n        for (int j = 0; j < i; j++)\n            if (a[j] == a[i]) {\n                seen = true;\n                break;\n            }\n        if (!seen)\n            c++;\n    }\n    cout << c;\n}\n"
     },
     {
       "chapter": 5,
@@ -3322,7 +3358,8 @@
       "id": "q407",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "二维数组"
+      "knowledge": "二维数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, m, a[50][50];\n    cin >> n >> m;\n    for (int i = 0; i < n; i++)\n        for (int j = 0; j < m; j++)\n            cin >> a[i][j];\n    for (int i = 0; i < n; i++) {\n        int s = 0;\n        for (int j = 0; j < m; j++)\n            s += a[i][j];\n        cout << s << \"\\n\";\n    }\n}\n"
     },
     {
       "chapter": 5,
@@ -3359,7 +3396,8 @@
       "id": "q408",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "二维数组"
+      "knowledge": "二维数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, m, a[50][50];\n    cin >> n >> m;\n    for (int i = 0; i < n; i++)\n        for (int j = 0; j < m; j++)\n            cin >> a[i][j];\n    int mx = a[0][0];\n    for (int i = 0; i < n; i++)\n        for (int j = 0; j < m; j++)\n            if (a[i][j] > mx)\n                mx = a[i][j];\n    cout << mx;\n}\n"
     },
     {
       "chapter": 5,
@@ -3396,7 +3434,8 @@
       "id": "q409",
       "typeName": "编程题",
       "difficultyName": "入门",
-      "knowledge": "字符串与字符数组"
+      "knowledge": "字符串与字符数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    char s[500];\n    cin >> s;\n    int n = 0;\n    while (s[n] != 0)\n        n++;\n    cout << n;\n}\n"
     },
     {
       "chapter": 5,
@@ -3433,7 +3472,8 @@
       "id": "q410",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "字符串与字符数组"
+      "knowledge": "字符串与字符数组",
+      "solutionPretty": "#include <cctype>\n#include <iostream>\nusing namespace std;\nint main() {\n    char s[500];\n    cin >> s;\n    int c = 0;\n    for (int i = 0; s[i] != 0; i++) {\n        char x = tolower(s[i]);\n        if (x == 'a' || x == 'e' || x == 'i' || x == 'o' || x == 'u')\n            c++;\n    }\n    cout << c;\n}\n"
     },
     {
       "chapter": 5,
@@ -3470,7 +3510,8 @@
       "id": "q411",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "字符串与字符数组"
+      "knowledge": "字符串与字符数组",
+      "solutionPretty": "#include <cctype>\n#include <iostream>\nusing namespace std;\nint main() {\n    char s[500];\n    cin >> s;\n    int u = 0, l = 0, d = 0;\n    for (int i = 0; s[i] != 0; i++) {\n        if (isupper((unsigned char)s[i]))\n            u++;\n        else if (islower((unsigned char)s[i]))\n            l++;\n        else if (isdigit((unsigned char)s[i]))\n            d++;\n    }\n    cout << u << \" \" << l << \" \" << d;\n}\n"
     },
     {
       "chapter": 5,
@@ -3507,7 +3548,8 @@
       "id": "q412",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "字符串与字符数组"
+      "knowledge": "字符串与字符数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    char s[500];\n    cin >> s;\n    int n = 0;\n    while (s[n] != 0)\n        n++;\n    for (int i = n - 1; i >= 0; i--)\n        cout << s[i];\n}\n"
     },
     {
       "chapter": 5,
@@ -3544,7 +3586,8 @@
       "id": "q413",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "字符串与字符数组"
+      "knowledge": "字符串与字符数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    char s[500];\n    cin >> s;\n    int n = 0;\n    while (s[n] != 0)\n        n++;\n    bool ok = true;\n    for (int i = 0, j = n - 1; i < j; i++, j--)\n        if (s[i] != s[j]) {\n            ok = false;\n            break;\n        }\n    cout << (ok ? \"YES\" : \"NO\");\n}\n"
     },
     {
       "chapter": 5,
@@ -3581,7 +3624,8 @@
       "id": "q414",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "字符串与字符数组"
+      "knowledge": "字符串与字符数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    char s[500], c;\n    cin >> s >> c;\n    for (int i = 0; s[i] != 0; i++)\n        if (s[i] == c) {\n            cout << i;\n            return 0;\n        }\n    cout << -1;\n}\n"
     },
     {
       "chapter": 5,
@@ -3618,7 +3662,8 @@
       "id": "q415",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "字符串与字符数组"
+      "knowledge": "字符串与字符数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    char s[500], c;\n    cin >> s >> c;\n    int k = 0;\n    for (int i = 0; s[i] != 0; i++)\n        if (s[i] != c)\n            s[k++] = s[i];\n    s[k] = 0;\n    cout << s;\n}\n"
     },
     {
       "chapter": 5,
@@ -3659,7 +3704,8 @@
       "id": "q416",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "字符串与字符数组"
+      "knowledge": "字符串与字符数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    char s[500];\n    cin.getline(s, 500);\n    int c = 0;\n    bool in = false;\n    for (int i = 0; s[i] != 0; i++) {\n        if (s[i] != ' ' && !in) {\n            c++;\n            in = true;\n        } else if (s[i] == ' ')\n            in = false;\n    }\n    cout << c;\n}\n"
     },
     {
       "chapter": 5,
@@ -3696,7 +3742,8 @@
       "id": "q417",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "字符串与字符数组"
+      "knowledge": "字符串与字符数组",
+      "solutionPretty": "#include <cctype>\n#include <iostream>\nusing namespace std;\nint main() {\n    char s[500];\n    cin.getline(s, 500);\n    bool start = true;\n    for (int i = 0; s[i] != 0; i++) {\n        if (s[i] == ' ') {\n            start = true;\n        } else {\n            if (start && s[i] >= 'a' && s[i] <= 'z')\n                s[i] = s[i] - 'a' + 'A';\n            start = false;\n        }\n    }\n    cout << s;\n}\n"
     },
     {
       "chapter": 5,
@@ -3733,7 +3780,8 @@
       "id": "q418",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "字符串与字符数组"
+      "knowledge": "字符串与字符数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    char s[500], p[100];\n    cin >> s >> p;\n    int n = 0, m = 0, c = 0;\n    while (s[n] != 0)\n        n++;\n    while (p[m] != 0)\n        m++;\n    for (int i = 0; i + m <= n; i++) {\n        int j = 0;\n        while (j < m && s[i + j] == p[j])\n            j++;\n        if (j == m)\n            c++;\n    }\n    cout << c;\n}\n"
     },
     {
       "chapter": 5,
@@ -3770,7 +3818,8 @@
       "id": "q419",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "字符串与字符数组"
+      "knowledge": "字符串与字符数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    char s[500], best[500], cur[500];\n    cin.getline(s, 500);\n    int bn = 0, cn = 0;\n    for (int i = 0;; i++) {\n        if (s[i] != ' ' && s[i] != 0) {\n            cur[cn++] = s[i];\n        } else {\n            cur[cn] = 0;\n            if (cn > bn) {\n                bn = cn;\n                for (int j = 0; j <= cn; j++)\n                    best[j] = cur[j];\n            }\n            if (s[i] == 0)\n                break;\n            cn = 0;\n        }\n    }\n    cout << best;\n}\n"
     },
     {
       "chapter": 5,
@@ -3807,7 +3856,8 @@
       "id": "q420",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "字符串与字符数组"
+      "knowledge": "字符串与字符数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    char s[100];\n    cin >> s;\n    long long n = 0;\n    for (int i = 0; s[i] != 0; i++)\n        n = n * 10 + (s[i] - '0');\n    cout << n;\n}\n"
     },
     {
       "chapter": 5,
@@ -3844,7 +3894,8 @@
       "id": "q426",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "字符串与字符数组"
+      "knowledge": "字符串与字符数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nbool isPal(char s[], int l, int r) {\n    if (l >= r)\n        return true;\n    if (s[l] != s[r])\n        return false;\n    return isPal(s, l + 1, r - 1);\n}\nint main() {\n    char s[500];\n    cin >> s;\n    int n = 0;\n    while (s[n] != 0)\n        n++;\n    cout << (isPal(s, 0, n - 1) ? \"YES\" : \"NO\");\n}\n"
     },
     {
       "chapter": 5,
@@ -3881,7 +3932,8 @@
       "id": "q429",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "二维数组"
+      "knowledge": "二维数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, a[50][50];\n    cin >> n;\n    for (int i = 0; i < n; i++)\n        for (int j = 0; j < n; j++)\n            cin >> a[i][j];\n    bool ok = true;\n    for (int i = 0; i < n; i++)\n        for (int j = i + 1; j < n; j++)\n            if (a[i][j] != a[j][i])\n                ok = false;\n    cout << (ok ? \"YES\" : \"NO\");\n}\n"
     },
     {
       "chapter": 5,
@@ -3918,7 +3970,8 @@
       "id": "q430",
       "typeName": "编程题",
       "difficultyName": "困难",
-      "knowledge": "二维数组"
+      "knowledge": "二维数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, m, p, a[30][30], b[30][30], c[30][30] = {};\n    cin >> n >> m >> p;\n    for (int i = 0; i < n; i++)\n        for (int j = 0; j < m; j++)\n            cin >> a[i][j];\n    for (int i = 0; i < m; i++)\n        for (int j = 0; j < p; j++)\n            cin >> b[i][j];\n    for (int i = 0; i < n; i++)\n        for (int j = 0; j < p; j++)\n            for (int k = 0; k < m; k++)\n                c[i][j] += a[i][k] * b[k][j];\n    for (int i = 0; i < n; i++) {\n        for (int j = 0; j < p; j++) {\n            if (j)\n                cout << \" \";\n            cout << c[i][j];\n        }\n        cout << \"\\n\";\n    }\n}\n"
     },
     {
       "chapter": 5,
@@ -3955,7 +4008,8 @@
       "id": "q431",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "二维数组"
+      "knowledge": "二维数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, m, a[50][50];\n    cin >> n >> m;\n    for (int i = 0; i < n; i++)\n        for (int j = 0; j < m; j++)\n            cin >> a[i][j];\n    for (int i = 0; i < n; i++) {\n        int mx = a[i][0];\n        for (int j = 1; j < m; j++)\n            if (a[i][j] > mx)\n                mx = a[i][j];\n        cout << mx << \"\\n\";\n    }\n}\n"
     },
     {
       "chapter": 5,
@@ -3992,7 +4046,8 @@
       "id": "q432",
       "typeName": "编程题",
       "difficultyName": "困难",
-      "knowledge": "二维数组"
+      "knowledge": "二维数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, a[50][50];\n    cin >> n;\n    for (int i = 0; i < n; i++)\n        for (int j = 0; j < n; j++)\n            cin >> a[i][j];\n    int top = 0, bottom = n - 1, left = 0, right = n - 1;\n    bool first = true;\n    while (top <= bottom && left <= right) {\n        for (int j = left; j <= right; j++) {\n            if (!first)\n                cout << \" \";\n            cout << a[top][j];\n            first = false;\n        }\n        top++;\n        for (int i = top; i <= bottom; i++) {\n            if (!first)\n                cout << \" \";\n            cout << a[i][right];\n            first = false;\n        }\n        right--;\n        if (top <= bottom) {\n            for (int j = right; j >= left; j--) {\n                if (!first)\n                    cout << \" \";\n                cout << a[bottom][j];\n                first = false;\n            }\n            bottom--;\n        }\n        if (left <= right) {\n            for (int i = bottom; i >= top; i--) {\n                if (!first)\n                    cout << \" \";\n                cout << a[i][left];\n                first = false;\n            }\n            left++;\n        }\n    }\n}\n"
     },
     {
       "chapter": 5,
@@ -4029,7 +4084,8 @@
       "id": "q437",
       "typeName": "编程题",
       "difficultyName": "困难",
-      "knowledge": "字符串与字符数组"
+      "knowledge": "字符串与字符数组",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    char a[1000], b[1000];\n    int x[1000] = {}, y[1000] = {}, z[1001] = {};\n    cin >> a >> b;\n    int n = 0, m = 0;\n    while (a[n] != 0)\n        n++;\n    while (b[m] != 0)\n        m++;\n    for (int i = 0; i < n; i++)\n        x[i] = a[n - 1 - i] - '0';\n    for (int i = 0; i < m; i++)\n        y[i] = b[m - 1 - i] - '0';\n    int len = n > m ? n : m;\n    for (int i = 0; i < len; i++) {\n        z[i] += x[i] + y[i];\n        z[i + 1] = z[i] / 10;\n        z[i] %= 10;\n    }\n    if (z[len])\n        cout << z[len];\n    for (int i = len - 1; i >= 0; i--)\n        cout << z[i];\n}\n"
     },
     {
       "chapter": 5,
@@ -4066,7 +4122,8 @@
       "id": "q438",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "结构体类型"
+      "knowledge": "结构体类型",
+      "solutionPretty": "#include <cmath>\n#include <iomanip>\n#include <iostream>\nusing namespace std;\nstruct Point {\n    int x, y;\n};\nint main() {\n    Point a, b;\n    cin >> a.x >> a.y >> b.x >> b.y;\n    double d = sqrt((double)(a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));\n    cout << fixed << setprecision(2) << d;\n}\n"
     },
     {
       "chapter": 5,
@@ -4103,7 +4160,8 @@
       "id": "q439",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "结构体类型"
+      "knowledge": "结构体类型",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nstruct Student {\n    char name[30];\n    int score;\n};\nint main() {\n    int n;\n    cin >> n;\n    Student a[100];\n    for (int i = 0; i < n; i++)\n        cin >> a[i].name >> a[i].score;\n    int best = 0;\n    for (int i = 1; i < n; i++)\n        if (a[i].score > a[best].score)\n            best = i;\n    cout << a[best].name;\n}\n"
     },
     {
       "chapter": 5,
@@ -4140,7 +4198,8 @@
       "id": "q440",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "结构体类型"
+      "knowledge": "结构体类型",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nstruct Book {\n    char name[40];\n    double price;\n};\nint main() {\n    int n;\n    cin >> n;\n    Book a[100];\n    for (int i = 0; i < n; i++)\n        cin >> a[i].name >> a[i].price;\n    for (int i = 0; i < n - 1; i++)\n        for (int j = i + 1; j < n; j++)\n            if (a[j].price < a[i].price) {\n                Book t = a[i];\n                a[i] = a[j];\n                a[j] = t;\n            }\n    for (int i = 0; i < n; i++)\n        cout << a[i].name << \"\\n\";\n}\n"
     },
     {
       "chapter": 5,
@@ -4177,7 +4236,8 @@
       "id": "q441",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "结构体类型"
+      "knowledge": "结构体类型",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nstruct Date {\n    int y, m, d;\n};\nint main() {\n    Date a, b;\n    cin >> a.y >> a.m >> a.d >> b.y >> b.m >> b.d;\n    bool aFirst = (a.y < b.y) || (a.y == b.y && a.m < b.m) || (a.y == b.y && a.m == b.m && a.d <= b.d);\n    Date e = aFirst ? a : b;\n    cout << e.y << \"-\" << e.m << \"-\" << e.d;\n}\n"
     },
     {
       "chapter": 5,
@@ -4214,7 +4274,8 @@
       "id": "q442",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "指针、指针运算与函数指针"
+      "knowledge": "指针、指针运算与函数指针",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nvoid swp(int* a, int* b) {\n    int t = *a;\n    *a = *b;\n    *b = t;\n}\nint main() {\n    int a, b;\n    cin >> a >> b;\n    swp(&a, &b);\n    cout << a << \" \" << b;\n}\n"
     },
     {
       "chapter": 5,
@@ -4251,7 +4312,8 @@
       "id": "q443",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "动态内存与链表"
+      "knowledge": "动态内存与链表",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n;\n    cin >> n;\n    int* a = new int[n];\n    for (int i = 0; i < n; i++)\n        cin >> a[i];\n    for (int i = n - 1; i >= 0; i--) {\n        if (i < n - 1)\n            cout << \" \";\n        cout << a[i];\n    }\n    delete[] a;\n}\n"
     },
     {
       "chapter": 5,
@@ -4288,7 +4350,8 @@
       "id": "q444",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "动态内存与链表"
+      "knowledge": "动态内存与链表",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nstruct Node {\n    int v;\n    Node* next;\n};\nint main() {\n    int n;\n    cin >> n;\n    Node* head = nullptr;\n    for (int i = 0; i < n; i++) {\n        int x;\n        cin >> x;\n        Node* p = new Node;\n        p->v = x;\n        p->next = head;\n        head = p;\n    }\n    int c = 0;\n    for (Node* p = head; p != nullptr; p = p->next)\n        c++;\n    cout << c;\n    while (head) {\n        Node* p = head;\n        head = head->next;\n        delete p;\n    }\n}\n"
     },
     {
       "chapter": 5,
@@ -4325,7 +4388,8 @@
       "id": "q445",
       "typeName": "编程题",
       "difficultyName": "入门",
-      "knowledge": "引用类型"
+      "knowledge": "引用类型",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nvoid addTen(int& x) {\n    x += 10;\n}\nint main() {\n    int a;\n    cin >> a;\n    addTen(a);\n    cout << a;\n}\n"
     },
     {
       "chapter": 5,
@@ -4366,7 +4430,8 @@
       "id": "q447",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "枚举类型"
+      "knowledge": "枚举类型",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nenum Status { CREATED,\n              PAID,\n              SHIPPED,\n              DONE };\nint main() {\n    int x;\n    cin >> x;\n    Status s = (Status)x;\n    switch (s) {\n        case CREATED:\n            cout << \"CREATED\";\n            break;\n        case PAID:\n            cout << \"PAID\";\n            break;\n        case SHIPPED:\n            cout << \"SHIPPED\";\n            break;\n        default:\n            cout << \"DONE\";\n    }\n}\n"
     }
   ]
 }

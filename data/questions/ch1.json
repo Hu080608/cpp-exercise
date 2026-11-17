@@ -992,7 +992,8 @@
       "typeName": "编程题",
       "difficultyName": "入门",
       "knowledge": "计算机与程序的基本概念",
-      "origin": "原创编程题 · 课程知识点综合"
+      "origin": "原创编程题 · 课程知识点综合",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    cout << \"Hello, C++!\";\n    return 0;\n}\n"
     },
     {
       "chapter": 1,
@@ -1035,7 +1036,8 @@
       "typeName": "编程题",
       "difficultyName": "简单",
       "knowledge": "程序设计范式、步骤与语言",
-      "origin": "原创编程题 · 课程知识点综合"
+      "origin": "原创编程题 · 课程知识点综合",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n;\n    cin >> n;\n    cout << n * 2;\n    return 0;\n}\n"
     },
     {
       "chapter": 1,
@@ -1098,7 +1100,8 @@
       "id": "q298",
       "typeName": "编程题",
       "difficultyName": "入门",
-      "knowledge": "C++ 词法：字符集、标识符、关键词与注释"
+      "knowledge": "C++ 词法：字符集、标识符、关键词与注释",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int a, b;\n    cin >> a >> b;\n    cout << a + b;\n}\n"
     }
   ]
 }

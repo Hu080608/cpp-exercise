@@ -1544,7 +1544,8 @@
       "typeName": "编程题",
       "difficultyName": "入门",
       "knowledge": "宏、内联函数、默认参数与命名空间",
-      "origin": "原创编程题 · 课程知识点综合"
+      "origin": "原创编程题 · 课程知识点综合",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint square(int x) {\n    return x * x;\n}\nint main() {\n    int n;\n    cin >> n;\n    cout << square(n);\n}\n"
     },
     {
       "chapter": 4,
@@ -1582,7 +1583,8 @@
       "typeName": "编程题",
       "difficultyName": "简单",
       "knowledge": "递归函数",
-      "origin": "原创编程题 · 课程知识点综合"
+      "origin": "原创编程题 · 课程知识点综合",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint factorial(int n) {\n    if (n <= 1)\n        return 1;\n    return n * factorial(n - 1);\n}\nint main() {\n    int n;\n    cin >> n;\n    cout << factorial(n);\n}\n"
     },
     {
       "chapter": 4,
@@ -1620,7 +1622,8 @@
       "typeName": "编程题",
       "difficultyName": "中等",
       "knowledge": "函数重载、函数指针、Lambda、范围 for 与 auto",
-      "origin": "原创编程题 · 课程知识点综合"
+      "origin": "原创编程题 · 课程知识点综合",
+      "solutionPretty": "#include <iomanip>\n#include <iostream>\nusing namespace std;\ndouble area(double r) {\n    return 3.14 * r * r;\n}\ndouble area(double w, double h) {\n    return w * h;\n}\nint main() {\n    int k;\n    cin >> k;\n    if (k == 1) {\n        double r;\n        cin >> r;\n        cout << fixed << setprecision(2) << area(r);\n    } else {\n        double w, h;\n        cin >> w >> h;\n        cout << fixed << setprecision(2) << area(w, h);\n    }\n}\n"
     },
     {
       "chapter": 4,
@@ -1659,7 +1662,8 @@
       "typeName": "编程题",
       "difficultyName": "困难",
       "knowledge": "动态内存：new/delete 与 malloc/free",
-      "origin": "原创编程题 · 课程知识点综合"
+      "origin": "原创编程题 · 课程知识点综合",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n;\n    cin >> n;\n    int* a = new int[n];\n    for (int i = 0; i < n; i++)\n        cin >> a[i];\n    int m = a[0];\n    for (int i = 1; i < n; i++)\n        if (a[i] > m)\n            m = a[i];\n    cout << m;\n    delete[] a;\n}\n"
     },
     {
       "chapter": 4,
@@ -1766,7 +1770,8 @@
       "id": "q340",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "递归函数"
+      "knowledge": "递归函数",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nlong long power(long long b, int e) {\n    if (e == 0)\n        return 1;\n    long long h = power(b, e / 2);\n    if (e % 2 == 0)\n        return h * h;\n    return h * h * b;\n}\nint main() {\n    long long b;\n    int e;\n    cin >> b >> e;\n    cout << power(b, e);\n}\n"
     },
     {
       "chapter": 4,
@@ -1806,7 +1811,8 @@
       "id": "q341",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "递归函数"
+      "knowledge": "递归函数",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nvoid hanoi(int n, char from, char to, char via) {\n    if (n == 0)\n        return;\n    hanoi(n - 1, from, via, to);\n    cout << from << \"->\" << to << \"\\n\";\n    hanoi(n - 1, via, to, from);\n}\nint main() {\n    int n;\n    cin >> n;\n    hanoi(n, 'A', 'C', 'B');\n}\n"
     },
     {
       "chapter": 4,
@@ -1846,7 +1852,8 @@
       "id": "q342",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "递归函数"
+      "knowledge": "递归函数",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, x, a[1000];\n    cin >> n;\n    for (int i = 0; i < n; i++)\n        cin >> a[i];\n    cin >> x;\n    int l = 0, r = n - 1, ans = -1;\n    while (l <= r) {\n        int m = (l + r) / 2;\n        if (a[m] == x) {\n            ans = m;\n            break;\n        } else if (a[m] < x)\n            l = m + 1;\n        else\n            r = m - 1;\n    }\n    cout << ans;\n}\n"
     },
     {
       "chapter": 4,
@@ -1883,7 +1890,8 @@
       "id": "q421",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "递归函数"
+      "knowledge": "递归函数",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint sumTo(int n) {\n    if (n == 1)\n        return 1;\n    return n + sumTo(n - 1);\n}\nint main() {\n    int n;\n    cin >> n;\n    cout << sumTo(n);\n}\n"
     },
     {
       "chapter": 4,
@@ -1920,7 +1928,8 @@
       "id": "q422",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "递归函数"
+      "knowledge": "递归函数",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint fib(int n) {\n    if (n <= 2)\n        return 1;\n    return fib(n - 1) + fib(n - 2);\n}\nint main() {\n    int n;\n    cin >> n;\n    cout << fib(n);\n}\n"
     },
     {
       "chapter": 4,
@@ -1957,7 +1966,8 @@
       "id": "q423",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "递归函数"
+      "knowledge": "递归函数",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint gcd(int a, int b) {\n    return b == 0 ? a : gcd(b, a % b);\n}\nint main() {\n    int a, b;\n    cin >> a >> b;\n    cout << gcd(a, b);\n}\n"
     },
     {
       "chapter": 4,
@@ -1994,7 +2004,8 @@
       "id": "q424",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "递归函数"
+      "knowledge": "递归函数",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint digitSum(int n) {\n    if (n < 10)\n        return n;\n    return n % 10 + digitSum(n / 10);\n}\nint main() {\n    int n;\n    cin >> n;\n    cout << digitSum(n);\n}\n"
     },
     {
       "chapter": 4,
@@ -2031,7 +2042,8 @@
       "id": "q425",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "递归函数"
+      "knowledge": "递归函数",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint maxInArray(int a[], int l, int r) {\n    if (l == r)\n        return a[l];\n    int m = maxInArray(a, l + 1, r);\n    return a[l] > m ? a[l] : m;\n}\nint main() {\n    int n, a[1000];\n    cin >> n;\n    for (int i = 0; i < n; i++)\n        cin >> a[i];\n    cout << maxInArray(a, 0, n - 1);\n}\n"
     },
     {
       "chapter": 4,
@@ -2068,7 +2080,8 @@
       "id": "q427",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "递归函数"
+      "knowledge": "递归函数",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nlong long moves(int n) {\n    if (n == 0)\n        return 0;\n    return 2 * moves(n - 1) + 1;\n}\nint main() {\n    int n;\n    cin >> n;\n    cout << moves(n);\n}\n"
     },
     {
       "chapter": 4,
@@ -2105,7 +2118,8 @@
       "id": "q428",
       "typeName": "编程题",
       "difficultyName": "困难",
-      "knowledge": "递归函数"
+      "knowledge": "递归函数",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint n, a[10], used[10];\nvoid dfs(int k) {\n    if (k == n) {\n        for (int i = 0; i < n; i++)\n            cout << a[i];\n        cout << \"\\n\";\n        return;\n    }\n    for (int i = 1; i <= n; i++)\n        if (!used[i]) {\n            used[i] = 1;\n            a[k] = i;\n            dfs(k + 1);\n            used[i] = 0;\n        }\n}\nint main() {\n    cin >> n;\n    dfs(0);\n}\n"
     },
     {
       "chapter": 4,
@@ -2142,7 +2156,8 @@
       "id": "q446",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "宏、内联函数、默认参数与命名空间"
+      "knowledge": "宏、内联函数、默认参数与命名空间",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nlong long power(int base, int exp = 2) {\n    long long r = 1;\n    for (int i = 0; i < exp; i++)\n        r *= base;\n    return r;\n}\nint main() {\n    int a;\n    cin >> a;\n    cout << power(a);\n}\n"
     }
   ]
 }

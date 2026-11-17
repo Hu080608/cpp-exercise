@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """汇总章节题库 -> data/questions/*.json，并做知识点/字段/覆盖矩阵校验。"""
-import json, os, re, sys
+import json, os, re, sys, shutil, subprocess
 from collections import Counter, defaultdict
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -16,6 +16,21 @@ with open(os.path.join(ROOT, "data", "knowledge.js"), encoding="utf-8") as f:
     src = f.read()
 for m in re.finditer(r'id:\s*"([^"]+)"[\s\S]*?chapter:\s*(\d+)[\s\S]*?section:\s*"([^"]+)"[\s\S]*?title:\s*"([^"]+)"[\s\S]*?source:\s*"([^"]+)"[\s\S]*?slides:\s*"([^"]+)"', src):
     KNOWLEDGE[m.group(1)] = {"chapter": int(m.group(2)), "section": m.group(3), "title": m.group(4), "source": m.group(5), "slides": m.group(6)}
+
+CLANG_FORMAT = shutil.which('clang-format')
+FORMAT_STYLE = '{BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 0, AllowShortFunctionsOnASingleLine: None, AllowShortIfStatementsOnASingleLine: false, AllowShortLoopsOnASingleLine: false, BreakBeforeBraces: Attach}'
+
+def pretty_cpp(code):
+    """用 clang-format 生成参考解展示版；未安装时保留原解。"""
+    code = str(code or '').strip()
+    if not CLANG_FORMAT:
+        return code + ('\n' if code else '')
+    try:
+        r = subprocess.run([CLANG_FORMAT, '--style=' + FORMAT_STYLE, '--assume-filename=main.cpp'],
+                           input=code + '\n', text=True, capture_output=True, timeout=10)
+        return (r.stdout or code).strip() + '\n'
+    except Exception:
+        return code + '\n'
 
 TYPE_ORDER = ["single", "multiple", "judge", "fill", "code", "programming"]
 DIFFS = [1, 2, 3, 4]
@@ -36,6 +51,7 @@ for i, item in enumerate(qcommon.QUESTIONS, 1):
     item.setdefault("source", k["source"] + " · " + k["slides"])
     if item.get("type") == "programming":
         item.setdefault("origin", "原创编程题 · 课程知识点综合")
+        item["solutionPretty"] = pretty_cpp(item.get("solution", ""))
     if qid in seen:
         raise SystemExit("重复题号 " + qid)
     seen.add(qid)

@@ -760,7 +760,8 @@
       "typeName": "编程题",
       "difficultyName": "入门",
       "knowledge": "输入输出与格式化",
-      "origin": "原创编程题 · 课程知识点综合"
+      "origin": "原创编程题 · 课程知识点综合",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n;\n    cin >> n;\n    cout << n;\n    return 0;\n}\n"
     },
     {
       "chapter": 2,
@@ -1067,7 +1068,8 @@
       "typeName": "编程题",
       "difficultyName": "简单",
       "knowledge": "算术、关系与逻辑运算",
-      "origin": "原创编程题 · 课程知识点综合"
+      "origin": "原创编程题 · 课程知识点综合",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int a, b;\n    cin >> a >> b;\n    cout << a + b << \" \" << a - b << \" \" << a * b << \" \" << a / b << \" \" << a % b;\n    return 0;\n}\n"
     },
     {
       "chapter": 2,
@@ -1535,7 +1537,8 @@
       "typeName": "编程题",
       "difficultyName": "中等",
       "knowledge": "输入输出与格式化",
-      "origin": "原创编程题 · 课程知识点综合"
+      "origin": "原创编程题 · 课程知识点综合",
+      "solutionPretty": "#include <iomanip>\n#include <iostream>\nusing namespace std;\nint main() {\n    double x;\n    cin >> x;\n    cout << fixed << setprecision(2) << x * x;\n    return 0;\n}\n"
     },
     {
       "chapter": 2,
@@ -1701,7 +1704,8 @@
       "id": "q299",
       "typeName": "编程题",
       "difficultyName": "入门",
-      "knowledge": "输入输出与格式化"
+      "knowledge": "输入输出与格式化",
+      "solutionPretty": "#include <iomanip>\n#include <iostream>\nusing namespace std;\nint main() {\n    double c;\n    cin >> c;\n    cout << fixed << setprecision(1) << c * 9 / 5 + 32;\n}\n"
     },
     {
       "chapter": 2,
@@ -1741,7 +1745,8 @@
       "id": "q300",
       "typeName": "编程题",
       "difficultyName": "入门",
-      "knowledge": "输入输出与格式化"
+      "knowledge": "输入输出与格式化",
+      "solutionPretty": "#include <iomanip>\n#include <iostream>\nusing namespace std;\nint main() {\n    double r;\n    cin >> r;\n    cout << fixed << setprecision(2) << 3.14 * r * r << \" \" << 2 * 3.14 * r;\n}\n"
     },
     {
       "chapter": 2,
@@ -1781,7 +1786,8 @@
       "id": "q301",
       "typeName": "编程题",
       "difficultyName": "入门",
-      "knowledge": "算术、关系与逻辑运算"
+      "knowledge": "算术、关系与逻辑运算",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int t;\n    cin >> t;\n    cout << t / 3600 << \":\" << t % 3600 / 60 << \":\" << t % 60;\n}\n"
     },
     {
       "chapter": 2,
@@ -1820,7 +1826,8 @@
       "id": "q302",
       "typeName": "编程题",
       "difficultyName": "入门",
-      "knowledge": "算术、关系与逻辑运算"
+      "knowledge": "算术、关系与逻辑运算",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n;\n    cin >> n;\n    cout << n / 100 + n / 10 % 10 + n % 10;\n}\n"
     },
     {
       "chapter": 2,
@@ -1857,7 +1864,8 @@
       "id": "q348",
       "typeName": "编程题",
       "difficultyName": "入门",
-      "knowledge": "输入输出与格式化"
+      "knowledge": "输入输出与格式化",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int p, q;\n    cin >> p >> q;\n    cout << p * q;\n}\n"
     },
     {
       "chapter": 2,
@@ -1894,7 +1902,8 @@
       "id": "q349",
       "typeName": "编程题",
       "difficultyName": "入门",
-      "knowledge": "算术、关系与逻辑运算"
+      "knowledge": "算术、关系与逻辑运算",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int w, h;\n    cin >> w >> h;\n    cout << w * h << \" \" << 2 * (w + h);\n}\n"
     },
     {
       "chapter": 2,
@@ -1931,7 +1940,8 @@
       "id": "q350",
       "typeName": "编程题",
       "difficultyName": "入门",
-      "knowledge": "类型转换、表达式求值与位运算"
+      "knowledge": "类型转换、表达式求值与位运算",
+      "solutionPretty": "#include <iomanip>\n#include <iostream>\nusing namespace std;\nint main() {\n    double b, h;\n    cin >> b >> h;\n    cout << fixed << setprecision(2) << b * h / 2;\n}\n"
     },
     {
       "chapter": 2,
@@ -1968,7 +1978,8 @@
       "id": "q351",
       "typeName": "编程题",
       "difficultyName": "入门",
-      "knowledge": "算术、关系与逻辑运算"
+      "knowledge": "算术、关系与逻辑运算",
+      "solutionPretty": "#include <iomanip>\n#include <iostream>\nusing namespace std;\nint main() {\n    double a, b, h;\n    cin >> a >> b >> h;\n    cout << fixed << setprecision(1) << (a + b) * h / 2;\n}\n"
     },
     {
       "chapter": 2,
@@ -2005,7 +2016,8 @@
       "id": "q352",
       "typeName": "编程题",
       "difficultyName": "入门",
-      "knowledge": "算术、关系与逻辑运算"
+      "knowledge": "算术、关系与逻辑运算",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int t;\n    cin >> t;\n    cout << t / 60 << \":\" << t % 60;\n}\n"
     },
     {
       "chapter": 2,
@@ -2042,7 +2054,8 @@
       "id": "q353",
       "typeName": "编程题",
       "difficultyName": "入门",
-      "knowledge": "算术、关系与逻辑运算"
+      "knowledge": "算术、关系与逻辑运算",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n;\n    cin >> n;\n    cout << (n / 100) * (n / 10 % 10) * (n % 10);\n}\n"
     },
     {
       "chapter": 2,
@@ -2079,7 +2092,8 @@
       "id": "q356",
       "typeName": "编程题",
       "difficultyName": "入门",
-      "knowledge": "算术、关系与逻辑运算"
+      "knowledge": "算术、关系与逻辑运算",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int a, b;\n    cin >> a >> b;\n    cout << (a > b ? a : b);\n}\n"
     },
     {
       "chapter": 2,
@@ -2116,7 +2130,8 @@
       "id": "q357",
       "typeName": "编程题",
       "difficultyName": "入门",
-      "knowledge": "算术、关系与逻辑运算"
+      "knowledge": "算术、关系与逻辑运算",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int a, b, c;\n    cin >> a >> b >> c;\n    int m = a;\n    if (b < m)\n        m = b;\n    if (c < m)\n        m = c;\n    cout << m;\n}\n"
     },
     {
       "chapter": 2,
@@ -2157,7 +2172,8 @@
       "id": "q361",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "算术、关系与逻辑运算"
+      "knowledge": "算术、关系与逻辑运算",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int x, y;\n    cin >> x >> y;\n    if (x > 0 && y > 0)\n        cout << \"Q1\";\n    else if (x < 0 && y > 0)\n        cout << \"Q2\";\n    else if (x < 0 && y < 0)\n        cout << \"Q3\";\n    else\n        cout << \"Q4\";\n}\n"
     },
     {
       "chapter": 2,
@@ -2198,7 +2214,8 @@
       "id": "q362",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "算术、关系与逻辑运算"
+      "knowledge": "算术、关系与逻辑运算",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int h;\n    cin >> h;\n    if (h <= 40)\n        cout << h * 20;\n    else\n        cout << 40 * 20 + (h - 40) * 30;\n}\n"
     },
     {
       "chapter": 2,
@@ -2235,7 +2252,8 @@
       "id": "q363",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "类型转换、表达式求值与位运算"
+      "knowledge": "类型转换、表达式求值与位运算",
+      "solutionPretty": "#include <iomanip>\n#include <iostream>\nusing namespace std;\nint main() {\n    double x;\n    cin >> x;\n    double pay = x >= 100 ? x * 0.9 : x * 0.95;\n    cout << fixed << setprecision(2) << pay;\n}\n"
     },
     {
       "chapter": 2,
@@ -2276,7 +2294,8 @@
       "id": "q366",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "类型转换、表达式求值与位运算"
+      "knowledge": "类型转换、表达式求值与位运算",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    double w, h;\n    cin >> w >> h;\n    double b = w / (h * h);\n    if (b < 18.5)\n        cout << \"UNDER\";\n    else if (b < 24)\n        cout << \"NORMAL\";\n    else\n        cout << \"OVER\";\n}\n"
     },
     {
       "chapter": 2,
@@ -2317,7 +2336,8 @@
       "id": "q367",
       "typeName": "编程题",
       "difficultyName": "入门",
-      "knowledge": "算术、关系与逻辑运算"
+      "knowledge": "算术、关系与逻辑运算",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int a, b;\n    cin >> a >> b;\n    long long p = (long long)a * b;\n    if (p > 0)\n        cout << \"POSITIVE\";\n    else if (p < 0)\n        cout << \"NEGATIVE\";\n    else\n        cout << \"ZERO\";\n}\n"
     },
     {
       "chapter": 2,
@@ -2354,7 +2374,8 @@
       "id": "q370",
       "typeName": "编程题",
       "difficultyName": "入门",
-      "knowledge": "算术、关系与逻辑运算"
+      "knowledge": "算术、关系与逻辑运算",
+      "solutionPretty": "#include <cmath>\n#include <iostream>\nusing namespace std;\nint main() {\n    int a, b;\n    cin >> a >> b;\n    int s = a + b;\n    cout << s * s - abs(a - b);\n}\n"
     },
     {
       "chapter": 2,
@@ -2391,7 +2412,8 @@
       "id": "q381",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "算术、关系与逻辑运算"
+      "knowledge": "算术、关系与逻辑运算",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    long long a, n, r = 1;\n    cin >> a >> n;\n    for (int i = 0; i < n; i++)\n        r *= a;\n    cout << r;\n}\n"
     },
     {
       "chapter": 2,
@@ -2428,7 +2450,8 @@
       "id": "q390",
       "typeName": "编程题",
       "difficultyName": "简单",
-      "knowledge": "类型转换、表达式求值与位运算"
+      "knowledge": "类型转换、表达式求值与位运算",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, a[40], k = 0;\n    cin >> n;\n    if (n == 0) {\n        cout << 0;\n        return 0;\n    }\n    while (n > 0) {\n        a[k++] = n % 2;\n        n /= 2;\n    }\n    for (int i = k - 1; i >= 0; i--)\n        cout << a[i];\n}\n"
     },
     {
       "chapter": 2,
@@ -2469,7 +2492,8 @@
       "id": "q391",
       "typeName": "编程题",
       "difficultyName": "中等",
-      "knowledge": "类型转换、表达式求值与位运算"
+      "knowledge": "类型转换、表达式求值与位运算",
+      "solutionPretty": "#include <iostream>\nusing namespace std;\nint main() {\n    int n, a[40], k = 0;\n    char h[] = \"0123456789ABCDEF\";\n    cin >> n;\n    if (n == 0) {\n        cout << 0;\n        return 0;\n    }\n    while (n > 0) {\n        a[k++] = n % 16;\n        n /= 16;\n    }\n    for (int i = k - 1; i >= 0; i--)\n        cout << h[a[i]];\n}\n"
     }
   ]
 }
