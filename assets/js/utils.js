@@ -162,3 +162,80 @@
     return '';
   };
 })(window.CppU);
+/* 编程题参考解展示：轻量 C++ 格式化 + 复制 */
+(function (U) {
+  'use strict';
+  U.formatCpp = function (source) {
+    const text = String(source == null ? '' : source).replace(/\r/g, '');
+    let out = '', indent = 0, paren = 0, quote = null, escaped = false, needIndent = false;
+    function newline() { out = out.replace(/[ \t]+$/,'') + '\n'; needIndent = true; }
+    function emit(str) {
+      if (needIndent) { out += '    '.repeat(Math.max(0, indent)); needIndent = false; }
+      out += str;
+    }
+    function isBlockBrace(i) {
+      let j = i - 1;
+      while (j >= 0 && /\s/.test(text[j])) j--;
+      const prev = j >= 0 ? text[j] : '';
+      return prev !== '=' && prev !== ',' && prev !== '[' && prev !== '{';
+    }
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i];
+      if (quote) {
+        emit(c);
+        if (escaped) escaped = false;
+        else if (c === String.fromCharCode(92)) escaped = true;
+        else if (c === quote) quote = null;
+        continue;
+      }
+      if (c === '"' || c === "'") { quote = c; emit(c); continue; }
+      if (c === '\n') { if (!out.endsWith('\n')) newline(); else needIndent = true; continue; }
+      if (c === ' ' || c === '\t') {
+        if (!needIndent && out && !out.endsWith(' ') && !out.endsWith('\n') && !'([{;,)}'.includes(out[out.length - 1])) emit(' ');
+        continue;
+      }
+      if (c === '(') { paren++; emit(c); continue; }
+      if (c === ')') { paren = Math.max(0, paren - 1); emit(c); continue; }
+      if (c === ';' && paren === 0) { emit(';'); newline(); continue; }
+      if (c === '{' && isBlockBrace(i)) {
+        if (out && !out.endsWith(' ') && !out.endsWith('\n')) emit(' ');
+        emit('{'); newline(); indent++; needIndent = true; continue;
+      }
+      if (c === '}') {
+        if (!out.endsWith('\n')) newline();
+        indent = Math.max(0, indent - 1);
+        emit('}');
+        let j = i + 1;
+        while (j < text.length && text[j] === ' ') j++;
+        if (text[j] === ';') { emit(';'); newline(); i = j; }
+        else newline();
+        continue;
+      }
+      emit(c);
+    }
+    return out.replace(/\n{3,}/g, '\n\n').trim() + '\n';
+  };
+
+  U.copyText = async function (text) {
+    const value = String(text == null ? '' : text);
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(value);
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = value;
+        ta.style.cssText = 'position:fixed;left:-9999px;top:0;opacity:0';
+        document.body.appendChild(ta);
+        ta.focus(); ta.select();
+        const ok = document.execCommand('copy');
+        ta.remove();
+        if (!ok) throw new Error('copy failed');
+      }
+      U.toast('✓ 参考解已复制', 'ok');
+      return true;
+    } catch (e) {
+      U.toast('复制失败，请手动选中代码复制', 'bad');
+      return false;
+    }
+  };
+})(window.CppU);

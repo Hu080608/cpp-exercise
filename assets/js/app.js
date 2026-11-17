@@ -387,7 +387,7 @@
 
   function renderFeedback(q, ok) {
     const ans = U.answerText(q);
-    const solution = q.type==='programming' && q.solution ? '<div class="code-block" style="margin-top:14px"><div class="code-bar"><i></i><i></i><i></i><span>参考解 · C++</span></div><pre><code>'+U.esc(q.solution)+'</code></pre></div>' : '';
+    const solution = q.type==='programming' && q.solution ? '<div class="code-block" style="margin-top:14px"><div class="code-bar"><i></i><i></i><i></i><span>参考解 · C++</span><button class="code-copy" data-action="copy-solution" data-id="'+U.attr(q.id)+'">'+U.icon('doc')+'复制代码</button></div><pre><code>'+U.esc(U.formatCpp(q.solution))+'</code></pre></div>' : '';
     return '<div class="feedback '+(ok?'ok':'bad')+'"><div class="feedback-head">'+U.icon(ok?'check':'x')+(ok?'回答正确':'回答错误')+'<span class="pill '+(ok?'ok':'bad')+'" style="margin-left:auto">'+(ok?'+1 正确':'已加入错题复习')+'</span></div><div class="feedback-body">'+U.esc(q.explain)+(ok?'':'<div class="answer-line">正确答案：<b>'+U.esc(ans)+'</b></div>')+'<div class="source-line">'+U.icon('doc')+'<span>PPT 来源：'+U.esc(q.source)+'</span></div>'+solution+'</div></div>';
   }
 
@@ -732,6 +732,7 @@
       case 'prev-question': prevQuestion(); break;
       case 'finish-session': finishSession(); break;
       case 'toggle-favorite': toggleFavorite(el.dataset.id); break;
+      case 'copy-solution': { const q=QID[el.dataset.id]; if(q&&q.solution)U.copyText(U.formatCpp(q.solution)); break; }
       case 'open-map': { const d=document.getElementById('quiz-drawer'); if(d)d.classList.add('open'); break; }
       case 'close-map': { const d=document.getElementById('quiz-drawer'); if(d)d.classList.remove('open'); break; }
       case 'goto-question': { const s=state.session; if(s){ s.idx=Number(el.dataset.i); save(true); renderRoute(); } break; }

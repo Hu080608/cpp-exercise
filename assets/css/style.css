@@ -418,3 +418,8 @@ html[data-theme="dark"] { color-scheme: dark; }
   .brand-name { font-size: 15px; }
   .nav-actions .icon-btn { width: 35px; height: 35px; }
 }
+/* 参考解换行与复制 */
+.code-copy { margin-left: auto; display: inline-flex; align-items: center; gap: 4px; padding: 4px 8px; border: 1px solid rgba(255,255,255,.16); border-radius: 7px; background: rgba(255,255,255,.06); color: rgba(255,255,255,.72); font-size: 10px; font-weight: 600; transition: all .15s; }
+.code-copy:hover { color: #fff; background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.28); }
+.code-copy svg { width: 12px; height: 12px; }
+.code-block pre code { white-space: pre; }
