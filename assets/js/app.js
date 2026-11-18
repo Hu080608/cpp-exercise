@@ -5,6 +5,7 @@
   const SAND = window.CppSandbox;
   const KNOWLEDGE = window.CPP_KNOWLEDGE || [];
   const DOWNLOADS = window.CPP_DOWNLOADS || [];
+  const EXAMS = window.CPP_EXAMS || [];
   const STORE_KEY = 'cpplab.v2';
   const CHAPTER_TITLES = {
     1: { title: '程序和 C++ 基础', short: '程序基础', desc: '计算机组成、数制、程序设计语言与 C++ 词法', accent: 'green' },
@@ -17,14 +18,16 @@
   const DIFF_LABEL = { 1:'入门', 2:'简单', 3:'中等', 4:'困难' };
   const DIFF_CLASS = { 1:'ok', 2:'accent', 3:'gold', 4:'bad' };
   const TYPE_ICON = { single:'target', multiple:'layers', judge:'check', fill:'keyboard', code:'code', programming:'terminal' };
+  const STATUS_LABEL = { new:'未做', done:'已做', wrong:'错题', mastered:'已掌握', fav:'收藏' };
 
   let QUESTIONS = [], QID = {}, TOPICS = {}, MANIFEST = { count: 0 };
   let route = parseHash();
-  let practiceFilter = { chapter:'all', topic:'all', type:'all', diff:'all', status:'all', q:'' };
+  let practiceFilter = { chapters:[1,2,3,4,5], topics:[], types:['single','multiple','judge','fill','code','programming'], diffs:[1,2,3,4], statuses:['new','done','wrong','mastered','fav'], q:'' };
   let progFilter = { diff:'all', status:'all', q:'' };
   let pendingProgram = {};
   let currentQuestionStarted = Date.now();
   let currentQuestionId = null;
+  let examTimer = null;
 
   const DEFAULT_STATE = {
     version: 2,
@@ -32,6 +35,7 @@
     settings: { theme:'system', autoNext:false, showSource:true, motion:true, dailyGoal:20, lineWrap:false },
     session: null,
     lastPractice: null,
+    examResults: {},
     createdAt: Date.now()
   };
   let state = loadState();
@@ -40,7 +44,7 @@
     if (!raw || typeof raw !== 'object') return JSON.parse(JSON.stringify(DEFAULT_STATE));
     const s = Object.assign({}, JSON.parse(JSON.stringify(DEFAULT_STATE)), raw);
     s.records = raw.records || {}; s.favorites = Array.isArray(raw.favorites) ? raw.favorites : [];
-    s.activity = raw.activity || {}; s.drafts = raw.drafts || {};
+    s.activity = raw.activity || {}; s.drafts = raw.drafts || {}; s.examResults = raw.examResults || {};
     s.settings = Object.assign({}, DEFAULT_STATE.settings, raw.settings || {});
     return s;
   }
@@ -76,6 +80,7 @@
     if (['practice','chapter','topic','quiz'].includes(route.name)) return 'practice';
     if (['knowledge'].includes(route.name)) return 'knowledge';
     if (['stats'].includes(route.name)) return 'stats';
+    if (['exams','exam'].includes(route.name)) return 'exams';
     if (['wrong','favorites'].includes(route.name)) return 'wrong';
     if (route.name === 'programming') return 'programming';
     if (['sandbox'].includes(route.name)) return 'sandbox';
@@ -87,13 +92,15 @@
     const active = opts.active || activeNav();
     const navItems = [
       { key:'home', label:'首页', icon:'home' }, { key:'practice', label:'题库', icon:'book' },
-      { key:'programming', label:'编程', icon:'terminal' }, { key:'knowledge', label:'知识点', icon:'brain' },
-      { key:'stats', label:'统计', icon:'chart' }, { key:'sandbox', label:'沙箱', icon:'terminal' }
+      { key:'programming', label:'编程', icon:'terminal' }, { key:'exams', label:'模考', icon:'award' },
+      { key:'knowledge', label:'知识点', icon:'brain' }, { key:'stats', label:'统计', icon:'chart' },
+      { key:'sandbox', label:'沙箱', icon:'terminal' }
     ];
     const topNavItems = navItems.concat([{ key:'wrong', label:'错题', icon:'fire' }]);
     const top = '<div class="shell topnav-inner"><a class="brand" href="#/home" aria-label="C++ Lab 首页"><span class="brand-mark">&lt;/&gt;</span><span><span class="brand-name">C++ Lab</span><span class="brand-sub">PROGRAMMING PRACTICE</span></span></a>' +
       '<nav class="nav-links" aria-label="主导航">' + topNavItems.map(n => '<a class="nav-link ' + (active===n.key?'active':'') + '" href="#/' + n.key + '">' + n.label + '</a>').join('') + '</nav>' +
-      '<div class="nav-actions"><button class="icon-btn" data-action="open-search" title="搜索题目 (/)">' + U.icon('search') + '</button>' +
+      '<div class="nav-actions"><button class="icon-btn" data-action="open-favorites" title="我的收藏">' + U.icon('star') + '</button>' +
+      '<button class="icon-btn" data-action="open-search" title="搜索题目 (/)">' + U.icon('search') + '</button>' +
       '<button class="icon-btn" data-action="toggle-theme" title="切换主题">' + U.icon(state.settings.theme==='dark'?'bulb':'moon') + '</button>' +
       '<button class="icon-btn" data-nav="settings" data-action="open-settings" title="设置">' + U.icon('gear') + '</button></div></div>';
     const tab = '<nav class="mobile-tabbar" aria-label="移动端导航">' + navItems.map(n => '<button class="' + (active===n.key?'active':'') + '" data-action="tab" data-tab="' + n.key + '">' + U.icon(n.icon) + '<span>' + n.label + '</span></button>').join('') + '</nav>';
@@ -123,6 +130,7 @@
       k.questions = QUESTIONS.filter(q => q.topicId === k.id);
       TOPICS[k.id] = k;
     });
+    practiceFilter.topics = KNOWLEDGE.map(k => k.id);
   }
   function recOf(id) { return state.records[id] || null; }
   function isDone(id) { const r = recOf(id); return !!(r && r.attempts > 0); }
@@ -217,6 +225,7 @@
     const recents = (state.lastPractice && state.lastPractice.answered) ? '<div class="card" style="margin-top:14px"><div class="card-head"><div><h3>继续上次练习</h3><p>' + U.esc(state.lastPractice.title) + ' · 已做 ' + state.lastPractice.answered + '/' + state.lastPractice.qids.length + ' 题</p></div><button class="btn btn-soft btn-sm" data-action="resume-last">继续</button></div><div class="progress"><i style="width:' + U.pct(state.lastPractice.answered, state.lastPractice.qids.length) + '%"></i></div></div>' : '';
     const content = '<div class="home-grid"><div>' +
       '<section class="hero"><div class="row between" style="align-items:flex-start"><div><div class="kicker" style="color:rgba(255,255,255,.72)">AUTUMN SEMESTER · C++</div><h1>把“看得懂”变成<br><em style="color:#fff">写得对、跑得通。</em></h1><p>' + QUESTIONS.length + ' 道题覆盖 PPT 第 1–5 章，六种题型、四档难度，配合真正能编译运行的 C++ 沙箱。</p></div>' + ringSvg(donePct, '已练') + '</div><div class="hero-stats"><div class="hero-stat"><b>' + g.done + '<span style="font-size:13px;opacity:.65"> / ' + g.total + '</span></b><span>已做题数</span></div><div class="hero-stat"><b>' + g.accuracy + '%</b><span>累计正确率</span></div><div class="hero-stat"><b>' + streak + '</b><span>连续学习天数</span></div><div class="hero-stat"><b>' + g.wrongCount + '</b><span>待复习错题</span></div></div></section>' +
+      '<div class="exam-banner"><div class="exam-banner-main"><span class="pill gold">'+U.icon("award")+' 期中模拟</span><h3>10 道选择题 + 5 道填空题 + 4 道编程题</h3><p>每套限时 120 分钟 · 按期中范围组卷 · 不考概念题</p></div><div class="row wrap"><span class="exam-num">'+EXAMS.length+'<small> 套</small></span><button class="btn btn-primary" data-action="open-exams">'+U.icon("play")+'进入模拟考</button></div></div>' +
       '<div class="section-head"><h2>今天从哪儿开始？</h2><span class="hint">推荐按“新题 → 错题 → 弱项”循环</span></div><div class="quick-grid four">' +
         quickCard('open-programming','terminal','编程训练场',programmingQuestions().length + ' 道编程题 · 真实编译评测') + quickCard('start-smart','spark','智能练习 20 题','优先新题与到期错题') + quickCard('start-wrong','fire', g.wrongCount ? '错题重练 · ' + g.wrongCount + ' 题' : '错题重练', g.wrongCount ? '连续答对 2 次移出' : '错题本是空的，保持住') + quickCard('open-sandbox','code','打开 C++ 沙箱','写代码，真实编译运行') +
       '</div>' + recents +
@@ -226,38 +235,88 @@
       '</div><aside>' +
       '<div class="card"><div class="card-head"><div><h3>今日目标</h3><p>' + U.esc(todayTip) + '</p></div><span class="pill accent">' + d.answered + ' / ' + d.goal + '</span></div><div class="progress gold"><i style="width:' + U.pct(d.answered,d.goal) + '%"></i></div><div class="row between" style="margin-top:12px"><span class="small muted">' + (d.answered>=d.goal?'目标完成，去挑战困难题吧':('还差 ' + (d.goal-d.answered) + ' 题完成今日目标')) + '</span><button class="btn btn-soft btn-sm" data-action="change-goal">调整</button></div></div>' +
       '<div class="card" style="margin-top:14px"><div class="card-head"><div><h3>最近错题</h3><p>按最近作答时间排序</p></div><a href="#/wrong" class="small">全部</a></div>' + (recentWrong.length ? recentWrong.map(q => '<button class="q-list-item" style="grid-template-columns:minmax(0,1fr) auto;padding:11px 0;border-width:0 0 1px;border-radius:0;background:none" data-action="practice-one" data-id="' + q.id + '"><div><div class="q-list-stem" style="font-size:12.5px">' + U.esc(q.stem) + '</div><div class="q-list-meta"><span class="pill">' + TYPE_LABEL[q.type] + '</span><span class="tiny muted">第' + q.chapter + '章 · ' + DIFF_LABEL[q.difficulty] + '</span></div></div><span class="q-status bad"></span></button>').join('') : '<p class="small muted">暂无错题，继续按节奏练习。</p>') + '</div>' +
+      '<div class="card" style="margin-top:14px"><div class="card-head"><div><h3>我的收藏</h3><p>已收藏 ' + state.favorites.length + ' 道题</p></div><a href="#/favorites" class="small">查看全部</a></div><button class="btn btn-fav btn-block" data-action="open-favorites">★ 打开收藏夹</button></div>' +
       '<div class="card" style="margin-top:14px"><div class="row wrap"><span class="pill blue">沙箱在线</span><span class="pill">GCC · C++17</span></div><h3 style="font-size:16px;margin-top:12px">代码不是看起来对，<br>而是跑起来对。</h3><p class="small muted" style="margin-top:7px;line-height:1.7">编辑器 + stdin + 编译错误诊断，支持把编程题初始代码一键载入。</p><button class="btn btn-primary btn-block" style="margin-top:14px" data-action="open-sandbox">' + U.icon('play') + '进入沙箱</button></div>' +
       '</aside></div>';
     return pageShell(content);
   }
 
   /* ---------- practice hub ---------- */
+  function availableTopics() {
+    return KNOWLEDGE.filter(k => practiceFilter.chapters.includes(k.chapter));
+  }
+  function resetPracticeFilters() {
+    practiceFilter = {
+      chapters:[1,2,3,4,5],
+      topics:KNOWLEDGE.map(k => k.id),
+      types:Object.keys(TYPE_LABEL),
+      diffs:[1,2,3,4],
+      statuses:Object.keys(STATUS_LABEL),
+      q:''
+    };
+  }
   function filterQuestions() {
     const f = practiceFilter;
+    if (!f.chapters.length || !f.topics.length || !f.types.length || !f.diffs.length || !f.statuses.length) return [];
     return QUESTIONS.filter(q => {
-      if (f.chapter !== 'all' && q.chapter !== Number(f.chapter)) return false;
-      if (f.topic !== 'all' && q.topicId !== f.topic) return false;
-      if (f.type !== 'all' && q.type !== f.type) return false;
-      if (f.diff !== 'all' && q.difficulty !== Number(f.diff)) return false;
+      if (!f.chapters.includes(q.chapter)) return false;
+      if (!f.topics.includes(q.topicId)) return false;
+      if (!f.types.includes(q.type)) return false;
+      if (!f.diffs.includes(q.difficulty)) return false;
+      const st = questionStatus(q.id).key;
+      const statusMatch = f.statuses.some(x =>
+        x === 'new' ? !isDone(q.id) :
+        x === 'done' ? isDone(q.id) :
+        x === 'wrong' ? inWrongBook(q.id) :
+        x === 'fav' ? isFav(q.id) :
+        x === 'mastered' ? st === 'mastered' : false);
+      if (!statusMatch) return false;
       if (f.q) { const s = (q.stem + ' ' + (q.options||[]).join(' ') + ' ' + (q.knowledge||'') + ' ' + (q.source||'')).toLowerCase(); if (!s.includes(f.q.toLowerCase())) return false; }
-      if (f.status === 'new' && isDone(q.id)) return false;
-      if (f.status === 'wrong' && !inWrongBook(q.id)) return false;
-      if (f.status === 'fav' && !isFav(q.id)) return false;
-      if (f.status === 'done' && !isDone(q.id)) return false;
-      if (f.status === 'mastered' && questionStatus(q.id).key !== 'mastered') return false;
       return true;
     });
   }
-  function topicOptions(selected) {
-    const chapter = practiceFilter.chapter;
-    const topics = chapter === 'all' ? KNOWLEDGE : KNOWLEDGE.filter(k => String(k.chapter) === String(chapter));
-    return '<option value="all">' + (chapter === 'all' ? '全部知识点' : '本章全部知识点') + '</option>' + topics.map(k => '<option value="' + U.attr(k.id) + '" ' + (selected===k.id?'selected':'') + '>第' + k.chapter + '章 · ' + U.esc(k.title) + '</option>').join('');
+  function filterSummary(field) {
+    const allTopics = availableTopics();
+    const map = {
+      chapters: { list:practiceFilter.chapters, total:5, all:'全部章节', empty:'未选择章节', unit:'章' },
+      topics: { list:practiceFilter.topics, total:allTopics.length, all:'全部知识点', empty:'未选择知识点', unit:'个' },
+      types: { list:practiceFilter.types, total:Object.keys(TYPE_LABEL).length, all:'全部题型', empty:'未选择题型', unit:'种' },
+      diffs: { list:practiceFilter.diffs, total:4, all:'全部难度', empty:'未选择难度', unit:'档' },
+      statuses: { list:practiceFilter.statuses, total:Object.keys(STATUS_LABEL).length, all:'全部状态', empty:'未选择状态', unit:'种' }
+    }[field];
+    if (!map.list.length) return map.empty;
+    if (map.list.length === map.total) return map.all;
+    return '已选 ' + map.list.length + ' ' + map.unit;
   }
-  function normalizePracticeFilter() {
-    if (practiceFilter.chapter !== 'all' && practiceFilter.topic !== 'all') {
-      const t = TOPICS[practiceFilter.topic];
-      if (!t || String(t.chapter) !== String(practiceFilter.chapter)) practiceFilter.topic = 'all';
-    }
+  function filterButton(field, label) {
+    return '<button class="filter-trigger" data-action="open-filter-menu" data-field="' + field + '"><span>' + label + '</span><b>' + U.esc(filterSummary(field)) + '</b><i>▾</i></button>';
+  }
+  function openFilterModal(field) {
+    const cfg = {
+      chapters: { title:'章节', values:[1,2,3,4,5], labels:[1,2,3,4,5].map(c=>'第'+c+'章 '+CHAPTER_TITLES[c].title) },
+      topics: { title:'知识点', values:availableTopics().map(k=>k.id), labels:availableTopics().map(k=>'第'+k.chapter+'章 · '+k.title) },
+      types: { title:'题型', values:Object.keys(TYPE_LABEL), labels:Object.values(TYPE_LABEL) },
+      diffs: { title:'难度', values:[1,2,3,4], labels:[1,2,3,4].map(d=>DIFF_LABEL[d]) },
+      statuses: { title:'作答状态', values:Object.keys(STATUS_LABEL), labels:Object.values(STATUS_LABEL) }
+    }[field];
+    if (!cfg) return;
+    const selected = practiceFilter[field].map(String);
+    const options = cfg.values.map((v,i) => '<label class="filter-option"><input type="checkbox" value="' + U.attr(String(v)) + '" ' + (selected.includes(String(v))?'checked':'') + '><span>' + U.esc(cfg.labels[i]) + '</span></label>').join('');
+    const m = U.modal('<h2>筛选 · ' + U.esc(cfg.title) + '</h2><p class="small muted" style="margin:8px 0 14px">可多选；使用「反选」快速翻转当前选择。</p><div class="filter-modal-actions"><button class="btn btn-ghost btn-sm" data-fa="all">全选</button><button class="btn btn-ghost btn-sm" data-fa="invert">反选</button><button class="btn btn-ghost btn-sm" data-fa="none">清空</button></div><div class="filter-options">' + (options || '<p class="small muted">当前没有可选项。</p>') + '</div><div class="row" style="justify-content:flex-end;margin-top:18px"><button class="btn btn-ghost" data-fa="cancel">取消</button><button class="btn btn-primary" data-fa="apply">应用筛选</button></div>');
+    const boxes = U.qsa('input[type=checkbox]', m.el);
+    U.qsa('[data-fa]', m.el).forEach(btn => btn.addEventListener('click', () => {
+      const fa = btn.dataset.fa;
+      if (fa === 'all') boxes.forEach(b => b.checked = true);
+      else if (fa === 'none') boxes.forEach(b => b.checked = false);
+      else if (fa === 'invert') boxes.forEach(b => b.checked = !b.checked);
+      else if (fa === 'cancel') m.close();
+      else if (fa === 'apply') {
+        const picked = boxes.filter(b => b.checked).map(b => field === 'chapters' || field === 'diffs' ? Number(b.value) : b.value);
+        practiceFilter[field] = picked;
+        if (field === 'chapters') practiceFilter.topics = KNOWLEDGE.filter(k => picked.includes(k.chapter)).map(k => k.id);
+        m.close(); renderRoute();
+      }
+    }));
   }
   function practiceListHtml(list) {
     if (!list.length) return emptyState('search','没有匹配的题目','试着放宽筛选条件，或清空关键词后重新查找。','<button class="btn btn-ghost btn-sm" style="margin-top:14px" data-action="clear-filters">清空筛选</button>');
@@ -267,18 +326,12 @@
     }).join('') + '</div>';
   }
   function renderPractice() {
-    normalizePracticeFilter();
     const list = filterQuestions();
-    const activeFilters = ['chapter','topic','type','diff','status'].filter(k=>practiceFilter[k]!=='all').length + (practiceFilter.q?1:0);
+    const allTopics = availableTopics();
+    const activeFilters = (practiceFilter.chapters.length!==5?1:0) + (practiceFilter.topics.length!==allTopics.length?1:0) + (practiceFilter.types.length!==6?1:0) + (practiceFilter.diffs.length!==4?1:0) + (practiceFilter.statuses.length!==5?1:0) + (practiceFilter.q?1:0);
     const counts = { total:QUESTIONS.length, single:QUESTIONS.filter(q=>q.type==='single').length, multiple:QUESTIONS.filter(q=>q.type==='multiple').length, judge:QUESTIONS.filter(q=>q.type==='judge').length, fill:QUESTIONS.filter(q=>q.type==='fill').length, code:QUESTIONS.filter(q=>q.type==='code').length, programming:QUESTIONS.filter(q=>q.type==='programming').length };
     const content = '<div class="row between wrap" style="margin-bottom:18px"><div><div class="kicker">QUESTION BANK · ' + QUESTIONS.length + ' QUESTIONS</div><h1 class="display" style="font-size:clamp(28px,4vw,44px)">题库<br><em>按你的薄弱点来。</em></h1></div><div class="row wrap"><span class="pill accent">' + counts.single + ' 单选</span><span class="pill coral">' + counts.multiple + ' 多选</span><span class="pill blue">' + counts.judge + ' 判断</span><span class="pill gold">' + counts.fill + ' 填空</span><span class="pill">' + counts.code + ' 代码阅读</span><span class="pill">' + counts.programming + ' 编程</span></div></div>' +
-      '<div class="filter-panel"><div class="filter-grid">' +
-        '<label class="field"><span>章节</span><select class="select" data-filter="chapter"><option value="all">全部章节</option>' + [1,2,3,4,5].map(c=>'<option value="'+c+'" '+(String(practiceFilter.chapter)===String(c)?'selected':'')+'>第'+c+'章 '+U.esc(CHAPTER_TITLES[c].title)+'</option>').join('') + '</select></label>' +
-        '<label class="field"><span>知识点</span><select class="select" data-filter="topic">' + topicOptions(practiceFilter.topic) + '</select></label>' +
-        '<label class="field"><span>题型</span><select class="select" data-filter="type"><option value="all">全部题型</option>' + Object.keys(TYPE_LABEL).map(t=>'<option value="'+t+'" '+(practiceFilter.type===t?'selected':'')+'>'+TYPE_LABEL[t]+'</option>').join('') + '</select></label>' +
-        '<label class="field"><span>难度</span><select class="select" data-filter="diff"><option value="all">全部难度</option>' + [1,2,3,4].map(d=>'<option value="'+d+'" '+(String(practiceFilter.diff)===String(d)?'selected':'')+'>'+DIFF_LABEL[d]+'</option>').join('') + '</select></label>' +
-        '<label class="field"><span>状态</span><select class="select" data-filter="status"><option value="all">全部状态</option><option value="new" '+(practiceFilter.status==='new'?'selected':'')+'>未做</option><option value="done" '+(practiceFilter.status==='done'?'selected':'')+'>已做</option><option value="wrong" '+(practiceFilter.status==='wrong'?'selected':'')+'>错题</option><option value="mastered" '+(practiceFilter.status==='mastered'?'selected':'')+'>已掌握</option><option value="fav" '+(practiceFilter.status==='fav'?'selected':'')+'>收藏</option></select></label>' +
-      '</div><div class="filter-foot"><div class="search-box" style="flex:1;min-width:220px">' + U.icon('search') + '<input class="input" data-filter="q" placeholder="搜索题干、选项、知识点…" value="' + U.attr(practiceFilter.q) + '"></div><span class="result-count" id="practice-count">匹配 <b>' + list.length + '</b> 题</span><button class="btn btn-ghost btn-sm" data-action="clear-filters">' + (activeFilters?'清空 ' + activeFilters + ' 个条件':'重置筛选') + '</button><button class="btn btn-primary btn-sm" data-action="start-filtered" data-shuffle="0">' + U.icon('play') + '顺序练</button><button class="btn btn-ink btn-sm" data-action="start-filtered" data-shuffle="1">' + U.icon('refresh') + '随机练</button></div></div>' +
+      '<div class="filter-panel"><div class="multi-filter-bar">' + filterButton('chapters','章节') + filterButton('topics','知识点') + filterButton('types','题型') + filterButton('diffs','难度') + filterButton('statuses','状态') + '</div><div class="filter-foot"><div class="search-box" style="flex:1;min-width:220px">' + U.icon('search') + '<input class="input" data-filter="q" placeholder="搜索题干、选项、知识点…" value="' + U.attr(practiceFilter.q) + '"></div><span class="result-count" id="practice-count">匹配 <b>' + list.length + '</b> 题</span><button class="btn btn-ghost btn-sm" data-action="clear-filters">' + (activeFilters?'清空 ' + activeFilters + ' 个条件':'重置筛选') + '</button><button class="btn btn-primary btn-sm" data-action="start-filtered" data-shuffle="0">' + U.icon('play') + '顺序练</button><button class="btn btn-ink btn-sm" data-action="start-filtered" data-shuffle="1">' + U.icon('refresh') + '随机练</button></div></div>' +
       '<div class="section-head"><h2 id="practice-result-title">' + (activeFilters?'筛选结果':'全部题目') + '</h2><span class="hint">点击任意题目即刻开始；题目作答记录与错题本自动同步</span></div>' +
       '<div id="practice-results">' + practiceListHtml(list) + '</div>' +
       '<div class="section-head"><h2>题型 × 难度覆盖</h2><span class="hint">24 个档位均有题目</span></div><div class="card" style="overflow:auto"><div class="heatmap">' + renderHeatmap() + '</div></div>';
@@ -355,15 +408,28 @@
   }
   function renderQuiz() {
     const s=state.session; if (!s || !curQ()) { go('home'); return pageShell('<div class="loading-screen"><div class="loader"></div></div>'); }
-    const q=curQ(), answered=s.answers[q.id]!==undefined, rec=recOf(q.id);
+    const q=curQ(), exam=!!s.exam, answered=s.answers[q.id]!==undefined, rec=recOf(q.id);
+    if (exam && answered && s.draft[q.id] === undefined && q.type !== 'programming') s.draft[q.id] = JSON.parse(JSON.stringify(s.answers[q.id]));
     const idx=s.idx, total=s.qids.length, pct=U.pct(idx,total);
-    const qMeta='<div class="q-meta"><span class="pill accent">第 '+q.chapter+' 章 · '+U.esc(q.knowledge)+'</span><span class="pill '+DIFF_CLASS[q.difficulty]+'">'+DIFF_LABEL[q.difficulty]+'</span><span class="pill">'+TYPE_LABEL[q.type]+'</span>'+(isFav(q.id)?'<span class="pill gold">'+U.icon('star')+' 已收藏</span>':'')+'</div>';
-    const source = state.settings.showSource ? '<div class="source-line">'+U.icon('doc')+'<span>知识点来源：'+U.esc(q.source)+(q.origin?' · 题目灵感：'+U.esc(q.origin):'')+'</span></div>' : '';
-    const feedback = answered ? renderFeedback(q, isAnswerCorrect(q,s.answers[q.id])) : '';
-    const actions = answered ? '<div class="quiz-actions"><button class="btn btn-ghost" data-action="prev-question" '+(idx===0?'disabled':'')+'>'+U.icon('back')+'上一题</button><button class="btn btn-ghost btn-sm" data-action="toggle-favorite" data-id="'+q.id+'">'+U.icon('star')+(isFav(q.id)?'已收藏':'收藏')+'</button><span class="spacer"></span>'+(idx<total-1?'<button class="btn btn-primary" data-action="next-question">下一题'+U.icon('arrow')+'</button>':'<button class="btn btn-primary" data-action="finish-session">'+U.icon('check')+'完成练习</button>')+'</div>' : '<div class="quiz-actions"><button class="btn btn-ghost" data-action="prev-question" '+(idx===0?'disabled':'')+'>'+U.icon('back')+'上一题</button><button class="btn btn-ghost btn-sm" data-action="reveal-answer">看答案</button><button class="btn btn-ghost btn-sm" data-action="toggle-favorite" data-id="'+q.id+'">'+U.icon('star')+'收藏</button><span class="spacer"></span><button class="btn btn-primary" id="submit-answer" data-action="submit-answer" '+(draftReady(q)?'':'disabled')+'>提交答案</button></div>';
-    const content='<div class="quiz-top"><button class="icon-btn" data-action="back" aria-label="返回">'+U.icon('back')+'</button><div class="quiz-progress"><div class="row between" style="margin-bottom:5px"><span class="quiz-title">'+U.esc(s.title)+'</span><span class="quiz-counter">'+(idx+1)+' / '+total+'</span></div><div class="track"><i style="width:'+pct+'%"></i></div></div><button class="icon-btn" data-action="open-map" aria-label="题目地图">'+U.icon('grid')+'</button></div>' +
-      '<div class="card question-card">'+qMeta+'<h2 class="q-stem">'+U.esc(q.stem)+'</h2>'+(q.code&&q.code.length?'<div class="code-block"><div class="code-bar"><i></i><i></i><i></i><span>C++</span></div><pre><code>'+U.esc(q.code.join('\n'))+'</code></pre></div>':'') + renderInput(q, s.answers[q.id], answered) + source + '</div>' + feedback + actions +
-      '<div class="quiz-drawer" id="quiz-drawer"><div class="drawer-mask" data-action="close-map"></div><aside class="drawer"><div class="row"><h3>题目地图</h3><button class="icon-btn" style="margin-left:auto" data-action="close-map">'+U.icon('x')+'</button></div><p class="small muted" style="margin-bottom:16px">颜色代表作答结果；点击跳转。</p><div class="map-grid">'+s.qids.map((id,i)=>{const r=recOf(id),aq=s.answers[id]!==undefined;const cls=aq?(isAnswerCorrect(QID[id],s.answers[id])?'ok':'bad'):'';return '<button class="map-btn '+(i===idx?'current ':'')+cls+'" data-action="goto-question" data-i="'+i+'">'+(i+1)+'</button>';}).join('')+'</div><div class="divider"></div><div class="small muted">快捷键：<kbd>1</kbd>–<kbd>6</kbd> 选择选项，<kbd>Enter</kbd> 提交 / 下一题，<kbd>←</kbd> <kbd>→</kbd> 切题。</div><button class="btn btn-danger btn-block" style="margin-top:18px" data-action="quit-session">退出本次练习</button></aside></div>';
+    const typeName = q.type === 'code' ? '选择题' : TYPE_LABEL[q.type];
+    const qMeta = exam
+      ? '<div class="q-meta"><span class="pill gold">' + U.icon('award') + ' 期中模拟</span><span class="pill accent">第 ' + (idx+1) + ' 题</span><span class="pill">' + typeName + '</span><span class="pill ' + DIFF_CLASS[q.difficulty] + '">' + DIFF_LABEL[q.difficulty] + '</span>' + (isFav(q.id)?'<span class="pill gold">★ 已收藏</span>':'') + '</div>'
+      : '<div class="q-meta"><span class="pill accent">第 '+q.chapter+' 章 · '+U.esc(q.knowledge)+'</span><span class="pill '+DIFF_CLASS[q.difficulty]+'">'+DIFF_LABEL[q.difficulty]+'</span><span class="pill">'+TYPE_LABEL[q.type]+'</span>'+(isFav(q.id)?'<span class="pill gold">'+U.icon('star')+' 已收藏</span>':'')+'</div>';
+    const source = (!exam && state.settings.showSource) ? '<div class="source-line">'+U.icon('doc')+'<span>知识点来源：'+U.esc(q.source)+(q.origin?' · 题目灵感：'+U.esc(q.origin):'')+'</span></div>' : '';
+    const showFeedback = !exam && answered;
+    const feedback = showFeedback ? renderFeedback(q, isAnswerCorrect(q,s.answers[q.id])) : (exam && answered ? '<div class="exam-saved">'+U.icon('check')+' 本题答案已保存，可继续修改</div>' : '');
+    const favBtn = '<button class="btn btn-fav btn-sm ' + (isFav(q.id)?'on':'') + '" data-action="toggle-favorite" data-id="'+q.id+'">' + (isFav(q.id)?'★ 已收藏':'☆ 收藏本题') + '</button>';
+    let actions;
+    if (exam) {
+      actions = '<div class="quiz-actions exam-actions"><button class="btn btn-ghost" data-action="prev-question" '+(idx===0?'disabled':'')+'>'+U.icon('back')+'上一题</button><button class="btn btn-soft" data-action="exam-save">'+U.icon('check')+'保存本题</button><span class="spacer"></span><button class="btn btn-ghost" data-action="next-question" '+(idx===total-1?'disabled':'')+'>下一题'+U.icon('arrow')+'</button><button class="btn btn-danger" data-action="finish-exam">'+U.icon('award')+'交卷</button></div>';
+    } else if (answered) {
+      actions = '<div class="quiz-actions"><button class="btn btn-ghost" data-action="prev-question" '+(idx===0?'disabled':'')+'>'+U.icon('back')+'上一题</button>'+favBtn+'<span class="spacer"></span>'+(idx<total-1?'<button class="btn btn-primary" data-action="next-question">下一题'+U.icon('arrow')+'</button>':'<button class="btn btn-primary" data-action="finish-session">'+U.icon('check')+'完成练习</button>')+'</div>';
+    } else {
+      actions = '<div class="quiz-actions"><button class="btn btn-ghost" data-action="prev-question" '+(idx===0?'disabled':'')+'>'+U.icon('back')+'上一题</button><button class="btn btn-ghost btn-sm" data-action="reveal-answer">看答案</button>'+favBtn+'<span class="spacer"></span>'+(idx<total-1?'<button class="btn btn-ghost" data-action="next-question">跳过'+U.icon('arrow')+'</button>':'<button class="btn btn-ghost" data-action="finish-session">结束练习</button>')+'<button class="btn btn-primary" id="submit-answer" data-action="submit-answer" '+(draftReady(q)?'':'disabled')+'>提交答案</button></div>';
+    }
+    const content='<div class="quiz-top"><button class="icon-btn" data-action="back" aria-label="返回">'+U.icon('back')+'</button><div class="quiz-progress"><div class="row between" style="margin-bottom:5px"><span class="quiz-title">'+U.esc(s.title)+'</span><span class="quiz-counter">'+(idx+1)+' / '+total+'</span></div><div class="track"><i style="width:'+pct+'%"></i></div></div>' + (exam ? '<div class="exam-clock" id="exam-clock">02:00:00</div>' : '') + '<button class="icon-btn" data-action="open-map" aria-label="题目地图">'+U.icon('grid')+'</button></div>' +
+      '<div class="card question-card">'+qMeta+'<h2 class="q-stem">'+U.esc(q.stem)+'</h2>'+(q.code&&q.code.length?'<div class="code-block"><div class="code-bar"><i></i><i></i><i></i><span>C++</span></div><pre><code>'+U.esc(q.code.join('\n'))+'</code></pre></div>':'') + renderInput(q, s.answers[q.id], exam ? false : answered) + source + '</div>' + feedback + actions +
+      '<div class="quiz-drawer" id="quiz-drawer"><div class="drawer-mask" data-action="close-map"></div><aside class="drawer"><div class="row"><h3>题目地图</h3><button class="icon-btn" style="margin-left:auto" data-action="close-map">'+U.icon('x')+'</button></div><p class="small muted" style="margin-bottom:16px">颜色代表作答状态；点击跳转。</p><div class="map-grid">'+s.qids.map((id,i)=>{const aq=s.answers[id]!==undefined;const cls=exam?"saved":(aq?(isAnswerCorrect(QID[id],s.answers[id])?'ok':'bad'):'');return '<button class="map-btn '+(i===idx?'current ':'')+cls+'" data-action="goto-question" data-i="'+i+'">'+(i+1)+'</button>';}).join('')+'</div><div class="divider"></div><div class="small muted">快捷键：<kbd>1</kbd>–<kbd>6</kbd> 选择选项，<kbd>Enter</kbd> 提交 / 下一题，<kbd>←</kbd> <kbd>→</kbd> 切题。</div><button class="btn btn-danger btn-block" style="margin-top:18px" data-action="quit-session">退出本次练习</button></aside></div>';
     return pageShell(content);
   }
   function renderInput(q, resp, answered) {
@@ -408,6 +474,7 @@
   }
   function renderProgramming(q, answered) {
     const d = progDraft(q);
+    const examMode = !!(state.session && state.session.exam);
     const p = pendingProgram[q.id] || {};
     const visible = q.tests.map((t,i)=>!t.hidden?i:-1).filter(i=>i>=0);
     const sample = q.tests[0];
@@ -419,9 +486,9 @@
       return '<div class="test-row '+(r?(r.passed?'pass':'fail'):'')+'"'+title+'><span class="test-name">'+(t.hidden?'隐藏测试':'样例 '+(i+1))+'</span><span class="test-detail">'+(r?after:before)+'</span></div>';
     }).join('') + '</div>';
     return '<div class="code-wrap"><div class="editor-card card" style="border-radius:16px"><div class="editor-head"><div class="editor-dots"><i></i><i></i><i></i></div><span class="editor-name">main.cpp</span><div class="editor-tools"><button class="btn btn-ghost btn-sm" data-action="reset-prog" data-id="'+q.id+'">'+U.icon('refresh')+'重置</button><button class="btn btn-soft btn-sm" data-action="prog-beautify" data-id="'+q.id+'">对齐</button></div></div><div class="editor-wrap"><div class="line-nums" id="prog-lines-'+q.id+'">'+d.code.split('\n').map((_,i)=>'<span>'+(i+1)+'</span>').join('')+'</div><textarea class="code-editor" id="prog-code-'+q.id+'" data-action="prog-code" data-id="'+q.id+'" spellcheck="false">'+U.esc(d.code)+'</textarea></div></div>' +
-      '<div class="grid-2" style="margin-top:12px"><div><label class="field"><span>自定义输入 stdin</span><textarea class="stdin-area" id="prog-stdin-'+q.id+'" data-action="prog-stdin" data-id="'+q.id+'">'+U.esc(d.stdin)+'</textarea></label></div><div><div class="row wrap" style="height:100%;align-content:center"><button class="btn btn-primary" data-action="run-prog" data-id="'+q.id+'">'+U.icon('play')+'运行</button><button class="btn btn-ink" data-action="judge-prog" data-id="'+q.id+'">'+U.icon('check')+(answered?'重新评测':'提交评测')+'</button><button class="btn btn-ghost btn-sm" data-action="load-sample" data-id="'+q.id+'">'+U.icon('task')+'载入样例输入</button></div></div></div>' +
-      '<div class="console" id="prog-console-'+q.id+'">'+(p.html || '<div class="console-head"><span class="status-dot"></span>OUTPUT</div><div class="console-body"><pre class="muted">点击「运行」使用自定义输入；点击「提交评测」将依次运行全部测试用例。</pre></div>')+'</div>' +
-      '<div class="row between wrap" style="margin-top:10px"><span class="small muted">评测会真实编译并运行你的代码。提交或看答案后，编辑器和运行按钮仍然可用。</span><span class="pill">'+q.tests.length+' 个测试 · '+q.tests.filter(t=>t.hidden).length+' 个隐藏</span></div>' + testsHtml + '</div>';
+      '<div class="grid-2" style="margin-top:12px"><div><label class="field"><span>自定义输入 stdin</span><textarea class="stdin-area" id="prog-stdin-'+q.id+'" data-action="prog-stdin" data-id="'+q.id+'">'+U.esc(d.stdin)+'</textarea></label></div><div><div class="row wrap" style="height:100%;align-content:center"><button class="btn btn-primary" data-action="run-prog" data-id="'+q.id+'">'+U.icon('play')+'运行</button>'+(examMode?'<button class="btn btn-ink" data-action="save-exam-program" data-id="'+q.id+'">'+U.icon('check')+'保存代码到答卷</button>':'<button class="btn btn-ink" data-action="judge-prog" data-id="'+q.id+'">'+U.icon('check')+(answered?'重新评测':'提交评测')+'</button>')+'<button class="btn btn-ghost btn-sm" data-action="load-sample" data-id="'+q.id+'">'+U.icon('task')+'载入样例输入</button></div></div></div>' +
+      '<div class="console" id="prog-console-'+q.id+'">'+(p.html || '<div class="console-head"><span class="status-dot"></span>OUTPUT</div><div class="console-body"><pre class="muted">'+(examMode?'考试中可运行代码自查；交卷时系统会统一评测全部测试用例。':'点击「运行」使用自定义输入；点击「提交评测」将依次运行全部测试用例。')+'</pre></div>')+'</div>' +
+      '<div class="row between wrap" style="margin-top:10px"><span class="small muted">'+(examMode?'考试模式：运行结果仅用于自查，交卷后统一评分。':'评测会真实编译并运行你的代码。提交或看答案后，编辑器和运行按钮仍然可用。')+'</span><span class="pill">'+q.tests.length+' 个测试 · '+q.tests.filter(t=>t.hidden).length+' 个隐藏</span></div>' + testsHtml + '</div>';
   }
   function consoleHtml(r) {
     if (!r) return '';
@@ -524,6 +591,76 @@
   }
 
 
+  /* ---------- mock exams ---------- */
+  function examQuestionIds(exam) {
+    return [].concat(exam.single || [], exam.fill || [], exam.programming || []);
+  }
+  function startExam(examId) {
+    const exam = EXAMS.find(x => x.id === examId);
+    if (!exam) { U.toast('模拟卷不存在'); return; }
+    const ids = examQuestionIds(exam).filter(id => QID[id]);
+    if (ids.length !== 19) { U.toast('模拟卷题目未加载完整，请刷新后重试'); return; }
+    const now = Date.now();
+    state.session = {
+      id:'exam-' + now, qids:ids, idx:0, title:exam.title, mode:'exam',
+      exam:true, examId:exam.id, durationSec:exam.duration || 7200,
+      startedAt:now, endsAt:now + (exam.duration || 7200) * 1000,
+      answers:{}, draft:{}, submitting:false
+    };
+    save(true); go('quiz');
+  }
+  function formatClock(sec) {
+    sec = Math.max(0, Math.floor(sec));
+    const h = Math.floor(sec / 3600), m = Math.floor(sec % 3600 / 60), s = sec % 60;
+    return String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  }
+  function stopExamTimer() { if (examTimer) { clearInterval(examTimer); examTimer = null; } }
+  function startExamTimer() {
+    stopExamTimer();
+    const s = state.session;
+    if (!s || !s.exam) return;
+    const tick = () => {
+      const cur = state.session;
+      if (!cur || !cur.exam) { stopExamTimer(); return; }
+      const left = Math.max(0, Math.ceil((cur.endsAt - Date.now()) / 1000));
+      const el = document.getElementById('exam-clock');
+      if (el) el.textContent = left > 0 ? formatClock(left) : '时间到';
+      if (left <= 0) { stopExamTimer(); finishExam(true); }
+    };
+    tick();
+    examTimer = setInterval(tick, 1000);
+  }
+  function syncExamAnswer(q) {
+    const s = state.session;
+    if (!s || !s.exam || !q) return false;
+    if (q.type === 'programming') {
+      const ta = document.getElementById('prog-code-' + q.id);
+      const code = ta ? ta.value : (progDraft(q).code || '');
+      if (!code.trim()) return false;
+      s.answers[q.id] = code;
+      progDraft(q).code = code;
+      save(true); return true;
+    }
+    const d = getDraft(q);
+    if (!draftReady(q)) return false;
+    s.answers[q.id] = JSON.parse(JSON.stringify(d));
+    save(true); return true;
+  }
+  function renderExams() {
+    const info = '<div class="exam-info card"><div class="exam-info-mark">' + U.icon('award') + '</div><div><div class="kicker">MIDTERM MOCK EXAM</div><h1 class="display" style="font-size:clamp(28px,4vw,44px)">期中模拟考<br><em>按真实题型，限时 2 小时。</em></h1><p class="lede" style="margin-top:8px">根据课程期中安排组卷：<b>10 道选择题 + 5 道填空题 + 4 道编程题</b>。每套限时 120 分钟，只选计算、代码阅读和编程题，<b>不考概念题</b>。</p></div></div>' +
+      '<div class="exam-facts"><span class="pill accent">19 题 / 套</span><span class="pill blue">120 分钟</span><span class="pill gold">不考概念题</span><span class="pill">3 套模拟卷</span></div>';
+    const cards = EXAMS.map((exam, i) => {
+      const ids = examQuestionIds(exam);
+      const last = state.examResults[exam.id];
+      const tagCls = exam.tag === '挑战' ? 'bad' : exam.tag === '提升' ? 'gold' : 'ok';
+      return '<div class="exam-card card hoverable"><div class="row between"><span class="pill ' + tagCls + '">' + U.esc(exam.tag) + '</span><span class="tiny muted">限时 120 分钟</span></div><h3>' + U.esc(exam.title) + '</h3><p>' + U.esc(exam.subtitle) + '</p><div class="exam-paper-meta"><span>选择题 <b>10</b></span><span>填空 <b>5</b></span><span>编程 <b>4</b></span></div><div class="exam-card-foot"><span class="tiny muted">' + (last ? '上次得分 ' + last.score + '% · ' + U.relativeTime(last.at) : '尚未作答') + '</span><button class="btn ' + (last ? 'btn-ghost' : 'btn-primary') + ' btn-sm" data-action="start-exam" data-exam="' + U.attr(exam.id) + '">' + U.icon('play') + (last ? '再做一次' : '开始模拟') + '</button></div></div>';
+    }).join('');
+    const activeExam = state.session && state.session.exam ? '<div class="card exam-active"><div class="row between wrap"><div><span class="pill gold">考试进行中</span><h3 style="margin-top:8px">' + U.esc(state.session.title) + '</h3><p class="small muted" style="margin-top:4px">剩余时间会自动保留，点击继续回到当前题目。</p></div><button class="btn btn-primary" data-action="resume-exam">' + U.icon('play') + '继续考试</button></div></div>' : '';
+    const content = info + activeExam + '<div class="section-head"><h2>选择一套开始</h2><span class="hint">交卷后统一评分，考试过程中不显示答案</span></div><div class="exam-grid">' + cards + '</div>' +
+      '<div class="card exam-rules"><h3>模拟考规则</h3><ul><li>每套固定 10 道选择题、5 道填空题、4 道编程题，合计 19 题。</li><li>点击「开始模拟」后计时 120 分钟，时间到自动交卷。</li><li>考试中点「保存本题」保存当前答案；也可以直接下一题，系统会在跳转前自动保存已答内容。</li><li>编程题可运行代码自查；最终交卷时会统一评测全部测试用例。</li><li>交卷后查看总分与各题型表现，考试过程中不显示正确答案。</li></ul></div>';
+    return pageShell(content);
+  }
+
   /* ---------- statistics ---------- */
   function statBar(name, value, label, extra) {
     const color = value>=80?'var(--ok)':value>=60?'var(--warn)':'var(--bad)';
@@ -584,7 +721,7 @@
     const q=curQ(); if(!q) return; const btn=document.getElementById('submit-answer'); if(btn) btn.disabled=!draftReady(q);
   }
   function pickOption(i) {
-    const q=curQ(); if(!q || state.session.answers[q.id]!==undefined) return;
+    const q=curQ(); if(!q || (!state.session.exam && state.session.answers[q.id]!==undefined)) return;
     const d=getDraft(q);
     if (q.type==='multiple') { const at=d.indexOf(i); if(at>=0)d.splice(at,1);else d.push(i); }
     else state.session.draft[q.id]=i;
@@ -593,7 +730,7 @@
     updateSubmitState(); save();
   }
   function pickJudge(v) {
-    const q=curQ(); if(!q||state.session.answers[q.id]!==undefined) return;
+    const q=curQ(); if(!q||(!state.session.exam&&state.session.answers[q.id]!==undefined)) return;
     state.session.draft[q.id]=v; U.qsa('.judge-btn').forEach(el=>el.classList.toggle('sel',String(v)===el.dataset.v)); updateSubmitState(); save();
   }
   function submitAnswer() {
@@ -614,13 +751,67 @@
   }
   function nextQuestion() {
     const s=state.session; if(!s) return;
+    if(s.exam){ const q=curQ(); if(q) syncExamAnswer(q); }
     if(s.idx<s.qids.length-1){ s.idx++; save(true); currentQuestionStarted=Date.now(); renderRoute(); window.scrollTo({top:0,behavior:'smooth'}); }
+    else if(s.exam) finishExam(false);
     else finishSession();
   }
   function prevQuestion() {
     const s=state.session; if(!s||s.idx===0) return;
     s.idx--; save(true); currentQuestionStarted=Date.now(); renderRoute(); window.scrollTo({top:0,behavior:'smooth'});
   }
+  async function finishExam(auto) {
+    const s = state.session;
+    if (!s || !s.exam || s.submitting) return;
+    const q = curQ();
+    if (q) syncExamAnswer(q);
+    if (!auto) {
+      const unanswered = s.qids.filter(id => s.answers[id] === undefined).length;
+      const yes = await U.confirm('交卷确认', unanswered ? '还有 ' + unanswered + ' 题未作答，确定交卷吗？交卷后不能修改。' : '确定交卷吗？交卷后将统一评分并显示结果。');
+      if (!yes) return;
+    }
+    s.submitting = true; stopExamTimer(); save(true);
+    const exam = EXAMS.find(x => x.id === s.examId);
+    const modal = U.modal('<h2>正在交卷</h2><p class="lede" style="font-size:13px;margin:8px 0 16px" id="exam-grading-status">正在检查答案…</p><div class="progress"><i id="exam-grading-bar" style="width:5%"></i></div>');
+    const status = modal.el.querySelector('#exam-grading-status');
+    const bar = modal.el.querySelector('#exam-grading-bar');
+    let correct = 0, warnings = 0;
+    const breakdown = { choice:{correct:0,total:10}, fill:{correct:0,total:5}, programming:{correct:0,total:4} };
+    let position = 0;
+    for (const id of s.qids) {
+      const item = QID[id];
+      position++;
+      if (status) status.textContent = '正在评测第 ' + position + ' / ' + s.qids.length + ' 题…';
+      if (bar) bar.style.width = U.pct(position, s.qids.length) + '%';
+      let ok = false;
+      if (item.type === 'programming') {
+        const code = s.answers[id];
+        if (code && code !== '__revealed__') {
+          const r = await SAND.judgeTests(code, item.tests);
+          ok = r.allPassed;
+          if (r.results.some(x => x.run && x.run.phase === 'service')) warnings++;
+        }
+        if (ok) breakdown.programming.correct++;
+      } else {
+        ok = isAnswerCorrect(item, s.answers[id]);
+        if (ok) breakdown.sequence = (breakdown.sequence || 0) + 1;
+        const sec = item.type === 'fill' ? 'fill' : 'choice';
+        if (ok) breakdown[sec].correct++;
+      }
+      if (ok) correct++;
+    }
+    const total = s.qids.length;
+    const score = Math.round(correct / total * 100);
+    const result = { examId:s.examId, score, correct, total, at:Date.now(), duration:Math.min(s.durationSec || 7200, Math.round((Date.now()-s.startedAt)/1000)), breakdown, warnings };
+    state.examResults[s.examId] = result;
+    state.session = null; save(true); stopExamTimer(); modal.close();
+    go('exams');
+    setTimeout(() => {
+      const pct = score;
+      const m2 = U.modal('<h2>模拟考完成</h2><div style="text-align:center;padding:14px 0 18px"><div style="font-size:54px;font-weight:800;letter-spacing:-.06em;line-height:1">' + pct + '<span style="font-size:20px;color:var(--ink-3)">%</span></div><div class="small muted" style="margin-top:6px">答对 ' + correct + ' / ' + total + ' 题 · 用时 ' + U.formatTime(result.duration) + '</div>' + (warnings ? '<div class="pill bad" style="margin-top:10px">有 ' + warnings + ' 道编程题评测服务异常</div>' : '') + '</div><div class="exam-result-grid"><div><b>' + breakdown.choice.correct + '/10</b><span>选择题</span></div><div><b>' + breakdown.fill.correct + '/5</b><span>填空题</span></div><div><b>' + breakdown.programming.correct + '/4</b><span>编程题</span></div></div><div class="row" style="justify-content:center;margin-top:18px"><button class="btn btn-primary" data-action="retry-exam" data-exam="' + U.attr(s.examId) + '">再做一次</button><button class="btn btn-ghost" data-action="close-modal">返回模考列表</button></div>');
+    }, 80);
+  }
+
   function finishSession() {
     const s=state.session; if(!s) return;
     let done=0,ok=0; const wrongIds=[];
@@ -646,7 +837,7 @@
   function startChapter(ch,shuffle) { let list=QUESTIONS.filter(q=>q.chapter===ch); if(shuffle) list=U.shuffle(list).slice(0,15); if(!list.length){U.toast('暂无题目');return;} startSession(list.map(q=>q.id),'第'+ch+'章 · '+CHAPTER_TITLES[ch].title,shuffle?'random':'chapter'); }
   function startWrong() { const list=QUESTIONS.filter(q=>inWrongBook(q.id)); if(!list.length){U.toast('错题本是空的');return;} startSession(list.map(q=>q.id),'错题重练 · '+list.length+' 题','wrong'); }
   function toggleFavorite(id) {
-    const i=state.favorites.indexOf(id); if(i>=0) state.favorites.splice(i,1); else state.favorites.push(id); save(true); U.toast(i>=0?'已取消收藏':'已加入收藏');
+    const i=state.favorites.indexOf(id); if(i>=0) state.favorites.splice(i,1); else state.favorites.push(id); save(true); U.toast(i>=0?'已取消收藏':'★ 已加入收藏，可在顶部星标或首页「我的收藏」查看', i>=0?'':'ok');
     if(route.name==='quiz') renderRoute(); else if(route.name==='favorites') renderRoute(); else {
       const btn=document.querySelector('[data-action="toggle-favorite"][data-id="'+CSS.escape(id)+'"]'); if(btn && isFav(id)) btn.classList.add('on');
     }
@@ -675,6 +866,7 @@
   /* ---------- route rendering ---------- */
   function renderRoute() {
     if (!QUESTIONS.length) return;
+    stopExamTimer();
     route=parseHash();
     let html='';
     try {
@@ -682,6 +874,7 @@
         case 'home': html=renderHome(); break;
         case 'practice': html=renderPractice(); break;
         case 'programming': html=renderProgrammingHub(); break;
+        case 'exams': html=renderExams(); break;
         case 'chapter': html=renderChapter(route.params.ch); break;
         case 'topic': html=renderTopic(route.params.id); break;
         case 'quiz': html=renderQuiz(); break;
@@ -700,6 +893,7 @@
     const app=document.getElementById('app'); if(app) app.innerHTML=html;
     currentQuestionId = curQ()?curQ().id:null; currentQuestionStarted=Date.now();
     window.scrollTo({top:0,behavior:'auto'});
+    if(state.session&&state.session.exam&&route.name==='quiz') startExamTimer();
     const topnav=document.getElementById('topnav'); if(topnav) topnav.classList.toggle('scrolled',window.scrollY>4);
   }
   function ensureRouteData() {
@@ -719,6 +913,14 @@
       case 'open-settings': go('settings'); break;
       case 'open-sandbox': go('sandbox'); break;
       case 'open-programming': go('programming'); break;
+      case 'open-exams': go('exams'); break;
+      case 'open-favorites': go('favorites'); break;
+      case 'start-exam': startExam(el.dataset.exam); break;
+      case 'resume-exam': if(state.session&&state.session.exam)go('quiz'); else U.toast('当前没有进行中的模拟考'); break;
+      case 'retry-exam': closeModalFromAction(el); startExam(el.dataset.exam); break;
+      case 'exam-save': { const q=curQ(); if(q&&syncExamAnswer(q))U.toast('✓ 本题答案已保存','ok'); else U.toast('本题还没有可保存的答案','bad'); break; }
+      case 'save-exam-program': { const q=QID[el.dataset.id]; if(q&&syncExamAnswer(q))U.toast('✓ 代码已保存到答卷','ok'); else U.toast('代码为空，未保存','bad'); break; }
+      case 'finish-exam': finishExam(false); break;
       case 'open-search': go('practice'); setTimeout(()=>{const i=document.querySelector('[data-filter="q"]');if(i)i.focus();},80); break;
       case 'toggle-theme': state.settings.theme=state.settings.theme==='dark'?'light':'dark'; applyTheme(); save(); renderRoute(); break;
       case 'start-smart': { const list=smartPool(20); startSession(list.map(q=>q.id),'智能练习 · 20 题','smart'); break; }
@@ -727,7 +929,8 @@
       case 'start-programming-track': { const track=el.dataset.track; let list=programmingQuestions(); if(track==='chapter2') list=list.filter(q=>q.chapter===2); else if(track==='chapter3') list=list.filter(q=>q.chapter===3); else if(track==='chapter4') list=list.filter(q=>q.chapter===4); else if(track==='chapter5a') list=list.filter(q=>q.chapter===5&&['5.2','5.3','5.4'].includes(q.topicId)); else if(track==='chapter5b') list=list.filter(q=>q.chapter===5&&['5.5','5.7','5.8','5.9'].includes(q.topicId)); if(!list.length){U.toast('该路线暂无题目');break;} startSession(U.shuffle(list).map(q=>q.id),'编程路线 · '+track,'programming'); break; }
       case 'clear-prog-filters': progFilter={diff:'all',status:'all',q:''}; renderRoute(); break;
       case 'start-filtered': startFiltered(el.dataset.shuffle==='1'); break;
-      case 'clear-filters': practiceFilter={chapter:'all',topic:'all',type:'all',diff:'all',status:'all',q:''}; renderRoute(); break;
+      case 'clear-filters': resetPracticeFilters(); renderRoute(); break;
+      case 'open-filter-menu': openFilterModal(el.dataset.field); break;
       case 'practice-one': practiceOne(el.dataset.id); break;
       case 'practice-topic': practiceTopic(el.dataset.topic); break;
       case 'start-chapter': startChapter(Number(el.dataset.ch),false); break;
@@ -780,11 +983,7 @@
   });
   document.addEventListener('change',function(e){
     const t=e.target;
-    if(t.dataset&&t.dataset.progFilter){ progFilter[t.dataset.progFilter]=t.value; refreshProgResults(); return; }
-    if(!t.dataset||!t.dataset.filter)return;
-    const key=t.dataset.filter; practiceFilter[key]=t.value;
-    if(key==='chapter'&&practiceFilter.topic!=='all'&&TOPICS[practiceFilter.topic]&&String(TOPICS[practiceFilter.topic].chapter)!==String(t.value))practiceFilter.topic='all';
-    renderRoute();
+    if(t.dataset&&t.dataset.progFilter){ progFilter[t.dataset.progFilter]=t.value; refreshProgResults(); }
   });
   function refreshProgResults() {
     const list=filteredProgramming(); const box=document.getElementById('programming-list'); if(box)box.innerHTML=programmingListHtml(list);
@@ -828,11 +1027,12 @@
     const answered=state.session.answers[q.id]!==undefined;
     if(e.key==='Enter'){
       if(editing&&tag!=='input')return;
+      if(state.session.exam){ e.preventDefault(); syncExamAnswer(q); nextQuestion(); return; }
       if(!answered&&q.type!=='programming'){e.preventDefault();submitAnswer();return;}
       if(answered){e.preventDefault();nextQuestion();}
       return;
     }
-    if(answered&&e.key==='ArrowRight'&&!editing){e.preventDefault();nextQuestion();return;}
+    if(e.key==='ArrowRight'&&!editing){e.preventDefault();nextQuestion();return;}
     if(e.key==='ArrowLeft'&&!editing){e.preventDefault();prevQuestion();return;}
     if(!answered&&!editing&&/^[1-9]$/.test(e.key)){
       const n=Number(e.key);

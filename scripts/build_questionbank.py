@@ -88,4 +88,23 @@ if missing:
 if set(topics) != set(KNOWLEDGE):
     print("警告：未覆盖知识点", set(KNOWLEDGE) - set(topics), file=sys.stderr)
     sys.exit(1)
+# 校验模拟卷配置
+exam_path = os.path.join(ROOT, "data", "exams.js")
+if os.path.exists(exam_path):
+    exam_src = open(exam_path, encoding="utf-8").read()
+    exam_blocks = re.findall(r"id:\s*'([^']+)'[\s\S]*?single:\s*\[([^\]]*)\][\s\S]*?fill:\s*\[([^\]]*)\][\s\S]*?programming:\s*\[([^\]]*)\]", exam_src)
+    if len(exam_blocks) != 3:
+        raise SystemExit("模拟卷数量应为 3，实际为 %d" % len(exam_blocks))
+    all_map = {q["id"]: q for q in all_q}
+    for eid, sids, fids, pids in exam_blocks:
+        groups = [(sids, 10, ("single", "code")), (fids, 5, ("fill",)), (pids, 4, ("programming",))]
+        for raw, need, allowed in groups:
+            ids = re.findall(r"'([^']+)'", raw)
+            if len(ids) != need:
+                raise SystemExit("模拟卷 %s 题目数量错误：期望 %d，实际 %d" % (eid, need, len(ids)))
+            for qid in ids:
+                if qid not in all_map or all_map[qid]["type"] not in allowed:
+                    raise SystemExit("模拟卷 %s 含非法题号：%s" % (eid, qid))
+    print("模拟卷校验通过：3 套 × 19 题，题型结构符合 10+5+4。")
+
 print("校验通过：24 个题型×难度组合无空缺，29 个知识点均有题。")
